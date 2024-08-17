@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class AppApplication
+class PsihosomApplication
 
 fun main(args: Array<String>) {
-    runApplication<AppApplication>(*args)
+    runApplication<PsihosomApplication>(*args)
 }
