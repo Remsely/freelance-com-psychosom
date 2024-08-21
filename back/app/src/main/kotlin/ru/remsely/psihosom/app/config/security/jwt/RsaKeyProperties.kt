@@ -16,8 +16,8 @@ import java.util.*
 class RsaKeyProperties(
     private val resourceLoader: ResourceLoader,
 ) {
-    private lateinit var publicKey: RSAPublicKey
-    private lateinit var privateKey: RSAPrivateKey
+    lateinit var publicKey: RSAPublicKey
+    lateinit var privateKey: RSAPrivateKey
 
     @Value("\${security.jwt.public-key-path}")
     private lateinit var publicKeyPath: String

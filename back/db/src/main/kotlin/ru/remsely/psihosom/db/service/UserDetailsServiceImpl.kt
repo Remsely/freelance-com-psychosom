@@ -5,8 +5,10 @@ import arrow.core.toOption
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Component
 import ru.remsely.psihosom.db.repository.UserRepository
 
+@Component
 class UserDetailsServiceImpl(
     private val userRepository: UserRepository
 ) : UserDetailsService {
