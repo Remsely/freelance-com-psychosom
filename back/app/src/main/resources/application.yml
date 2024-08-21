@@ -19,3 +19,11 @@ spring:
   sql:
     init:
       mode: never
+
+security:
+  jwt:
+    private-key-path: classpath:jwt/private_key.pem
+    public-key-path: classpath:jwt/public_key.pem
+
+frontend:
+  url: ${PSIHOSOM_WEB_URL:http://localhost:3000}

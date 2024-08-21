@@ -4,6 +4,7 @@ object Libs {
     const val spring_boot_starter_web = "org.springframework.boot:spring-boot-starter-web:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_data_jpa = "org.springframework.boot:spring-boot-starter-data-jpa:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_security = "org.springframework.boot:spring-boot-starter-security:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_oauth2_resource_server = "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_validation = "org.springframework.boot:spring-boot-starter-validation:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
 
