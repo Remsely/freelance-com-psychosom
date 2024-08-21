@@ -1,3 +1,21 @@
 spring:
   application:
     name: psihosom
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/psihosom
+    username: psihosom
+    password: psihosom
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        boot.allow_jdbc_metadata_access: false
+    database: postgresql
+    open-in-view: false
+    show-sql: true
+  sql:
+    init:
+      mode: never
