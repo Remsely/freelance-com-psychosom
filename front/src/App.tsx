@@ -1,14 +1,32 @@
-import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Footer from "./components/Footer.tsx";
 
 export default function App() {
     return (
         <>
             <Header/>
 
-            <div className="main_container container">
+            <main className="container">
+                <div className="description block">
+                    <p>Инфа о специалисте, интересная и мотивирующая история из жизни <br/>
+                        Инфа о специалисте, интересная и мотивирующая история из жизни</p>
+                    <div className="important">
+                        <p>Блок важное (сноска/заметка) <br/>
+                            со ссылкой на инфу о психосоматике</p>
+                    </div>
+                    <p>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
+                        текста Продолжается много текста Продолжается много текста Продолжается много текста
+                        Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
+                        текста Продолжается много текста Продолжается </p>
+                    <div className="important">
+                        <p>Инфа о дипломе <br/>
+                            кнопка, открывающая модальное окно с файлом диплома</p>
+                    </div>
+                </div>
+                <div className="photo block">
 
-            </div>
+                </div>
+            </main>
 
             <Footer/>
         </>
