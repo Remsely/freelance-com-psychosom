@@ -4,16 +4,14 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/psihosom
-    username: psihosom
-    password: psihosom
+    username: test
+    password: test
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-        boot.allow_jdbc_metadata_access: false
-    database: postgresql
     open-in-view: false
     show-sql: true
   sql:
@@ -22,8 +20,8 @@ spring:
 
 security:
   jwt:
-    private-key-path: classpath:jwt/private_key.pem
-    public-key-path: classpath:jwt/public_key.pem
+    private-key-path: classpath:jwt/rsa/private_key.pem
+    public-key-path: classpath:jwt/rsa/public_key.pem
 
 frontend:
   url: ${PSIHOSOM_WEB_URL:http://localhost:3000}

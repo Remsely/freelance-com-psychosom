@@ -1,4 +1,4 @@
-package ru.remsely.psihosom.app.config.security.jwt
+package ru.remsely.psihosom.security.jwt
 
 import org.springframework.security.core.Authentication
 

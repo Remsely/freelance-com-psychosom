@@ -22,6 +22,7 @@ dependencies {
     implementation(project(Modules.use_case))
     implementation(project(Modules.api))
     implementation(project(Modules.db))
+    implementation(project(Modules.security))
 
     implementation(Libs.spring_boot_starter)
     implementation(Libs.spring_boot_starter_security)

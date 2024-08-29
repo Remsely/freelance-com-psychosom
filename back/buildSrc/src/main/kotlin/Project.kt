@@ -9,4 +9,5 @@ object Modules {
     const val use_case = ":use-case"
     const val api = ":api"
     const val db = ":db"
+    const val security = ":security"
 }

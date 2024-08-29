@@ -25,8 +25,8 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import ru.remsely.psihosom.app.config.security.jwt.RsaKeyProperties
 import ru.remsely.psihosom.db.service.UserDetailsServiceImpl
+import ru.remsely.psihosom.security.jwt.RsaKeyProperties
 
 @Configuration
 @EnableWebSecurity

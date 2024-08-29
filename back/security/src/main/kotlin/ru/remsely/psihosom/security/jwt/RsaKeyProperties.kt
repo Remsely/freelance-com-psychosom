@@ -1,4 +1,4 @@
-package ru.remsely.psihosom.app.config.security.jwt
+package ru.remsely.psihosom.security.jwt
 
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Value
@@ -37,7 +37,7 @@ class RsaKeyProperties(
         privateKey = resourceLoader.getResource(privateKeyPath)
             .inputStream.use { it.readBytes() }
             .decodePemKey("-----BEGIN PRIVATE KEY-----", "-----END PRIVATE KEY-----")
-            .let { keyFactory.generatePublic(PKCS8EncodedKeySpec(it)) as RSAPrivateKey }
+            .let { keyFactory.generatePrivate(PKCS8EncodedKeySpec(it)) as RSAPrivateKey }
     }
 
     private fun ByteArray.decodePemKey(beginMarker: String, endMarker: String) =

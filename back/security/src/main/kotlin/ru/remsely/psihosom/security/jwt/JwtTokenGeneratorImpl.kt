@@ -1,13 +1,15 @@
-package ru.remsely.psihosom.app.config.security.jwt
+package ru.remsely.psihosom.security.jwt
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.jwt.JwtClaimsSet
 import org.springframework.security.oauth2.jwt.JwtEncoder
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters
+import org.springframework.stereotype.Component
 import ru.remsely.psihosom.db.entity.User
 import ru.remsely.psihosom.domain.extentions.logger
 import java.time.Instant
 
+@Component
 class JwtTokenGeneratorImpl(
     private val jwtEncoder: JwtEncoder
 ) : JwtTokenGenerator {
