@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import ru.remsely.psihosom.domain.user.User
 
 @Entity
 @Table(name = "app_user")
@@ -20,7 +21,7 @@ data class User(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val role: Role,
+    val role: User.Role,
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf(
         SimpleGrantedAuthority(role.name)
@@ -30,7 +31,7 @@ data class User(
 
     override fun getUsername(): String = username
 
-    enum class Role {
-        ADMIN, PATIENT, PSYCHOLOGIST
+    override fun toString(): String {
+        return "User(id=$id, username='$username', role=$role)"
     }
 }

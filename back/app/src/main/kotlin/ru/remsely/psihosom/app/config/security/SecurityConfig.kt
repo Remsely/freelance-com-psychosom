@@ -44,7 +44,7 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth.apply {
                     requestMatchers("/v1/admin/**").hasRole("ADMIN")
-                    requestMatchers("/v1/*").permitAll()
+                    requestMatchers("/v1/**").permitAll()
                     anyRequest().permitAll()
                 }
             }
