@@ -1,7 +1,10 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer.tsx";
+import {Form, useForm} from "react-hook-form";
 
 export default function App() {
+    const {register} = useForm()
+
     return (
         <>
             <Header/>
@@ -27,6 +30,15 @@ export default function App() {
 
                 </div>
             </main>
+
+            <h1 className="title_block">Записаться на консультацию</h1>
+
+            <Form>
+                <div className="inputs">
+                    <h2>Имя</h2>
+                    <input type="text" {...register("name", {required: true})}/>
+                </div>
+            </Form>
 
             <Footer/>
         </>
