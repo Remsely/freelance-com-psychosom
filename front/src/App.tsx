@@ -1,9 +1,14 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer.tsx";
-import {Form, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 
 export default function App() {
-    const {register} = useForm()
+
+    const {register, handleSubmit} = useForm();
+
+    const onSubmit = (data : object) => {
+        console.log(data);
+    }
 
     return (
         <>
@@ -31,14 +36,22 @@ export default function App() {
                 </div>
             </main>
 
-            <h1 className="title_block">Записаться на консультацию</h1>
+            <h1 className="title_block container">Записаться на консультацию</h1>
 
-            <Form>
-                <div className="inputs">
+            <form onSubmit={handleSubmit(onSubmit)} method="POST" className="form container">
+                <div>
                     <h2>Имя</h2>
-                    <input type="text" {...register("name", {required: true})}/>
+                    <input type="text" {...register("firstname", {required: true})}/>
+                    <h2>Фамилия</h2>
+                    <input type="text" {...register("lastname", {required: true})}/>
+                    <h2>Телефон / Telegram</h2>
+                    <input type="text" {...register("phone", {required: true})}/>
                 </div>
-            </Form>
+                <div>
+                    <input type="message"/>
+                    <input type="submit"/>
+                </div>
+            </form>
 
             <Footer/>
         </>
