@@ -7,6 +7,7 @@ object Libs {
     const val spring_boot_starter_oauth2_resource_server = "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_validation = "org.springframework.boot:spring-boot-starter-validation:${LibVersions.spring_boot_starter}"
     const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
+    const val spring_tx = "org.springframework:spring-tx:${LibVersions.spring_tx}"
 
     // Arrow
     const val arrow_core = "io.arrow-kt:arrow-core:${LibVersions.arrow}"
@@ -19,7 +20,6 @@ object Libs {
     // Utils
     const val jetbrains_kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect"
     const val jackson_module_kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin"
-    const val lombock = "org.projectlombok:lombok:${LibVersions.lombock}"
 
     // Test
     const val kotlin_test_junit5 = "org.jetbrains.kotlin:kotlin-test-junit5"
@@ -32,7 +32,7 @@ object LibVersions {
     const val kotest_assertions_arrow = "1.4.0"
     const val spring_boot_starter = "3.3.2"
     const val postgresql = "42.7.1"
-    const val lombock = "1.18.34"
+    const val spring_tx = "6.1.12"
 }
 
 object Plugins {

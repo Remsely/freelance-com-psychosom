@@ -1,10 +1,12 @@
 package ru.remsely.psihosom.security.service
 
 import arrow.core.Either
+import arrow.core.flatMap
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psihosom.domain.error.DomainError
 import ru.remsely.psihosom.domain.extentions.logger
 import ru.remsely.psihosom.domain.user.User
@@ -15,7 +17,7 @@ import ru.remsely.psihosom.usecase.auth.UserLoginError
 import ru.remsely.psihosom.usecase.auth.request.AuthRequest
 
 @Service
-class AuthServiceImpl(
+open class AuthServiceImpl(
     private val userCreator: UserCreator,
     private val authManager: AuthenticationManager,
     private val tokenGenerator: JwtTokenGenerator,
@@ -23,6 +25,7 @@ class AuthServiceImpl(
 ) : AuthService {
     private val log = logger()
 
+    @Transactional
     override fun registerUser(request: AuthRequest, role: User.Role): Either<DomainError, String> =
         userCreator.createUser(
             User(
@@ -31,7 +34,7 @@ class AuthServiceImpl(
                 passwordEncoder.encode(request.password),
                 role
             )
-        ).let {
+        ).flatMap {
             loginUser(request)
         }.also {
             log.info("User with username ${request.username} successfully registered.")
