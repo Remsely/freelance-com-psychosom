@@ -10,8 +10,8 @@ plugins {
 	id(Plugins.ksp) version PluginVersions.ksp
 }
 
-group = Constants.groupId
-version = Constants.version
+group = Project.groupId
+version = Project.version
 
 java {
 	toolchain {
@@ -57,5 +57,5 @@ subprojects {
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
-	mainClass.set(Constants.main_class)
+	mainClass.set(Project.main_class)
 }

@@ -2,8 +2,8 @@ plugins {
     id(Plugins.ksp) version PluginVersions.ksp
 }
 
-group = Constants.groupId
-version = Constants.version
+group = Project.groupId
+version = Project.version
 
 repositories {
     mavenCentral()

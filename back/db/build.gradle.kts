@@ -2,8 +2,8 @@ plugins {
     id(Plugins.kotlin_jpa) version PluginVersions.kotlin_jpa
 }
 
-group = Constants.groupId
-version = Constants.version
+group = Project.groupId
+version = Project.version
 
 repositories {
     mavenCentral()

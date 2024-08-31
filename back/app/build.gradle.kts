@@ -4,8 +4,8 @@ plugins {
     id(Plugins.spring_dependency_management) version PluginVersions.spring_dependency_management
 }
 
-group = Constants.groupId
-version = Constants.version
+group = Project.groupId
+version = Project.version
 
 java {
     toolchain {
