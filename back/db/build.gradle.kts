@@ -14,7 +14,6 @@ dependencies {
     implementation(project(Modules.use_case))
 
     implementation(Libs.spring_boot_starter_data_jpa)
-    implementation(Libs.spring_boot_starter_security)
 
     implementation(Libs.arrow_core)
     implementation(Libs.postgresql)

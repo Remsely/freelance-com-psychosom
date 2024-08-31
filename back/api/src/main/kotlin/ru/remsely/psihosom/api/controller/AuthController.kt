@@ -55,7 +55,7 @@ class AuthController(
 
     private fun handleError(error: DomainError): ResponseEntity<ErrorResponse> =
         when (error) {
-            is UserCreationError.UserAlreadyExists -> HttpStatus.BAD_REQUEST
+            is UserCreationError.AlreadyExists -> HttpStatus.BAD_REQUEST
             is UserLoginError.AuthenticationError -> HttpStatus.UNAUTHORIZED
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {

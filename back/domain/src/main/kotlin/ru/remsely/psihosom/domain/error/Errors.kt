@@ -5,4 +5,5 @@ sealed interface DomainError {
 
     interface BusinessLogicError : DomainError
     interface ValidationError : DomainError
+    interface IntegrationError : DomainError
 }

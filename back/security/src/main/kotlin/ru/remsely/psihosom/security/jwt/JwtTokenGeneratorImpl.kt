@@ -5,8 +5,8 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet
 import org.springframework.security.oauth2.jwt.JwtEncoder
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters
 import org.springframework.stereotype.Component
-import ru.remsely.psihosom.db.entity.User
 import ru.remsely.psihosom.domain.extentions.logger
+import ru.remsely.psihosom.security.user.User
 import java.time.Instant
 
 @Component
