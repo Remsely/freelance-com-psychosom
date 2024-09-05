@@ -39,7 +39,7 @@ export default function App() {
             <h1 className="title_block container">Записаться на консультацию</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className="form container">
-                <div>
+                <div className="inputs block">
                     <h2>Имя</h2>
                     <input type="text" {...register("firstname", {required: true})}/>
                     <h2>Фамилия</h2>
@@ -47,8 +47,8 @@ export default function App() {
                     <h2>Телефон / Telegram</h2>
                     <input type="text" {...register("phone", {required: true})}/>
                 </div>
-                <div>
-                    <input type="message"/>
+                <div className="textarea block">
+                    <input type="message" {...register("message", {required: true})}/>
                     <input type="submit"/>
                 </div>
             </form>
