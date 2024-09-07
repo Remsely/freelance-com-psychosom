@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer.tsx";
 import {useForm} from "react-hook-form";
+import "./components/formatinput.ts";
 
 export default function App() {
 
@@ -36,20 +37,30 @@ export default function App() {
                 </div>
             </main>
 
-            <h1 className="title_block container">Записаться на консультацию</h1>
+            <h1 className="title_block container">Запишитесь на консультацию</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className="form container">
                 <div className="inputs block">
-                    <h2>Имя</h2>
-                    <input type="text" {...register("firstname", {required: true})}/>
-                    <h2>Фамилия</h2>
-                    <input type="text" {...register("lastname", {required: true})}/>
-                    <h2>Телефон / Telegram</h2>
-                    <input type="text" {...register("phone", {required: true})}/>
+                    <div className="row">
+                        <h2>Имя</h2>
+                        <input type="name" data-name-input="true"
+                               placeholder="Имя" {...register("firstname", {required: true})}/>
+                    </div>
+                    <div className="row">
+                        <h2>Фамилия</h2>
+                        <input type="name" data-name-input="true"
+                               placeholder="Фамилия" {...register("lastname", {required: true})}/>
+                    </div>
+                    <div className="row">
+                        <h2>Телефон / Telegram</h2>
+                        <input type="tel" data-tel-input="true" placeholder="Телефон"
+                               maxLength={18} {...register("phone", {required: true})}/>
+                    </div>
                 </div>
                 <div className="textarea block">
-                    <input type="message" {...register("message", {required: true})}/>
-                    <input type="submit"/>
+                    <h2>Опишите свою проблему</h2>
+                    <textarea {...register("message", {required: true})}/>
+                    <button type="submit">Записаться</button>
                 </div>
             </form>
 
