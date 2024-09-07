@@ -16,7 +16,8 @@ object Libs {
 
     // DB
     const val postgresql = "org.postgresql:postgresql:${LibVersions.postgresql}"
-    const val flyway = "org.flywaydb:flyway-core:${LibVersions.flyway}"
+    const val flyway_core = "org.flywaydb:flyway-core:${LibVersions.flyway}"
+    const val flyway_database_postgresql = "org.flywaydb:flyway-database-postgresql:${LibVersions.flyway}"
 
     // Utils
     const val jetbrains_kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect"
