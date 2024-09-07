@@ -3,7 +3,7 @@ spring:
     name: psihosom
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://:localhost:5433/psihosom
+    url: jdbc:postgresql://localhost:5433/psihosom
     username: test
     password: test
   jpa:
