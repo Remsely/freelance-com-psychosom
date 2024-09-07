@@ -1,5 +1,6 @@
 plugins {
     id(Plugins.kotlin_jpa) version PluginVersions.kotlin_jpa
+    id(Plugins.flyway) version PluginVersions.flyway
 }
 
 group = Project.groupId
@@ -17,6 +18,7 @@ dependencies {
 
     implementation(Libs.arrow_core)
     implementation(Libs.postgresql)
+    implementation(Libs.flyway)
 
     implementation(Libs.jetbrains_kotlin_reflect)
 
