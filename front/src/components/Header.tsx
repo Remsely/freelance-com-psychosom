@@ -8,7 +8,7 @@ export default function Header() {
                         <li><a href="#">Главная</a></li>
                         <li><a href="#">Отзывы</a></li>
                         <li><a href="#">О психосоматике</a></li>
-                        <li><a href="#">Записаться на консультацию</a></li>
+                        <li><a href="#">Записаться</a></li>
                     </ul>
                 </nav>
             </header>

@@ -15,24 +15,25 @@ export default function App() {
         <>
             <Header/>
 
-            <main className="container">
-                <div className="description block">
+            <main className="main container">
+                <div className="description">
                     <p>Инфа о специалисте, интересная и мотивирующая история из жизни <br/>
-                        Инфа о специалисте, интересная и мотивирующая история из жизни</p>
+                        Инфа о специалисте, интересная и мотивирующая история из жизни <br/>
+                        Инфа о специалисте, интересная и мотивирующая история из жизни
+                    </p>
                     <div className="important">
                         <p>Блок важное (сноска/заметка) <br/>
                             со ссылкой на инфу о психосоматике</p>
                     </div>
                     <p>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
                         текста Продолжается много текста Продолжается много текста Продолжается много текста
-                        Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
-                        текста Продолжается много текста Продолжается </p>
+                        Продолжается много текста Продолжается много текста Продолжается много текста </p>
                     <div className="important">
                         <p>Инфа о дипломе <br/>
                             кнопка, открывающая модальное окно с файлом диплома</p>
                     </div>
                 </div>
-                <div className="photo block">
+                <div className="photo">
 
                 </div>
             </main>
@@ -42,17 +43,17 @@ export default function App() {
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className="form container">
                 <div className="inputs block">
                     <div className="row">
-                        <h2>Имя</h2>
+                        <p>Имя</p>
                         <input type="name" data-name-input="true"
                                placeholder="Имя" {...register("firstname", {required: true})}/>
                     </div>
                     <div className="row">
-                        <h2>Фамилия</h2>
+                        <p>Фамилия</p>
                         <input type="name" data-name-input="true"
                                placeholder="Фамилия" {...register("lastname", {required: true})}/>
                     </div>
                     <div className="row">
-                        <h2>Телефон / Telegram</h2>
+                        <p>Телефон / Telegram</p>
                         <input type="tel" data-tel-input="true" placeholder="Телефон"
                                maxLength={18} {...register("phone", {required: true})}/>
                     </div>
