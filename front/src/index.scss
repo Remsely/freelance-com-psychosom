@@ -50,11 +50,18 @@ $font-text: #7D7D7D;
     background-image: url("/public/background.svg");
 }
 
+.title_block {
+    color: $font-title;
+    padding: 24px 0 11px 16px;
+    font-size: 40px;
+    font-weight: 700;
+}
+
 /* Header */
 
 header {
     padding-top: 25px;
-    padding-bottom: 49px;
+    padding-bottom: 50px;
 
     .title {
         color: $font-title;
@@ -77,7 +84,7 @@ header {
             li {
                 font-weight: 600;
                 display: inline-block;
-                padding: 4px 10px;
+                padding: 5px 10px;
                 margin-right: 5px;
 
                 a {
@@ -92,6 +99,8 @@ header {
         }
     }
 }
+
+/* Footer */
 
 hr.footer {
     margin-top: 50px;
@@ -122,6 +131,8 @@ footer {
     }
 }
 
+/* Main */
+
 .main {
     display: flex;
 
@@ -132,8 +143,8 @@ footer {
     border-radius: 35px;
 
     .description {
-        width: 681px;
-        padding: 28px 0 0 18px;
+        width: 700px;
+        padding: 25px 0 0 20px;
 
         p {
             font-size: 20px;
@@ -144,10 +155,10 @@ footer {
             background: rgba(231, 192, 148, 0.02);
             border-radius: 28px;
             color: $font-title;
-            padding: 9px 23px;
+            padding: 10px 20px;
             margin: 22px 0;
             width: 100%;
-            height: 74px;
+            height: 75px;
 
             p {
                 color: $font-title;
@@ -156,12 +167,14 @@ footer {
     }
 }
 
+/* Form */
+
 form {
     display: flex;
 
     .inputs {
         width: 301px;
-        padding: 15px 17px;
+        padding: 15px 18px;
         margin-right: 10px;
 
         .row {
@@ -182,11 +195,11 @@ form {
             border: none;
             width: 254px;
             height: 42px;
-            margin-top: 9px;
+            margin-top: 10px;
             font-size: 20px;
             border-radius: 20px;
             padding: 0 15px;
-         }
+        }
     }
 
     .textarea {
@@ -239,9 +252,40 @@ form {
 
 }
 
-.title_block {
-    color: $font-title;
-    padding: 24px 0 11px 16px;
-    font-size: 40px;
-    font-weight: 700;
+/* Comments */
+
+.comment {
+    width: 305px;
+    height: 450px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.4);
+    border-left: 1px solid #cbbfbf;
+    border-top: 1px solid #cbbfbf;
+    border-radius: 35px;
+    padding: 10px 20px;
+
+    .info {
+        display: flex;
+        align-items: center;
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            color: $font-title;
+        }
+
+        span {
+            font-size: 40px;
+            font-weight: 600;
+            color: $font-title;
+            margin-left: auto;
+            margin-right: 5px;
+        }
+    }
+
+    h4 {
+        margin-top: 12px;
+        text-align: center;
+    }
 }

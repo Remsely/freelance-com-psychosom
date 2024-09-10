@@ -1,13 +1,12 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer.tsx";
 import {useForm} from "react-hook-form";
-import "./components/formatinput.ts";
 
 export default function App() {
 
     const {register, handleSubmit} = useForm();
 
-    const onSubmit = (data : object) => {
+    const onSubmit = (data: object) => {
         console.log(data);
     }
 
@@ -66,6 +65,21 @@ export default function App() {
             </form>
 
             <h1 className="title_block container">Отзывы</h1>
+
+            <div className="container">
+                <div className="comment">
+                    <div className="info">
+                        <h3>Имя Ф.</h3>
+                        <span>5 </span><img src="/public/star.svg" alt="Звезда"/>
+                    </div>
+                    <p>Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст
+                        Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст
+                        Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст Текст
+                        Текст Текст Текст Текст Текст Текст Текст
+                    </p>
+                    <h4>Дата</h4>
+                </div>
+            </div>
 
             <Footer/>
         </>
