@@ -53,17 +53,19 @@ export default function App() {
                                placeholder="Фамилия" {...register("lastname", {required: true})}/>
                     </div>
                     <div className="row">
-                        <p>Телефон / Telegram</p>
+                        <p>Телефон/ Telegram</p>
                         <input type="tel" data-tel-input="true" placeholder="Телефон"
                                maxLength={18} {...register("phone", {required: true})}/>
                     </div>
                 </div>
                 <div className="textarea block">
-                    <h2>Опишите свою проблему</h2>
+                    <p>Опишите свою проблему</p>
                     <textarea {...register("message", {required: true})}/>
                     <button type="submit">Записаться</button>
                 </div>
             </form>
+
+            <h1 className="title_block container">Отзывы</h1>
 
             <Footer/>
         </>

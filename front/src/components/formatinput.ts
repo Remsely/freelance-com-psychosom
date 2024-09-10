@@ -75,16 +75,16 @@ document.addEventListener("DOMContentLoaded", function () {
         input.value = formattedInputValue;
     };
 
-    // const onPhoneKeyDown = (e: KeyboardEvent): void => {
-        // const input = e.target as HTMLInputElement;
-        // const inputValue = input.value.replace(/\D/g, '');
-        // if (e.key === 'Backspace' && inputValue.length === 1) {
-            //input.value = '';
-        // }
-    // };
+    const onPhoneKeyDown = (e: KeyboardEvent): void => {
+        const input = e.target as HTMLInputElement;
+        const inputValue = input.value.replace(/\D/g, '');
+        if (e.key === 'Backspace' && inputValue.length === 1) {
+            input.value = '';
+        }
+    };
 
     for (const phoneInput of phoneInputs) {
-        // phoneInput.addEventListener('keydown', onPhoneKeyDown);
+        phoneInput.addEventListener('keydown', onPhoneKeyDown);
         phoneInput.addEventListener('input', onPhoneInput as EventListener, false);
         phoneInput.addEventListener('paste', onPhonePaste, false);
     }
