@@ -1,8 +1,8 @@
 import Header from "./components/Header";
-import Footer from "./components/Footer.tsx";
+import Footer from "./components/Footer";
 import {useForm} from "react-hook-form";
 import "./utils/formatinput.ts";
-import InputForm from "./components/UI/InputForm/InputForm.tsx";
+import InputForm from "./components/UI/RowForm/RowForm";
 
 export default function App() {
 
@@ -43,21 +43,9 @@ export default function App() {
 
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className="form container">
                 <div className="inputs block">
-                    <div className="row">
-                        <p>Имя</p>
-                        <input type="name"
-                               placeholder="Имя" {...register("firstname", {required: true})}/>
-                    </div>
-                    <div className="row">
-                        <p>Фамилия</p>
-                        <input type="name"
-                               placeholder="Фамилия" {...register("lastname", {required: true})}/>
-                    </div>
-                    <div className="row">
-                        <p>Телефон/ Telegram</p>
-                        <InputForm name="Телефон" type="tel" nameDB="phone"/>
-
-                    </div>
+                    <InputForm label="Фамилия" name="firstname" type="name" register={register} required={true}/>
+                    <InputForm label="Фамилия" name="lastname" type="name" register={register} required={true}/>
+                    <InputForm label="Телефон/ Telegram" name="phone" type="tel" register={register} required={true}/>
                 </div>
                 <div className="textarea block">
                     <p>Опишите свою проблему</p>

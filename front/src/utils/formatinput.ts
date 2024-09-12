@@ -1,13 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    // Для полей только с буквами
+
     const nameInputs = document.querySelectorAll<HTMLInputElement>('input[type="name"]');
 
     nameInputs.forEach(input => {
         input.addEventListener('input', function (event: Event) {
             const target = event.target as HTMLInputElement;
-
             target.value = target.value.replace(/[^a-zA-Zа-яА-Я]/g, '');
         });
     });
+
+    // Для полей с номер телефона (и Telegram ID)
 
     const phoneInputs = document.querySelectorAll<HTMLInputElement>('input[type="tel"]');
 
@@ -15,9 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return input.value.replace(/\D/g, '');
     };
 
+    const isTelegramMode = (input: HTMLInputElement): boolean => {
+        return input.value.includes('@');
+    };
+
     const onPhonePaste = (e: ClipboardEvent): void => {
         const input = e.target as HTMLInputElement;
         const inputNumbersValue = getInputNumbersValue(input);
+
+        if (isTelegramMode(input)) {
+            return;
+        }
 
         if (e.clipboardData) {
             const pastedText = e.clipboardData.getData('text');
@@ -26,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
         } else if ((window as Window & typeof globalThis & { clipboardData?: DataTransfer }).clipboardData) {
-
             const pastedText = (window as Window & typeof globalThis & { clipboardData?: DataTransfer }).clipboardData?.getData('Text');
             if (pastedText && /\D/g.test(pastedText)) {
                 input.value = inputNumbersValue;
@@ -40,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let inputNumbersValue = getInputNumbersValue(input);
         const selectionStart = input.selectionStart;
         let formattedInputValue = '';
+
+        if (isTelegramMode(input)) {
+            return;
+        }
 
         if (!inputNumbersValue) {
             input.value = '';
@@ -78,6 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const onPhoneKeyDown = (e: KeyboardEvent): void => {
         const input = e.target as HTMLInputElement;
         const inputValue = input.value.replace(/\D/g, '');
+
+        if (isTelegramMode(input)) {
+            return;
+        }
+
         if (e.key === 'Backspace' && inputValue.length === 1) {
             input.value = '';
         }
