@@ -1,7 +1,8 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer.tsx";
 import {useForm} from "react-hook-form";
-import "./components/formatinput.ts";
+import "./utils/formatinput.ts";
+import InputForm from "./components/UI/InputForm/InputForm.tsx";
 
 export default function App() {
 
@@ -44,18 +45,18 @@ export default function App() {
                 <div className="inputs block">
                     <div className="row">
                         <p>Имя</p>
-                        <input type="name" data-name-input="true"
+                        <input type="name"
                                placeholder="Имя" {...register("firstname", {required: true})}/>
                     </div>
                     <div className="row">
                         <p>Фамилия</p>
-                        <input type="name" data-name-input="true"
+                        <input type="name"
                                placeholder="Фамилия" {...register("lastname", {required: true})}/>
                     </div>
                     <div className="row">
                         <p>Телефон/ Telegram</p>
-                        <input type="tel" data-tel-input="true" placeholder="Телефон"
-                               maxLength={18} {...register("phone", {required: true})}/>
+                        <InputForm name="Телефон" type="tel" nameDB="phone"/>
+
                     </div>
                 </div>
                 <div className="textarea block">
