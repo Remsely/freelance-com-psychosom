@@ -18,19 +18,12 @@ export default function RowForm({ label, name, type, register, required }: Input
     const { onChange: onChangeHandler } = register(name, { required });
 
     useEffect(() => {
-        if (!inputValue.includes('@') || /\d/.test(inputValue)) {
-            setIsTelegram(false);
-        }
+        setIsTelegram(inputValue.startsWith('@'));
     }, [inputValue]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setInputValue(value);
-
-        if (showTelegramOptions) {
-            setIsTelegram(value.includes("@") && !/\d/.test(value));
-        }
-
         onChangeHandler?.(e);
     };
 
@@ -61,12 +54,7 @@ export default function RowForm({ label, name, type, register, required }: Input
             ) : (
                 <p>{label}</p>
             )}
-            <input
-                type={type}
-                placeholder={placeholder}
-                value={inputValue}
-                onChange={handleChange}
-            />
+            <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange}/>
         </div>
     );
 }
