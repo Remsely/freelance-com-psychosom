@@ -163,30 +163,6 @@ form {
         width: 301px;
         padding: 15px 17px;
         margin-right: 10px;
-
-        .row {
-            margin: 32px 0;
-
-            p {
-                font-size: 24px;
-            }
-
-            &:first-child {
-                margin-top: 0;
-            }
-        }
-
-        input {
-            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-            background: rgba(238, 238, 238, 0.7);
-            border: none;
-            width: 254px;
-            height: 42px;
-            margin-top: 9px;
-            font-size: 20px;
-            border-radius: 20px;
-            padding: 0 15px;
-         }
     }
 
     .textarea {
@@ -201,7 +177,7 @@ form {
         textarea {
             box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.25);
             background: rgba(238, 238, 238, 0.7);
-            border: none;
+            border: 2px solid rgba(238, 238, 238, 0.7);
             width: 100%;
             height: 273px;
             border-radius: 20px;
@@ -209,6 +185,12 @@ form {
             resize: none;
             font-size: 20px;
             padding: 15px;
+            outline: none;
+            transition: all 100ms ease;
+
+            &:focus {
+                border: 2px solid #6E522D;
+            }
         }
 
         button {

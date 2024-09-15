@@ -1,4 +1,6 @@
-import {FieldValues, UseFormRegister} from "react-hook-form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
+import styles from "./RowForm.module.scss";
+import { ChangeEvent, useState, useEffect } from "react";
 
 interface InputProps {
     label: string;
@@ -8,15 +10,63 @@ interface InputProps {
     required?: boolean;
 }
 
-export default function RowForm({label, name, type, register, required}: InputProps) {
+export default function RowForm({ label, name, type, register, required }: InputProps) {
+    const [isTelegram, setIsTelegram] = useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>("");
+
+    const showTelegramOptions = label === "Телефон / Telegram";
+    const { onChange: onChangeHandler } = register(name, { required });
+
+    useEffect(() => {
+        if (!inputValue.includes('@') || /\d/.test(inputValue)) {
+            setIsTelegram(false);
+        }
+    }, [inputValue]);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setInputValue(value);
+
+        if (showTelegramOptions) {
+            setIsTelegram(value.includes("@") && !/\d/.test(value));
+        }
+
+        onChangeHandler?.(e);
+    };
+
+    const handlePhoneClick = () => {
+        setIsTelegram(false);
+        setInputValue("");
+    };
+
+    const handleTelegramClick = () => {
+        setIsTelegram(true);
+        if (!inputValue.includes("@")) {
+            setInputValue("@" + inputValue);
+        }
+    };
+
+    const placeholder = showTelegramOptions
+        ? (isTelegram ? "Telegram" : "Телефон")
+        : label;
+
     return (
-        <div className="row">
-            <p>{label}</p>
+        <div className={styles.row}>
+            {showTelegramOptions ? (
+                <p>
+                    <a className={!isTelegram ? styles.active : ""} onClick={handlePhoneClick}>Телефон</a>
+                    {' / '}
+                    <a className={isTelegram ? styles.active : ""} onClick={handleTelegramClick}>Telegram</a>
+                </p>
+            ) : (
+                <p>{label}</p>
+            )}
             <input
                 type={type}
-                placeholder={label}
-                {...register(name, {required})}
+                placeholder={placeholder}
+                value={inputValue}
+                onChange={handleChange}
             />
         </div>
     );
-};
+}
