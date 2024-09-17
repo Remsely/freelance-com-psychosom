@@ -15,11 +15,14 @@ export default function RowForm({ label, name, type, register, required }: Input
     const [inputValue, setInputValue] = useState<string>("");
 
     const showTelegramOptions = label === "Телефон / Telegram";
-    const { onChange: onChangeHandler } = register(name, { required });
+
+    const { onChange: onChangeHandler, ...restRegister } = register(name, { required });
 
     useEffect(() => {
-        setIsTelegram(inputValue.startsWith('@'));
-    }, [inputValue]);
+        if (inputValue.startsWith('@') !== isTelegram) {
+            setIsTelegram(inputValue.startsWith('@'));
+        }
+    }, [inputValue, isTelegram]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -33,9 +36,9 @@ export default function RowForm({ label, name, type, register, required }: Input
     };
 
     const handleTelegramClick = () => {
-        setIsTelegram(true);
-        if (!inputValue.includes("@")) {
-            setInputValue("@" + inputValue);
+        if (!isTelegram) {
+            setIsTelegram(true);
+            setInputValue(prev => (prev.startsWith("@") ? prev : "@" + prev));
         }
     };
 
@@ -54,7 +57,7 @@ export default function RowForm({ label, name, type, register, required }: Input
             ) : (
                 <p>{label}</p>
             )}
-            <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange}/>
+            <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange} {...restRegister}/>
         </div>
     );
 }
