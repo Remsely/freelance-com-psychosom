@@ -1,9 +1,11 @@
+import styles from "./Header.module.scss"
+
 export default function Header() {
     return (
         <>
-            <header className="container">
-                <h1 className="title">НАЗВАНИЕ</h1>
-                <nav className="navbar">
+            <header className={`${styles.header} container`}>
+                <h1 className={styles.title}>НАЗВАНИЕ</h1>
+                <nav className={styles.navbar}>
                     <ul>
                         <li><a href="#">Главная</a></li>
                         <li><a href="#">Отзывы</a></li>

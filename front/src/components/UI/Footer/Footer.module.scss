@@ -1,0 +1,28 @@
+.footer__hr {
+    margin-top: 50px;
+    border: 0;
+    height: 1px;
+    background: #111111;
+}
+
+.footer {
+    padding-top: 50px;
+    height: 200px;
+
+    .social {
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            margin-top: 20px;
+        }
+
+        img {
+            margin-right: 42px;
+        }
+
+        span {
+            font-size: 20px;
+        }
+    }
+}
