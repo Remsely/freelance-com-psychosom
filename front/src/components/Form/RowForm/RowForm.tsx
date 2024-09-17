@@ -1,6 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import styles from "./RowForm.module.scss";
 import { ChangeEvent, useState, useEffect } from "react";
+import "../../../utils/formatinput.ts";
 
 interface InputProps {
     label: string;
