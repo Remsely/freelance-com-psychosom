@@ -100,11 +100,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    phoneInputs.forEach((input) => {
-        input.addEventListener('keydown', onPhoneKeyDown);
-        input.addEventListener('input', onPhoneInput as EventListener, false);
-        input.addEventListener('paste', onPhonePaste, false);
-    });
+    const reattachPhoneMask = (input: HTMLInputElement) => {
+        if (!isTelegramMode(input)) {
+            input.addEventListener('keydown', onPhoneKeyDown);
+            input.addEventListener('input', onPhoneInput as EventListener, false);
+            input.addEventListener('paste', onPhonePaste, false);
+        }
+    };
 
     phoneInputs.forEach((input) => {
         input.addEventListener('input', function () {
@@ -112,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 input.removeEventListener('keydown', onPhoneKeyDown);
                 input.removeEventListener('input', onPhoneInput as EventListener);
                 input.removeEventListener('paste', onPhonePaste);
+            } else {
+                reattachPhoneMask(input);
             }
         });
     });

@@ -28,8 +28,12 @@ export default function RowForm({ label, name, type, register, required }: Input
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
 
+        if (value.includes('@') && !isTelegram) {
+            value = value.replace(/@/g, '');
+        }
+
         if (isTelegram && !value.startsWith('@')) {
-            value = '@' + value.replace(/^@+/, ''); // Добавляем @ и убираем лишние @ в середине
+            value = '@' + value.replace(/^@+/, '');
         }
 
         setInputValue(value);
@@ -38,14 +42,12 @@ export default function RowForm({ label, name, type, register, required }: Input
 
     const handlePhoneClick = () => {
         setIsTelegram(false);
-        setInputValue("");
+        setInputValue('');
     };
 
     const handleTelegramClick = () => {
-        if (!isTelegram) {
-            setIsTelegram(true);
-            setInputValue(prev => (prev.startsWith("@") ? prev : "@" + prev));
-        }
+        setIsTelegram(true);
+        setInputValue('@');
     };
 
     const placeholder = showTelegramOptions
@@ -63,7 +65,14 @@ export default function RowForm({ label, name, type, register, required }: Input
             ) : (
                 <p>{label}</p>
             )}
-            <input type={type} placeholder={placeholder} value={inputValue} onChange={handleChange} {...restRegister}/>
+            <input
+                type={type}
+                placeholder={placeholder}
+                value={inputValue}
+                onChange={handleChange}
+                {...restRegister}
+                maxLength={type === "tel" ? 18 : undefined}
+            />
         </div>
     );
 }

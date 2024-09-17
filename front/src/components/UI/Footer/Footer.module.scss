@@ -1,22 +1,55 @@
 .footer {
+    display: flex;
+    justify-content: space-between;
     padding-top: 50px;
-    height: 250px;
+    height: 300px;
 
     .social {
         display: flex;
         align-items: center;
+        margin-bottom: 15px;
 
         &:last-child {
             margin-top: 20px;
         }
 
         img {
-            margin-right: 42px;
+            margin-right: 20px;
         }
 
         span {
             font-size: 20px;
         }
+    }
+
+    .important{
+
+        ul {
+            li {
+                font-weight: 600;
+                padding: 5px 10px;
+                margin-right: 5px;
+
+                a {
+                    font-size: 18px;
+                    color: #6E522D;
+                    transition: all 200ms ease;
+
+                    &:hover {
+                        color: #8B6842;
+                    }
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    h2 {
+        color: #6E522D;
+        margin-bottom: 20px;
     }
 }
 
@@ -24,4 +57,11 @@
     margin-top: 50px;
     box-shadow: inset 0 0 40px 0 rgba(231, 192, 148, 0.6);
     background: rgba(231, 192, 148, 0.1);
+}
+
+.title {
+    color: #6E522D;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
 }

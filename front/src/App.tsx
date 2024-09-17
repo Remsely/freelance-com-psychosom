@@ -30,11 +30,11 @@ export default function App() {
                 </div>
             </main>
 
-            <TitleBlock title="Запишитесь на консультацию"/>
+            <TitleBlock title="Запишитесь на консультацию" id="consultation"/>
 
             <Form/>
 
-            <TitleBlock title="Отзывы"/>
+            <TitleBlock title="Отзывы" id="feedbacks"/>
 
             <SliderFeedback/>
 
