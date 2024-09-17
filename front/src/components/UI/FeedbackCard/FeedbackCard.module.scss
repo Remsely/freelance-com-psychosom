@@ -1,0 +1,39 @@
+.feedback {
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+    width: 305px;
+    font-weight: 700;
+    height: 450px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.4);
+    border-left: 1px solid #cbbfbf;
+    border-top: 1px solid #cbbfbf;
+    border-radius: 35px;
+    padding: 10px 20px;
+
+    .info {
+        display: flex;
+        align-items: center;
+
+        h3 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #6E522D;
+        }
+
+        span {
+            font-size: 40px;
+            font-weight: 600;
+            color: #6E522D;
+            margin-left: auto;
+            margin-right: 5px;
+        }
+    }
+
+    h4 {
+        margin-top: auto;
+        text-align: center;
+    }
+}

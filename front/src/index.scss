@@ -70,11 +70,17 @@ $font-text: #7D7D7D;
     border-radius: 35px;
 
     .description {
-        width: 681px;
-        padding: 28px 0 0 18px;
+        width: 700px;
+        padding: 25px 0 0 20px;
 
         p {
             font-size: 20px;
         }
     }
+}
+
+.feedbacks {
+    display: flex;
+    flex-direction: row;
+    gap: 20px
 }

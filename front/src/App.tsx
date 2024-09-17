@@ -3,9 +3,10 @@ import Footer from "./components/UI/Footer/Footer.tsx";
 import TitleBlock from "./components/UI/TitleBlock/TitleBlock";
 import ImportantBlock from "./components/UI/ImportantBlock/ImportantBlock";
 import Form from "./components/Form/Form/Form";
+import {feedbacks} from "./utils/data.ts";
+import FeedbackCard from "./components/UI/FeedbackCard/FeedbackCard.tsx";
 
 export default function App() {
-
     return (
         <>
             <Header/>
@@ -17,7 +18,7 @@ export default function App() {
                         Инфа о специалисте, интересная и мотивирующая история из жизни
                     </p>
                     <ImportantBlock text="Блок важное (сноска/заметка) <br/>
-                    со ссылкой на инфу о психосоматике" />
+                    со ссылкой на инфу о психосоматике"/>
                     <p>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
                         текста Продолжается много текста Продолжается много текста Продолжается много текста
                         Продолжается много текста Продолжается много текста Продолжается много текста </p>
@@ -34,6 +35,18 @@ export default function App() {
             <Form/>
 
             <TitleBlock title="Отзывы"/>
+
+            <div className="feedbacks container">
+            {feedbacks.map(feedback => (
+                <FeedbackCard
+                    id={feedback.id}
+                    name={feedback.name}
+                    star={feedback.star}
+                    message={feedback.message}
+                    date={feedback.date}
+                />
+            ))}
+            </div>
 
             <Footer/>
         </>
