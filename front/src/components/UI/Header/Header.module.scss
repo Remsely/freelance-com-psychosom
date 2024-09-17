@@ -29,6 +29,11 @@
                 a {
                     font-size: 24px;
                     color: #6E522D;
+                    transition: all 200ms ease;
+
+                    &:hover {
+                        color: #8B6842;
+                    }
                 }
 
                 &:last-child {
