@@ -26,7 +26,12 @@ export default function RowForm({ label, name, type, register, required }: Input
     }, [inputValue, isTelegram]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+        let value = e.target.value;
+
+        if (isTelegram && !value.startsWith('@')) {
+            value = '@' + value.replace(/^@+/, ''); // Добавляем @ и убираем лишние @ в середине
+        }
+
         setInputValue(value);
         onChangeHandler?.(e);
     };
