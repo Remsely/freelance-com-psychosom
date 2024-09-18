@@ -12,15 +12,15 @@ export default function Footer() {
                         <h2>Важное</h2>
                         <ul>
                             <li><a href="#">Главная</a></li>
-                            <li><a href="#consultation">Записаться на консультацию</a></li>
-                            <li><a href="#feedbacks">Отзывы</a></li>
+                            <li><a href={"#consultation"}>Записаться на консультацию</a></li>
+                            <li><a href={"#feedbacks"}>Отзывы</a></li>
                         </ul>
                     </div>
                     <div className={styles.socials}>
                         <h2>Соцсети</h2>
                         <div className={styles.social}>
                             <img src="/telegram.svg" alt="telegram"/>
-                            <span>psihosomatica</span>
+                            <span>psychosomatic</span>
                         </div>
                         <div className={styles.social}>
                             <img src="/whatsapp.svg" alt="whatsapp"/>
@@ -28,7 +28,7 @@ export default function Footer() {
                         </div>
                         <div className={styles.social}>
                             <img src="/instagram.svg" alt="instagram"/>
-                            <span>psihosomatica</span>
+                            <span>psychosomatic</span>
                         </div>
                     </div>
                 </footer>
