@@ -41,7 +41,10 @@ export default function RowForm({ label, name, type, register, required }: RowFo
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
-        if (value.startsWith('@')) {
+
+        if (label === "Имя" || label === "Фамилия") {
+            value = value.replace(/[^а-яА-Яa-zA-Z]/g, '');
+        } else if (value.startsWith('@')) {
             setIsTelegram(true);
             value = '@' + value.replace(/@+/g, '');
         } else {
@@ -49,6 +52,7 @@ export default function RowForm({ label, name, type, register, required }: RowFo
             value = value.replace(/[^0-9]/g, '');
             value = formatPhoneNumber(value);
         }
+
         setInputValue(value);
         onChangeHandler?.(e);
     };
@@ -69,7 +73,7 @@ export default function RowForm({ label, name, type, register, required }: RowFo
 
     return (
         <div className={styles.row}>
-            {showTelegramOptions && (
+            {showTelegramOptions ? (
                 <p>
                     <a className={!isTelegram ? styles.active : ""} onClick={() => handleModeChange('phone')}>
                         Телефон
@@ -79,7 +83,7 @@ export default function RowForm({ label, name, type, register, required }: RowFo
                         Telegram
                     </a>
                 </p>
-            )}
+            ) : (<p>{label}</p>)}
             <input
                 type={type}
                 placeholder={placeholder}
