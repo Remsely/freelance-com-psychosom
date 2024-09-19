@@ -4,8 +4,12 @@ import TitleBlock from "./components/UI/TitleBlock/TitleBlock";
 import ImportantBlock from "./components/UI/ImportantBlock/ImportantBlock";
 import Form from "./components/Form/Form/Form";
 import SliderFeedback from "./components/UI/SliderFeedback/SliderFeedback";
+import PopupModal from "./components/UI/PopupModal/PopupModal";
+import {useState} from "react";
 
 export default function App() {
+
+    const [isOpenCertificate, setIsOpenCertificate] = useState(false)
 
     return (
         <>
@@ -17,13 +21,15 @@ export default function App() {
                         Инфа о специалисте, интересная и мотивирующая история из жизни <br/>
                         Инфа о специалисте, интересная и мотивирующая история из жизни
                     </p>
-                    <ImportantBlock text="Блок важное (сноска/заметка) <br/>
+                    <ImportantBlock text="Блок важное (сноска/заметка)
                     со ссылкой на инфу о психосоматике"/>
                     <p>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
                         текста Продолжается много текста Продолжается много текста Продолжается много текста
                         Продолжается много текста Продолжается много текста Продолжается много текста </p>
-                    <ImportantBlock text="Инфа о дипломе <br/>
-                    кнопка, открывающая модальное окно с файлом диплома"/>
+                    <ImportantBlock text="<a id='important-link'>Инфа о дипломе</a>
+                    кнопка, открывающая модальное окно с файлом диплома"
+                    onLinkClick={() => setIsOpenCertificate(true)}/>
+                    <PopupModal isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} image="certificate.jpg"/>
                 </div>
                 <div className="photo">
 

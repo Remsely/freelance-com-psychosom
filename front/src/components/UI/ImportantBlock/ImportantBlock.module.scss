@@ -8,6 +8,15 @@
     width: 100%;
     height: 75px;
 
+    a {
+        cursor: pointer;
+        transition: all 200ms ease;
+
+        &:hover {
+            color: #8B6842;
+        }
+    }
+
     p {
         color: #6E522D;
     }

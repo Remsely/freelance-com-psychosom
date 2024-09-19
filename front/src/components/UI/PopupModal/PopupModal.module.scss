@@ -1,0 +1,36 @@
+.dialog {
+    position: relative;
+    z-index: 50;
+
+    .background {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.2);
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            padding: 30px;
+
+            .closeModal {
+                margin-left: auto;
+                margin-bottom: 15px;
+
+                img {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+img {
+    max-height: 750px;
+}
