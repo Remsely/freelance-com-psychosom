@@ -1,3 +1,5 @@
+@import "/src/utils/variables";
+
 @font-face {
     font-family: Manrope;
     src: url('/src/assets/fonts/Manrope-Medium.ttf') format('truetype');
@@ -30,7 +32,7 @@ html {
 
     font-family: "Manrope", sans-serif;
     font-size: 20px;
-    color: #7D7D7D;
+    color: $text-font-color;
 
     a {
         text-decoration: none;
@@ -49,11 +51,11 @@ html {
 .block {
     height: 450px;
     border-radius: 35px;
-    background: rgba(255, 255, 255, 0.4);
-    border-left: 1px solid #cbbfbf;
-    border-top: 1px solid #cbbfbf;
+    background: $background-div-color;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
     backdrop-filter: blur(15px);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: $box-shadow;
 }
 
 .wrapper {
@@ -63,11 +65,11 @@ html {
 .main {
     display: flex;
 
-    border-left: 1px solid #cbbfbf;
-    border-top: 1px solid #cbbfbf;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
     backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: $background-div-color;
+    box-shadow: $box-shadow;
     border-radius: 35px;
 
     .description {
@@ -92,7 +94,7 @@ html {
 
 .slick-arrow.slick-next,
 .slick-arrow.slick-prev {
-    background-color: #F8EBD9;
+    background-color: $button-bg-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +121,7 @@ html {
 
 .slick-arrow.slick-next:hover,
 .slick-arrow.slick-prev:hover {
-    background-color: #E6D1B3;
+    background-color: $button-hover-color;
 }
 
 .slick-prev::before,

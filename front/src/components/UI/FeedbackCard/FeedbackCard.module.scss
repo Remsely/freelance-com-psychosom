@@ -1,3 +1,5 @@
+@import "/src/utils/variables";
+
 .feedback {
     display: flex;
     flex-direction: column;
@@ -6,10 +8,10 @@
     font-weight: 700;
     height: 450px;
     backdrop-filter: blur(15px);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 0.4);
-    border-left: 1px solid #cbbfbf;
-    border-top: 1px solid #cbbfbf;
+    box-shadow: $box-shadow;
+    background: $background-div-color;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
     border-radius: 35px;
     padding: 10px 20px;
 
@@ -20,13 +22,13 @@
         h3 {
             font-size: 32px;
             font-weight: 600;
-            color: #6E522D;
+            color: $title-font-color;
         }
 
         span {
             font-size: 40px;
             font-weight: 600;
-            color: #6E522D;
+            color: $title-font-color;
             margin-left: auto;
             margin-right: 5px;
         }

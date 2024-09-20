@@ -40,6 +40,7 @@ export default function SliderFeedback() {
         slidesToShow: 3,
         slidesToScroll: 1,
         variableWidth: true,
+        useTransform: true,
         nextArrow: <SampleNextArrow/>,
         prevArrow: <SamplePrevArrow/>,
         responsive: [

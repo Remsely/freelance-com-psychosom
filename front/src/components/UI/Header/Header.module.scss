@@ -1,9 +1,11 @@
+@import "/src/utils/variables";
+
 .header {
     padding-top: 25px;
     padding-bottom: 50px;
 
     .title {
-        color: #6E522D;
+        color: $title-font-color;
         font-weight: 700;
         font-size: 40px;
         text-align: center;
@@ -15,7 +17,7 @@
         justify-content: center;
 
         ul {
-            background: rgba(248, 235, 217, 0.88);
+            background: $button-bg-color;
             width: fit-content;
             border-radius: 18px;
             list-style: none;
@@ -28,11 +30,11 @@
 
                 a {
                     font-size: 24px;
-                    color: #6E522D;
+                    color: $title-font-color;
                     transition: all 200ms ease;
 
                     &:hover {
-                        color: #8B6842;
+                        color: $title-hover-color;
                     }
                 }
 

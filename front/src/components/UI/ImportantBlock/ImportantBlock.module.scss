@@ -1,8 +1,9 @@
+@import "/src/utils/variables";
+
 .important {
-    box-shadow: inset 0 0 40px 0 rgba(231, 192, 148, 0.6);
-    background: rgba(231, 192, 148, 0.02);
+    background: $button-bg-color;
     border-radius: 28px;
-    color: #6E522D;
+    color: $title-font-color;
     padding: 10px 20px;
     margin: 22px 0;
     width: 100%;
@@ -13,11 +14,11 @@
         transition: all 200ms ease;
 
         &:hover {
-            color: #8B6842;
+            color: $title-hover-color;
         }
     }
 
     p {
-        color: #6E522D;
+        color: $title-font-color;
     }
 }
