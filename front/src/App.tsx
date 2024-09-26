@@ -10,6 +10,7 @@ import {useState} from "react";
 export default function App() {
 
     const [isOpenCertificate, setIsOpenCertificate] = useState(false)
+    const [isOpenForm, setIsOpenForm] = useState(false)
 
     return (
         <>
@@ -38,7 +39,8 @@ export default function App() {
 
             <TitleBlock title="Запишитесь на консультацию" id="consultation"/>
 
-            <Form/>
+            <Form setIsOpen={setIsOpenForm}/>
+            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!" description="Вы записались в консультацию к специалисту"/>
 
             <TitleBlock title="Отзывы" id="feedbacks"/>
 

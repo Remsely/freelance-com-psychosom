@@ -9,11 +9,8 @@ export default function TextareaForm({ register } : TextareaFormProps) {
 
     return (
         <>
-            <div className={`${styles.textarea} block`} >
-                <p>Опишите свою проблему</p>
-                <textarea {...register("message", {required: true})}/>
-                <button type="submit">Записаться</button>
-            </div>
+            <p className={styles.p}>Опишите свою проблему</p>
+            <textarea className={styles.textarea} {...register("message", {required: true})}/>
         </>
     )
 }

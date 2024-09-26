@@ -12,8 +12,8 @@ export default function Footer() {
                         <h2>Важное</h2>
                         <ul>
                             <li><a href="#">Главная</a></li>
-                            <li><a href={"#consultation"}>Записаться на консультацию</a></li>
-                            <li><a href={"#feedbacks"}>Отзывы</a></li>
+                            <li><a href="#consultation">Записаться на консультацию</a></li>
+                            <li><a href="#feedbacks">Отзывы</a></li>
                         </ul>
                     </div>
                     <div className={styles.socials}>

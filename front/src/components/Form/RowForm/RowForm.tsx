@@ -46,7 +46,7 @@ export default function RowForm({ label, name, type, register, required }: RowFo
             value = value.replace(/[^а-яА-Яa-zA-Z]/g, '');
         } else if (value.startsWith('@')) {
             setIsTelegram(true);
-            value = '@' + value.replace(/@+/g, '');
+            value = '@' + value.slice(1).replace(/[^a-zA-Z0-9]/g, '');
         } else {
             setIsTelegram(false);
             value = value.replace(/[^0-9]/g, '');

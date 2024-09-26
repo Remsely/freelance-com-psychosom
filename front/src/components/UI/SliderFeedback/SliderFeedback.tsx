@@ -39,6 +39,7 @@ export default function SliderFeedback() {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
+        infinite: false,
         variableWidth: true,
         useTransform: true,
         nextArrow: <SampleNextArrow/>,

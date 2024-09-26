@@ -3,12 +3,18 @@ import RowForm from "../RowForm/RowForm.tsx";
 import TextareaForm from "../TextareaForm/TextareaForm.tsx";
 import styles from "./Form.module.scss"
 
-export default function Form() {
+interface FormProps {
+    setIsOpen: (isOpen: boolean) => void
+}
 
-    const {register, handleSubmit} = useForm();
+export default function Form({setIsOpen} : FormProps) {
+
+    const {register, handleSubmit, reset} = useForm();
 
     const onSubmit = (data: object) => {
         console.log(data);
+        setIsOpen(true)
+        reset();
     };
 
     return (
@@ -19,7 +25,10 @@ export default function Form() {
                     <RowForm label="Фамилия" name="lastname" type="name" register={register} required={true}/>
                     <RowForm label="Телефон / Telegram" name="contact" type="tel" register={register} required={true}/>
                 </div>
-                <TextareaForm register={register} />
+                <div className={`${styles.textarea} block`}>
+                    <TextareaForm register={register}/>
+                    <button className={styles.button} type="submit">Записаться</button>
+                </div>
             </form>
         </>
     )
