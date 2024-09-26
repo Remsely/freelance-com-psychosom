@@ -85,7 +85,7 @@ export default function RowForm({ label, name, type, register, required }: RowFo
                 </p>
             ) : (<p>{label}</p>)}
             <input
-                type={type}
+                type={isTelegram ? 'text' : 'tel'}
                 placeholder={placeholder}
                 value={inputValue}
                 onChange={handleChange}

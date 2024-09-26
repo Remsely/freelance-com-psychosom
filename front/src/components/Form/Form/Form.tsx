@@ -17,7 +17,7 @@ export default function Form() {
                 <div className={`${styles.inputs} block`}>
                     <RowForm label="Имя" name="firstname" type="name" register={register} required={true}/>
                     <RowForm label="Фамилия" name="lastname" type="name" register={register} required={true}/>
-                    <RowForm label="Телефон / Telegram" name="phone" type="tel" register={register} required={true}/>
+                    <RowForm label="Телефон / Telegram" name="contact" type="tel" register={register} required={true}/>
                 </div>
                 <TextareaForm register={register} />
             </form>
