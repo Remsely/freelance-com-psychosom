@@ -20,19 +20,33 @@
             flex-direction: column;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
+            max-width: 85vh;
             max-height: 95vh;
             overflow-y: auto;
 
             .header {
                 display: flex;
+                margin-bottom: 20px;
+                align-items: center;
+
+                .title {
+                    font-size: 32px;
+                    color: $title-font-color;
+                }
             }
 
             .closeModal {
                 margin-left: auto;
-                margin-bottom: 15px;
 
-                img {
+                svg {
+                    stroke: $title-font-color;
                     cursor: pointer;
+                    transition: all 300ms ease;
+
+                    &:hover {
+                        transform: scale(1.2);
+                        stroke: $title-hover-color;
+                    }
                 }
             }
         }

@@ -29,7 +29,7 @@ export default function App() {
                         Продолжается много текста Продолжается много текста Продолжается много текста </p>
                     <ImportantBlock text="<a id='important-link'>Инфа о дипломе</a>
                     кнопка, открывающая модальное окно с файлом диплома"
-                    onLinkClick={() => setIsOpenCertificate(true)}/>
+                                    onLinkClick={() => setIsOpenCertificate(true)}/>
                     <PopupModal isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} image="certificate.jpg"/>
                 </div>
                 <div className="photo">
@@ -40,7 +40,8 @@ export default function App() {
             <TitleBlock title="Запишитесь на консультацию" id="consultation"/>
 
             <Form setIsOpen={setIsOpenForm}/>
-            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!" description="Вы записались в консультацию к специалисту"/>
+            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!"
+            description="Вы записались на консультацию к специалисту. Скоро с вами свяжется специалист по методу связи, который вы указали."/>
 
             <TitleBlock title="Отзывы" id="feedbacks"/>
 

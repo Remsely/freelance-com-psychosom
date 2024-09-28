@@ -21,9 +21,9 @@ export default function Form({setIsOpen} : FormProps) {
         <>
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} container`}>
                 <div className={`${styles.inputs} block`}>
-                    <RowForm label="Имя" name="firstname" type="name" register={register} required={true}/>
-                    <RowForm label="Фамилия" name="lastname" type="name" register={register} required={true}/>
-                    <RowForm label="Телефон / Telegram" name="contact" type="tel" register={register} required={true}/>
+                    <RowForm label="Имя" name="firstname" register={register} required={true}/>
+                    <RowForm label="Фамилия" name="lastname" register={register} required={true}/>
+                    <RowForm label="Телефон / Telegram" name="contact" register={register} required={true}/>
                 </div>
                 <div className={`${styles.textarea} block`}>
                     <TextareaForm register={register}/>

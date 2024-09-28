@@ -1,25 +1,27 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {FieldValues, UseFormRegister} from "react-hook-form";
 import styles from "./RowForm.module.scss";
-import { ChangeEvent, useState, useEffect, KeyboardEvent } from "react";
+import {ChangeEvent, useState, useEffect, KeyboardEvent, useRef} from "react";
 
 interface RowFormProps {
     label: string;
     name: string;
-    type: string;
     register: UseFormRegister<FieldValues>;
     required?: boolean;
 }
 
-export default function RowForm({ label, name, type, register, required }: RowFormProps) {
-    const [inputValue, setInputValue] = useState<string>("");
+export default function RowForm({label, name, register, required}: RowFormProps) {
     const [isTelegram, setIsTelegram] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     const showTelegramOptions = label === "Телефон / Telegram";
-    const { onChange: onChangeHandler, ...restRegister } = register(name, { required });
+    const placeholder = showTelegramOptions ? (isTelegram ? "Telegram" : "Номер телефона") : label;
+    const {onChange: onChangeHandler, ref, ...restRegister} = register(name, {required});
 
     useEffect(() => {
-        setIsTelegram(inputValue.startsWith('@'));
-    }, [inputValue]);
+        if (inputRef.current) {
+            setIsTelegram(inputRef.current.value.startsWith('@'));
+        }
+    }, []);
 
     const formatPhoneNumber = (value: string) => {
         let inputNumbersValue = value.replace(/\D/g, '');
@@ -53,23 +55,39 @@ export default function RowForm({ label, name, type, register, required }: RowFo
             value = formatPhoneNumber(value);
         }
 
-        setInputValue(value);
-        onChangeHandler?.(e);
+        if (inputRef.current) {
+            inputRef.current.value = value;
+        }
+
+        const event = {
+            target: {
+                value: value,
+            },
+        } as ChangeEvent<HTMLInputElement>;
+
+        onChangeHandler?.(event);
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (!isTelegram && e.key === 'Backspace') {
-            const inputNumbersValue = inputValue.replace(/\D/g, '');
-            if (inputNumbersValue.length <= 1) setInputValue('');
+            const inputNumbersValue = (inputRef.current?.value || '').replace(/\D/g, '');
+            if (inputNumbersValue.length <= 1) {
+                if (inputRef.current) inputRef.current.value = '';
+            }
         }
     };
 
     const handleModeChange = (mode: 'phone' | 'telegram') => {
         setIsTelegram(mode === 'telegram');
-        setInputValue(mode === 'telegram' ? '@' : '');
+        if (inputRef.current) {
+            inputRef.current.value = mode === 'telegram' ? '@' : '';
+        }
     };
 
-    const placeholder = showTelegramOptions ? (isTelegram ? "Telegram" : "Телефон") : label;
+    const combinedRef = (el: HTMLInputElement | null) => {
+        inputRef.current = el;
+        ref(el);
+    };
 
     return (
         <div className={styles.row}>
@@ -85,13 +103,13 @@ export default function RowForm({ label, name, type, register, required }: RowFo
                 </p>
             ) : (<p>{label}</p>)}
             <input
+                ref={combinedRef}
                 type={isTelegram ? 'text' : 'tel'}
                 placeholder={placeholder}
-                value={inputValue}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 {...restRegister}
-                maxLength={type === "tel" ? 18 : undefined}
+                maxLength={isTelegram ? 18 : undefined}
             />
         </div>
     );
