@@ -10,7 +10,7 @@ export default function TextareaForm({ register } : TextareaFormProps) {
     return (
         <>
             <p className={styles.p}>Опишите свою проблему</p>
-            <textarea className={styles.textarea} {...register("message", {required: true})}/>
+            <textarea className={styles.textarea} placeholder="Опишите свою проблему" {...register("message", {required: true})}/>
         </>
     )
 }

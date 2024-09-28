@@ -6,16 +6,15 @@ interface RowFormProps {
     label: string;
     name: string;
     register: UseFormRegister<FieldValues>;
-    required?: boolean;
 }
 
-export default function RowForm({label, name, register, required}: RowFormProps) {
+export default function RowForm({label, name, register}: RowFormProps) {
     const [isTelegram, setIsTelegram] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const showTelegramOptions = label === "Телефон / Telegram";
     const placeholder = showTelegramOptions ? (isTelegram ? "Telegram" : "Номер телефона") : label;
-    const {onChange: onChangeHandler, ref, ...restRegister} = register(name, {required});
+    const {onChange: onChangeHandler, ref, ...restRegister} = register(name, {required: true});
 
     useEffect(() => {
         if (inputRef.current) {
