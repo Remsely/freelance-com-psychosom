@@ -69,10 +69,17 @@ export default function RowForm({label, name, register, required}: RowFormProps)
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (!isTelegram && e.key === 'Backspace') {
-            const inputNumbersValue = (inputRef.current?.value || '').replace(/\D/g, '');
-            if (inputNumbersValue.length <= 1) {
-                if (inputRef.current) inputRef.current.value = '';
+        if (e.key === 'Backspace') {
+            const currentValue = e.currentTarget.value;
+            if (label === "Телефон / Telegram" && !isTelegram) {
+                const inputNumbersValue = currentValue.replace(/\D/g, '');
+                if (inputNumbersValue.length <= 1) {
+                    e.currentTarget.value = '';
+                }
+            } else if (label === "Имя" || label === "Фамилия" || isTelegram) {
+                if (currentValue.length === 1) {
+                    e.currentTarget.value = '';
+                }
             }
         }
     };
