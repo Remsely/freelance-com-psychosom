@@ -8,7 +8,7 @@ export default function Header() {
                 <nav className={styles.navbar}>
                     <ul>
                         <li><a href="#">Главная</a></li>
-                        <li><a href="#consultation}">Записаться на консультацию</a></li>
+                        <li><a href="#consultation">Записаться на консультацию</a></li>
                         <li><a href="#feedbacks">Отзывы</a></li>
                     </ul>
                 </nav>
