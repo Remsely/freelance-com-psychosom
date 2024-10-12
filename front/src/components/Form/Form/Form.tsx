@@ -1,4 +1,4 @@
-import {useForm} from "react-hook-form";
+import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import RowForm from "../RowForm/RowForm.tsx";
 import TextareaForm from "../TextareaForm/TextareaForm.tsx";
 import styles from "./Form.module.scss"
@@ -9,9 +9,11 @@ interface FormProps {
 
 export default function Form({setIsOpen} : FormProps) {
 
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit, reset, formState: { errors }} = useForm({
+        mode: "onChange",
+    });
 
-    const onSubmit = (data: object) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data: object) => {
         console.log(data);
         setIsOpen(true)
         reset();
@@ -21,12 +23,12 @@ export default function Form({setIsOpen} : FormProps) {
         <>
             <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} container`}>
                 <div className={`${styles.inputs} block`}>
-                    <RowForm label="Имя" name="firstname" register={register}/>
-                    <RowForm label="Фамилия" name="lastname" register={register}/>
-                    <RowForm label="Телефон / Telegram" name="contact" register={register}/>
+                    <RowForm label="Имя" name="firstname" register={register} error={errors.firstname}/>
+                    <RowForm label="Фамилия" name="lastname" register={register} error={errors.lastname}/>
+                    <RowForm label="Телефон / Telegram" name="contact" register={register} error={errors.contact}/>
                 </div>
                 <div className={`${styles.textarea} block`}>
-                    <TextareaForm register={register}/>
+                    <TextareaForm register={register} error={errors.textarea}/>
                     <button className={styles.button} type="submit">Записаться</button>
                 </div>
             </form>

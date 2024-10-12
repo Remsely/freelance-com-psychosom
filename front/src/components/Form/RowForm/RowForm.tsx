@@ -1,4 +1,4 @@
-import {FieldValues, UseFormRegister} from "react-hook-form";
+import {FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister} from "react-hook-form";
 import styles from "./RowForm.module.scss";
 import {ChangeEvent, useState, useEffect, KeyboardEvent, useRef} from "react";
 
@@ -6,15 +6,37 @@ interface RowFormProps {
     label: string;
     name: string;
     register: UseFormRegister<FieldValues>;
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl>;
 }
 
-export default function RowForm({label, name, register}: RowFormProps) {
+export default function RowForm({label, name, register, error}: RowFormProps) {
     const [isTelegram, setIsTelegram] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const showTelegramOptions = label === "Телефон / Telegram";
     const placeholder = showTelegramOptions ? (isTelegram ? "Telegram" : "Номер телефона") : label;
-    const {onChange: onChangeHandler, ref, ...restRegister} = register(name, {required: true});
+
+    const pattern = label === "Имя" || label === "Фамилия"
+        ? /^[а-яА-Яa-zA-Z]+$/
+        : label === "Телефон / Telegram"
+            ? isTelegram
+                ? /^@[a-zA-Z0-9]+$/
+                : /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$|^8\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$|^\+\d+$/
+            : undefined;
+
+    const {onChange: onChangeHandler, ref, ...restRegister} = register(name, {
+        required: 'Это поле обязательное',
+        pattern: pattern
+            ? {
+                value: pattern,
+                message: label === "Имя" || label === "Фамилия"
+                    ? "Имя и фамилия могут содержать только буквы"
+                    : isTelegram
+                        ? "Telegram ID должен начинаться с @ и содержать только буквы и цифры"
+                        : "Введите корректный номер телефона",
+            }
+            : undefined,
+    });
 
     useEffect(() => {
         if (inputRef.current) {
@@ -98,7 +120,7 @@ export default function RowForm({label, name, register}: RowFormProps) {
     return (
         <div className={styles.row}>
             {showTelegramOptions ? (
-                <p>
+                <h2>
                     <a className={!isTelegram ? styles.active : ""} onClick={() => handleModeChange('phone')}>
                         Телефон
                     </a>
@@ -106,8 +128,8 @@ export default function RowForm({label, name, register}: RowFormProps) {
                     <a className={isTelegram ? styles.active : ""} onClick={() => handleModeChange('telegram')}>
                         Telegram
                     </a>
-                </p>
-            ) : (<p>{label}</p>)}
+                </h2>
+            ) : (<h2>{label}</h2>)}
             <input
                 ref={combinedRef}
                 type={isTelegram ? 'text' : 'tel'}
@@ -117,6 +139,9 @@ export default function RowForm({label, name, register}: RowFormProps) {
                 {...restRegister}
                 maxLength={isTelegram ? 18 : undefined}
             />
+            {error && typeof error.message === 'string' && (
+                <p className={styles.error}>{error.message}</p>
+            )}
         </div>
     );
 }
