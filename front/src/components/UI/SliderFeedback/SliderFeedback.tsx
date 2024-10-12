@@ -35,35 +35,35 @@ function SamplePrevArrow(props : ArrowProps) {
 }
 
 export default function SliderFeedback() {
-    const sliderSettings = {
-        speed: 500,
+    const settings = {
         slidesToShow: 3,
-        slidesToScroll: 1,
-        infinite: false,
         variableWidth: true,
-        useTransform: true,
         nextArrow: <SampleNextArrow/>,
         prevArrow: <SamplePrevArrow/>,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                },
+                    slidesToShow: 3,
+                }
             },
             {
-                breakpoint: 768,
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
+                }
+            }
+        ]
     };
 
     return (
-        <Slider className="container" {...sliderSettings}>
+        <Slider className="container" {...settings}>
             {feedbacks.map(feedback => (
                 <FeedbackCard
                     key={feedback.id}
