@@ -2,7 +2,7 @@ import Header from "./components/UI/Header/Header.tsx";
 import Footer from "./components/UI/Footer/Footer.tsx";
 import TitleBlock from "./components/UI/TitleBlock/TitleBlock";
 import ImportantBlock from "./components/UI/ImportantBlock/ImportantBlock";
-import Form from "./components/Form/Form/Form";
+import Form from "./components/UI/Form/Form";
 import SliderFeedback from "./components/UI/SliderFeedback/SliderFeedback";
 import PopupModal from "./components/UI/PopupModal/PopupModal";
 import {useState} from "react";
