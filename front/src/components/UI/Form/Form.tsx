@@ -43,21 +43,34 @@ export default function Form({ setIsOpen }: FormProps) {
 
         if (label === "Имя" || label === "Фамилия") {
             value = value.replace(/[^а-яА-Яa-zA-Z]/g, '');
-        } else if (label === "Телефон / Telegram") {
-            if (value.startsWith('@')) {
-                setIsTelegram(true);
-                value = '@' + value.slice(1).replace(/[^a-zA-Z0-9]/g, '');
+            e.target.value = value;
+            return;
+        }
+
+
+        if (label === "Телефон / Telegram") {
+            if (isTelegram) {
+                if (value.startsWith('7') || value.startsWith('8')) {
+                    setIsTelegram(false);
+                    value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
+                } else {
+                    if (!value.startsWith('@')) {
+                        value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                    } else {
+                        value = '@' + value.slice(1).replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                    }
+                }
             } else {
-                setIsTelegram(false);
-                value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
+                if (value.includes('@')) {
+                    setIsTelegram(true);
+                    value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                } else {
+                    value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
+                }
             }
         }
 
-        if (label === "Имя" || label === "Фамилия") {
-            e.target.value = value;
-        } else {
-            setContactValue(value);
-        }
+        setContactValue(value);
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, label: string) => {
