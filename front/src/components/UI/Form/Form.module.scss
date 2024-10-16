@@ -29,6 +29,10 @@
                 outline: none;
                 transition: all 200ms ease;
 
+                &::placeholder {
+                    opacity: 0.4;
+                }
+
                 &:focus {
                     border: 2px solid $title-font-color;
                     background: $input-hover-color;
@@ -68,6 +72,10 @@
 
             &:hover {
                 background: $input-hover-color;
+            }
+
+            &::placeholder {
+                opacity: 0.4;
             }
         }
 
