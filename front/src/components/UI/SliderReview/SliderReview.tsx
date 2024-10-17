@@ -1,9 +1,9 @@
 import Slider from "react-slick";
-import FeedbackCard from "../FeedbackCard/FeedbackCard.tsx";
+import ReviewCard from "../ReviewCard/ReviewCard.tsx";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {feedbacks} from "../../../utils/data.ts";
+import {reviews} from "../../../utils/!!!data-for-dev.ts";
 import {CSSProperties} from "react";
 
 interface ArrowProps {
@@ -12,7 +12,7 @@ interface ArrowProps {
     onClick?: () => void;
 }
 
-function SampleNextArrow(props : ArrowProps) {
+function SampleArrow(props : ArrowProps) {
     const {className, style, onClick} = props;
     return (
         <div
@@ -23,23 +23,12 @@ function SampleNextArrow(props : ArrowProps) {
     );
 }
 
-function SamplePrevArrow(props : ArrowProps) {
-    const {className, style, onClick} = props;
-    return (
-        <div
-            className={className}
-            style={{...style}}
-            onClick={onClick}
-        />
-    );
-}
-
-export default function SliderFeedback() {
+export default function SliderReview() {
     const settings = {
         slidesToShow: 3,
         variableWidth: true,
-        nextArrow: <SampleNextArrow/>,
-        prevArrow: <SamplePrevArrow/>,
+        nextArrow: <SampleArrow/>,
+        prevArrow: <SampleArrow/>,
         responsive: [
             {
                 breakpoint: 1024,
@@ -64,14 +53,14 @@ export default function SliderFeedback() {
 
     return (
         <Slider className="container" {...settings}>
-            {feedbacks.map(feedback => (
-                <FeedbackCard
-                    key={feedback.id}
-                    id={feedback.id}
-                    name={feedback.name}
-                    star={feedback.star}
-                    message={feedback.message}
-                    date={feedback.date}
+            {reviews.map(review => (
+                <ReviewCard
+                    key={review.id}
+                    id={review.id}
+                    name={review.name}
+                    star={review.star}
+                    message={review.message}
+                    date={review.date}
                 />
             ))}
         </Slider>

@@ -3,7 +3,7 @@ import Footer from "./components/UI/Footer/Footer.tsx";
 import TitleBlock from "./components/UI/TitleBlock/TitleBlock";
 import ImportantBlock from "./components/UI/ImportantBlock/ImportantBlock";
 import Form from "./components/UI/Form/Form";
-import SliderFeedback from "./components/UI/SliderFeedback/SliderFeedback";
+import SliderReview from "./components/UI/SliderReview/SliderReview.tsx";
 import PopupModal from "./components/UI/PopupModal/PopupModal";
 import {useState} from "react";
 
@@ -43,9 +43,9 @@ export default function App() {
             <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!"
             description="Вы записались на консультацию к специалисту. Скоро с вами свяжется специалист по методу связи, который вы указали."/>
 
-            <TitleBlock title="Отзывы" id="feedbacks"/>
+            <TitleBlock title="Отзывы" id="reviews"/>
 
-            <SliderFeedback/>
+            <SliderReview/>
 
             <Footer/>
         </>

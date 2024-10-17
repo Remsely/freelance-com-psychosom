@@ -1,4 +1,4 @@
-export type Feedback = {
+export type Review = {
     id: number;
     name: string;
     star: number;

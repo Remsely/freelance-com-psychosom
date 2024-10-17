@@ -9,7 +9,7 @@ export default function Header() {
                     <ul>
                         <li><a href="#">Главная</a></li>
                         <li><a href="#consultation">Записаться на консультацию</a></li>
-                        <li><a href="#feedbacks">Отзывы</a></li>
+                        <li><a href="#reviews">Отзывы</a></li>
                     </ul>
                 </nav>
             </header>

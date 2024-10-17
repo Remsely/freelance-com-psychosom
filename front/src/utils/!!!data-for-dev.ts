@@ -1,6 +1,6 @@
-import {Feedback} from "../../@types/types.ts";
+import {Review} from "../../@types/types.ts";
 
-export const feedbacks : Feedback[]  = [
+export const reviews : Review[]  = [
     {
         id: 1,
         name: "John",
