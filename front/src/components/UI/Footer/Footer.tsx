@@ -1,4 +1,5 @@
 import styles from "./Footer.module.scss"
+import SocialBlock from "./SocialBlock/SocialBlock.tsx";
 
 export default function Footer() {
     return (
@@ -18,18 +19,9 @@ export default function Footer() {
                     </div>
                     <div className={styles.socials}>
                         <h2>Соцсети</h2>
-                        <div className={styles.social}>
-                            <img src="/telegram.svg" alt="telegram"/>
-                            <span>psychosomatic</span>
-                        </div>
-                        <div className={styles.social}>
-                            <img src="/whatsapp.svg" alt="whatsapp"/>
-                            <span>8 (999)-888-77-66</span>
-                        </div>
-                        <div className={styles.social}>
-                            <img src="/instagram.svg" alt="instagram"/>
-                            <span>psychosomatic</span>
-                        </div>
+                        <SocialBlock text="phychosomatic" image="telegram"/>
+                        <SocialBlock text="8 (999)-888-77-66" image="whatsapp"/>
+                        <SocialBlock text="phychosomatic" image="instagram"/>
                     </div>
                 </footer>
             </div>

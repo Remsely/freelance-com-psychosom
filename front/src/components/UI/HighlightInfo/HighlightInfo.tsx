@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import styles from "./ImportantBlock.module.scss";
+import styles from "./HighlightInfo.module.scss";
 
-interface ImportantBlockProps {
+interface HighlightInfoProps {
     text: string;
     onLinkClick?: () => void;
 }
 
-export default function ImportantBlock({ text, onLinkClick }: ImportantBlockProps) {
+export default function HighlightInfo({ text, onLinkClick }: HighlightInfoProps) {
     useEffect(() => {
         if (onLinkClick) {
             const link = document.querySelector('#important-link');
@@ -23,7 +23,7 @@ export default function ImportantBlock({ text, onLinkClick }: ImportantBlockProp
     }, [onLinkClick]);
 
     return (
-        <div className={styles.important}>
+        <div className={styles.highlight}>
             <p dangerouslySetInnerHTML={{ __html: text }}></p>
         </div>
     );
