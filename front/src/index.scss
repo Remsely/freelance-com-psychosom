@@ -31,8 +31,12 @@ html {
     box-sizing: border-box;
 
     font-family: "Manrope", sans-serif;
-    font-size: 20px;
+    font-size: $font-size-text;
     color: $text-font-color;
+
+    input::placeholder {
+        opacity: 0.4;
+    }
 
     a {
         text-decoration: none;
@@ -51,11 +55,11 @@ html {
 
 .block {
     height: 450px;
-    border-radius: 35px;
+    border-radius: $border-radius;
     background: $background-div-color;
     border-left: $border-shadow;
     border-top: $border-shadow;
-    backdrop-filter: blur(15px);
+    backdrop-filter: $backdrop-filter;
     box-shadow: $box-shadow;
 }
 
@@ -68,18 +72,14 @@ html {
 
     border-left: $border-shadow;
     border-top: $border-shadow;
-    backdrop-filter: blur(15px);
+    backdrop-filter: $backdrop-filter;
     background: $background-div-color;
     box-shadow: $box-shadow;
-    border-radius: 35px;
+    border-radius: $border-radius;
 
     .description {
         width: 700px;
         padding: 25px 0 0 20px;
-
-        p {
-            font-size: 20px;
-        }
     }
 }
 
@@ -103,7 +103,7 @@ html {
     opacity: 1;
     height: 50px;
     width: 50px;
-    transition: all 200ms ease;
+    transition: $transition-main;
 }
 
 .slick-arrow.slick-next {

@@ -3,7 +3,9 @@ $title-hover-color: #8B6A4A;
 $text-font-color: #7D7D7D;
 $background-div-color: rgba(255, 255, 255, 0.4);
 $box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+$backdrop-filter: blur(15px);
 $border-shadow: 1px solid #cbbfbf;
+$border-radius: 35px;
 
 $input-bg-color: rgba(238, 238, 238, 0.7);
 $input-box-shadow: inset $box-shadow;
@@ -11,3 +13,14 @@ $input-hover-color: rgba(245, 245, 245, 0.9);
 
 $button-bg-color: rgba(248, 235, 217, 0.88);
 $button-hover-color: #E6D1B3;
+
+$transition-main: all 200ms ease;
+$transition-fastest: all 100ms ease;
+
+$font-size-title: 40px;
+$font-size-subtitle: 32px;
+$font-size-text-title: 24px;
+$font-size-text: 20px;
+
+$font-weight-title: 700;
+$font-weight-subtitle: 600;

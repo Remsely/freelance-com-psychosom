@@ -30,7 +30,7 @@
                 align-items: center;
 
                 .title {
-                    font-size: 32px;
+                    font-size: $font-size-subtitle;
                     color: $title-font-color;
                 }
             }
@@ -41,7 +41,7 @@
                 svg {
                     stroke: $title-font-color;
                     cursor: pointer;
-                    transition: all 300ms ease;
+                    transition: $transition-main;
 
                     &:hover {
                         transform: scale(1.2);

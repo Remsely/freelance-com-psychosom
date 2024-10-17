@@ -2,7 +2,7 @@
 
 .important {
     background: $button-bg-color;
-    border-radius: 28px;
+    border-radius: 25px;
     color: $title-font-color;
     padding: 10px 20px;
     margin: 22px 0;
@@ -11,7 +11,7 @@
 
     a {
         cursor: pointer;
-        transition: all 200ms ease;
+        transition: $transition-main;
 
         &:hover {
             color: $title-hover-color;
