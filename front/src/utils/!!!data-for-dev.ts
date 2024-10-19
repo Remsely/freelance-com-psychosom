@@ -35,7 +35,7 @@ export const navigations : Navigation[]  = [
     {
         id: 1,
         name: "Главная",
-        link: "",
+        link: "root",
     },
     {
         id: 2,

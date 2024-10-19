@@ -1,3 +1,5 @@
+import { Link } from "react-scroll";
+
 interface NavLineProps {
     name: string;
     link: string;
@@ -5,6 +7,6 @@ interface NavLineProps {
 
 export default function NavLine(props : NavLineProps) {
     return (
-        <li><a href={`#${props.link}`}>{props.name}</a></li>
+        <li><Link to={props.link} smooth={true} duration={500}>{props.name}</Link></li>
     )
 }
