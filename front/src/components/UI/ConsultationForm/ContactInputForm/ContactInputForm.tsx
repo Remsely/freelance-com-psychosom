@@ -11,14 +11,7 @@ interface ContactInputProps {
     errors: Record<string, FieldError | undefined>;
 }
 
-export default function ContactInputForm({
-                                         isTelegram,
-                                         setIsTelegram,
-                                         contactValue,
-                                         setContactValue,
-                                         register,
-                                         errors,
-                                     }: ContactInputProps) {
+export default function ContactInputForm({isTelegram, setIsTelegram, contactValue, setContactValue, register, errors,}: ContactInputProps) {
     const formatPhoneNumber = (value: string) => {
         let inputNumbersValue = value.replace(/\D/g, '');
         if (inputNumbersValue.length === 0) return '';
@@ -55,7 +48,13 @@ export default function ContactInputForm({
                 setIsTelegram(true);
                 value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
             } else {
-                value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
+                const cleanedValue = value.replace(/[^0-9]/g, '');
+
+                if (cleanedValue.length < value.length) {
+                    value = '+' + cleanedValue;
+                } else {
+                    value = formatPhoneNumber(cleanedValue);
+                }
             }
         }
 
@@ -63,11 +62,18 @@ export default function ContactInputForm({
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        const currentValue = e.currentTarget.value;
+
         if (e.key === 'Backspace') {
-            const currentValue = e.currentTarget.value;
-            const inputNumbersValue = currentValue.replace(/\D/g, '');
-            if (inputNumbersValue.length <= 1) {
-                e.currentTarget.value = '';
+            if (isTelegram) {
+                if (currentValue.length <= 1) {
+                    e.currentTarget.value = '';  // Удалить всё, если остался один символ
+                }
+            } else {
+                const inputNumbersValue = currentValue.replace(/\D/g, '');
+                if (inputNumbersValue.length <= 1) {
+                    e.currentTarget.value = '';
+                }
             }
         }
     };
@@ -89,7 +95,7 @@ export default function ContactInputForm({
                 </a>
             </h2>
             <input
-                type="text"
+                type={isTelegram ? "text" : "tel"}
                 placeholder={isTelegram ? "Telegram" : "Телефон"}
                 value={contactValue}
                 onKeyDown={handleKeyDown}

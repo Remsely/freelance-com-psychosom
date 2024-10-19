@@ -4,8 +4,8 @@ interface PhotoMainProps {
     children: string
 }
 
-export default function PhotoMentorInfo(children : PhotoMainProps) {
+export default function PhotoMentorInfo(props : PhotoMainProps) {
     return (
-        <img className={styles.photo} src={`/${children}`} alt=""/>
+        <img className={styles.photo} src={`/${props.children}`} alt=""/>
     )
 }

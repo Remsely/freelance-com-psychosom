@@ -19,7 +19,7 @@
         ul {
             background: $button-bg-color;
             width: fit-content;
-            border-radius: 20px;
+            border-radius: $border-radius-inputs-form;
             list-style: none;
 
             li {

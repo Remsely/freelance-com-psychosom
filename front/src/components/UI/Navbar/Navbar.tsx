@@ -1,5 +1,5 @@
-import {navigations} from "../../../utils/!!!data-for-dev.ts";
 import NavbarItem from "./NavbarItem/NavbarItem.tsx";
+import {navigations} from "../../../assets/data.ts";
 
 export default function Navbar() {
 

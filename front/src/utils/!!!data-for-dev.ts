@@ -1,4 +1,4 @@
-import {Navigation, Review} from "../../@types/types.ts";
+import {Review} from "../../@types/types.ts";
 
 export const reviews : Review[]  = [
     {
@@ -28,23 +28,5 @@ export const reviews : Review[]  = [
         star: 5,
         message: "Лучший специалист",
         date: "02.08.24",
-    },
-]
-
-export const navigations : Navigation[]  = [
-    {
-        id: 1,
-        name: "Главная",
-        link: "root",
-    },
-    {
-        id: 2,
-        name: "Записаться на консультацию",
-        link: "consultation",
-    },
-    {
-        id: 3,
-        name: "Отзывы",
-        link: "reviews",
     },
 ]
