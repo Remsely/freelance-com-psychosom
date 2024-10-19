@@ -6,7 +6,7 @@ export default function Navbar() {
     return (
         <ul>
             {navigations.map((navigation) => (
-                <NavbarItem name={navigation.name} link={navigation.link} />
+                <NavbarItem key={navigation.id} link={navigation.link} >{navigation.name}</NavbarItem>
             ))}
         </ul>
     )

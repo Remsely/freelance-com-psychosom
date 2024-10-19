@@ -1,4 +1,4 @@
-import HighlightInfo from "../HighlightInfo/HighlightInfo.tsx";
+import HighlightInfo from "./HighlightInfo/HighlightInfo.tsx";
 import PopupModal from "../PopupModal/PopupModal.tsx";
 import {useState} from "react";
 import TextMentorInfo from "./TextMentorInfo/TextMentorInfo.tsx";
@@ -11,20 +11,18 @@ export default function MentorInfo() {
     return (
         <main className={`${styles.main} container`}>
             <div className={styles.description}>
-                <TextMentorInfo text="Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
-                        текста Продолжается много текста Продолжается много текста Продолжается много текста
-                        Продолжается много текста Продолжается много текста Продолжается много текста"/>
-                <HighlightInfo text="Блок важное (сноска/заметка)
-                    со ссылкой на инфу о психосоматике"/>
-                <TextMentorInfo text="Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
-                        текста Продолжается много текста Продолжается много текста Продолжается много текста
-                        Продолжается много текста Продолжается много текста Продолжается много текста"/>
-                <HighlightInfo text="<a id='important-link'>Инфа о дипломе</a>
-                    кнопка, открывающая модальное окно с файлом диплома"
-                                onLinkClick={() => setIsOpenCertificate(true)}/>
+                <TextMentorInfo>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
+                    текста Продолжается много текста Продолжается много текста Продолжается много текста
+                    Продолжается много текста Продолжается много текста Продолжается много текста</TextMentorInfo>
+                <HighlightInfo>Блок важное (сноска/заметка) со ссылкой на инфу о психосоматике"</HighlightInfo>
+                <TextMentorInfo>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
+                    текста Продолжается много текста Продолжается много текста Продолжается много текста
+                    Продолжается много текста Продолжается много текста Продолжается много текста</TextMentorInfo>
+                <HighlightInfo onLinkClick={() => setIsOpenCertificate(true)}><a id='important-link'>Инфа о дипломе</a> кнопка,
+                    открывающая модальное окно с файлом диплома</HighlightInfo>
                 <PopupModal isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} image="certificate.jpg"/>
             </div>
-            <PhotoMentorInfo image="specialist.jpg"/>
+            <PhotoMentorInfo>specialist.jpg</PhotoMentorInfo>
         </main>
     )
 }

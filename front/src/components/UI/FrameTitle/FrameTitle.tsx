@@ -1,13 +1,13 @@
 import styles from "./FrameTitle.module.scss"
 
 interface FrameTitleProps {
-    title: string;
+    children: string;
     id?: string;
 }
 
-export default function FrameTitle({ title, id } : FrameTitleProps) {
+export default function FrameTitle({ children, id } : FrameTitleProps) {
     return (
-        <h1 className={`${styles.title_block} container`} id={id}>{title}</h1>
+        <h1 className={`${styles.title_block} container`} id={id}>{children}</h1>
     )
 }
 

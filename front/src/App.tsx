@@ -16,13 +16,13 @@ export default function App() {
 
             <MentorInfo/>
 
-            <FrameTitle title="Запишитесь на консультацию" id="consultation"/>
+            <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
 
             <ConsultationForm setIsOpen={setIsOpenForm}/>
-            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!"
-            description="Вы записались на консультацию к специалисту. Скоро с вами свяжется специалист по методу связи, который вы указали."/>
+            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!">Вы записались на консультацию к специалисту.
+                Скоро с вами свяжется специалист по методу связи, который вы указали.</PopupModal>
 
-            <FrameTitle title="Отзывы" id="reviews"/>
+            <FrameTitle id="reviews">Отзывы</FrameTitle>
 
             <SliderReview/>
 

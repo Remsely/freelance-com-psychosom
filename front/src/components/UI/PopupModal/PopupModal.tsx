@@ -6,12 +6,12 @@ interface PopupModalProps {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void;
     title?: string;
-    description?: string;
+    children?: string;
     image?: string;
     alt?: string;
 }
 
-export default function PopupModal({isOpen, setIsOpen, title, description, image, alt}: PopupModalProps) {
+export default function PopupModal({isOpen, setIsOpen, title, children, image, alt}: PopupModalProps) {
     return (
         <Dialog open={isOpen} onClose={() => setIsOpen(false)} className={styles.dialog}>
             <div className={styles.background}>
@@ -20,7 +20,7 @@ export default function PopupModal({isOpen, setIsOpen, title, description, image
                         {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
                         <CloseModalButton setIsOpen={setIsOpen}/>
                     </div>
-                    {description && <p>{description}</p>}
+                    {children && <p>{children}</p>}
                     {image && <img src={`/${image}`} alt={alt}/>}
                 </DialogPanel>
             </div>

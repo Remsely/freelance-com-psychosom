@@ -57,7 +57,7 @@ export default function ConsultationForm({setIsOpen}: ConsultationFormProps) {
                     register={register}
                     errors={errors as Record<string, FieldError | undefined>}
                 />
-                <ButtonMaster type="submit" text="Записаться"/>
+                <ButtonMaster type="submit">Записаться</ButtonMaster>
             </div>
         </form>
     );

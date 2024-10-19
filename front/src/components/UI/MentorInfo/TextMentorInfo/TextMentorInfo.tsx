@@ -1,9 +1,9 @@
 interface TextMainProps {
-    text : string
+    children : string
 }
 
-export default function TextMentorInfo({text} : TextMainProps) {
+export default function TextMentorInfo({children} : TextMainProps) {
     return (
-        <p>{text}</p>
+        <p>{children}</p>
     )
 }

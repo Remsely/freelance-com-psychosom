@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import {ReactNode, useEffect} from 'react';
 import styles from "./HighlightInfo.module.scss";
 
 interface HighlightInfoProps {
-    text: string;
+    children: ReactNode;
     onLinkClick?: () => void;
 }
 
@@ -24,7 +24,7 @@ export default function HighlightInfo(props: HighlightInfoProps) {
 
     return (
         <div className={styles.highlight}>
-            <p dangerouslySetInnerHTML={{ __html: props.text }}></p>
+            <p>{props.children}</p>
         </div>
     );
 }
