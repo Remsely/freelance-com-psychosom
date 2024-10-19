@@ -2,9 +2,9 @@ import Header from "./components/UI/Header/Header.tsx";
 import Footer from "./components/UI/Footer/Footer.tsx";
 import TitleBlock from "./components/UI/TitleBlock/TitleBlock";
 import ImportantBlock from "./components/UI/HighlightInfo/HighlightInfo.tsx";
-import Form from "./components/UI/Form/Form";
 import SliderReview from "./components/UI/SliderReview/SliderReview.tsx";
 import PopupModal from "./components/UI/PopupModal/PopupModal";
+import ConsultationForm from "./components/UI/ConsultationForm/ConsultationForm.tsx";
 import {useState} from "react";
 
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
 
             <TitleBlock title="Запишитесь на консультацию" id="consultation"/>
 
-            <Form setIsOpen={setIsOpenForm}/>
+            <ConsultationForm setIsOpen={setIsOpenForm}/>
             <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!"
             description="Вы записались на консультацию к специалисту. Скоро с вами свяжется специалист по методу связи, который вы указали."/>
 

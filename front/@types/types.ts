@@ -5,3 +5,9 @@ export type Review = {
     message: string;
     date: string;
 }
+
+export type Navigation = {
+    id: number;
+    name: string;
+    link: string;
+}

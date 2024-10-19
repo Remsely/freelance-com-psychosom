@@ -1,5 +1,6 @@
 import styles from "./Footer.module.scss"
 import SocialBlock from "./SocialBlock/SocialBlock.tsx";
+import NavBlock from "../NavBlock/NavBlock.tsx";
 
 export default function Footer() {
     return (
@@ -11,11 +12,7 @@ export default function Footer() {
                     </div>
                     <div className={styles.important}>
                         <h2>Важное</h2>
-                        <ul>
-                            <li><a href="#">Главная</a></li>
-                            <li><a href="#consultation">Записаться на консультацию</a></li>
-                            <li><a href="#reviews">Отзывы</a></li>
-                        </ul>
+                        <NavBlock/>
                     </div>
                     <div className={styles.socials}>
                         <h2>Соцсети</h2>
