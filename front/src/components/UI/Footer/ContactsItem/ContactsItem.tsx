@@ -1,11 +1,11 @@
-import styles from "./ContactsBlock.module.scss";
+import styles from "./ContactsItem.module.scss";
 
 interface ContactsBlockProps {
     children: string;
     image: string;
 }
 
-export default function ContactsBlock(props : ContactsBlockProps) {
+export default function ContactsItem(props : ContactsBlockProps) {
 
     return (
         <div className={styles.social}>

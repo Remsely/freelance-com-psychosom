@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss"
-import ContactsBlock from "./ContactsBlock/ContactsBlock.tsx";
+import ContactsItem from "./ContactsItem/ContactsItem.tsx";
 import Navbar from "../Navbar/Navbar";
 
 export default function Footer() {
@@ -16,9 +16,9 @@ export default function Footer() {
                     </div>
                     <div className={styles.socials}>
                         <h2>Соцсети</h2>
-                        <ContactsBlock image="telegram">psychosomatic</ContactsBlock>
-                        <ContactsBlock image="whatsapp">8 (999)-888-77-66</ContactsBlock>
-                        <ContactsBlock image="instagram">psychosomatic</ContactsBlock>
+                        <ContactsItem image="telegram">psychosomatic</ContactsItem>
+                        <ContactsItem image="whatsapp">8 (999)-888-77-66</ContactsItem>
+                        <ContactsItem image="instagram">psychosomatic</ContactsItem>
                     </div>
                 </footer>
             </div>
