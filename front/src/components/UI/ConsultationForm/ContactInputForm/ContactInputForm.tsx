@@ -11,7 +11,7 @@ interface ContactInputProps {
     errors: Record<string, FieldError | undefined>;
 }
 
-export default function ContactInput({
+export default function ContactInputForm({
                                          isTelegram,
                                          setIsTelegram,
                                          contactValue,

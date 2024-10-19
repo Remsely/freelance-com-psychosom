@@ -2,8 +2,8 @@ interface TextMainProps {
     text : string
 }
 
-export default function TextMentorInfo(props : TextMainProps) {
+export default function TextMentorInfo({text} : TextMainProps) {
     return (
-        <p>{props.text}</p>
+        <p>{text}</p>
     )
 }

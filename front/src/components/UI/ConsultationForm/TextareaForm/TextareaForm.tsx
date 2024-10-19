@@ -1,14 +1,14 @@
 import {FieldError, FieldValues, UseFormRegister} from "react-hook-form";
 import styles from "../ConsultationForm.module.scss";
 
-interface TextareaProps {
+interface TextareaFormProps {
     label: string;
     name: string;
     register: UseFormRegister<FieldValues>;
     errors: Record<string, FieldError | undefined>;
 }
 
-export default function Textarea({ label, name, register, errors }: TextareaProps) {
+export default function TextareaForm({ label, name, register, errors }: TextareaFormProps) {
     return (
         <>
             <h2 className={styles.p}>{label}</h2>

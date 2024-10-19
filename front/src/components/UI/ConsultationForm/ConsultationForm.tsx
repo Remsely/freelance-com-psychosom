@@ -1,9 +1,10 @@
 import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useState} from "react";
 import styles from "./ConsultationForm.module.scss";
-import ContactInput from "./ContactInput/ContactInput";
-import NameInput from "./NameInput/NameInput";
-import MessageInput from "./MessageInput/MessageInput";
+import ContactInputForm from "./ContactInputForm/ContactInputForm.tsx";
+import NameInputForm from "./NameInputForm/NameInputForm.tsx";
+import TextareaForm from "./TextareaForm/TextareaForm.tsx";
+import ButtonMaster from "../ButtonMaster/ButtonMaster.tsx";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
@@ -27,19 +28,19 @@ export default function ConsultationForm({setIsOpen}: ConsultationFormProps) {
     return (
         <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} container`}>
             <div className={`${styles.inputs} block`}>
-                <NameInput
+                <NameInputForm
                     label="Имя"
                     name="firstname"
                     register={register}
                     errors={errors as Record<string, FieldError | undefined>}
                 />
-                <NameInput
+                <NameInputForm
                     label="Фамилия"
                     name="lastname"
                     register={register}
                     errors={errors as Record<string, FieldError | undefined>}
                 />
-                <ContactInput
+                <ContactInputForm
                     isTelegram={isTelegram}
                     setIsTelegram={setIsTelegram}
                     contactValue={contactValue}
@@ -50,13 +51,13 @@ export default function ConsultationForm({setIsOpen}: ConsultationFormProps) {
             </div>
 
             <div className={`${styles.textarea} block`}>
-                <MessageInput
+                <TextareaForm
                     label="Опишите свою проблему"
                     name="message"
                     register={register}
                     errors={errors as Record<string, FieldError | undefined>}
                 />
-                <button className={styles.button} type="submit">Записаться</button>
+                <ButtonMaster type="submit" text="Записаться"/>
             </div>
         </form>
     );

@@ -9,7 +9,7 @@ interface NameInputProps {
     errors: Record<string, FieldError | undefined>;
 }
 
-export default function NameInput({ label, name, register, errors }: NameInputProps) {
+export default function NameInputForm({ label, name, register, errors }: NameInputProps) {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.value = e.target.value.replace(/[^а-яА-Яa-zA-Z]/g, '');
     };
