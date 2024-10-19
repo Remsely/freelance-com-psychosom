@@ -67,22 +67,6 @@ html {
     background-image: url("/public/background.svg");
 }
 
-.main {
-    display: flex;
-
-    border-left: $border-shadow;
-    border-top: $border-shadow;
-    backdrop-filter: $backdrop-filter;
-    background: $background-div-color;
-    box-shadow: $box-shadow;
-    border-radius: $border-radius;
-
-    .description {
-        width: 700px;
-        padding: 25px 0 0 20px;
-    }
-}
-
 .slick-slide {
     > div {
         margin-right: 20px;

@@ -6,25 +6,25 @@ interface HighlightInfoProps {
     onLinkClick?: () => void;
 }
 
-export default function HighlightInfo({ text, onLinkClick }: HighlightInfoProps) {
+export default function HighlightInfo(props: HighlightInfoProps) {
     useEffect(() => {
-        if (onLinkClick) {
+        if (props.onLinkClick) {
             const link = document.querySelector('#important-link');
             if (link) {
-                link.addEventListener('click', onLinkClick);
+                link.addEventListener('click', props.onLinkClick);
             }
 
             return () => {
-                if (link) {
-                    link.removeEventListener('click', onLinkClick);
+                if (link && props.onLinkClick) {
+                    link.removeEventListener('click', props.onLinkClick);
                 }
             };
         }
-    }, [onLinkClick]);
+    }, [props.onLinkClick]);
 
     return (
         <div className={styles.highlight}>
-            <p dangerouslySetInnerHTML={{ __html: text }}></p>
+            <p dangerouslySetInnerHTML={{ __html: props.text }}></p>
         </div>
     );
 }
