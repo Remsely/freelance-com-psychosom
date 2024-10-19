@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss"
-import NavBlock from "../NavBlock/NavBlock.tsx";
+import Navbar from "../Navbar/Navbar";
 
 export default function Header() {
     return (
@@ -7,7 +7,7 @@ export default function Header() {
             <header className={`${styles.header} container`}>
                 <h1 className={styles.title}>НАЗВАНИЕ</h1>
                 <nav className={styles.navbar}>
-                    <NavBlock/>
+                    <Navbar/>
                 </nav>
             </header>
         </>

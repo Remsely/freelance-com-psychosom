@@ -2,7 +2,7 @@ type CloseModalProps = {
     setIsOpen: (isOpen: boolean) => void;
 };
 
-export default function CloseModal({setIsOpen}: CloseModalProps) {
+export default function CloseModalButton({setIsOpen}: CloseModalProps) {
     return (
         <svg onClick={() => setIsOpen(false)} xmlns="http://www.w3.org/2000/svg" width="24" height="24"
              viewBox="0 0 24 24"

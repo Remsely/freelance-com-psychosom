@@ -1,6 +1,6 @@
 import {Dialog, DialogPanel, DialogTitle} from "@headlessui/react";
 import styles from "./PopupModal.module.scss"
-import CloseModal from "./CloseModal/CloseModal.tsx";
+import CloseModalButton from "./CloseModalButton/CloseModalButton.tsx";
 
 interface PopupModalProps {
     isOpen: boolean
@@ -18,9 +18,7 @@ export default function PopupModal({isOpen, setIsOpen, title, description, image
                 <DialogPanel className={styles.panel}>
                     <div className={styles.header}>
                         {title && <DialogTitle className={styles.title}>{title}</DialogTitle>}
-                        <div className={styles.closeModal}>
-                            <CloseModal setIsOpen={setIsOpen}/>
-                        </div>
+                        <CloseModalButton setIsOpen={setIsOpen}/>
                     </div>
                     {description && <p>{description}</p>}
                     {image && <img src={`/${image}`} alt={alt}/>}

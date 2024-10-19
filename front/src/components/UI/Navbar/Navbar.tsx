@@ -1,12 +1,12 @@
 import {navigations} from "../../../utils/!!!data-for-dev.ts";
-import NavLine from "./NavLine/NavLine.tsx";
+import NavbarItem from "./NavbarItem/NavbarItem.tsx";
 
-export default function NavBlock() {
+export default function Navbar() {
 
     return (
         <ul>
             {navigations.map((navigation) => (
-                <NavLine name={navigation.name} link={navigation.link} />
+                <NavbarItem name={navigation.name} link={navigation.link} />
             ))}
         </ul>
     )
