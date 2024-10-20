@@ -1,5 +1,5 @@
 import {ChangeEvent, KeyboardEvent} from "react";
-import {FieldError, FieldValues, UseFormRegister} from "react-hook-form";
+import {FieldError, FieldValues, UseFormClearErrors, UseFormRegister} from "react-hook-form";
 import styles from "../ConsultationForm.module.scss";
 
 interface ContactInputProps {
@@ -9,9 +9,10 @@ interface ContactInputProps {
     setContactValue: (value: string) => void;
     register: UseFormRegister<FieldValues>;
     errors: Record<string, FieldError | undefined>;
+    clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export default function ContactInputForm({isTelegram, setIsTelegram, contactValue, setContactValue, register, errors,}: ContactInputProps) {
+export default function ContactInputForm({isTelegram, setIsTelegram, contactValue, setContactValue, register, errors, clearErrors}: ContactInputProps) {
     const formatPhoneNumber = (value: string) => {
         let inputNumbersValue = value.replace(/\D/g, '');
         if (inputNumbersValue.length === 0) return '';
@@ -38,9 +39,9 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
                 value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
             } else {
                 if (!value.startsWith('@')) {
-                    value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                    value = '@' + value;
                 } else {
-                    value = '@' + value.slice(1).replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                    value = '@' + value.slice(1);
                 }
             }
         } else {
@@ -48,16 +49,11 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
                 setIsTelegram(true);
                 value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
             } else {
-                const cleanedValue = value.replace(/[^0-9]/g, '');
-
-                if (cleanedValue.length < value.length) {
-                    value = '+' + cleanedValue;
-                } else {
-                    value = formatPhoneNumber(cleanedValue);
-                }
+                value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
             }
         }
 
+        clearErrors('contact');
         setContactValue(value);
     };
 
@@ -67,7 +63,7 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
         if (e.key === 'Backspace') {
             if (isTelegram) {
                 if (currentValue.length <= 1) {
-                    e.currentTarget.value = '';  // Удалить всё, если остался один символ
+                    e.currentTarget.value = '';
                 }
             } else {
                 const inputNumbersValue = currentValue.replace(/\D/g, '');
@@ -97,12 +93,32 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
             <input
                 type={isTelegram ? "text" : "tel"}
                 placeholder={isTelegram ? "Telegram" : "Телефон"}
+                maxLength={isTelegram ? 32 : 18}
                 value={contactValue}
                 onKeyDown={handleKeyDown}
                 {...register("contact", {
                     required: "Это поле обязательное",
+                    pattern: {
+                        value: isTelegram
+                            ? /^@?[a-zA-Z0-9]+$/
+                            : /^(\+7|8)\s?\(?\d{3}\)?\s?\d{3}-?\d{2}-?\d{2}$/,
+                        message: isTelegram
+                            ? "В Telegram допустимы только латинские буквы и цифры"
+                            : "Номер телефона должен быть в формате +7 или 8 (XXX) XXX-XX-XX",
+                    },
+                    validate: {
+                        complete: (value) => {
+                            const formattedValue = value.startsWith('8') ? value.replace(/^8/, '+7') : value;
+
+                            if (!isTelegram && !/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/.test(formattedValue)) {
+                                return "Пожалуйста, введите полный номер телефона";
+                            }
+                            return true;
+                        }
+                    },
                     onChange: handleChange,
                 })}
+
             />
             {errors.contact && <p className={styles.error}>{(errors.contact as FieldError).message}</p>}
         </div>
