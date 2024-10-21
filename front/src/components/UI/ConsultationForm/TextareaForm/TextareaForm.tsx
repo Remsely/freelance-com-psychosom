@@ -13,7 +13,7 @@ export default function TextareaForm({ label, name, register, errors }: Textarea
         <>
             <h2 className={styles.p}>{label}</h2>
             <textarea
-                maxLength={250}
+                maxLength={2047}
                 {...register(name)}
                 placeholder={label}
             ></textarea>

@@ -12,11 +12,20 @@ interface ContactInputProps {
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export default function ContactInputForm({isTelegram, setIsTelegram, contactValue, setContactValue, register, errors, clearErrors}: ContactInputProps) {
+export default function ContactInputForm({
+                                             isTelegram,
+                                             setIsTelegram,
+                                             contactValue,
+                                             setContactValue,
+                                             register,
+                                             errors,
+                                             clearErrors
+                                         }: ContactInputProps) {
     const formatPhoneNumber = (value: string) => {
-        let inputNumbersValue = value.replace(/\D/g, '');
+        let inputNumbersValue = value.replace(/[^0-9]/g, '');
         if (inputNumbersValue.length === 0) return '';
         let formatted: string;
+
         if (['7', '8', '9'].includes(inputNumbersValue[0])) {
             if (inputNumbersValue[0] === '9') inputNumbersValue = '7' + inputNumbersValue;
             formatted = (inputNumbersValue[0] === '8' ? '8' : '+7') + ' ';
@@ -39,15 +48,15 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
                 value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
             } else {
                 if (!value.startsWith('@')) {
-                    value = '@' + value;
+                    value = '@' + value.replace(/[^a-zA-Z0-9]/g, '');
                 } else {
-                    value = '@' + value.slice(1);
+                    value = '@' + value.slice(1).replace(/[^a-zA-Z0-9]/g, '');
                 }
             }
         } else {
-            if (value.includes('@')) {
+            if (value.includes('@') && value.length < 1) {
                 setIsTelegram(true);
-                value = '@' + value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+                value = '@' + value.replace(/[^a-zA-Z0-9]/g, '');
             } else {
                 value = formatPhoneNumber(value.replace(/[^0-9]/g, ''));
             }
@@ -105,16 +114,6 @@ export default function ContactInputForm({isTelegram, setIsTelegram, contactValu
                         message: isTelegram
                             ? "В Telegram допустимы только латинские буквы и цифры"
                             : "Номер телефона должен быть в формате +7 или 8 (XXX) XXX-XX-XX",
-                    },
-                    validate: {
-                        complete: (value) => {
-                            const formattedValue = value.startsWith('8') ? value.replace(/^8/, '+7') : value;
-
-                            if (!isTelegram && !/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/.test(formattedValue)) {
-                                return "Пожалуйста, введите полный номер телефона";
-                            }
-                            return true;
-                        }
                     },
                     onChange: handleChange,
                 })}

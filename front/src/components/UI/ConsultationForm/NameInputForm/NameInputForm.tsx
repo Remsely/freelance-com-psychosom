@@ -12,7 +12,7 @@ interface NameInputProps {
 
 export default function NameInputForm({ label, name, register, errors, clearErrors }: NameInputProps) {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        e.target.value = e.target.value.replace(/[^а-яА-Я-]/g, '');
+        e.target.value = e.target.value.replace(/[^а-яА-Яa-zA-Z-]/g, '');
         clearErrors(name);
     };
 
@@ -29,11 +29,11 @@ export default function NameInputForm({ label, name, register, errors, clearErro
                 type="text"
                 placeholder={label}
                 onKeyDown={handleKeyDown}
-                maxLength={25}
+                maxLength={255}
                 {...register(name, {
                     required: "Это поле обязательное",
                     pattern: {
-                        value: /^[а-яА-Я-]+$/,
+                        value: /^[а-яА-Яa-zA-Z-]*$/,
                         message: "Допустимы только буквы и дефис",
                     },
                     onChange: handleChange,
