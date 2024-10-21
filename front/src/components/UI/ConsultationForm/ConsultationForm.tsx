@@ -10,9 +10,10 @@ import FrameTitle from "../FrameTitle/FrameTitle.tsx";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
+    isOpen: boolean;
 }
 
-export default function ConsultationForm({setIsOpen}: ConsultationFormProps) {
+export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormProps) {
     const {register, handleSubmit, reset, formState: {errors}, clearErrors} = useForm({
         mode: "onBlur",
     });
@@ -40,7 +41,7 @@ export default function ConsultationForm({setIsOpen}: ConsultationFormProps) {
     };
 
     return (
-        isSubmitted ? (
+        isSubmitted && !isOpen ? (
             <div id="consultation" className={`${styles.success} container`}>
                 <h2 className={styles.title}>Вы уже записаны на консультацию!</h2>
                 <p className={styles.text}>Мы свяжемся с вами в ближайшее время.</p>

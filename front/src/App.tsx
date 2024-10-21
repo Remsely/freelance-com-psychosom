@@ -16,7 +16,7 @@ export default function App() {
 
             <MentorInfo/>
 
-            <ConsultationForm setIsOpen={setIsOpenForm}/>
+            <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
             <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!">Вы записались на консультацию к специалисту.
                 Скоро с вами свяжется специалист по методу связи, который вы указали.</PopupModal>
 
