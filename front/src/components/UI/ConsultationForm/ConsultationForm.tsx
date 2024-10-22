@@ -7,6 +7,7 @@ import NameInputForm from "./NameInputForm/NameInputForm.tsx";
 import TextareaForm from "./TextareaForm/TextareaForm.tsx";
 import ButtonMaster from "../ButtonMaster/ButtonMaster.tsx";
 import FrameTitle from "../FrameTitle/FrameTitle.tsx";
+import {Cookie} from "../../../enums/cookie.ts";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
@@ -23,7 +24,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
-        const formSubmitted = Cookies.get('formSubmitted');
+        const formSubmitted = Cookies.get(Cookie.formSubmitted);
         if (formSubmitted === 'true') {
             setIsSubmitted(true);
         }
@@ -34,7 +35,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
         setIsOpen(true);
 
         setIsSubmitted(true);
-        Cookies.set('formSubmitted', 'true', {expires: 1});
+        Cookies.set(Cookie.formSubmitted, 'true', {expires: 1});
 
         reset();
         setContactValue("");
