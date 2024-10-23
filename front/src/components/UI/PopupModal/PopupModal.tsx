@@ -22,6 +22,7 @@ export default function PopupModal({isOpen, setIsOpen, title, children, image, a
                     </div>
                     {children && <p>{children}</p>}
                     {image && <img src={`/${image}`} alt={alt}/>}
+                    {}
                 </DialogPanel>
             </div>
         </Dialog>

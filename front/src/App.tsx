@@ -6,6 +6,7 @@ import ConsultationForm from "./components/UI/ConsultationForm/ConsultationForm.
 import FrameTitle from "./components/UI/FrameTitle/FrameTitle.tsx";
 import {useState} from "react";
 import MentorInfo from "./components/UI/MentorInfo/MentorInfo.tsx";
+import ReviewForm from "./components/UI/ReviewForm/ReviewForm.tsx";
 
 export default function App() {
     const [isOpenForm, setIsOpenForm] = useState(false)
@@ -21,6 +22,8 @@ export default function App() {
                 Скоро с вами свяжется специалист по методу связи, который вы указали.</PopupModal>
 
             <FrameTitle id="reviews">Отзывы</FrameTitle>
+
+            <ReviewForm/>
 
             <SliderReview/>
 
