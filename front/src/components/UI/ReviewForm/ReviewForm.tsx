@@ -10,7 +10,7 @@ export default function ReviewForm() {
             <ButtonMaster type="button" onClick={() => setIsOpenReviewForm(true)}>
                 Оставить отзыв
             </ButtonMaster>
-            <PopupModal isOpen={isOpenReviewForm} setIsOpen={setIsOpenReviewForm} />
+            <PopupModal isOpen={isOpenReviewForm} setIsOpen={setIsOpenReviewForm} form={true} title="Оставить отзыв"/>
         </>
     )
 }

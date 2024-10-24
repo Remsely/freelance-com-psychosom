@@ -1,8 +1,7 @@
 import {Dialog, DialogPanel, DialogTitle} from "@headlessui/react";
 import styles from "./PopupModal.module.scss"
 import CloseModalButton from "./CloseModalButton/CloseModalButton.tsx";
-import ModalReviewForm from "./ModalReviewForm/ModalReviewForm.tsx";
-import {useState} from "react";
+import ModalReviewForm from "../ReviewForm/ModalReviewForm/ModalReviewForm.tsx";
 
 interface PopupModalProps {
     isOpen: boolean
@@ -11,12 +10,10 @@ interface PopupModalProps {
     children?: string;
     image?: string;
     alt?: string;
-    form: boolean;
+    form?: boolean;
 }
 
 export default function PopupModal({isOpen, setIsOpen, title, children, image, alt, form}: PopupModalProps) {
-    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-
     return (
         <Dialog open={isOpen} onClose={() => setIsOpen(false)} className={styles.dialog}>
             <div className={styles.background}>
@@ -27,7 +24,7 @@ export default function PopupModal({isOpen, setIsOpen, title, children, image, a
                     </div>
                     {children && <p>{children}</p>}
                     {image && <img src={`/${image}`} alt={alt}/>}
-                    {form && !isSubmitted && <ModalReviewForm />}
+                    {form && <ModalReviewForm/>}
                 </DialogPanel>
             </div>
         </Dialog>
