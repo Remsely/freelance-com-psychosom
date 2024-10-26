@@ -1,10 +1,19 @@
 import styles from "./ReviewForm.module.scss"
 import ButtonMaster from "../ButtonMaster/ButtonMaster.tsx";
 import PopupModal from "../PopupModal/PopupModal.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function ReviewForm() {
     const [isOpenReviewForm, setIsOpenReviewForm] = useState(false);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('review') === 'true') {
+            setIsOpenReviewForm(true);
+        }
+    }, []);
+
+
 
     return (
         <>
