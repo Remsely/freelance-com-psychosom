@@ -4,6 +4,7 @@ import { FieldError, FieldValues, SubmitHandler, useForm } from "react-hook-form
 import TextareaForm from "../../ConsultationForm/TextareaForm/TextareaForm.tsx";
 import ButtonMaster from "../../ButtonMaster/ButtonMaster.tsx";
 import {useState} from "react";
+import StarRating from "../StarRating/StarRating";
 
 
 export default function ModalReviewForm() {
@@ -16,6 +17,10 @@ export default function ModalReviewForm() {
         console.log(data);
         setIsSubmitted(true);
         reset();
+    };
+
+    const handleRatingSelect = (rating: number) => {
+        console.log(`Выбранный рейтинг: ${rating}`);
     };
 
     return (
@@ -37,6 +42,7 @@ export default function ModalReviewForm() {
                             errors={errors as Record<string, FieldError | undefined>}
                             clearErrors={clearErrors}
                         />
+                        <StarRating onRatingSelect={handleRatingSelect}/>
                     </div>
                     <div className={`${styles.textarea} block-modal`}>
                         <TextareaForm
