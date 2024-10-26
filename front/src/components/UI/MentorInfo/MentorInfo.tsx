@@ -9,7 +9,7 @@ export default function MentorInfo() {
     const [isOpenCertificate, setIsOpenCertificate] = useState(false)
 
     return (
-        <main className={`${styles.main} container`}>
+        <main className={styles.main}>
             <div className={styles.description}>
                 <TextMentorInfo>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
                     текста Продолжается много текста Продолжается много текста Продолжается много текста

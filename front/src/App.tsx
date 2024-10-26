@@ -13,19 +13,21 @@ export default function App() {
 
     return (
         <>
-            <Header/>
+            <div className="container">
+                <Header/>
 
-            <MentorInfo/>
+                <MentorInfo/>
 
-            <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
-            <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!">Вы записались на консультацию к специалисту.
-                Скоро с вами свяжется специалист по методу связи, который вы указали.</PopupModal>
+                <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
+                <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm} title="Поздравляем, вы записаны!">Вы записались на консультацию к специалисту.
+                    Скоро с вами свяжется специалист по методу связи, который вы указали.</PopupModal>
 
-            <FrameTitle id="reviews">Отзывы</FrameTitle>
+                <FrameTitle id="reviews">Отзывы</FrameTitle>
 
-            <SliderReview/>
+                <SliderReview/>
 
-            <ReviewForm/>
+                <ReviewForm/>
+            </div>
 
             <Footer/>
         </>

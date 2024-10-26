@@ -43,14 +43,14 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
 
     return (
         isSubmitted && !isOpen ? (
-            <div id="consultation" className={`${styles.success} container`}>
+            <div id="consultation" className={styles.success}>
                 <h2 className={styles.title}>Вы уже записаны на консультацию!</h2>
                 <p className={styles.text}>Мы свяжемся с вами в ближайшее время.</p>
             </div>
         ) : (
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
-                <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} container`}>
+                <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
                     <div className={`${styles.inputs} block`}>
                         <NameInputForm
                             label="Имя"
