@@ -64,11 +64,6 @@ html {
     box-shadow: $box-shadow;
 }
 
-.block-modal {
-    @extend .block;
-    height: 350px;
-}
-
 .wrapper {
     background-image: url("/public/background.svg");
 }

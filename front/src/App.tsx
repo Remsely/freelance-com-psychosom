@@ -23,9 +23,9 @@ export default function App() {
 
             <FrameTitle id="reviews">Отзывы</FrameTitle>
 
-            <ReviewForm/>
-
             <SliderReview/>
+
+            <ReviewForm/>
 
             <Footer/>
         </>

@@ -1,4 +1,4 @@
-import styles from "../../ConsultationForm/ConsultationForm.module.scss";
+import styles from "./ModalReviewForm.module.scss";
 import NameInputForm from "../../ConsultationForm/NameInputForm/NameInputForm.tsx";
 import { FieldError, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import TextareaForm from "../../ConsultationForm/TextareaForm/TextareaForm.tsx";
@@ -9,7 +9,7 @@ import StarRating from "../StarRating/StarRating";
 
 export default function ModalReviewForm() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm({
+    const { register, handleSubmit, reset, formState: { errors }, clearErrors, setValue} = useForm({
         mode: "onBlur",
     });
 
@@ -20,14 +20,15 @@ export default function ModalReviewForm() {
     };
 
     const handleRatingSelect = (rating: number) => {
-        console.log(`Выбранный рейтинг: ${rating}`);
+        setValue("rating", rating);
     };
 
     return (
         <>
             {!isSubmitted ? (
                 <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
-                    <div className={`${styles.inputs} block-modal`}>
+                    <div className={styles.info}>
+                    <div className={styles.inputs}>
                         <NameInputForm
                             label="Имя"
                             name="firstname"
@@ -46,13 +47,14 @@ export default function ModalReviewForm() {
                     </div>
                     <div className={`${styles.textarea} block-modal`}>
                         <TextareaForm
-                            label="Опишите свою проблему"
+                            label="Комментарий к отзыву"
                             name="message"
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                         />
-                        <ButtonMaster type="submit">Записаться</ButtonMaster>
                     </div>
+                    </div>
+                    <ButtonMaster type="submit">Оставить отзыв</ButtonMaster>
                 </form>
             ) : (
                 <p>Спасибо за отзыв! Мы очень ценим это!</p>
