@@ -118,3 +118,16 @@ h2 {
     backdrop-filter: $backdrop-filter;
     box-shadow: $box-shadow;
 }
+
+.success {
+    text-align: center;
+    padding: 225px 0;
+    h2 {
+        font-size: $font-size-title;
+        font-weight: $font-weight-title;
+        color: $title-font-color;
+    }
+    p {
+        font-size: $font-size-text-title;
+    }
+}

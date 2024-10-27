@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent } from "react";
+import {ChangeEvent, KeyboardEvent} from "react";
 import {FieldError, FieldValues, UseFormClearErrors, UseFormRegister} from "react-hook-form";
 import styles from "../ConsultationForm.module.scss";
 
@@ -11,8 +11,19 @@ interface NameInputProps {
 }
 
 export default function NameInputForm({ label, name, register, errors, clearErrors }: NameInputProps) {
+    const translateToCyrillic = (input: string): string => {
+        const translationMap: { [key: string]: string } = {
+            a: 'ф', b: 'и', c: 'с', d: 'в', e: 'у', f: 'а', g: 'п',
+            h: 'п', i: 'г', j: 'й', k: 'л', l: 'д', m: 'ь', n: 'т',
+            o: 'щ', p: 'з', q: 'й', r: 'к', s: 'ы', t: 'е', u: 'ж',
+            v: 'ч', w: 'ц', x: 'ъ', y: 'э', z: 'я'
+        };
+
+        return input.split('').map(char => translationMap[char] || char).join('');
+    };
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        e.target.value = e.target.value.replace(/[^а-яА-Я-]/g, '');
+        e.target.value = translateToCyrillic(e.target.value).replace(/[^а-яА-Я-]/g, '');
         clearErrors(name);
     };
 
