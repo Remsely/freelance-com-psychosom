@@ -8,7 +8,7 @@
         width: 301px;
         padding: 15px 18px;
         margin-right: 10px;
-        }
+    }
 
     .textarea {
         flex-shrink: 0;
@@ -107,4 +107,14 @@ h2 {
             background: $input-hover-color;
         }
     }
+}
+
+.block {
+    height: 450px;
+    border-radius: $border-radius;
+    background: $background-div-color;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
+    backdrop-filter: $backdrop-filter;
+    box-shadow: $box-shadow;
 }

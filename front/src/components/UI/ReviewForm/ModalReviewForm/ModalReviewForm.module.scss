@@ -2,14 +2,14 @@
 
 .form {
     width: 850px;
-    height: 405px;
+    height: 425px;
 
     .info {
         display: flex;
 
         .inputs {
             width: 301px;
-            padding: 15px 18px;
+            padding: 15px 20px;
             margin-right: 10px;
         }
     }
@@ -17,7 +17,7 @@
     .textarea {
         position: relative;
         width: calc(100% - 301px);
-        padding: 16px 20px;
+        padding: 15px 20px;
 
         textarea {
             position: relative;
@@ -66,4 +66,17 @@ button {
     &:hover {
         background-color: $button-hover-color;
     }
+}
+
+.block {
+    border-radius: $border-radius;
+    background: $background-div-color;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
+    backdrop-filter: $backdrop-filter;
+    box-shadow: $box-shadow;
+}
+
+.button {
+    padding: 0 20px 20px 20px;
 }

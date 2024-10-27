@@ -51,7 +51,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
                 <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
-                    <div className={`${styles.inputs} block`}>
+                    <div className={`${styles.inputs} ${styles.block}`}>
                         <NameInputForm
                             label="Имя"
                             name="firstname"
@@ -76,7 +76,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
                             clearErrors={clearErrors}
                         />
                     </div>
-                    <div className={`${styles.textarea} block`}>
+                    <div className={`${styles.textarea} ${styles.block}`}>
                         <TextareaForm
                             label="Опишите свою проблему"
                             name="message"

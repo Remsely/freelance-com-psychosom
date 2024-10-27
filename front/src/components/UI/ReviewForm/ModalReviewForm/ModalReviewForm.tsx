@@ -26,7 +26,7 @@ export default function ModalReviewForm() {
     return (
         <>
             {!isSubmitted ? (
-                <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
+                <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} ${styles.block}`}>
                     <div className={styles.info}>
                     <div className={styles.inputs}>
                         <NameInputForm
@@ -54,7 +54,9 @@ export default function ModalReviewForm() {
                         />
                     </div>
                     </div>
+                    <div className={styles.button}>
                     <ButtonMaster type="submit">Оставить отзыв</ButtonMaster>
+                    </div>
                 </form>
             ) : (
                 <p>Спасибо за отзыв! Мы очень ценим это!</p>
