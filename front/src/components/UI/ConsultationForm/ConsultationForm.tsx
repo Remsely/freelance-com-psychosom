@@ -24,7 +24,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     useEffect(() => {
-        const formSubmitted = Cookies.get(Cookie.formSubmitted);
+        const formSubmitted = Cookies.get(Cookie.consultationFormSubmitted);
         if (formSubmitted === 'true') {
             setIsSubmitted(true);
         }
@@ -35,7 +35,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
         setIsOpen(true);
 
         setIsSubmitted(true);
-        Cookies.set(Cookie.formSubmitted, 'true', {expires: 1});
+        Cookies.set(Cookie.consultationFormSubmitted, 'true', {expires: 1});
 
         reset();
         setContactValue("");

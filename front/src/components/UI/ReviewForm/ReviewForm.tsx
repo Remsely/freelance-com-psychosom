@@ -12,9 +12,7 @@ export default function ReviewForm() {
             setIsOpenReviewForm(true);
         }
     }, []);
-
-
-
+    
     return (
         <>
             <div className={styles.button}>
