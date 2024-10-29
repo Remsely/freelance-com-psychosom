@@ -8,6 +8,7 @@ import TextareaForm from "./TextareaForm/TextareaForm.tsx";
 import ButtonMaster from "../ButtonMaster/ButtonMaster.tsx";
 import FrameTitle from "../FrameTitle/FrameTitle.tsx";
 import {Cookie} from "../../../enums/cookie.ts";
+import SubmitMessage from "../SubmitMessages/SubmitMessage.tsx";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
@@ -43,10 +44,7 @@ export default function ConsultationForm({setIsOpen, isOpen}: ConsultationFormPr
 
     return (
         isSubmitted && !isOpen ? (
-            <div id="consultation" className={styles.success}>
-                <h2 className={styles.title}>Вы уже записаны на консультацию!</h2>
-                <p className={styles.text}>Мы свяжемся с вами в ближайшее время.</p>
-            </div>
+            <SubmitMessage title="Вы уже записаны на консультацию!">Мы свяжемся с вами в ближайшее время</SubmitMessage>
         ) : (
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>

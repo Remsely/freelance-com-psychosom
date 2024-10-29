@@ -49,15 +49,6 @@
     }
 }
 
-.error {
-    position: absolute;
-    width: 255px;
-    text-align: center;
-    color: darkred;
-    font-size: 14px;
-    margin-top: 4px;
-}
-
 button {
     height: 60px;
     width: 100%;
@@ -72,16 +63,6 @@ button {
 }
 
 .success {
-    text-align: center;
     max-width: 600px;
     padding: 25px 0;
-    h4 {
-        font-size: $font-size-title;
-        font-weight: $font-weight-title;
-        color: $title-font-color;
-        margin-bottom: 10px;
-    }
-    p {
-        font-size: $font-size-text-title;
-    }
 }

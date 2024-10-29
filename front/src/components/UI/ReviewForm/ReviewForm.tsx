@@ -6,6 +6,7 @@ import ModalReviewForm from "./ModalReviewForm/ModalReviewForm.tsx";
 
 export default function ReviewForm() {
     const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -22,7 +23,9 @@ export default function ReviewForm() {
                 </ButtonMaster>
             </div>
 
-            <PopupModal isOpen={isOpenReviewModalForm} setIsOpen={setIsOpenReviewModalForm} title="Оставить отзыв"> <ModalReviewForm/> </PopupModal>
+            <PopupModal isOpen={isOpenReviewModalForm} setIsOpen={setIsOpenReviewModalForm} title="Оставить отзыв" isSuccessSubmitForm={isSuccess}>
+                <ModalReviewForm setIsSuccess={setIsSuccess}/>
+            </PopupModal>
         </>
     )
 }

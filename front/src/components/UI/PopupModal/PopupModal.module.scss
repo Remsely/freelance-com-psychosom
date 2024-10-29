@@ -42,21 +42,25 @@
             }
 
             img {
+                margin-top: 40px;
                 max-height: 750px;
             }
 
-            .closeModal {
-                margin-left: auto;
+            p {
+                width: 700px;
+            }
 
-                svg {
-                    stroke: $title-font-color;
-                    cursor: pointer;
-                    transition: $transition-main;
+            .svg {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                stroke: $title-font-color;
+                cursor: pointer;
+                transition: $transition-main;
 
-                    &:hover {
-                        transform: scale(1.2);
-                        stroke: $title-hover-color;
-                    }
+                &:hover {
+                    transform: scale(1.1);
+                    stroke: $title-hover-color;
                 }
             }
         }
