@@ -7,8 +7,6 @@
 }
 
 .star {
-    width: 1.5rem;
-    height: 1.5rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -20,17 +18,23 @@
 
     &:hover .starIcon,
     &.filled .starIcon {
-        transform: scale(1.5);
         fill: $title-font-color;
         stroke: $title-font-color;
     }
 }
 
-.starIcon {
-    width: 1rem;
-    height: 1rem;
-    transition: transform 0.2s ease;
-}
-
 svg *[fill] { fill: currentColor }
 svg *[stroke] { stroke: currentColor }
+
+.title {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}

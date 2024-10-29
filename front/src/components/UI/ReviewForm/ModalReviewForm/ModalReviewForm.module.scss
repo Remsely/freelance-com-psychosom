@@ -2,22 +2,21 @@
 
 .form {
     width: 850px;
-    height: 425px;
+    height: fit-content;
 
     .info {
         display: flex;
 
         .inputs {
-            width: 301px;
-            padding: 15px 20px;
-            margin-right: 10px;
+            width: fit-content;
+            margin-right: 25px;
+
         }
     }
 
     .textarea {
         position: relative;
-        width: calc(100% - 301px);
-        padding: 15px 20px;
+        width: 100%;
 
         textarea {
             position: relative;
@@ -68,17 +67,8 @@ button {
     }
 }
 
-.block {
-    border-radius: $border-radius;
-    background: $background-div-color;
-    border-left: $border-shadow;
-    border-top: $border-shadow;
-    backdrop-filter: $backdrop-filter;
-    box-shadow: $box-shadow;
-}
-
 .button {
-    padding: 0 20px 20px 20px;
+    padding-top: 20px;
 }
 
 .success {
