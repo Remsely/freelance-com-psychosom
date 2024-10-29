@@ -14,7 +14,7 @@ export default function ReviewForm() {
             setIsOpenReviewModalForm(true);
         }
     }, []);
-    
+
     return (
         <>
             <div className={styles.button}>
@@ -23,7 +23,10 @@ export default function ReviewForm() {
                 </ButtonMaster>
             </div>
 
-            <PopupModal isOpen={isOpenReviewModalForm} setIsOpen={setIsOpenReviewModalForm} title="Оставить отзыв" isSuccessSubmitForm={isSuccess}>
+            <PopupModal isOpen={isOpenReviewModalForm}
+                        setIsOpen={setIsOpenReviewModalForm}
+                        title="Оставить отзыв"
+                        isSuccessSubmitForm={isSuccess}>
                 <ModalReviewForm setIsSuccess={setIsSuccess}/>
             </PopupModal>
         </>
