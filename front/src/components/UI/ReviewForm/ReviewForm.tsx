@@ -2,26 +2,27 @@ import styles from "./ReviewForm.module.scss"
 import ButtonMaster from "../ButtonMaster/ButtonMaster.tsx";
 import PopupModal from "../PopupModal/PopupModal.tsx";
 import {useEffect, useState} from "react";
+import ModalReviewForm from "./ModalReviewForm/ModalReviewForm.tsx";
 
 export default function ReviewForm() {
-    const [isOpenReviewForm, setIsOpenReviewForm] = useState(false);
+    const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         if (params.get('review') === 'true') {
-            setIsOpenReviewForm(true);
+            setIsOpenReviewModalForm(true);
         }
     }, []);
     
     return (
         <>
             <div className={styles.button}>
-                <ButtonMaster type="button" onClick={() => setIsOpenReviewForm(true)}>
+                <ButtonMaster type="button" onClick={() => setIsOpenReviewModalForm(true)}>
                     Оставить отзыв
                 </ButtonMaster>
             </div>
 
-            <PopupModal isOpen={isOpenReviewForm} setIsOpen={setIsOpenReviewForm} form={true} title="Оставить отзыв"/>
+            <PopupModal isOpen={isOpenReviewModalForm} setIsOpen={setIsOpenReviewModalForm} title="Оставить отзыв"> <ModalReviewForm/> </PopupModal>
         </>
     )
 }
