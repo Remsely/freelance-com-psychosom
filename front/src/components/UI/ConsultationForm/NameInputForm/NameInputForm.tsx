@@ -10,20 +10,22 @@ interface NameInputProps {
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export default function NameInputForm({ label, name, register, errors, clearErrors }: NameInputProps) {
+export default function NameInputForm({label, name, register, errors, clearErrors}: NameInputProps) {
     const translateToCyrillic = (input: string): string => {
         const translationMap: { [key: string]: string } = {
-            a: 'ф', b: 'и', c: 'с', d: 'в', e: 'у', f: 'а', g: 'п',
-            h: 'п', i: 'г', j: 'й', k: 'л', l: 'д', m: 'ь', n: 'т',
-            o: 'щ', p: 'з', q: 'й', r: 'к', s: 'ы', t: 'е', u: 'ж',
-            v: 'ч', w: 'ц', x: 'ъ', y: 'э', z: 'я'
+            q: 'й', w: 'ц', e: 'у', r: 'к', t: 'е', y: 'н', u: 'г', i: 'ш', o: 'щ', p: 'з',
+            a: 'ф', s: 'ы', d: 'в', f: 'а', g: 'п', h: 'р', j: 'о', k: 'л', l: 'д',
+            z: 'я', x: 'ч', c: 'с', v: 'м', b: 'и', n: 'т', m: 'ь',
+
         };
 
         return input.split('').map(char => translationMap[char] || char).join('');
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        e.target.value = translateToCyrillic(e.target.value).replace(/[^а-яА-Я-]/g, '');
+        const fullValue = e.target.value.slice(0, -1);
+        const lastChar = e.target.value.slice(-1);
+        e.target.value = fullValue + translateToCyrillic(lastChar).replace(/[^а-яА-Я-]/g, '');
         clearErrors(name);
     };
 
