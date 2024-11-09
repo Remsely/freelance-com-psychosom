@@ -42,8 +42,6 @@ export function ModalReviewForm( props : ModalReviewFormProps) {
         setValue("rating", rating);
     };
 
-    console.log("Render ModalReviewForm");
-
     return (
         <>
             {!isSubmitted ? (
