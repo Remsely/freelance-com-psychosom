@@ -19,7 +19,7 @@ import ru.remsely.psyhosom.usecase.auth.request.AuthRequest
 import java.time.LocalDateTime
 
 @RestController
-@RequestMapping("/api/v1/users/auth")
+@RequestMapping("/api/v1/auth")
 class AuthController(
     private val authService: AuthService
 ) {
@@ -27,25 +27,25 @@ class AuthController(
 
     @PostMapping("/register/admin") // TODO: Подумать, как защитить
     fun registerAdmin(@Valid @RequestBody request: AuthRequest): ResponseEntity<*> {
-        log.info("POST /users/auth/admin/register | AuthRequest: $request")
+        log.info("POST /auth/admin/register | AuthRequest: $request")
         return register(request, User.Role.ADMIN)
     }
 
     @PostMapping("/register/patient")
     fun registerPatient(@Valid @RequestBody request: AuthRequest): ResponseEntity<*> {
-        log.info("POST /users/auth/patient/register | AuthRequest: $request")
+        log.info("POST /auth/patient/register | AuthRequest: $request")
         return register(request, User.Role.PATIENT)
     }
 
     @PostMapping("/register/psychologist")
     fun registerPsychologist(@Valid @RequestBody request: AuthRequest): ResponseEntity<*> {
-        log.info("POST /users/auth/psychologist/register | AuthRequest: $request")
+        log.info("POST /auth/psychologist/register | AuthRequest: $request")
         return register(request, User.Role.PSYCHOLOGIST)
     }
 
     @PostMapping("/login")
     fun loginAdmin(@Valid @RequestBody request: AuthRequest): ResponseEntity<*> {
-        log.info("POST /users/auth/login | AuthRequest: $request")
+        log.info("POST /auth/login | AuthRequest: $request")
         return login(request)
     }
 
