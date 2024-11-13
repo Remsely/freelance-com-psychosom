@@ -1,26 +1,24 @@
-import {ChangeEvent} from "react";
-import {FieldError, FieldValues, UseFormClearErrors, UseFormRegister} from "react-hook-form";
+"use client";
+
+import { ChangeEvent, useState } from "react";
+import { FieldError, FieldValues, UseFormClearErrors, UseFormRegister } from "react-hook-form";
 import styles from "../ConsultationForm.module.scss";
 
 interface ContactInputProps {
-    isTelegram: boolean;
-    setIsTelegram: (value: boolean) => void;
-    contactValue: string;
-    setContactValue: (value: string) => void;
+    contactValue?: string;
+    setContactValue?: (value: string) => void;
     register: UseFormRegister<FieldValues>;
     errors: Record<string, FieldError | undefined>;
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export function ContactInputForm({
-                                             isTelegram,
-                                             setIsTelegram,
-                                             contactValue,
-                                             setContactValue,
-                                             register,
-                                             errors,
-                                             clearErrors
-                                         }: ContactInputProps) {
+export function ContactInputForm(props: ContactInputProps) {
+    const [isTelegram, setIsTelegram] = useState<boolean>(false);
+
+    const [localContactValue, setLocalContactValue] = useState<string>("");
+    const contactValue = props.contactValue ?? localContactValue;
+    const setContactValue = props.setContactValue ?? setLocalContactValue;
+
     const phonePattern = /^(\+7|8)\s?\(?\d{3}\)?\s?\d{3}-?\d{2}-?\d{2}$/;
     const telegramPattern = /^@(?=.{5,})[a-zA-Z0-9]+$/;
 
@@ -58,7 +56,7 @@ export function ContactInputForm({
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value;
-        clearErrors('contact');
+        props.clearErrors('contact');
 
         if (isTelegram) {
             value = handleTelegramMode(value);
@@ -72,7 +70,7 @@ export function ContactInputForm({
     const handleModeChange = (mode: 'phone' | 'telegram') => {
         setIsTelegram(mode === 'telegram');
         setContactValue(mode === 'telegram' ? '@' : '');
-        clearErrors('contact');
+        props.clearErrors('contact');
     };
 
     return (
@@ -92,7 +90,7 @@ export function ContactInputForm({
                 maxLength={isTelegram ? 32 : 18}
                 minLength={5}
                 value={isTelegram ? contactValue : '+7 ' + contactValue}
-                {...register("contact", {
+                {...props.register("contact", {
                     required: "Это поле обязательное",
                     pattern: {
                         value: isTelegram
@@ -104,9 +102,8 @@ export function ContactInputForm({
                     },
                     onChange: handleChange,
                 })}
-
             />
-            {errors.contact && <p className={styles.error}>{(errors.contact as FieldError).message}</p>}
+            {props.errors.contact && <p className={styles.error}>{(props.errors.contact as FieldError).message}</p>}
         </div>
     );
 }
