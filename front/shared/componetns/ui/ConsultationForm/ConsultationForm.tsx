@@ -18,7 +18,6 @@ export function ConsultationForm(props : ConsultationFormProps) {
         mode: "onBlur",
     });
 
-    const [isTelegram, setIsTelegram] = useState<boolean>(false);
     const [contactValue, setContactValue] = useState<string>("");
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -63,8 +62,6 @@ export function ConsultationForm(props : ConsultationFormProps) {
                             clearErrors={clearErrors}
                         />
                         <ContactInputForm
-                            isTelegram={isTelegram}
-                            setIsTelegram={setIsTelegram}
                             contactValue={contactValue}
                             setContactValue={setContactValue}
                             register={register}
