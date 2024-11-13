@@ -5,5 +5,4 @@ export { MentorInfo } from "./MentorInfo/MentorInfo";
 export { Navbar } from "./Navbar/Navbar";
 export { ReviewCard } from "./ReviewCard/ReviewCard";
 export { ReviewForm } from "./ReviewForm/ReviewForm";
-export { SliderReview } from "./SliderReview/SliderReview";
 export { SubmitMessage } from "./SubmitMessages/SubmitMessage"
