@@ -5,10 +5,9 @@ import {
     FrameTitle,
     MentorInfo,
     ReviewForm,
-    SliderReview,
     SubmitMessage
 } from "@/shared/componetns/ui";
-import {PopupModal} from "@/shared/componetns/shared";
+import {PopupModal, SliderReview} from "@/shared/componetns/shared";
 import {useState} from "react";
 
 export default function Home() {
