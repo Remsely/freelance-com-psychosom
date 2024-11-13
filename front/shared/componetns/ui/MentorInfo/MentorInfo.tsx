@@ -3,8 +3,8 @@
 import {useState} from "react";
 import styles from "./MentorInfo.module.scss";
 import {HighlightInfo, PhotoMentorInfo, TextMentorInfo} from "@/shared/componetns/ui/MentorInfo";
-import {PopupModal} from "@/shared/componetns/ui";
 import Image from "next/image";
+import {PopupModal} from "@/shared/componetns/shared";
 
 export function MentorInfo() {
     const [isOpenCertificate, setIsOpenCertificate] = useState(false)

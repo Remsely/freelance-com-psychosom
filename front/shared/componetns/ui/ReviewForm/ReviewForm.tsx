@@ -3,8 +3,10 @@
 import styles from "./ReviewForm.module.scss"
 import {useEffect, useState} from "react";
 
-import {ButtonMaster, PopupModal} from "@/shared/componetns/ui";
+import {ButtonMaster} from "@/shared/componetns/ui";
+
 import {ModalReviewForm} from "@/shared/componetns/ui/ReviewForm";
+import {PopupModal} from "@/shared/componetns/shared";
 
 export function ReviewForm() {
     const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);

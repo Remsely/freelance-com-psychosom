@@ -4,10 +4,11 @@ import {
     ConsultationForm,
     FrameTitle,
     MentorInfo,
-    PopupModal, ReviewForm,
+    ReviewForm,
     SliderReview,
     SubmitMessage
 } from "@/shared/componetns/ui";
+import {PopupModal} from "@/shared/componetns/shared";
 import {useState} from "react";
 
 export default function Home() {
