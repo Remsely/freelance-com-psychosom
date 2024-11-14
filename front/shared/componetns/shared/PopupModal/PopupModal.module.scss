@@ -25,6 +25,7 @@
             border-top: $border-shadow;
             backdrop-filter: $backdrop-filter;
             box-shadow: $box-shadow;
+            margin-right: -15px;
             padding: 30px;
             max-width: 90%;
             max-height: 90vh;
@@ -55,12 +56,14 @@
                 right: 30px;
                 top: 30px;
                 stroke: $title-font-color;
+                fill: $title-font-color;
                 cursor: pointer;
                 transition: $transition-main;
 
                 &:hover {
                     transform: scale(1.1);
                     stroke: $title-hover-color;
+                    fill: $title-hover-color;
                 }
             }
         }

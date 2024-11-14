@@ -32,6 +32,11 @@
             margin-left: auto;
             margin-right: 5px;
         }
+
+        svg {
+            stroke: $title-font-color;
+            fill: $title-font-color;
+        }
     }
 
     h4 {
