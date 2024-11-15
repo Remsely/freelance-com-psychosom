@@ -46,29 +46,32 @@ export function ConsultationForm(props : ConsultationFormProps) {
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
                 <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
-                    <div className={`${styles.inputs} ${styles.block}`}>
-                        <NameInput
-                            label="Имя"
-                            name="firstname"
-                            register={register}
-                            errors={errors as Record<string, FieldError | undefined>}
-                            clearErrors={clearErrors}
-                        />
-                        <NameInput
-                            label="Фамилия"
-                            name="lastname"
-                            register={register}
-                            errors={errors as Record<string, FieldError | undefined>}
-                            clearErrors={clearErrors}
-                        />
-                        <ContactInput
-                            contactValue={contactValue}
-                            setContactValue={setContactValue}
-                            register={register}
-                            errors={errors as Record<string, FieldError | undefined>}
-                            clearErrors={clearErrors}
-                        />
+                    <div className={`${styles.leftColumn} ${styles.block}`}>
+                        <div className={styles.inputs}>
+                            <NameInput
+                                label="Имя"
+                                name="firstname"
+                                register={register}
+                                errors={errors as Record<string, FieldError | undefined>}
+                                clearErrors={clearErrors}
+                            />
+                            <NameInput
+                                label="Фамилия"
+                                name="lastname"
+                                register={register}
+                                errors={errors as Record<string, FieldError | undefined>}
+                                clearErrors={clearErrors}
+                            />
+                            <ContactInput
+                                contactValue={contactValue}
+                                setContactValue={setContactValue}
+                                register={register}
+                                errors={errors as Record<string, FieldError | undefined>}
+                                clearErrors={clearErrors}
+                            />
+                        </div>
                     </div>
+
                     <div className={`${styles.textarea} ${styles.block}`}>
                         <TextInput
                             label="Опишите свою проблему"

@@ -97,7 +97,7 @@ export function ContactInput(props: ContactInputProps) {
                             ? telegramPattern
                             : phonePattern,
                         message: isTelegram
-                            ? "В Telegram допустимы только латинские буквы и цифры, длина должна быть не менее 5 символов"
+                            ? "В Telegram допустимы только латинские буквы и цифры, не менее 5 символов"
                             : "Номер телефона должен быть в формате +7 или 8 (XXX) XXX-XX-XX",
                     },
                     onChange: handleChange,

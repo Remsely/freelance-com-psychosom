@@ -7,14 +7,15 @@
 
 .error {
     position: absolute;
-    width: calc(100% - 36px);
+    width: 100%;
     color: darkred;
     font-size: 14px;
     margin-top: 4px;
+    text-align: center;
 }
 
 .row {
-    margin: 30px 0;
+    position: relative;
 
     &:first-child {
         margin-top: 0;

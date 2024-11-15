@@ -12,12 +12,19 @@
         .inputs {
             width: 240px;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             margin-right: 25px;
         }
     }
 
     .textarea {
         width: 100%;
+
+        textarea {
+            height: 260px;
+        }
     }
 }
 

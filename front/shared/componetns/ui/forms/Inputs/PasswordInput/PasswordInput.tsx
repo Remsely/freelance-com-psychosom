@@ -13,14 +13,16 @@ export function PasswordInput() {
 
     return (
         <>
-            <h2 className={styles.title}>Пароль</h2>
-            <div className={styles.input}>
-                <input type={showPassword ? "text" : "password"}/>
-                <i className={styles.eye} onClick={toggleShowPassword}>
-                    {showPassword ?
-                        <EyeOff/> :
-                        <Eye/>}
-                </i>
+            <div className={styles.row}>
+                <h2 className={styles.title}>Пароль</h2>
+                <div className={styles.input}>
+                    <input type={showPassword ? "text" : "password"}/>
+                    <i className={styles.eye} onClick={toggleShowPassword}>
+                        {showPassword ?
+                            <EyeOff/> :
+                            <Eye/>}
+                    </i>
+                </div>
             </div>
         </>
     );
