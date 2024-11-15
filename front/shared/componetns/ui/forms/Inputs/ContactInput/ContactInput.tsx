@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import { FieldError, FieldValues, UseFormClearErrors, UseFormRegister } from "react-hook-form";
-import styles from "../ConsultationForm.module.scss";
+import styles from "./ContactInput.module.scss";
 
 interface ContactInputProps {
     contactValue?: string;
@@ -12,7 +12,7 @@ interface ContactInputProps {
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export function ContactInputForm(props: ContactInputProps) {
+export function ContactInput(props: ContactInputProps) {
     const [isTelegram, setIsTelegram] = useState<boolean>(false);
 
     const [localContactValue, setLocalContactValue] = useState<string>("");

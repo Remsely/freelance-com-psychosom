@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import styles from "./ConsultationForm.module.scss";
 import {ButtonMaster, FrameTitle, SubmitMessage} from "@/shared/componetns/ui";
-import {ContactInputForm, NameInputForm, TextareaForm} from "@/shared/componetns/ui/ConsultationForm";
+import {ContactInput, NameInput, TextInput} from "@/shared/componetns/ui/forms/Inputs";
 import {Cookie} from "@/shared/enums/cookie";
 
 interface ConsultationFormProps {
@@ -47,21 +47,21 @@ export function ConsultationForm(props : ConsultationFormProps) {
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
                 <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
                     <div className={`${styles.inputs} ${styles.block}`}>
-                        <NameInputForm
+                        <NameInput
                             label="Имя"
                             name="firstname"
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                             clearErrors={clearErrors}
                         />
-                        <NameInputForm
+                        <NameInput
                             label="Фамилия"
                             name="lastname"
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                             clearErrors={clearErrors}
                         />
-                        <ContactInputForm
+                        <ContactInput
                             contactValue={contactValue}
                             setContactValue={setContactValue}
                             register={register}
@@ -70,7 +70,7 @@ export function ConsultationForm(props : ConsultationFormProps) {
                         />
                     </div>
                     <div className={`${styles.textarea} ${styles.block}`}>
-                        <TextareaForm
+                        <TextInput
                             label="Опишите свою проблему"
                             name="message"
                             register={register}

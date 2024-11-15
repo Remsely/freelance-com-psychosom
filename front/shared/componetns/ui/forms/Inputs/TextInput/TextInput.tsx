@@ -1,18 +1,18 @@
 import {FieldError, FieldValues, UseFormRegister} from "react-hook-form";
-import styles from "../ConsultationForm.module.scss";
+import styles from "./TextInput.module.scss";
 
-interface TextareaFormProps {
+interface TextInputProps {
     label: string;
     name: string;
     register: UseFormRegister<FieldValues>;
     errors: Record<string, FieldError | undefined>;
 }
 
-export function TextareaForm({ label, name, register, errors }: TextareaFormProps) {
+export function TextInput({ label, name, register, errors }: TextInputProps) {
     return (
         <>
             <h2 className={styles.title}>{label}</h2>
-            <textarea
+            <textarea className={styles.textarea}
                 maxLength={2047}
                 {...register(name)}
                 placeholder={label}

@@ -1,0 +1,45 @@
+@use "@/shared/styles/variables" as *;
+
+.form {
+    display: flex;
+
+    .inputs {
+        flex-shrink: 0;
+        width: 301px;
+        padding: 15px 18px;
+        margin-right: 10px;
+    }
+
+    .textarea {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        position: relative;
+        width: calc(100% - 301px);
+        padding: 16px 20px;
+
+        button {
+            width: 100%;
+            height: 60px;
+            margin-top: auto;
+
+            &:hover {
+                background-color: $button-hover-color;
+            }
+        }
+    }
+}
+
+.block {
+    height: 450px;
+    border-radius: $border-radius;
+    background: $background-div-color;
+    border-left: $border-shadow;
+    border-top: $border-shadow;
+    backdrop-filter: $backdrop-filter;
+    box-shadow: $box-shadow;
+}
+
+.success {
+    padding: 225px 0;
+}

@@ -4,7 +4,7 @@ import {
     ConsultationForm,
     FrameTitle,
     MentorInfo,
-    ReviewForm,
+    ReviewButton,
     SubmitMessage
 } from "@/shared/componetns/ui";
 import {PopupModal, SliderReview} from "@/shared/componetns/shared";
@@ -27,7 +27,7 @@ export default function Home() {
 
                 <SliderReview/>
 
-                <ReviewForm/>
+                <ReviewButton/>
             </div>
         </>
     );
