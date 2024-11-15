@@ -11,10 +11,12 @@ export function AuthForm() {
 
 
     return (
-        <form action="">
-            <ContactInput register={register} clearErrors={clearErrors}
-                          errors={errors as Record<string, FieldError | undefined>}/>
-            <PasswordInput/>
+        <form action="" className={styles.form}>
+            <div className={styles.inputs}>
+                <ContactInput register={register} clearErrors={clearErrors}
+                              errors={errors as Record<string, FieldError | undefined>}/>
+                <PasswordInput/>
+            </div>
             <ButtonMaster type="button" className={styles.button}>Войти</ButtonMaster>
         </form>
     )

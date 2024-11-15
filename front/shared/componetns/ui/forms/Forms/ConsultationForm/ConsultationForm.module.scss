@@ -3,11 +3,18 @@
 .form {
     display: flex;
 
-    .inputs {
+    .leftColumn {
         flex-shrink: 0;
         width: 301px;
         padding: 15px 18px;
         margin-right: 10px;
+
+        .inputs {
+            height: calc(450px - 135px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
     }
 
     .textarea {
@@ -41,5 +48,5 @@
 }
 
 .success {
-    padding: 225px 0;
+    padding: 230px 0;
 }
