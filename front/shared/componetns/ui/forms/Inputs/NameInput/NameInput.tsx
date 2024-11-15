@@ -1,6 +1,6 @@
 import {ChangeEvent, KeyboardEvent} from "react";
 import {FieldError, FieldValues, UseFormClearErrors, UseFormRegister} from "react-hook-form";
-import styles from "../ConsultationForm.module.scss";
+import styles from "./NameInput.module.scss";
 
 interface NameInputProps {
     label: string;
@@ -10,7 +10,7 @@ interface NameInputProps {
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export function NameInputForm({label, name, register, errors, clearErrors}: NameInputProps) {
+export function NameInput({label, name, register, errors, clearErrors}: NameInputProps) {
     const translateToCyrillic = (input: string): string => {
         const translationMap: { [key: string]: string } = {
             q: 'й', w: 'ц', e: 'у', r: 'к', t: 'е', y: 'н', u: 'г', i: 'ш', o: 'щ', p: 'з', "[": "х", "]": "ъ",

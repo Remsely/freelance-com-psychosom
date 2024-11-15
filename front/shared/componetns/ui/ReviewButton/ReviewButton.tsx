@@ -1,14 +1,14 @@
 "use client";
 
-import styles from "./ReviewForm.module.scss"
+import styles from "./ReviewButton.module.scss"
 import {useEffect, useState} from "react";
 
 import {ButtonMaster} from "@/shared/componetns/ui";
 
-import {ModalReviewForm} from "@/shared/componetns/ui/ReviewForm";
+import {ReviewForm} from "@/shared/componetns/ui/forms/Forms";
 import {PopupModal} from "@/shared/componetns/shared";
 
-export function ReviewForm() {
+export function ReviewButton() {
     const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -31,7 +31,7 @@ export function ReviewForm() {
                         setIsOpen={setIsOpenReviewModalForm}
                         title="Оставить отзыв"
                         isSuccessSubmitForm={isSuccess}>
-                <ModalReviewForm setIsSuccess={setIsSuccess}/>
+                <ReviewForm setIsSuccess={setIsSuccess}/>
             </PopupModal>
         </>
     )

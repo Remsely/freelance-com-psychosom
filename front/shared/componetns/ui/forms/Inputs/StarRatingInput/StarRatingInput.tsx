@@ -1,19 +1,19 @@
 "use client";
 
 import {useState} from 'react';
-import styles from './StarRating.module.scss';
+import styles from './StarRatingInput.module.scss';
 
-interface StarRatingProps {
+interface StarRatingInputProps {
     onRatingSelect: (rating: number) => void;
 }
 
-export function StarRating({onRatingSelect}: StarRatingProps) {
+export function StarRatingInput(props: StarRatingInputProps) {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
 
     const handleClick = (index: number) => {
         setRating(index);
-        onRatingSelect(index);
+        props.onRatingSelect(index);
     };
 
     return (
