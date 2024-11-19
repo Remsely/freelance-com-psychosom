@@ -7,5 +7,5 @@ fun DomainUser.toEntity() = User(
     id = id,
     username = username,
     password = password,
-    role = role
+    role = role!!
 )

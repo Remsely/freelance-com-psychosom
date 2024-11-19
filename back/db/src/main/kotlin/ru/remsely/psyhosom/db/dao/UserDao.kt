@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.db.extensions.toDomain
 import ru.remsely.psyhosom.db.extensions.toEntity
 import ru.remsely.psyhosom.db.repository.UserRepository
-import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.errors.DomainError
 import ru.remsely.psyhosom.domain.user.User
 import ru.remsely.psyhosom.domain.user.dao.UserCreationError
 import ru.remsely.psyhosom.domain.user.dao.UserCreator
