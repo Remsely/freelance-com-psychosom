@@ -1,6 +1,6 @@
 "use client";
 
-import {AuthForm} from "@/shared/componetns/ui/forms/Forms/AuthForm/AuthForm";
+import {AuthForm} from "@/shared/componetns/shared/forms/Forms/AuthForm/AuthForm";
 import {useState} from "react";
 import {PopupModal} from "@/shared/componetns/shared";
 import {LogIn} from "lucide-react";

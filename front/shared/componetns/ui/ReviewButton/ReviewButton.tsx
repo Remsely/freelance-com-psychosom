@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 
 import {ButtonMaster} from "@/shared/componetns/ui";
 
-import {ReviewForm} from "@/shared/componetns/ui/forms/Forms";
+import {ReviewForm} from "@/shared/componetns/shared/forms/Forms";
 import {PopupModal} from "@/shared/componetns/shared";
 
 export function ReviewButton() {

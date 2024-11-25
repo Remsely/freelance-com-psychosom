@@ -1,5 +1,5 @@
 export {ButtonMaster} from "./ButtonMaster/ButtonMaster";
-export {ConsultationForm} from "@/shared/componetns/ui/forms/Forms/ConsultationForm/ConsultationForm";
+export {ConsultationForm} from "@/shared/componetns/shared/forms/Forms/ConsultationForm/ConsultationForm";
 export {FrameTitle} from "./FrameTitle/FrameTitle";
 export {MentorInfo} from "./MentorInfo/MentorInfo";
 export {Navbar} from "./Navbar/Navbar";

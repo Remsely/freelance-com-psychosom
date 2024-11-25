@@ -103,7 +103,7 @@ export function ContactInput(props: ContactInputProps) {
                     onChange: handleChange,
                 })}
             />
-            {props.errors.contact && <p className={styles.error}>{(props.errors.contact as FieldError).message}</p>}
+            {props.errors.contact && <p className={styles.error}>{props.errors.contact.message}</p>}
         </div>
     );
 }
