@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {Cookie} from "@/shared/enums/cookie";
 import {NameInput, TextInput} from "../ConsultationForm";
-import {StarRatingInput} from "@/shared/componetns/ui/forms/Inputs";
+import {StarRatingInput} from "@/shared/componetns/shared/forms/Inputs";
 import {ButtonMaster, SubmitMessage} from "@/shared/componetns/ui";
 
 interface ReviewFormProps {

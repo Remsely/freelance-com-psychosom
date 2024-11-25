@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import styles from "./ConsultationForm.module.scss";
 import {ButtonMaster, FrameTitle, SubmitMessage} from "@/shared/componetns/ui";
-import {ContactInput, NameInput, TextInput} from "@/shared/componetns/ui/forms/Inputs";
+import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/forms/Inputs";
 import {Cookie} from "@/shared/enums/cookie";
 
 interface ConsultationFormProps {
