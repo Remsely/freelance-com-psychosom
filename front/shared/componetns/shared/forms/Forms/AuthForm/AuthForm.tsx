@@ -1,5 +1,5 @@
 import {ContactInput} from "../ConsultationForm";
-import {PasswordInput} from "@/shared/componetns/shared/forms/Inputs/PasswordInput/PasswordInput";
+import {PasswordInput} from "@/shared/componetns/shared/forms/Inputs";
 import {FieldError, useForm} from "react-hook-form";
 import {ButtonMaster} from "@/shared/componetns/ui";
 import styles from "./AuthForm.module.scss"

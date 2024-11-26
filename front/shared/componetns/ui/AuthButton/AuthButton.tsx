@@ -1,6 +1,6 @@
 "use client";
 
-import {AuthForm} from "@/shared/componetns/shared/forms/Forms/AuthForm/AuthForm";
+import {AuthForm} from "@/shared/componetns/shared/forms/Forms";
 import {useState} from "react";
 import {PopupModal} from "@/shared/componetns/shared";
 import {LogIn} from "lucide-react";
@@ -11,7 +11,8 @@ export function AuthButton() {
     return (
         <>
             <LogIn onClick={() => setIsOpen(!isOpen)} width={24}/>
-            {isOpen && <PopupModal isOpen={isOpen} setIsOpen={setIsOpen} title="Авторизация"><AuthForm/></PopupModal> }
+            {isOpen && <PopupModal isOpen={isOpen}
+                                   setIsOpen={setIsOpen} title="Авторизация"><AuthForm/></PopupModal> }
         </>
     );
 }
