@@ -15,3 +15,9 @@ sealed class UserLoginError(override val message: String) : DomainError.Validati
         "Incorrect username or password."
     )
 }
+
+sealed class UserRegisterValidationError(override val message: String) : DomainError.ValidationError {
+    data object InvalidUsername : UserRegisterValidationError(
+        "User username must be telegram username or phone number."
+    )
+}

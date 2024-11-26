@@ -16,6 +16,7 @@ import ru.remsely.psyhosom.domain.user.User
 import ru.remsely.psyhosom.domain.user.dao.UserCreationError
 import ru.remsely.psyhosom.usecase.auth.AuthService
 import ru.remsely.psyhosom.usecase.auth.UserLoginError
+import ru.remsely.psyhosom.usecase.auth.UserRegisterValidationError
 import java.time.LocalDateTime
 
 @RestController
@@ -83,6 +84,7 @@ class AuthController(
     private fun handleError(error: DomainError): ResponseEntity<ErrorResponse> =
         when (error) {
             is UserCreationError.AlreadyExists -> HttpStatus.BAD_REQUEST
+            is UserRegisterValidationError.InvalidUsername -> HttpStatus.BAD_REQUEST
             is UserLoginError.AuthenticationError -> HttpStatus.UNAUTHORIZED
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
@@ -94,6 +96,8 @@ class AuthController(
                         timestamp = LocalDateTime.now(),
                         status = it.name
                     )
-                )
+                ).also {
+                    log.warn(error.message)
+                }
         }
 }
