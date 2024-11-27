@@ -9,7 +9,7 @@ export function SubmitMessage({title, children}: SubmitMessageProps) {
     return (
         <div className={styles.success} style={{padding: title === "Вы уже записаны на консультацию!" ? "225px 0" : "20px 0"}}>
             <h2>{title}</h2>
-            <p>{children}</p>
+            <p style={{ width: title === "Вы уже записаны на консультацию!" ? "auto" : "700px"}}>{children}</p>
         </div>
     )
 }

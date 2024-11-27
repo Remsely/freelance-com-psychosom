@@ -7,6 +7,6 @@ interface PhotoMainProps {
 
 export function PhotoMentorInfo(props : PhotoMainProps) {
     return (
-        <Image className={styles.photo} src={`/${props.children}`} alt="" width={400} height={533} priority/>
+        <Image className={styles.photo} src={`/${props.children}`} alt="" width={400} height={543.8} priority/>
     )
 }

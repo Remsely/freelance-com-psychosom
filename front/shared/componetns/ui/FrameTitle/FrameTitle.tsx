@@ -5,9 +5,9 @@ interface FrameTitleProps {
     id?: string;
 }
 
-export function FrameTitle({ children, id } : FrameTitleProps) {
+export function FrameTitle(props : FrameTitleProps) {
     return (
-        <h1 className={styles.title_block} id={id}>{children}</h1>
+        <h1 className={styles.title_block} id={props.id}>{props.children}</h1>
     )
 }
 
