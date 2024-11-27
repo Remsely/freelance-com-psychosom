@@ -13,7 +13,7 @@ interface ConsultationFormProps {
     isOpen: boolean;
 }
 
-export function ConsultationForm(props : ConsultationFormProps) {
+export function ConsultationForm(props: ConsultationFormProps) {
     const {register, handleSubmit, reset, formState: {errors}, clearErrors} = useForm({
         mode: "onBlur",
     });
@@ -41,7 +41,11 @@ export function ConsultationForm(props : ConsultationFormProps) {
 
     return (
         isSubmitted && !props.isOpen ? (
-            <SubmitMessage title="Вы уже записаны на консультацию!">Мы свяжемся с вами в ближайшее время</SubmitMessage>
+            <>
+                <i id="consultation"></i>
+                <SubmitMessage title="Вы уже записаны на консультацию!">Мы свяжемся с вами в ближайшее
+                    время</SubmitMessage>
+            </>
         ) : (
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>

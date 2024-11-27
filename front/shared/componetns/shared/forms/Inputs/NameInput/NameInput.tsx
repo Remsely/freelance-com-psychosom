@@ -29,6 +29,11 @@ export function NameInput({label, name, register, errors, clearErrors}: NameInpu
         const fullValue = e.target.value.slice(0, -1);
         const lastChar = e.target.value.slice(-1);
         e.target.value = fullValue + translateToCyrillic(lastChar).replace(/[^а-яА-Я-]/g, '');
+
+        if (e.target.value.length > 0) {
+            e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+        }
+
         clearErrors(name);
     };
 
