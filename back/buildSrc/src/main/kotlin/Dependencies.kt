@@ -1,18 +1,26 @@
 object Libs {
     // Spring Boot
     const val spring_boot_starter = "org.springframework.boot:spring-boot-starter:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_web = "org.springframework.boot:spring-boot-starter-web:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_data_jpa = "org.springframework.boot:spring-boot-starter-data-jpa:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_security = "org.springframework.boot:spring-boot-starter-security:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_oauth2_resource_server = "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_validation = "org.springframework.boot:spring-boot-starter-validation:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_web =
+        "org.springframework.boot:spring-boot-starter-web:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_data_jpa =
+        "org.springframework.boot:spring-boot-starter-data-jpa:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_security =
+        "org.springframework.boot:spring-boot-starter-security:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_oauth2_resource_server =
+        "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_test =
+        "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
     const val spring_tx = "org.springframework:spring-tx:${LibVersions.spring_tx}"
 
     // Arrow
     const val arrow_core = "io.arrow-kt:arrow-core:${LibVersions.arrow}"
     const val arrow_optics = "io.arrow-kt:arrow-optics:${LibVersions.arrow}"
     const val arrow_optics_ksp = "io.arrow-kt:arrow-optics-ksp-plugin:${LibVersions.arrow}"
+
+    // Monitoring
+    const val slf2j = "org.slf4j:slf4j-api:${LibVersions.slf4j}"
+    const val logback = "ch.qos.logback:logback-classic:${LibVersions.logback}"
 
     // DB
     const val postgresql = "org.postgresql:postgresql:${LibVersions.postgresql}"
@@ -26,7 +34,8 @@ object Libs {
     // Test
     const val kotlin_test_junit5 = "org.jetbrains.kotlin:kotlin-test-junit5"
     const val junit_platform_launcher = "org.junit.platform:junit-platform-launcher"
-    const val kotest_assertions_arrow = "io.kotest.extensions:kotest-assertions-arrow:${LibVersions.kotest_assertions_arrow}"
+    const val kotest_assertions_arrow =
+        "io.kotest.extensions:kotest-assertions-arrow:${LibVersions.kotest_assertions_arrow}"
 }
 
 object LibVersions {
@@ -36,6 +45,8 @@ object LibVersions {
     const val postgresql = "42.7.1"
     const val spring_tx = "6.1.12"
     const val flyway = "10.17.3"
+    const val slf4j = "2.0.16"
+    const val logback = "1.5.12"
 }
 
 object Plugins {
