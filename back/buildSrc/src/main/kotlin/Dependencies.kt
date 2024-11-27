@@ -1,16 +1,11 @@
 object Libs {
     // Spring Boot
     const val spring_boot_starter = "org.springframework.boot:spring-boot-starter:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_web =
-        "org.springframework.boot:spring-boot-starter-web:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_data_jpa =
-        "org.springframework.boot:spring-boot-starter-data-jpa:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_security =
-        "org.springframework.boot:spring-boot-starter-security:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_oauth2_resource_server =
-        "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
-    const val spring_boot_starter_test =
-        "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_web = "org.springframework.boot:spring-boot-starter-web:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_data_jpa = "org.springframework.boot:spring-boot-starter-data-jpa:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_security = "org.springframework.boot:spring-boot-starter-security:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_oauth2_resource_server = "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${LibVersions.spring_boot_starter}"
+    const val spring_boot_starter_test = "org.springframework.boot:spring-boot-starter-test:${LibVersions.spring_boot_starter}"
     const val spring_tx = "org.springframework:spring-tx:${LibVersions.spring_tx}"
 
     // Arrow
@@ -34,8 +29,7 @@ object Libs {
     // Test
     const val kotlin_test_junit5 = "org.jetbrains.kotlin:kotlin-test-junit5"
     const val junit_platform_launcher = "org.junit.platform:junit-platform-launcher"
-    const val kotest_assertions_arrow =
-        "io.kotest.extensions:kotest-assertions-arrow:${LibVersions.kotest_assertions_arrow}"
+    const val kotest_assertions_arrow = "io.kotest.extensions:kotest-assertions-arrow:${LibVersions.kotest_assertions_arrow}"
 }
 
 object LibVersions {
