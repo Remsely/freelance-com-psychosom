@@ -8,7 +8,7 @@ import ru.remsely.psyhosom.domain.account.Account
 data class Account(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long,
 
     @Column(nullable = false, unique = true, length = 255)
     val username: String,
@@ -19,4 +19,10 @@ data class Account(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     val role: Account.Role,
+
+    @Column(name = "is_confirmed", nullable = false)
+    val isConfirmed: Boolean,
+
+    @Column(name = "tg_bot_token", nullable = false, unique = true)
+    val tgBotToken: String
 )

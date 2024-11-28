@@ -4,5 +4,11 @@
       "name": "frontend.url",
       "type": "java.lang.String",
       "description": "Web app url."
-  }
-] }
+    },
+    {
+      "name": "telegram.bot.endpoints.confirmation",
+      "type": "java.lang.String",
+      "description": "Description for telegram.bot.endpoints.confirmation."
+    }
+  ]
+}

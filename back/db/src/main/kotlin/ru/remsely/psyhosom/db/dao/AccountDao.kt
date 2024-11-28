@@ -15,7 +15,7 @@ import ru.remsely.psyhosom.db.repository.AccountRepository
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.AccountCreator
 import ru.remsely.psyhosom.domain.account.dao.AccountFinder
-import ru.remsely.psyhosom.domain.account.dao.UserCreationError
+import ru.remsely.psyhosom.domain.account.dao.AccountCreationError
 import ru.remsely.psyhosom.domain.account.dao.UserFindingError
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.monitoring.log.logger
@@ -30,7 +30,7 @@ open class AccountDao(
     @Transactional
     override fun createUser(account: Account): Either<DomainError, Account> = either {
         ensure(!accountRepository.existsByUsername(account.username)) {
-            UserCreationError.AlreadyExists(account.username)
+            AccountCreationError.AlreadyExists(account.username)
         }
         accountRepository.save(account.toEntity()).toDomain()
             .also {
@@ -50,6 +50,7 @@ open class AccountDao(
             }
     }
 
+    @Transactional(readOnly = true)
     override fun findUserById(id: Long): Either<DomainError, Account> =
         accountRepository.findById(id)
             .getOrNull()
