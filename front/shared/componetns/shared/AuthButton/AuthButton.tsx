@@ -1,8 +1,8 @@
 "use client";
 
-import {AuthForm} from "@/shared/componetns/shared/forms/Forms";
+import {AuthForm} from "@/shared/componetns/shared/Forms";
 import {useState} from "react";
-import {Dialog} from "@/shared/componetns/shared";
+import {Dialog} from "@/shared/componetns/ui";
 import {LogIn} from "lucide-react";
 
 export function AuthButton() {

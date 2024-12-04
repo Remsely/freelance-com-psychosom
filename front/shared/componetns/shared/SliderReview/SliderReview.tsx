@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import {CSSProperties} from "react";
-import {ReviewCard} from "@/shared/componetns/ui";
+import {ReviewCard} from "@/shared/componetns/shared";
 import {reviews} from "@/shared/dataForDev";
 import dynamic from "next/dynamic";
 

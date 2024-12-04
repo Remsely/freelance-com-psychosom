@@ -1,14 +1,15 @@
 "use client";
 
 import {
-    ConsultationForm,
     FrameTitle,
     MentorInfo,
     ReviewButton,
-    SubmitMessage
-} from "@/shared/componetns/ui";
-import {Dialog, SliderReview} from "@/shared/componetns/shared";
+    SubmitMessage,
+    SliderReview
+} from "@/shared/componetns/shared";
 import {useState} from "react";
+import {ConsultationForm} from "@/shared/componetns/shared/Forms";
+import {Dialog} from "@/shared/componetns/ui";
 
 export default function Home() {
     const [isOpenForm, setIsOpenForm] = useState(false)

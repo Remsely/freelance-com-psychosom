@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss"
-import {AuthButton, Navbar} from "@/shared/componetns/ui";
+import {AuthButton, Navbar} from "@/shared/componetns/shared";
 
 export function Header() {
     return (

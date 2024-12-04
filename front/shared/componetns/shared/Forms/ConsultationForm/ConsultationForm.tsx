@@ -4,9 +4,10 @@ import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import styles from "./ConsultationForm.module.scss";
-import {Button, FrameTitle, SubmitMessage} from "@/shared/componetns/ui";
-import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/forms/Inputs";
+import {Button} from "@/shared/componetns/ui";
+import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/Inputs";
 import {Cookie} from "@/shared/enums/cookie";
+import {FrameTitle, SubmitMessage} from "@/shared/componetns/shared";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
