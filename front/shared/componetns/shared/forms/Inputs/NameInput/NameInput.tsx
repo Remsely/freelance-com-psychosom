@@ -10,7 +10,7 @@ interface NameInputProps {
     clearErrors: UseFormClearErrors<FieldValues>;
 }
 
-export function NameInput({label, name, register, errors, clearErrors}: NameInputProps) {
+export function NameInput(props: NameInputProps) {
     const translateToCyrillic = (input: string): string => {
         const translationMap: { [key: string]: string } = {
             q: 'й', w: 'ц', e: 'у', r: 'к', t: 'е', y: 'н', u: 'г', i: 'ш', o: 'щ', p: 'з', "[": "х", "]": "ъ",
@@ -34,7 +34,7 @@ export function NameInput({label, name, register, errors, clearErrors}: NameInpu
             e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
         }
 
-        clearErrors(name);
+        props.clearErrors(props.name);
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -45,13 +45,13 @@ export function NameInput({label, name, register, errors, clearErrors}: NameInpu
 
     return (
         <div className={styles.row}>
-            <h2 className={styles.title}>{label}</h2>
+            <h2 className={styles.title}>{props.label}</h2>
             <input
                 type="text"
-                placeholder={label}
+                placeholder={props.label}
                 onKeyDown={handleKeyDown}
                 maxLength={255}
-                {...register(name, {
+                {...props.register(props.name, {
                     required: "Это поле обязательное",
                     pattern: {
                         value: /^[a-zA-Zа-яА-Я-]*$/,
@@ -60,7 +60,7 @@ export function NameInput({label, name, register, errors, clearErrors}: NameInpu
                     onChange: handleChange,
                 })}
             />
-            {errors[name] && <p className={styles.error}>{(errors[name] as FieldError).message}</p>}
+            {props.errors[props.name] && <p className={styles.error}>{(props.errors[props.name] as FieldError).message}</p>}
         </div>
     );
 }

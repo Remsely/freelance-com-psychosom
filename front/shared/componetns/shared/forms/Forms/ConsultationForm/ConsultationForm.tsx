@@ -4,7 +4,7 @@ import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import styles from "./ConsultationForm.module.scss";
-import {ButtonMaster, FrameTitle, SubmitMessage} from "@/shared/componetns/ui";
+import {Button, FrameTitle, SubmitMessage} from "@/shared/componetns/ui";
 import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/forms/Inputs";
 import {Cookie} from "@/shared/enums/cookie";
 
@@ -85,7 +85,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                         />
-                        <ButtonMaster className={styles.buttonForm} type="submit">Записаться</ButtonMaster>
+                        <Button className={styles.buttonForm} type="submit">Записаться</Button>
                     </div>
                 </form>
             </>

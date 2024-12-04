@@ -2,9 +2,9 @@
 
 import {useState} from "react";
 import styles from "./MentorInfo.module.scss";
-import {HighlightInfo, PhotoMentorInfo, TextMentorInfo} from "@/shared/componetns/ui/MentorInfo";
+import {HighlightInfo, PhotoMentorInfo, TextMentorInfo} from "@/shared/componetns/shared/MentorInfo/index";
 import Image from "next/image";
-import {PopupModal} from "@/shared/componetns/shared";
+import {Dialog} from "@/shared/componetns/shared";
 
 export function MentorInfo() {
     const [isOpenCertificate, setIsOpenCertificate] = useState(false)
@@ -21,7 +21,7 @@ export function MentorInfo() {
                     Продолжается много текста Продолжается много текста Продолжается много текста</TextMentorInfo>
                 <HighlightInfo onLinkClick={() => setIsOpenCertificate(true)}><a id='important-link'>Инфа о дипломе</a> кнопка,
                     открывающая модальное окно с файлом диплома</HighlightInfo>
-                <PopupModal isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} > <Image src="/certificate.jpg" alt="" width={533} height={750}/> </PopupModal>
+                <Dialog isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} > <Image src="/certificate.jpg" alt="" width={533} height={750}/> </Dialog>
             </div>
             <PhotoMentorInfo>specialist.jpg</PhotoMentorInfo>
         </main>

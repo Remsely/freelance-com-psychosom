@@ -1,1 +1,0 @@
-export {AuthForm} from "@/shared/componetns/shared/forms/Forms/AuthForm/AuthForm";
