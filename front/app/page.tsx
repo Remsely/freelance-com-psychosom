@@ -7,7 +7,7 @@ import {
     ReviewButton,
     SubmitMessage
 } from "@/shared/componetns/ui";
-import {PopupModal, SliderReview} from "@/shared/componetns/shared";
+import {Dialog, SliderReview} from "@/shared/componetns/shared";
 import {useState} from "react";
 
 export default function Home() {
@@ -19,9 +19,9 @@ export default function Home() {
                 <MentorInfo/>
 
                 <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
-                <PopupModal isOpen={isOpenForm} setIsOpen={setIsOpenForm}> <SubmitMessage
+                <Dialog isOpen={isOpenForm} setIsOpen={setIsOpenForm}> <SubmitMessage
                     title="Поздравляем, вы записаны!"> Вы записались на консультацию к специалисту.
-                    Скоро с вами свяжется специалист по методу связи, который вы указали. </SubmitMessage> </PopupModal>
+                    Скоро с вами свяжется специалист по методу связи, который вы указали. </SubmitMessage> </Dialog>
 
                 <FrameTitle id="reviews">Отзывы</FrameTitle>
 

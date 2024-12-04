@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {Cookie} from "@/shared/enums/cookie";
 import {NameInput, StarRatingInput, TextInput} from "@/shared/componetns/shared/forms/Inputs";
-import {ButtonMaster, SubmitMessage} from "@/shared/componetns/ui";
+import {Button, SubmitMessage} from "@/shared/componetns/ui";
 
 interface ReviewFormProps {
     setIsSuccess: (isSuccess: boolean) => void;
@@ -72,7 +72,7 @@ export function ReviewForm(props: ReviewFormProps) {
                             />
                         </div>
                     </div>
-                    <ButtonMaster className={styles.button} type="submit">Оставить отзыв</ButtonMaster>
+                    <Button className={styles.submitButton} type="submit">Оставить отзыв</Button>
                 </form>
             ) : (!isCookies ? (
                     <SubmitMessage title="Вы успешно оставили отзыв!">Спасибо за отзыв! Мы очень ценим

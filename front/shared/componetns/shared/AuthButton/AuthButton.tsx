@@ -2,7 +2,7 @@
 
 import {AuthForm} from "@/shared/componetns/shared/forms/Forms";
 import {useState} from "react";
-import {PopupModal} from "@/shared/componetns/shared";
+import {Dialog} from "@/shared/componetns/shared";
 import {LogIn} from "lucide-react";
 
 export function AuthButton() {
@@ -11,8 +11,8 @@ export function AuthButton() {
     return (
         <>
             <LogIn onClick={() => setIsOpen(!isOpen)} width={24}/>
-            {isOpen && <PopupModal isOpen={isOpen}
-                                   setIsOpen={setIsOpen} title="Авторизация"><AuthForm/></PopupModal> }
+            {isOpen && <Dialog isOpen={isOpen}
+                               setIsOpen={setIsOpen} title="Авторизация"><AuthForm/></Dialog> }
         </>
     );
 }
