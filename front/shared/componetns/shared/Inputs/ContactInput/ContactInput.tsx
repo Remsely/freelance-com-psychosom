@@ -90,7 +90,7 @@ export function ContactInput(props: ContactInputProps) {
                 maxLength={isTelegram ? 32 : 18}
                 minLength={5}
                 value={isTelegram ? contactValue : '+7 ' + contactValue}
-                {...props.register(isTelegram ? "telegram" : "phone", {
+                {...props.register("contact", {
                     required: "Это поле обязательное",
                     pattern: {
                         value: isTelegram
@@ -98,7 +98,7 @@ export function ContactInput(props: ContactInputProps) {
                             : phonePattern,
                         message: isTelegram
                             ? "В Telegram допустимы только латинские буквы и цифры, не менее 5 символов"
-                            : "Номер телефона должен быть в формате +7 или 8 (XXX) XXX-XX-XX",
+                            : "Номер телефона должен быть в формате +7 (XXX) XXX-XX-XX",
                     },
                     onChange: handleChange,
                 })}
