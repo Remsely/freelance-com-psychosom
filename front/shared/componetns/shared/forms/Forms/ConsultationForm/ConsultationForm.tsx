@@ -28,10 +28,12 @@ export function ConsultationForm(props: ConsultationFormProps) {
         }
     }, []);
 
-    const onSubmit: SubmitHandler<FieldValues> = (data: object) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
         console.log(data);
         props.setIsOpen(true);
-
+        if (data.phone) {
+            data.phone = data.phone.replace(/[^0-9]/g, "");
+        }
         setIsSubmitted(true);
         Cookies.set(Cookie.consultationFormSubmitted, 'true', {expires: 1});
 
