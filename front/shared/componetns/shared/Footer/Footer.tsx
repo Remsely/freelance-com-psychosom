@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss"
-import {Navbar} from "@/shared/componetns/ui";
+import {Navbar} from "@/shared/componetns/shared";
 import {ContactsItem} from "./ContactsItem/ContactsItem";
 
 export function Footer() {

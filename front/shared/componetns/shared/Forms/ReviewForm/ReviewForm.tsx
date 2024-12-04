@@ -5,8 +5,9 @@ import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {Cookie} from "@/shared/enums/cookie";
-import {NameInput, StarRatingInput, TextInput} from "@/shared/componetns/shared/forms/Inputs";
-import {Button, SubmitMessage} from "@/shared/componetns/ui";
+import {NameInput, StarRatingInput, TextInput} from "@/shared/componetns/shared/Inputs";
+import {Button} from "@/shared/componetns/ui";
+import {SubmitMessage} from "@/shared/componetns/shared";
 
 interface ReviewFormProps {
     setIsSuccess: (isSuccess: boolean) => void;

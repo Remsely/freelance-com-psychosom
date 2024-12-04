@@ -2,9 +2,9 @@
 
 import {useState} from "react";
 import styles from "./MentorInfo.module.scss";
-import {HighlightInfo, PhotoMentorInfo, TextMentorInfo} from "@/shared/componetns/shared/MentorInfo/index";
+import {HighlightInfo, PhotoMentorInfo, TextMentorInfo} from "@/shared/componetns/shared/MentorInfo";
 import Image from "next/image";
-import {Dialog} from "@/shared/componetns/shared";
+import {Dialog} from "@/shared/componetns/ui";
 
 export function MentorInfo() {
     const [isOpenCertificate, setIsOpenCertificate] = useState(false)

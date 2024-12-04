@@ -1,4 +1,4 @@
-import {ContactInput, PasswordInput} from "@/shared/componetns/shared/forms/Inputs";
+import {ContactInput, PasswordInput} from "@/shared/componetns/shared/Inputs";
 import {FieldError, useForm} from "react-hook-form";
 import {Button} from "@/shared/componetns/ui";
 import styles from "./AuthForm.module.scss"
