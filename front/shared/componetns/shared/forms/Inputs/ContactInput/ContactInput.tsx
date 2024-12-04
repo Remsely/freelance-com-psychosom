@@ -90,7 +90,7 @@ export function ContactInput(props: ContactInputProps) {
                 maxLength={isTelegram ? 32 : 18}
                 minLength={5}
                 value={isTelegram ? contactValue : '+7 ' + contactValue}
-                {...props.register("contact", {
+                {...props.register(isTelegram ? "telegram" : "phone", {
                     required: "Это поле обязательное",
                     pattern: {
                         value: isTelegram
