@@ -2,7 +2,7 @@ import type {Metadata} from "next";
 import {Manrope} from 'next/font/google';
 import {ReactNode} from "react";
 import "@/shared/styles/index.scss"
-import {Footer, Header} from "@/shared/componetns/shared";
+import {Footer, Header, Providers} from "@/shared/componetns/shared";
 
 const manrope = Manrope({
     subsets: ['cyrillic'],
@@ -17,11 +17,13 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: Readonly<{ children: ReactNode }>) {
     return (
         <html lang="ru">
-            <body className={`${manrope.variable} wrapper`}>
-                <Header/>
-                    {children}
-                <Footer/>
-            </body>
+        <body className={`${manrope.variable} wrapper`}>
+        <Providers>
+            <Header/>
+            {children}
+            <Footer/>
+        </Providers>
+        </body>
         </html>
     );
 }
