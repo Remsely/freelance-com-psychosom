@@ -8,3 +8,4 @@ export {ReviewCard} from "./ReviewCard/ReviewCard";
 export {ReviewButton} from "./ReviewButton/ReviewButton";
 export {SubmitMessage} from "./SubmitMessages/SubmitMessage"
 export {AuthButton} from "./AuthButton/AuthButton";
+export { Providers } from "./providers";
