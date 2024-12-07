@@ -12,16 +12,20 @@ export function MentorInfo() {
     return (
         <main className={styles.main}>
             <div className={styles.description}>
-                <TextMentorInfo>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
-                    текста Продолжается много текста Продолжается много текста Продолжается много текста
-                    Продолжается много текста Продолжается много текста Продолжается много текста</TextMentorInfo>
-                <HighlightInfo>Блок важное (сноска/заметка) со ссылкой на инфу о психосоматике</HighlightInfo>
-                <TextMentorInfo>Продолжается много текста Продолжается много текста Продолжается много текста Продолжается много
-                    текста Продолжается много текста Продолжается много текста Продолжается много текста
-                    Продолжается много текста Продолжается много текста Продолжается много текста</TextMentorInfo>
-                <HighlightInfo onLinkClick={() => setIsOpenCertificate(true)}><a id='important-link'>Инфа о дипломе</a> кнопка,
-                    открывающая модальное окно с файлом диплома</HighlightInfo>
-                <Dialog isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate} > <Image src="/certificate.jpg" alt="" width={533} height={750}/> </Dialog>
+                <TextMentorInfo>Добро пожаловать! Меня зовут [Имя специалиста], и я специализируюсь на психосоматике —
+                    области, которая помогает понять, как наши мысли и эмоции влияют на тело. Мой подход основан на
+                    многолетнем опыте работы и личных исследованиях, которые я провожу, чтобы найти индивидуальное
+                    решение для каждого клиента.</TextMentorInfo>
+                <HighlightInfo>Если вас беспокоят хронические симптомы, которые сложно объяснить медицинскими причинами,
+                    психосоматика может стать ключом к разгадке.</HighlightInfo>
+                <TextMentorInfo>На протяжении своей практики я помог 20 клиентам в течении 2-х лет людям избавиться от
+                    внутренних блоков, восстановить баланс и обрести гармонию. Имею диплом в высшем образовании
+                    Института Психосоматики.</TextMentorInfo>
+                <HighlightInfo onLinkClick={() => setIsOpenCertificate(true)}><a id='important-link'>Диплом</a>
+                    : нажмите, чтобы открыть модальное окно и ознакомиться с моим дипломом.</HighlightInfo>
+                <Dialog isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate}> <Image src="/certificate.jpg"
+                                                                                            alt="" width={533}
+                                                                                            height={750}/> </Dialog>
             </div>
             <PhotoMentorInfo>specialist.jpg</PhotoMentorInfo>
         </main>
