@@ -1,5 +1,10 @@
 @use "@/shared/styles/variables" as *;
 
-img {
+.svg {
+    stroke: $title-font-color;
     cursor: pointer;
+
+    &:hover {
+        stroke: $title-hover-color;
+    }
 }

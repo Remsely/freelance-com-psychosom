@@ -8,14 +8,12 @@ import {Cookie} from "@/shared/enums/cookie";
 import {NameInput, StarRatingInput, TextInput} from "@/shared/componetns/shared/Inputs";
 import {Button} from "@/shared/componetns/ui";
 import {SubmitMessage} from "@/shared/componetns/shared";
+import useDialogStore from "@/shared/componetns/stores/dialogStore";
 
-interface ReviewFormProps {
-    setIsSuccess: (isSuccess: boolean) => void;
-}
-
-export function ReviewForm(props: ReviewFormProps) {
+export function ReviewForm() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [isCookies, setIsCookies] = useState<boolean>(false);
+    const setTitle = useDialogStore((state) => state.setTitle);
 
     const {register, handleSubmit, reset, formState: {errors}, clearErrors, setValue} = useForm({
         mode: "onBlur",
@@ -26,15 +24,15 @@ export function ReviewForm(props: ReviewFormProps) {
         if (formSubmitted === 'true') {
             setIsSubmitted(true);
             setIsCookies(true);
-            props.setIsSuccess(true);
+            setTitle("")
         }
-    }, []);
+    }, [setTitle]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data: object) => {
         console.log(data);
-        props.setIsSuccess(true);
         setIsSubmitted(true);
         Cookies.set(Cookie.reviewFormSubmitted, "true", {expires: 1});
+        setTitle("")
         reset();
     };
 

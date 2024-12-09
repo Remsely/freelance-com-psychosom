@@ -52,7 +52,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
         ) : (
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
-                <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
+                <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                     <div className={`${styles.leftColumn} ${styles.block}`}>
                         <div className={styles.inputs}>
                             <NameInput
