@@ -8,7 +8,7 @@ import {Cookie} from "@/shared/enums/cookie";
 import {NameInput, StarRatingInput, TextInput} from "@/shared/componetns/shared/Inputs";
 import {Button} from "@/shared/componetns/ui";
 import {SubmitMessage} from "@/shared/componetns/shared";
-import useDialogStore from "@/shared/componetns/stores/dialogStore";
+import useDialogStore from "@/shared/stores/dialogStore";
 
 export function ReviewForm() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);

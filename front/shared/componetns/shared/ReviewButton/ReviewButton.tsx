@@ -4,7 +4,7 @@ import styles from "./ReviewButton.module.scss"
 import {useEffect, useState} from "react";
 import {Button, Dialog} from "@/shared/componetns/ui";
 import {ReviewForm} from "@/shared/componetns/shared/Forms";
-import useDialogStore from "@/shared/componetns/stores/dialogStore";
+import useDialogStore from "@/shared/stores/dialogStore";
 
 export function ReviewButton() {
     const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);

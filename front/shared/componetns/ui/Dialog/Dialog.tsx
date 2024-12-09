@@ -2,7 +2,7 @@ import {Dialog as DialogBlock, DialogPanel, DialogTitle} from "@headlessui/react
 import styles from "./Dialog.module.scss"
 import {CloseDialogButton} from "./CloseDialogButton/CloseDialogButton";
 import {ReactNode} from "react";
-import useDialogStore from "@/shared/componetns/stores/dialogStore";
+import useDialogStore from "@/shared/stores/dialogStore";
 
 interface DialogProps {
     isOpen: boolean
