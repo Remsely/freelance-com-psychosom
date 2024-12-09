@@ -3,8 +3,15 @@
 import styles from "./PasswordInput.module.scss"
 import {useState} from "react";
 import {Eye, EyeOff} from "lucide-react";
+import {FieldError, FieldValues, UseFormRegister} from "react-hook-form";
 
-export function PasswordInput() {
+interface PasswordInputProps {
+    register: UseFormRegister<FieldValues>;
+    errors: Record<string, FieldError | undefined>;
+    mode?: string;
+}
+
+export function PasswordInput(props: PasswordInputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     const toggleShowPassword = () => {
@@ -14,9 +21,16 @@ export function PasswordInput() {
     return (
         <>
             <div className={styles.row}>
-                <h2 className={styles.title}>Пароль</h2>
+                <h2 className={styles.title}>{props.mode === "again" ? "Повторите пароль" : "Пароль"}</h2>
                 <div className={styles.input}>
-                    <input type={showPassword ? "text" : "password"}/>
+                    <input type={showPassword ? "text" : "password"} {...props.register("password", {
+                        required: "Это поле обязательное",
+                        pattern: {
+                            value: /^.{8,}$/,
+                            message: "Пароль должен быть не менее 8 символов",
+                        },
+                    })}/>
+                    {props.errors.password && <p className={styles.error}>{props.errors.password.message}</p>}
                     <i className={styles.eye} onClick={toggleShowPassword}>
                         {showPassword ?
                             <EyeOff/> :

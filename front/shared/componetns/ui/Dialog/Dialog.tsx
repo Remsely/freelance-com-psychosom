@@ -1,24 +1,25 @@
 import {Dialog as DialogBlock, DialogPanel, DialogTitle} from "@headlessui/react";
 import styles from "./Dialog.module.scss"
-import {CloseDialogButton} from "./CloseModalButton/CloseDialogButton";
+import {CloseDialogButton} from "./CloseDialogButton/CloseDialogButton";
 import {ReactNode} from "react";
+import useDialogStore from "@/shared/componetns/stores/dialogStore";
 
 interface DialogProps {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void;
-    title?: string;
     children?: string | ReactNode;
-    isSuccessSubmitForm?: boolean
 }
 
 export function Dialog(props: DialogProps) {
+    const { title } = useDialogStore();
+
     return (
         <DialogBlock open={props.isOpen} onClose={() => props.setIsOpen(false)} className={styles.dialog}>
             <div className={styles.background}>
                 <DialogPanel className={styles.panel}>
-                    {props.title && !props.isSuccessSubmitForm &&
+                    {title &&
                         <div className={styles.header}>
-                            <DialogTitle className={styles.title}>{props.title}</DialogTitle>
+                            <DialogTitle className={styles.title}>{title}</DialogTitle>
                         </div>
                     }
                     <CloseDialogButton setIsOpen={props.setIsOpen}/>
