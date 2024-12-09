@@ -4,7 +4,7 @@ import {Button} from "@/shared/componetns/ui";
 import styles from "./AuthForm.module.scss"
 import {toast} from "react-hot-toast";
 import {useState} from "react";
-import useDialogStore from "@/shared/componetns/stores/dialogStore";
+import useDialogStore from "@/shared/stores/dialogStore";
 
 // const socket = io("http://localhost:4000");
 

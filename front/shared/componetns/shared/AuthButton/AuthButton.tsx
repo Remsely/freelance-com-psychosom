@@ -5,7 +5,7 @@ import {AuthForm} from "@/shared/componetns/shared/Forms";
 import {useState} from "react";
 import {Dialog} from "@/shared/componetns/ui";
 import {LogIn} from "lucide-react";
-import useDialogStore from "@/shared/componetns/stores/dialogStore";
+import useDialogStore from "@/shared/stores/dialogStore";
 
 export function AuthButton() {
     const [isOpen, setIsOpen] = useState(false);
