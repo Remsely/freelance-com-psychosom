@@ -9,7 +9,7 @@ import useDialogStore from "@/shared/stores/dialogStore";
 // const socket = io("http://localhost:4000");
 
 export function AuthForm() {
-    const {register, formState: {errors}, clearErrors, handleSubmit} = useForm({
+    const {register, formState: {errors}, clearErrors, handleSubmit, watch} = useForm({
         mode: "onBlur",
     });
     const [qrLink, setQrLink] = useState<string | null>(null);
@@ -72,9 +72,9 @@ export function AuthForm() {
                         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                             <div className={styles.inputs}>
                                 <ContactInput register={register} clearErrors={clearErrors} errors={errors as Record<string, FieldError | undefined>}/>
-                                <PasswordInput register={register} errors={errors as Record<string, FieldError | undefined>}/>
+                                <PasswordInput register={register} errors={errors as Record<string, FieldError | undefined>} watch={watch}/>
                                 {mode === "register" && (
-                                    <PasswordInput register={register} errors={errors as Record<string, FieldError | undefined>} mode="again"/>
+                                    <PasswordInput register={register} errors={errors as Record<string, FieldError | undefined>} watch={watch} mode="again"/>
                                 )}
                             </div>
                             <Button type="submit" className={styles.button}>{
