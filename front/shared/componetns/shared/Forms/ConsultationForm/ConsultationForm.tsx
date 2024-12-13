@@ -8,6 +8,9 @@ import {Button} from "@/shared/componetns/ui";
 import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/Inputs";
 import {Cookie} from "@/shared/enums/cookie";
 import {FrameTitle, SubmitMessage} from "@/shared/componetns/shared";
+import {useSession} from "next-auth/react";
+import {toast} from "react-hot-toast";
+import {CircleAlert} from "lucide-react";
 
 interface ConsultationFormProps {
     setIsOpen: (isOpen: boolean) => void;
@@ -15,6 +18,7 @@ interface ConsultationFormProps {
 }
 
 export function ConsultationForm(props: ConsultationFormProps) {
+    const {data: session} = useSession();
     const {register, handleSubmit, reset, formState: {errors}, clearErrors} = useForm({
         mode: "onBlur",
     });
@@ -30,16 +34,24 @@ export function ConsultationForm(props: ConsultationFormProps) {
     }, []);
 
     const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-        console.log(data);
-        props.setIsOpen(true);
-        if (data.phone) {
-            data.phone = data.phone.replace(/[^0-9]/g, "");
+        if (session) {
+            if (data.phone) {
+                data.phone = data.phone.replace(/[^0-9]/g, "");
+            }
+            console.log(data);
+            props.setIsOpen(true);
+            setIsSubmitted(true);
+            Cookies.set(Cookie.consultationFormSubmitted, 'true', {expires: 1});
+            reset();
+            setContactValue("");
+        } else {
+            props.setIsOpen(true);
+            toast("Прежде чем записаться к консультанту, пожалуйста, войдите в аккаунт", {
+                icon: <CircleAlert />,
+                duration: 3000,
+                className: styles.toast
+            })
         }
-        setIsSubmitted(true);
-        Cookies.set(Cookie.consultationFormSubmitted, 'true', {expires: 1});
-
-        reset();
-        setContactValue("");
     };
 
     return (
@@ -52,43 +64,45 @@ export function ConsultationForm(props: ConsultationFormProps) {
         ) : (
             <>
                 <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
-                <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                    <div className={`${styles.leftColumn} ${styles.block}`}>
-                        <div className={styles.inputs}>
-                            <NameInput
-                                label="Имя"
-                                name="firstname"
-                                register={register}
-                                errors={errors as Record<string, FieldError | undefined>}
-                                clearErrors={clearErrors}
-                            />
-                            <NameInput
-                                label="Фамилия"
-                                name="lastname"
-                                register={register}
-                                errors={errors as Record<string, FieldError | undefined>}
-                                clearErrors={clearErrors}
-                            />
-                            <ContactInput
-                                contactValue={contactValue}
-                                setContactValue={setContactValue}
-                                register={register}
-                                errors={errors as Record<string, FieldError | undefined>}
-                                clearErrors={clearErrors}
-                            />
+                <div className={styles.formWrapper}>
+                    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                        <div className={`${styles.leftColumn} ${styles.block}`}>
+                            <div className={styles.inputs}>
+                                <NameInput
+                                    label="Имя"
+                                    name="firstname"
+                                    register={register}
+                                    errors={errors as Record<string, FieldError | undefined>}
+                                    clearErrors={clearErrors}
+                                />
+                                <NameInput
+                                    label="Фамилия"
+                                    name="lastname"
+                                    register={register}
+                                    errors={errors as Record<string, FieldError | undefined>}
+                                    clearErrors={clearErrors}
+                                />
+                                <ContactInput
+                                    contactValue={contactValue}
+                                    setContactValue={setContactValue}
+                                    register={register}
+                                    errors={errors as Record<string, FieldError | undefined>}
+                                    clearErrors={clearErrors}
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className={`${styles.textarea} ${styles.block}`}>
-                        <TextInput
-                            label="Опишите свою проблему"
-                            name="message"
-                            register={register}
-                            errors={errors as Record<string, FieldError | undefined>}
-                        />
-                        <Button className={styles.buttonForm} type="submit">Записаться</Button>
-                    </div>
-                </form>
+                        <div className={`${styles.textarea} ${styles.block}`}>
+                            <TextInput
+                                label="Опишите свою проблему"
+                                name="message"
+                                register={register}
+                                errors={errors as Record<string, FieldError | undefined>}
+                            />
+                            <Button className={styles.buttonForm} type="submit">Записаться</Button>
+                        </div>
+                    </form>
+                </div>
             </>
         )
     );

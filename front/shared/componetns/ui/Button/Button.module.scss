@@ -14,4 +14,8 @@
     &:hover {
         background-color: $button-hover-color;
     }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }

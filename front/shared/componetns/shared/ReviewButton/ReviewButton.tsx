@@ -8,20 +8,18 @@ import useDialogStore from "@/shared/stores/dialogStore";
 
 export function ReviewButton() {
     const [isOpenReviewModalForm, setIsOpenReviewModalForm] = useState(false);
-
+    const setTitle = useDialogStore((state) => state.setTitle);
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         if (params.get('review') === 'true') {
             setIsOpenReviewModalForm(true);
         }
-    }, []);
-
-    const setTitle = useDialogStore((state) => state.setTitle);
-    if (isOpenReviewModalForm) {
-        setTitle("Оставить отзыв")
-    } else {
-        setTitle("")
-    }
+        if (isOpenReviewModalForm) {
+            setTitle("Оставить отзыв")
+        } else {
+            setTitle("")
+        }
+    }, [isOpenReviewModalForm, setTitle]);
 
     return (
         <>

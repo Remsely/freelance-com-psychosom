@@ -13,15 +13,43 @@
     background: inherit;
     border: 1px solid $title-font-color;
 
+    /* FOR DEV */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        margin-right: 5px;
+        stroke: $title-font-color;
+    }
+
+    /* FOR DEV */
+
     &:hover {
         border: 1px solid $button-hover-color;
+    }
+}
+
+.paragraph {
+    font-size: 18px;
+    font-weight: $font-weight-subtitle;
+    text-align: center;
+
+    .switchMode {
+        color: $title-font-color;
+        font-weight: $font-weight-subtitle;
+
+        &:hover {
+            color: $title-hover-color;
+        }
     }
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    width: 330px;
+    margin: 0 auto;
+    width: 340px;
     gap: 10px;
 
     .inputs {
