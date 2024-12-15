@@ -24,6 +24,8 @@ dependencies {
     implementation(project(Modules.db))
     implementation(project(Modules.security))
     implementation(project(Modules.telegram))
+    implementation(project(Modules.monitoring))
+    implementation(project(Modules.scheduled))
 
     implementation(Libs.spring_boot_starter_security)
     implementation(Libs.spring_boot_starter_oauth2_resource_server)

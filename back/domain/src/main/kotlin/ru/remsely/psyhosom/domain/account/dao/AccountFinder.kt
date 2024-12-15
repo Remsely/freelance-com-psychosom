@@ -11,6 +11,8 @@ interface AccountFinder {
     fun findAccountById(id: Long): Either<DomainError, Account>
 
     fun findAccountByTgBotToken(tgBotToken: TelegramBotToken): Either<DomainError, Account>
+
+    fun findOutdatedAccounts(): List<Account>
 }
 
 sealed class AccountFindingError(override val message: String) : DomainError.ValidationError {

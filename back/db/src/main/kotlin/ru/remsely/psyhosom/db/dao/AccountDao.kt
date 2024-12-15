@@ -15,15 +15,18 @@ import ru.remsely.psyhosom.db.repository.AccountRepository
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.*
 import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.profile.dao.ProfileEraser
 import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
 import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.monitoring.log.logger
+import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Component
 open class AccountDao(
-    private val accountRepository: AccountRepository
-) : AccountCreator, AccountFinder, AccountUpdater {
+    private val accountRepository: AccountRepository,
+    private val profileEraser: ProfileEraser
+) : AccountCreator, AccountFinder, AccountUpdater, AccountEraser {
     private val log = logger()
 
     @Transactional
@@ -76,6 +79,16 @@ open class AccountDao(
                 }
             )
 
+    @Transactional(readOnly = true)
+    override fun findOutdatedAccounts(): List<Account> =
+        LocalDateTime.now().minusMinutes(5)
+            .let { outdatedDate ->
+                accountRepository.findOutdatedAccounts(outdatedDate)
+                    .map { it.toDomain() }
+            }.also {
+                log.info("Found ${it.size} outdated accounts.")
+            }
+
     @Transactional
     override fun confirmAccount(id: Long, tgChatId: TelegramChatId): Either<DomainError, Account> =
         findAccountById(id).fold(
@@ -91,4 +104,14 @@ open class AccountDao(
                 }
             }
         )
+
+    @Transactional
+    override fun eraseAccountsByIds(ids: List<Long>): Either<DomainError, Unit> =
+        profileEraser.eraseProfilesByAccountIds(ids)
+            .let {
+                accountRepository.deleteAllById(ids).right()
+            }
+            .also {
+                log.info("Accounts by id list with size ${ids.size} successfully deleted from DB.")
+            }
 }

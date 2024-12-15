@@ -10,7 +10,7 @@ interface AccountUpdater {
 }
 
 sealed class AccountUpdatingError(override val message: String) : DomainError.ValidationError {
-    data class NotFoundById(private val id: Long) : AccountFindingError(
+    data class NotFoundById(private val id: Long) : AccountUpdatingError(
         "User with id $id not found."
     )
 }

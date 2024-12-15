@@ -24,7 +24,15 @@ class WebSocketSessionManager : WebSocketAccountConfirmationNotifier {
 
     override fun sendNotification(token: TelegramBotToken, status: WebSocketAccountConfirmationNotifier.Status) {
         val jsonMessage = """{"token": "${token.value}", "status": "$status"}"""
-        sessions[token.value]!!.sendMessage(TextMessage(jsonMessage))
-        log.info("Notification for token ${token.value} successfully sent.")
+
+        val session = sessions[token.value]
+
+        if (session != null) {
+            session.sendMessage(TextMessage(jsonMessage))
+            session.close()
+            log.info("Notification for token ${token.value} successfully sent.")
+        } else {
+            log.warn("Session for token ${token.value} not found.")
+        }
     }
 }

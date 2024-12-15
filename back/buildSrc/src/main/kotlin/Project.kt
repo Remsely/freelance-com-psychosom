@@ -12,4 +12,5 @@ object Modules {
     const val security = ":security"
     const val monitoring = ":monitoring"
     const val telegram = ":telegram"
+    const val scheduled = ":scheduled"
 }
