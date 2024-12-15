@@ -42,7 +42,6 @@ class UpdateProfileCommandImpl(
                             (user to it).right()
                         }
                     )
-
             }
             .flatMap { (user, profile) ->
                 profileUpdater.updateProfile(
