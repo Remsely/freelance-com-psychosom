@@ -1,5 +1,6 @@
 package ru.remsely.psyhosom.telegram.command
 
+import arrow.core.getOrElse
 import arrow.core.raise.either
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand
@@ -12,11 +13,13 @@ import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.telegram.BotMessageSender
 import ru.remsely.psyhosom.usecase.auth.AccountConfirmationError
 import ru.remsely.psyhosom.usecase.auth.ConfirmAccountCommand
+import ru.remsely.psyhosom.usecase.auth.WebSocketAccountConfirmationNotifier
 
 @Component
-class StartCommand(
+open class StartCommand(
     private val botMessageSender: BotMessageSender,
-    private val confirmAccountCommand: ConfirmAccountCommand
+    private val confirmAccountCommand: ConfirmAccountCommand,
+    private val accountConfirmationNotifier: WebSocketAccountConfirmationNotifier
 ) : BotCommand(
     Command.START.value, "Начать"
 ) {
@@ -26,13 +29,7 @@ class StartCommand(
         log.info("Command ${Command.START.value} was executed in chat ${chat.id} with args: $args")
 
         if (args.isNullOrEmpty() || args.size != 1) {
-            absSender.execute(
-                botMessageSender.sendMessage(
-                    chat.id.toString(),
-                    "При выполнении команды ${Command.START.value} произошла ошибка. " +
-                            "Убедитесь, что вы переходили по ссылке, указанной на сайте."
-                )
-            )
+            sendWrongFormatError(absSender, chat)
             return
         }
 
@@ -46,25 +43,22 @@ class StartCommand(
         }.fold(
             {
                 if (it is AccountConfirmationError.ConfirmationAttemptIsOutdated) {
-                    absSender.execute(
-                        botMessageSender.sendMessage(
-                            chat.id.toString(),
-                            "Время подтверждения аккаунта вышло. Попробуйте зарегистрироваться снова."
-                        )
-                    )
+                    sendOutdatedError(absSender, chat)
                 } else {
-                    absSender.execute(
-                        botMessageSender.sendMessage(
-                            chat.id.toString(),
-                            "При выполнении команды произошла ошибка. Попробуйте позже."
-                        )
-                    )
+                    sendUnknownError(absSender, chat)
                 }
                 log.warn("Error while executing command ${Command.START.value} in chat ${chat.id} with args: $args.")
-
             },
             {
                 log.info("Command ${Command.START.value} successfully executed in chat ${chat.id} with args: $args.")
+
+                runCatching {
+                    accountConfirmationNotifier.sendNotification(
+                        token = TelegramBotToken(token).getOrElse { throw RuntimeException("Invalid token.") },
+                        status = WebSocketAccountConfirmationNotifier.Status.CONFIRMED
+                    )
+                }
+
                 absSender.execute(
                     botMessageSender.sendMessage(
                         chat.id.toString(),
@@ -72,6 +66,34 @@ class StartCommand(
                     )
                 )
             }
+        )
+    }
+
+    private fun sendUnknownError(absSender: AbsSender, chat: Chat) {
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chat.id.toString(),
+                "При выполнении команды произошла ошибка. Попробуйте позже."
+            )
+        )
+    }
+
+    private fun sendWrongFormatError(absSender: AbsSender, chat: Chat) {
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chat.id.toString(),
+                "При выполнении команды ${Command.START.value} произошла ошибка. " +
+                        "Убедитесь, что вы переходили по ссылке, указанной на сайте."
+            )
+        )
+    }
+
+    private fun sendOutdatedError(absSender: AbsSender, chat: Chat) {
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chat.id.toString(),
+                "Время подтверждения аккаунта вышло. Попробуйте зарегистрироваться снова."
+            )
         )
     }
 }
