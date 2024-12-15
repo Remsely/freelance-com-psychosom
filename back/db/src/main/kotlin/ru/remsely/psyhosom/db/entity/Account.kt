@@ -2,6 +2,7 @@ package ru.remsely.psyhosom.db.entity
 
 import jakarta.persistence.*
 import ru.remsely.psyhosom.domain.account.Account
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "account")
@@ -24,5 +25,11 @@ data class Account(
     val isConfirmed: Boolean,
 
     @Column(name = "tg_bot_token", nullable = false, unique = true)
-    val tgBotToken: String
+    val tgBotToken: String,
+
+    @Column(name = "tg_chat_id", nullable = true)
+    val tgChatId: Long?,
+
+    @Column(name = "registration_dttm", nullable = false)
+    val registrationDate: LocalDateTime
 )

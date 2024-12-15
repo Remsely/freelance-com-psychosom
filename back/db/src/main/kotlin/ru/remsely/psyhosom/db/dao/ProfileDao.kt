@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.db.extensions.toDomain
 import ru.remsely.psyhosom.db.extensions.toEntity
 import ru.remsely.psyhosom.db.repository.ProfileRepository
-import ru.remsely.psyhosom.domain.account.dao.ProfileFinder
-import ru.remsely.psyhosom.domain.account.dao.UserProfileFindingError
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.profile.Profile
 import ru.remsely.psyhosom.domain.profile.dao.ProfileCreator
+import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.profile.dao.ProfileUpdater
+import ru.remsely.psyhosom.domain.profile.dao.UserProfileFindingError
 import ru.remsely.psyhosom.monitoring.log.logger
 
 @Component

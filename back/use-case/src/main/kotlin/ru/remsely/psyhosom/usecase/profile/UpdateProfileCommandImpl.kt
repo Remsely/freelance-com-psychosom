@@ -9,9 +9,9 @@ import arrow.core.right
 import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.AccountFinder
-import ru.remsely.psyhosom.domain.account.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.profile.Profile
+import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.profile.dao.ProfileUpdater
 import ru.remsely.psyhosom.domain.profile.event.UpdateProfileEvent
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
@@ -27,7 +27,7 @@ class UpdateProfileCommandImpl(
     private val log = logger()
 
     override fun execute(event: UpdateProfileEvent): Either<DomainError, Profile> =
-        accountFinder.findUserById(event.accountId)
+        accountFinder.findAccountById(event.accountId)
             .flatMap {
                 validatePossibleUsernameChange(event, it)
             }

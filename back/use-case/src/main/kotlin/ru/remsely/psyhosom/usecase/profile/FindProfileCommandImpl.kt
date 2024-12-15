@@ -4,9 +4,9 @@ import arrow.core.Either
 import arrow.core.flatMap
 import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.domain.account.dao.AccountFinder
-import ru.remsely.psyhosom.domain.account.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.profile.Profile
+import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
 import ru.remsely.psyhosom.monitoring.log.logger
 
 @Component
@@ -17,7 +17,7 @@ class FindProfileCommandImpl(
     private val log = logger()
 
     override fun execute(userId: Long): Either<DomainError, Profile> =
-        accountFinder.findUserById(userId)
+        accountFinder.findAccountById(userId)
             .flatMap {
                 profileFinder.findProfileByUserId(userId)
             }.also {

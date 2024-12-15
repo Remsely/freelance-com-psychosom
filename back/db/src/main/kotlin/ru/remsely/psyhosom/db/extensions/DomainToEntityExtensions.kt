@@ -11,7 +11,9 @@ fun DomainAccount.toEntity() = Account(
     password = password,
     role = role,
     isConfirmed = isConfirmed,
-    tgBotToken = tgBotToken.value
+    tgBotToken = tgBotToken.value,
+    tgChatId = tgChatId.value,
+    registrationDate = registrationDate
 )
 
 fun DomainProfile.toEntity() = Profile(

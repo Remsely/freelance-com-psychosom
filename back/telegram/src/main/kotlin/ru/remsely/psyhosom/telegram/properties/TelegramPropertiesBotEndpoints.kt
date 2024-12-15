@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component
 
 @Component
 @ConfigurationProperties(prefix = "telegram.bot.endpoints")
-class TelegramBotEndpoints {
+class TelegramPropertiesBotEndpoints {
     lateinit var confirmation: String
 }

@@ -9,9 +9,9 @@ import ru.remsely.psyhosom.api.request.UpdateProfileRequest
 import ru.remsely.psyhosom.api.response.ErrorResponse
 import ru.remsely.psyhosom.api.response.toResponse
 import ru.remsely.psyhosom.api.utils.AuthUserId
-import ru.remsely.psyhosom.domain.account.dao.UserFindingError
-import ru.remsely.psyhosom.domain.account.dao.UserProfileFindingError
+import ru.remsely.psyhosom.domain.account.dao.AccountFindingError
 import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.profile.dao.UserProfileFindingError
 import ru.remsely.psyhosom.domain.profile.event.UpdateProfileEvent
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.PhoneNumberValidationError
@@ -19,8 +19,8 @@ import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.domain.value_object.TelegramUsernameValidationError
 import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.usecase.profile.FindProfileCommand
-import ru.remsely.psyhosom.usecase.profile.UpdateProfileCommand
 import ru.remsely.psyhosom.usecase.profile.ProfileUpdateError
+import ru.remsely.psyhosom.usecase.profile.UpdateProfileCommand
 import java.time.LocalDateTime
 
 @RestController
@@ -73,7 +73,7 @@ class ProfileController(
             is PhoneNumberValidationError.InvalidPhoneNumber -> HttpStatus.BAD_REQUEST
             is TelegramUsernameValidationError.InvalidTelegramUsername -> HttpStatus.BAD_REQUEST
             is ProfileUpdateError.ProfileUsernameMustBeInContacts -> HttpStatus.BAD_REQUEST
-            is UserFindingError.NotFoundById -> HttpStatus.NOT_FOUND
+            is AccountFindingError.NotFoundById -> HttpStatus.NOT_FOUND
             is UserProfileFindingError.NotFoundByUserId -> HttpStatus.NOT_FOUND
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
@@ -82,6 +82,7 @@ class ProfileController(
                 .body(
                     ErrorResponse(
                         message = error.message,
+                        source = error.javaClass.name,
                         timestamp = LocalDateTime.now(),
                         status = it.name
                     )

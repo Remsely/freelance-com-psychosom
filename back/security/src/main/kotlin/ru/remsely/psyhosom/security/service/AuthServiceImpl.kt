@@ -10,21 +10,23 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.AccountCreator
-import ru.remsely.psyhosom.domain.account.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.account.event.LoginAccountEvent
 import ru.remsely.psyhosom.domain.account.event.RegisterAccountEvent
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.profile.Profile
 import ru.remsely.psyhosom.domain.profile.dao.ProfileCreator
+import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
+import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.security.jwt.JwtTokenGenerator
 import ru.remsely.psyhosom.usecase.auth.AuthService
 import ru.remsely.psyhosom.usecase.auth.UserLoginError
 import ru.remsely.psyhosom.usecase.auth.UserRegisterValidationError
-import ru.remsely.psyhosom.usecase.telegram.TelegramBotConfirmation
+import ru.remsely.psyhosom.usecase.telegram.TelegramBotConfirmationUris
+import java.time.LocalDateTime
 
 @Service
 open class AuthServiceImpl(
@@ -34,7 +36,7 @@ open class AuthServiceImpl(
     private val passwordEncoder: PasswordEncoder,
     private val profileCreator: ProfileCreator,
     private val profileFinder: ProfileFinder,
-    private val telegramBotConfirmation: TelegramBotConfirmation
+    private val telegramBotConfirmationUris: TelegramBotConfirmationUris
 ) : AuthService {
     private val log = logger()
 
@@ -54,7 +56,9 @@ open class AuthServiceImpl(
                 password = passwordEncoder.encode(event.password),
                 role = event.role,
                 isConfirmed = false,
-                tgBotToken = TelegramBotToken.generate()
+                tgBotToken = TelegramBotToken.generate(),
+                tgChatId = TelegramChatId(null).bind(),
+                registrationDate = LocalDateTime.now()
             )
         ).bind().let { account ->
             profileCreator.createProfile(
@@ -67,7 +71,7 @@ open class AuthServiceImpl(
                     telegram = TelegramUsername(account.username).getOrNull()
                 )
             ).bind()
-            telegramBotConfirmation.getTelegramConfirmationUri(account.tgBotToken)
+            telegramBotConfirmationUris.getTelegramConfirmationUri(account.tgBotToken)
         }
     }
 

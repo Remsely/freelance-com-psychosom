@@ -14,6 +14,7 @@ import ru.remsely.psyhosom.domain.account.dao.AccountCreationError
 import ru.remsely.psyhosom.domain.account.event.LoginAccountEvent
 import ru.remsely.psyhosom.domain.account.event.RegisterAccountEvent
 import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.profile.dao.UserProfileFindingError
 import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.usecase.auth.AuthService
 import ru.remsely.psyhosom.usecase.auth.UserLoginError
@@ -86,6 +87,7 @@ class AuthController(
         when (error) {
             is AccountCreationError.AlreadyExists -> HttpStatus.BAD_REQUEST
             is UserRegisterValidationError.InvalidUsername -> HttpStatus.BAD_REQUEST
+            is UserProfileFindingError.ProfileWithUsernameAlreadyExists -> HttpStatus.BAD_REQUEST
             is UserLoginError.AuthenticationError -> HttpStatus.UNAUTHORIZED
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
@@ -94,6 +96,7 @@ class AuthController(
                 .body(
                     ErrorResponse(
                         message = error.message,
+                        source = error.javaClass.name,
                         timestamp = LocalDateTime.now(),
                         status = it.name
                     )

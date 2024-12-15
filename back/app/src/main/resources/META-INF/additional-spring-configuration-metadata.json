@@ -8,7 +8,17 @@
     {
       "name": "telegram.bot.endpoints.confirmation",
       "type": "java.lang.String",
-      "description": "Description for telegram.bot.endpoints.confirmation."
+      "description": "Telegram bot user confirmation url."
+    },
+    {
+      "name": "telegram.bot.token",
+      "type": "java.lang.String",
+      "description": "Telegram bot token."
+    },
+    {
+      "name": "telegram.bot.username",
+      "type": "java.lang.String",
+      "description": "Telegram bot username."
     }
   ]
 }

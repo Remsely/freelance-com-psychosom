@@ -13,18 +13,17 @@ import ru.remsely.psyhosom.db.extensions.toDomain
 import ru.remsely.psyhosom.db.extensions.toEntity
 import ru.remsely.psyhosom.db.repository.AccountRepository
 import ru.remsely.psyhosom.domain.account.Account
-import ru.remsely.psyhosom.domain.account.dao.AccountCreator
-import ru.remsely.psyhosom.domain.account.dao.AccountFinder
-import ru.remsely.psyhosom.domain.account.dao.AccountCreationError
-import ru.remsely.psyhosom.domain.account.dao.UserFindingError
+import ru.remsely.psyhosom.domain.account.dao.*
 import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
+import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.monitoring.log.logger
 import kotlin.jvm.optionals.getOrNull
 
 @Component
 open class AccountDao(
     private val accountRepository: AccountRepository
-) : AccountCreator, AccountFinder {
+) : AccountCreator, AccountFinder, AccountUpdater {
     private val log = logger()
 
     @Transactional
@@ -34,33 +33,62 @@ open class AccountDao(
         }
         accountRepository.save(account.toEntity()).toDomain()
             .also {
-                log.info("User with id ${it.id} successfully created in DB.")
+                log.info("Account with id ${it.id} successfully created in DB.")
             }
     }
 
     @Transactional(readOnly = true)
-    override fun findUserByUsername(username: String): Either<DomainError, Account> = either {
+    override fun findAccountByUsername(username: String): Either<DomainError, Account> = either {
         accountRepository.findByUsername(username)
             .let {
-                ensureNotNull(it) { UserFindingError.NotFoundByUsername(username) }
+                ensureNotNull(it) { AccountFindingError.NotFoundByUsername(username) }
                 it.toDomain()
             }
             .also {
-                log.info("User with id ${it.id} successfully found by username in DB.")
+                log.info("Account with id ${it.id} successfully found by username in DB.")
             }
     }
 
     @Transactional(readOnly = true)
-    override fun findUserById(id: Long): Either<DomainError, Account> =
+    override fun findAccountById(id: Long): Either<DomainError, Account> =
         accountRepository.findById(id)
             .getOrNull()
             .toOption()
             .fold(
-                { UserFindingError.NotFoundById(id).left() },
+                { AccountFindingError.NotFoundById(id).left() },
                 {
                     it.toDomain().right().also {
-                        log.info("User with id $id successfully found by id in DB.")
+                        log.info("Account with id $id successfully found by id in DB.")
                     }
                 }
             )
+
+    @Transactional(readOnly = true)
+    override fun findAccountByTgBotToken(tgBotToken: TelegramBotToken): Either<DomainError, Account> =
+        accountRepository.findByTgBotToken(tgBotToken.value)
+            .toOption()
+            .fold(
+                { AccountFindingError.NotFoundByTgBotToken(tgBotToken).left() },
+                {
+                    it.toDomain().right().also {
+                        log.info("Account with token ${tgBotToken.value} successfully found by in DB.")
+                    }
+                }
+            )
+
+    @Transactional
+    override fun confirmAccount(id: Long, tgChatId: TelegramChatId): Either<DomainError, Account> =
+        findAccountById(id).fold(
+            { AccountUpdatingError.NotFoundById(id).left() },
+            {
+                accountRepository.save(
+                    it.toEntity().copy(
+                        isConfirmed = true,
+                        tgChatId = tgChatId.value
+                    )
+                ).toDomain().right().also {
+                    log.info("Account with id $id successfully confirmed in DB.")
+                }
+            }
+        )
 }
