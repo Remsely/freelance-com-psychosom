@@ -11,7 +11,7 @@ import {Github} from "lucide-react";
 // const socket = io("http://localhost:4000");
 
 export function AuthForm() {
-    const {register, formState: {errors}, clearErrors, handleSubmit, watch} = useForm({
+    const {register, formState: {errors}, clearErrors, handleSubmit, watch, reset} = useForm({
         mode: "onBlur",
     });
 
@@ -61,6 +61,7 @@ export function AuthForm() {
 
     const onSwitchMode = () => {
         setMode(mode === 'login' ? 'register' : 'login');
+        reset();
     };
 
     return (
