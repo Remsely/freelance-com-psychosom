@@ -5,17 +5,23 @@ import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.Patient
 
 interface PatientFinder {
-    fun findPatientByUserId(userId: Long): Either<DomainError, Patient>
+    fun findPatientByAccountId(accountId: Long): Either<DomainError, Patient>
+
+    fun findPatientById(id: Long): Either<DomainError, Patient>
 
     fun checkNotExistsWithUsernameInContacts(username: String): Either<DomainError, Unit>
 }
 
 sealed class PatientFindingError(override val message: String) : DomainError.ValidationError {
-    data class NotFoundByUserId(private val userId: Long) : PatientFindingError(
-        "Profile for user with id $userId not found."
+    data class NotFoundByAccountId(private val accountId: Long) : PatientFindingError(
+        "Patient with for account $accountId not found."
     )
 
-    data object ProfileWithUsernameAlreadyExists : PatientFindingError(
-        "Profile with such username already exists."
+    data class NotFoundById(private val id: Long) : PatientFindingError(
+        "Patient with id $id not found."
+    )
+
+    data object PatientWithUsernameAlreadyExists : PatientFindingError(
+        "Patient with such username already exists."
     )
 }

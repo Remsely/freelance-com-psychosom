@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.usecase.profile
+package ru.remsely.psyhosom.usecase.patient
 
 import arrow.core.Either
 import arrow.core.flatMap
@@ -32,7 +32,7 @@ class UpdatePatientCommandImpl(
                 validatePossibleUsernameChange(event, it)
             }
             .flatMap { user ->
-                patientFinder.findPatientByUserId(user.id)
+                patientFinder.findPatientByAccountId(user.id)
                     .fold(
                         {
                             log.error("Profile with for user with id ${event.accountId} not found.")

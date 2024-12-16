@@ -11,5 +11,11 @@ data class Psychologist(
 
     @JoinColumn(nullable = false, unique = true)
     @OneToOne
-    val account: Account
+    val account: Account,
+
+    @Column(name = "first_name")
+    val firstName: String?,
+
+    @Column(name = "last_name")
+    val lastName: String?
 )

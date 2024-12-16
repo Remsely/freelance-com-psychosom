@@ -1,11 +1,8 @@
 package ru.remsely.psyhosom.db.dao
 
-import arrow.core.Either
-import arrow.core.left
+import arrow.core.*
 import arrow.core.raise.either
 import arrow.core.raise.ensure
-import arrow.core.right
-import arrow.core.singleOrNone
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.db.extensions.toDomain
@@ -15,6 +12,7 @@ import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.Patient
 import ru.remsely.psyhosom.domain.patient.dao.*
 import ru.remsely.psyhosom.monitoring.log.logger
+import kotlin.jvm.optionals.getOrNull
 
 @Component
 open class PatientDao(
@@ -28,19 +26,34 @@ open class PatientDao(
             .toDomain()
             .right()
             .also {
-                log.info("Profile for user with id ${patient.account.id} successfully created in DB.")
+                log.info("Patient with account ${patient.account.id} successfully created in DB.")
             }
 
     @Transactional(readOnly = true)
-    override fun findPatientByUserId(userId: Long): Either<DomainError, Patient> =
-        patientRepository.findByAccountId(userId)
+    override fun findPatientByAccountId(accountId: Long): Either<DomainError, Patient> =
+        patientRepository.findByAccountId(accountId)
             .singleOrNone()
             .fold(
-                { PatientFindingError.NotFoundByUserId(userId).left() },
+                { PatientFindingError.NotFoundByAccountId(accountId).left() },
                 {
                     it.toDomain().right()
                         .also {
-                            log.info("Profile for user with id $userId successfully found in DB.")
+                            log.info("Patient with account $accountId successfully found in DB.")
+                        }
+                }
+            )
+
+    @Transactional(readOnly = true)
+    override fun findPatientById(id: Long): Either<DomainError, Patient> =
+        patientRepository.findById(id)
+            .getOrNull()
+            .toOption()
+            .fold(
+                { PatientFindingError.NotFoundById(id).left() },
+                {
+                    it.toDomain().right()
+                        .also {
+                            log.info("Patient with id $id successfully found in DB.")
                         }
                 }
             )
@@ -54,7 +67,7 @@ open class PatientDao(
                     username
                 )
             ) {
-                PatientFindingError.ProfileWithUsernameAlreadyExists
+                PatientFindingError.PatientWithUsernameAlreadyExists
             }
         }
 
@@ -64,13 +77,13 @@ open class PatientDao(
             .toDomain()
             .right()
             .also {
-                log.info("Profile for user with id ${patient.account.id} successfully updated in DB.")
+                log.info("Patient with account ${patient.account.id} successfully updated in DB.")
             }
 
     @Transactional
     override fun erasePatientsByAccountIds(accountIds: List<Long>): Either<DomainError, Unit> =
         patientRepository.deleteByAccountIdIn(accountIds).right()
             .also {
-                log.info("Profiles by id list wish size ${accountIds.size} successfully deleted from DB.")
+                log.info("Patients by id list wish size ${accountIds.size} successfully deleted from DB.")
             }
 }

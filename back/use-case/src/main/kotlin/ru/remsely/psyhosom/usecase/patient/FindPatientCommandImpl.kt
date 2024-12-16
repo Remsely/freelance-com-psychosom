@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.usecase.profile
+package ru.remsely.psyhosom.usecase.patient
 
 import arrow.core.Either
 import arrow.core.flatMap
@@ -19,7 +19,7 @@ class FindPatientCommandImpl(
     override fun execute(userId: Long): Either<DomainError, Patient> =
         accountFinder.findAccountById(userId)
             .flatMap {
-                patientFinder.findPatientByUserId(userId)
+                patientFinder.findPatientByAccountId(userId)
             }.also {
                 log.info("Profile for user with id $userId successfully found.")
             }

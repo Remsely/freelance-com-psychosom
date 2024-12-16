@@ -79,7 +79,9 @@ open class AuthServiceImpl(
                 Account.Role.PSYCHOLOGIST -> psychologistCreator.createPsychologist(
                     Psychologist(
                         id = 0L,
-                        account = account
+                        account = account,
+                        firstName = null,
+                        lastName = null
                     )
                 ).bind()
 

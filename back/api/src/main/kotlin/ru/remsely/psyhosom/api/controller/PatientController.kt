@@ -18,13 +18,13 @@ import ru.remsely.psyhosom.domain.value_object.PhoneNumberValidationError
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.domain.value_object.TelegramUsernameValidationError
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.profile.FindPatientCommand
-import ru.remsely.psyhosom.usecase.profile.PatientUpdateError
-import ru.remsely.psyhosom.usecase.profile.UpdatePatientCommand
+import ru.remsely.psyhosom.usecase.patient.FindPatientCommand
+import ru.remsely.psyhosom.usecase.patient.PatientUpdateError
+import ru.remsely.psyhosom.usecase.patient.UpdatePatientCommand
 import java.time.LocalDateTime
 
 @RestController
-@RequestMapping("/api/v1/patients/profile")
+@RequestMapping("/api/v1/patients")
 class PatientController(
     private val updatePatientCommand: UpdatePatientCommand,
     private val findPatientCommand: FindPatientCommand
@@ -33,7 +33,7 @@ class PatientController(
 
     @PutMapping
     fun updatePatient(@AuthAccountId accountId: Long, @RequestBody request: UpdatePatientRequest): ResponseEntity<*> {
-        log.info("PUT /api/v1/patients/profile | userId: $accountId.")
+        log.info("PUT /api/v1/patients | userId: $accountId.")
         return either {
             UpdatePatientEvent(
                 accountId = accountId,
@@ -56,7 +56,7 @@ class PatientController(
 
     @GetMapping
     fun findPatient(@AuthAccountId accountId: Long): ResponseEntity<*> {
-        log.info("GET /api/v1/patients/profile | userId: $accountId.")
+        log.info("GET /api/v1/patients | userId: $accountId.")
         return findPatientCommand.execute(accountId)
             .fold(
                 { handleError(it) },
@@ -74,7 +74,7 @@ class PatientController(
             is TelegramUsernameValidationError.InvalidTelegramUsername -> HttpStatus.BAD_REQUEST
             is PatientUpdateError.PatientUsernameMustBeInContacts -> HttpStatus.BAD_REQUEST
             is AccountFindingError.NotFoundById -> HttpStatus.NOT_FOUND
-            is PatientFindingError.NotFoundByUserId -> HttpStatus.NOT_FOUND
+            is PatientFindingError.NotFoundByAccountId -> HttpStatus.NOT_FOUND
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
             ResponseEntity

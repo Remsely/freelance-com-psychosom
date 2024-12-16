@@ -9,7 +9,7 @@ interface PsychologistFinder {
 }
 
 sealed class PsychologistFindingError(override val message: String) : DomainError.ValidationError {
-    data class NotFoundByrId(private val userId: Long) : PsychologistFindingError(
+    data class NotFoundById(private val userId: Long) : PsychologistFindingError(
         "Psychologist with id $userId not found."
     )
 }

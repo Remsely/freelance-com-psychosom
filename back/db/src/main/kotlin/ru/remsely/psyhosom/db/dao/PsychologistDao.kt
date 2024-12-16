@@ -39,7 +39,7 @@ open class PsychologistDao(
             .getOrNull()
             .toOption()
             .fold(
-                { PsychologistFindingError.NotFoundByrId(id).left() },
+                { PsychologistFindingError.NotFoundById(id).left() },
                 {
                     it.toDomain().right().also {
                         log.info("Psychologist with id $id successfully found by id in DB.")

@@ -93,7 +93,7 @@ class AuthController(
         when (error) {
             is AccountCreationError.AlreadyExists -> HttpStatus.BAD_REQUEST
             is UserRegisterValidationError.InvalidUsername -> HttpStatus.BAD_REQUEST
-            is PatientFindingError.ProfileWithUsernameAlreadyExists -> HttpStatus.BAD_REQUEST
+            is PatientFindingError.PatientWithUsernameAlreadyExists -> HttpStatus.BAD_REQUEST
             is UserLoginError.AuthenticationError -> HttpStatus.UNAUTHORIZED
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {

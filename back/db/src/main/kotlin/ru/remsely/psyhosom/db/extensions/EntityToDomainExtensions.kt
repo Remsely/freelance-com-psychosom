@@ -4,6 +4,7 @@ import arrow.core.getOrElse
 import ru.remsely.psyhosom.db.entity.Account
 import ru.remsely.psyhosom.db.entity.Patient
 import ru.remsely.psyhosom.db.entity.Psychologist
+import ru.remsely.psyhosom.db.entity.Session
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
 import ru.remsely.psyhosom.domain.value_object.TelegramChatId
@@ -11,6 +12,7 @@ import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.domain.account.Account as DomainAccount
 import ru.remsely.psyhosom.domain.patient.Patient as DomainPatient
 import ru.remsely.psyhosom.domain.psychologist.Psychologist as DomainPsychologist
+import ru.remsely.psyhosom.domain.session.Session as DomainSession
 
 fun Account.toDomain() = DomainAccount(
     id = id,
@@ -42,5 +44,17 @@ fun Patient.toDomain() = DomainPatient(
 
 fun Psychologist.toDomain() = DomainPsychologist(
     id = id,
-    account = account.toDomain()
+    account = account.toDomain(),
+    firstName = firstName,
+    lastName = lastName
+)
+
+fun Session.toDomain() = DomainSession(
+    id = id,
+    psychologist = psychologist.toDomain(),
+    patient = patient.toDomain(),
+    status = status,
+    orderDate = orderDate,
+    confirmationDate = confirmationDate,
+    startDate = startDate,
 )
