@@ -3,8 +3,8 @@ package ru.remsely.psyhosom.app.config.web
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
-import ru.remsely.psyhosom.api.utils.AuthAccountIdResolver
-import ru.remsely.psyhosom.api.utils.AuthPatientIdResolver
+import ru.remsely.psyhosom.api.utils.annotation.resolver.AuthAccountIdResolver
+import ru.remsely.psyhosom.api.utils.annotation.resolver.AuthPatientIdResolver
 
 @Configuration
 class WebConfig(

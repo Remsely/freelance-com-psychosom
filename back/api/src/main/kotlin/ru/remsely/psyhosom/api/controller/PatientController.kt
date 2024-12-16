@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 import ru.remsely.psyhosom.api.request.UpdatePatientRequest
 import ru.remsely.psyhosom.api.response.ErrorResponse
 import ru.remsely.psyhosom.api.response.toResponse
-import ru.remsely.psyhosom.api.utils.AuthAccountId
+import ru.remsely.psyhosom.api.utils.annotation.AuthAccountId
 import ru.remsely.psyhosom.domain.account.dao.AccountFindingError
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFindingError
@@ -73,8 +73,8 @@ class PatientController(
             is PhoneNumberValidationError.InvalidPhoneNumber -> HttpStatus.BAD_REQUEST
             is TelegramUsernameValidationError.InvalidTelegramUsername -> HttpStatus.BAD_REQUEST
             is PatientUpdateError.PatientUsernameMustBeInContacts -> HttpStatus.BAD_REQUEST
-            is AccountFindingError.NotFoundById -> HttpStatus.NOT_FOUND
-            is PatientFindingError.NotFoundByAccountId -> HttpStatus.NOT_FOUND
+            is AccountFindingError.NotFoundById -> HttpStatus.BAD_REQUEST
+            is PatientFindingError.NotFoundByAccountId -> HttpStatus.BAD_REQUEST
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
             ResponseEntity

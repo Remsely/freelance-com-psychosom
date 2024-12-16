@@ -2,32 +2,37 @@ package ru.remsely.psyhosom.api.controller
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ru.remsely.psyhosom.api.request.CreateConsultationRequest
 import ru.remsely.psyhosom.api.response.CreateConsultationResponse
 import ru.remsely.psyhosom.api.response.ErrorResponse
-import ru.remsely.psyhosom.api.utils.AuthPatientId
+import ru.remsely.psyhosom.api.response.FindActiveConsultationsResponse
+import ru.remsely.psyhosom.api.utils.annotation.AuthPatientId
+import ru.remsely.psyhosom.domain.consultation.dao.ConsultationFindingError
+import ru.remsely.psyhosom.domain.consultation.event.CreateConsultationEvent
+import ru.remsely.psyhosom.domain.consultation.event.FindActiveConsultationsEvent
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFindingError
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistFindingError
-import ru.remsely.psyhosom.domain.consultation.event.CreateConsultationEvent
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.psychologist.CreateConsultationCommand
 import ru.remsely.psyhosom.usecase.psychologist.ConsultationCreationError
+import ru.remsely.psyhosom.usecase.psychologist.CreateConsultationCommand
+import ru.remsely.psyhosom.usecase.psychologist.FindActiveConsultationCommand
 import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/api/v1/consultations")
 class ConsultationController(
-    private val createConsultationCommand: CreateConsultationCommand
+    private val createConsultationCommand: CreateConsultationCommand,
+    private val findActiveConsultationCommand: FindActiveConsultationCommand
 ) {
     private val log = logger()
 
     @PostMapping
-    fun createSession(@AuthPatientId patientId: Long, @RequestBody request: CreateConsultationRequest): ResponseEntity<*> {
+    fun createSession(
+        @AuthPatientId patientId: Long,
+        @RequestBody request: CreateConsultationRequest
+    ): ResponseEntity<*> {
         log.info("POST /api/v1/consultations | patientId: $patientId.")
         return createConsultationCommand.execute(
             CreateConsultationEvent(
@@ -52,11 +57,44 @@ class ConsultationController(
         )
     }
 
+    @GetMapping("/active")
+    fun findActiveSession(
+        @AuthPatientId patientId: Long,
+        @RequestParam(required = true) psychologistId: Long
+    ): ResponseEntity<*> {
+        log.info("GET /api/v1/consultations/active | patientId: $patientId.")
+        return findActiveConsultationCommand.execute(
+            FindActiveConsultationsEvent(
+                patientId = patientId,
+                psychologistId = psychologistId
+            )
+        ).fold(
+            { handleError(it) },
+            {
+                ResponseEntity
+                    .ok()
+                    .body(
+                        FindActiveConsultationsResponse(
+                            id = it.id,
+                            psychologistId = it.psychologist.id,
+                            patientId = it.patient.id,
+                            status = it.status,
+                            orderDate = it.orderDate,
+                            confirmationDate = it.confirmationDate,
+                            startDate = it.startDate
+                        )
+                    )
+            }
+        )
+    }
+
     private fun handleError(error: DomainError): ResponseEntity<ErrorResponse> =
         when (error) {
-            is PatientFindingError.NotFoundById -> HttpStatus.NOT_FOUND
             is ConsultationCreationError.ActiveConsultationExist -> HttpStatus.BAD_REQUEST
-            is PsychologistFindingError.NotFoundById -> HttpStatus.NOT_FOUND
+            is PatientFindingError.NotFoundById -> HttpStatus.BAD_REQUEST
+            is PsychologistFindingError.NotFoundById -> HttpStatus.BAD_REQUEST
+            is ConsultationFindingError.NotFoundActiveByPatientAndPsychologist -> HttpStatus.NOT_FOUND
+            is ConsultationFindingError.MoreThanOneActiveFoundByPatientAndPsychologist -> HttpStatus.INTERNAL_SERVER_ERROR
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
             ResponseEntity
