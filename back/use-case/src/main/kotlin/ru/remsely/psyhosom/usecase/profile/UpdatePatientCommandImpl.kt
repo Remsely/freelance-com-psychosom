@@ -10,33 +10,33 @@ import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.AccountFinder
 import ru.remsely.psyhosom.domain.error.DomainError
-import ru.remsely.psyhosom.domain.profile.Profile
-import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
-import ru.remsely.psyhosom.domain.profile.dao.ProfileUpdater
-import ru.remsely.psyhosom.domain.profile.event.UpdateProfileEvent
+import ru.remsely.psyhosom.domain.patient.Patient
+import ru.remsely.psyhosom.domain.patient.dao.PatientFinder
+import ru.remsely.psyhosom.domain.patient.dao.PatientUpdater
+import ru.remsely.psyhosom.domain.patient.event.UpdatePatientEvent
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.monitoring.log.logger
 
 @Component
-class UpdateProfileCommandImpl(
+class UpdatePatientCommandImpl(
     private val accountFinder: AccountFinder,
-    private val profileFinder: ProfileFinder,
-    private val profileUpdater: ProfileUpdater,
-) : UpdateProfileCommand {
+    private val patientFinder: PatientFinder,
+    private val patientUpdater: PatientUpdater,
+) : UpdatePatientCommand {
     private val log = logger()
 
-    override fun execute(event: UpdateProfileEvent): Either<DomainError, Profile> =
+    override fun execute(event: UpdatePatientEvent): Either<DomainError, Patient> =
         accountFinder.findAccountById(event.accountId)
             .flatMap {
                 validatePossibleUsernameChange(event, it)
             }
             .flatMap { user ->
-                profileFinder.findProfileByUserId(user.id)
+                patientFinder.findPatientByUserId(user.id)
                     .fold(
                         {
                             log.error("Profile with for user with id ${event.accountId} not found.")
-                            ProfileUpdateError.ProfileNotFound(event.accountId).left()
+                            PatientUpdateError.PatientNotFound(event.accountId).left()
                         },
                         {
                             (user to it).right()
@@ -44,8 +44,8 @@ class UpdateProfileCommandImpl(
                     )
             }
             .flatMap { (user, profile) ->
-                profileUpdater.updateProfile(
-                    Profile(
+                patientUpdater.updatePatient(
+                    Patient(
                         id = profile.id,
                         account = user,
                         firstName = event.firstName ?: profile.firstName,
@@ -58,15 +58,15 @@ class UpdateProfileCommandImpl(
                 }
             }
 
-    private fun validatePossibleUsernameChange(event: UpdateProfileEvent, account: Account) = either {
+    private fun validatePossibleUsernameChange(event: UpdatePatientEvent, account: Account) = either {
         if (event.phone?.value != null && PhoneNumber(account.username).isRight()) {
             ensure(account.username == event.phone?.value) {
-                ProfileUpdateError.ProfileUsernameMustBeInContacts
+                PatientUpdateError.PatientUsernameMustBeInContacts
             }
         }
         if (event.telegram?.value != null && TelegramUsername(account.username).isRight()) {
             ensure(account.username == event.telegram?.value) {
-                ProfileUpdateError.ProfileUsernameMustBeInContacts
+                PatientUpdateError.PatientUsernameMustBeInContacts
             }
         }
         account

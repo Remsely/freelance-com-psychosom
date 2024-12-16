@@ -1,9 +1,9 @@
-package ru.remsely.psyhosom.domain.profile.event
+package ru.remsely.psyhosom.domain.patient.event
 
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 
-data class UpdateProfileEvent(
+data class UpdatePatientEvent(
     val accountId: Long,
     val firstName: String?,
     val lastName: String?,

@@ -2,13 +2,15 @@ package ru.remsely.psyhosom.db.extensions
 
 import arrow.core.getOrElse
 import ru.remsely.psyhosom.db.entity.Account
-import ru.remsely.psyhosom.db.entity.Profile
+import ru.remsely.psyhosom.db.entity.Patient
+import ru.remsely.psyhosom.db.entity.Psychologist
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
 import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.domain.account.Account as DomainAccount
-import ru.remsely.psyhosom.domain.profile.Profile as DomainProfile
+import ru.remsely.psyhosom.domain.patient.Patient as DomainPatient
+import ru.remsely.psyhosom.domain.psychologist.Psychologist as DomainPsychologist
 
 fun Account.toDomain() = DomainAccount(
     id = id,
@@ -25,7 +27,7 @@ fun Account.toDomain() = DomainAccount(
     registrationDate = registrationDate
 )
 
-fun Profile.toDomain() = DomainProfile(
+fun Patient.toDomain() = DomainPatient(
     id = id,
     account = account.toDomain(),
     phone = PhoneNumber(phone).getOrElse {
@@ -36,4 +38,9 @@ fun Profile.toDomain() = DomainProfile(
     },
     firstName = firstName,
     lastName = lastName,
+)
+
+fun Psychologist.toDomain() = DomainPsychologist(
+    id = id,
+    account = account.toDomain()
 )

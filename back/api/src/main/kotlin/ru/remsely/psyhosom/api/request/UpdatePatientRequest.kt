@@ -1,6 +1,6 @@
 package ru.remsely.psyhosom.api.request
 
-data class UpdateProfileRequest(
+data class UpdatePatientRequest(
     val phone: String?,
     val telegram: String?,
     val firstName: String?,

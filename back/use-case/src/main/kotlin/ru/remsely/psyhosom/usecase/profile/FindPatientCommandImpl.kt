@@ -5,21 +5,21 @@ import arrow.core.flatMap
 import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.domain.account.dao.AccountFinder
 import ru.remsely.psyhosom.domain.error.DomainError
-import ru.remsely.psyhosom.domain.profile.Profile
-import ru.remsely.psyhosom.domain.profile.dao.ProfileFinder
+import ru.remsely.psyhosom.domain.patient.Patient
+import ru.remsely.psyhosom.domain.patient.dao.PatientFinder
 import ru.remsely.psyhosom.monitoring.log.logger
 
 @Component
-class FindProfileCommandImpl(
+class FindPatientCommandImpl(
     private val accountFinder: AccountFinder,
-    private val profileFinder: ProfileFinder
-) : FindProfileCommand {
+    private val patientFinder: PatientFinder
+) : FindPatientCommand {
     private val log = logger()
 
-    override fun execute(userId: Long): Either<DomainError, Profile> =
+    override fun execute(userId: Long): Either<DomainError, Patient> =
         accountFinder.findAccountById(userId)
             .flatMap {
-                profileFinder.findProfileByUserId(userId)
+                patientFinder.findPatientByUserId(userId)
             }.also {
                 log.info("Profile for user with id $userId successfully found.")
             }

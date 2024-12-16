@@ -1,6 +1,6 @@
 package ru.remsely.psyhosom.api.response
 
-import ru.remsely.psyhosom.domain.profile.Profile
+import ru.remsely.psyhosom.domain.patient.Patient
 
 data class ProfileResponse(
     val firstName: String?,
@@ -9,7 +9,7 @@ data class ProfileResponse(
     val telegram: String?
 )
 
-fun Profile.toResponse() = ProfileResponse(
+fun Patient.toResponse() = ProfileResponse(
     phone = phone?.value,
     telegram = telegram?.value,
     firstName = firstName,

@@ -9,11 +9,11 @@ import org.springframework.web.method.support.ModelAndViewContainer
 import ru.remsely.psyhosom.usecase.auth.AuthCredentialsAnnotationsProvider
 
 @Component
-class AuthUserIdResolver(
+class AuthAccountIdResolver(
     private val authCredentialsAnnotationsProvider: AuthCredentialsAnnotationsProvider
 ) : HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean =
-        parameter.getParameterAnnotation(AuthUserId::class.java) != null &&
+        parameter.getParameterAnnotation(AuthAccountId::class.java) != null &&
                 parameter.parameterType == Long::class.javaPrimitiveType
 
     override fun resolveArgument(

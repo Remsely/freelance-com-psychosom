@@ -3,11 +3,11 @@ package ru.remsely.psyhosom.db.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "profile")
-data class Profile(
+@Table(name = "patient_profile")
+data class Patient(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long,
 
     @JoinColumn(nullable = false, unique = true)
     @OneToOne(fetch = FetchType.EAGER)

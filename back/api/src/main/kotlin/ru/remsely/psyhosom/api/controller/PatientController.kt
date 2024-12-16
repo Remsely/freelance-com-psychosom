@@ -5,37 +5,37 @@ import arrow.core.raise.either
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ru.remsely.psyhosom.api.request.UpdateProfileRequest
+import ru.remsely.psyhosom.api.request.UpdatePatientRequest
 import ru.remsely.psyhosom.api.response.ErrorResponse
 import ru.remsely.psyhosom.api.response.toResponse
-import ru.remsely.psyhosom.api.utils.AuthUserId
+import ru.remsely.psyhosom.api.utils.AuthAccountId
 import ru.remsely.psyhosom.domain.account.dao.AccountFindingError
 import ru.remsely.psyhosom.domain.error.DomainError
-import ru.remsely.psyhosom.domain.profile.dao.UserProfileFindingError
-import ru.remsely.psyhosom.domain.profile.event.UpdateProfileEvent
+import ru.remsely.psyhosom.domain.patient.dao.PatientFindingError
+import ru.remsely.psyhosom.domain.patient.event.UpdatePatientEvent
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
 import ru.remsely.psyhosom.domain.value_object.PhoneNumberValidationError
 import ru.remsely.psyhosom.domain.value_object.TelegramUsername
 import ru.remsely.psyhosom.domain.value_object.TelegramUsernameValidationError
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.profile.FindProfileCommand
-import ru.remsely.psyhosom.usecase.profile.ProfileUpdateError
-import ru.remsely.psyhosom.usecase.profile.UpdateProfileCommand
+import ru.remsely.psyhosom.usecase.profile.FindPatientCommand
+import ru.remsely.psyhosom.usecase.profile.PatientUpdateError
+import ru.remsely.psyhosom.usecase.profile.UpdatePatientCommand
 import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/api/v1/patients/profile")
-class ProfileController(
-    private val updateProfileCommand: UpdateProfileCommand,
-    private val findProfileCommand: FindProfileCommand
+class PatientController(
+    private val updatePatientCommand: UpdatePatientCommand,
+    private val findPatientCommand: FindPatientCommand
 ) {
     private val log = logger()
 
     @PutMapping
-    fun updateUserProfile(@AuthUserId accountId: Long, @RequestBody request: UpdateProfileRequest): ResponseEntity<*> {
+    fun updatePatient(@AuthAccountId accountId: Long, @RequestBody request: UpdatePatientRequest): ResponseEntity<*> {
         log.info("PUT /api/v1/patients/profile | userId: $accountId.")
         return either {
-            UpdateProfileEvent(
+            UpdatePatientEvent(
                 accountId = accountId,
                 firstName = request.firstName,
                 lastName = request.lastName,
@@ -43,7 +43,7 @@ class ProfileController(
                 telegram = TelegramUsername(request.telegram).bind()
             )
         }.flatMap {
-            updateProfileCommand.execute(it)
+            updatePatientCommand.execute(it)
         }.fold(
             { handleError(it) },
             {
@@ -55,9 +55,9 @@ class ProfileController(
     }
 
     @GetMapping
-    fun findUserProfile(@AuthUserId accountId: Long): ResponseEntity<*> {
+    fun findPatient(@AuthAccountId accountId: Long): ResponseEntity<*> {
         log.info("GET /api/v1/patients/profile | userId: $accountId.")
-        return findProfileCommand.execute(accountId)
+        return findPatientCommand.execute(accountId)
             .fold(
                 { handleError(it) },
                 {
@@ -72,9 +72,9 @@ class ProfileController(
         when (error) {
             is PhoneNumberValidationError.InvalidPhoneNumber -> HttpStatus.BAD_REQUEST
             is TelegramUsernameValidationError.InvalidTelegramUsername -> HttpStatus.BAD_REQUEST
-            is ProfileUpdateError.ProfileUsernameMustBeInContacts -> HttpStatus.BAD_REQUEST
+            is PatientUpdateError.PatientUsernameMustBeInContacts -> HttpStatus.BAD_REQUEST
             is AccountFindingError.NotFoundById -> HttpStatus.NOT_FOUND
-            is UserProfileFindingError.NotFoundByUserId -> HttpStatus.NOT_FOUND
+            is PatientFindingError.NotFoundByUserId -> HttpStatus.NOT_FOUND
             else -> HttpStatus.INTERNAL_SERVER_ERROR
         }.let {
             ResponseEntity

@@ -10,33 +10,33 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.db.extensions.toDomain
 import ru.remsely.psyhosom.db.extensions.toEntity
-import ru.remsely.psyhosom.db.repository.ProfileRepository
+import ru.remsely.psyhosom.db.repository.PatientRepository
 import ru.remsely.psyhosom.domain.error.DomainError
-import ru.remsely.psyhosom.domain.profile.Profile
-import ru.remsely.psyhosom.domain.profile.dao.*
+import ru.remsely.psyhosom.domain.patient.Patient
+import ru.remsely.psyhosom.domain.patient.dao.*
 import ru.remsely.psyhosom.monitoring.log.logger
 
 @Component
-open class ProfileDao(
-    private val profileRepository: ProfileRepository
-) : ProfileCreator, ProfileFinder, ProfileUpdater, ProfileEraser {
+open class PatientDao(
+    private val patientRepository: PatientRepository
+) : PatientCreator, PatientFinder, PatientUpdater, PatientEraser {
     private val log = logger()
 
     @Transactional
-    override fun createProfile(profile: Profile): Either<DomainError, Profile> =
-        profileRepository.save(profile.toEntity())
+    override fun createPatient(patient: Patient): Either<DomainError, Patient> =
+        patientRepository.save(patient.toEntity())
             .toDomain()
             .right()
             .also {
-                log.info("Profile for user with id ${profile.account.id} successfully created in DB.")
+                log.info("Profile for user with id ${patient.account.id} successfully created in DB.")
             }
 
     @Transactional(readOnly = true)
-    override fun findProfileByUserId(userId: Long): Either<DomainError, Profile> =
-        profileRepository.findByAccountId(userId)
+    override fun findPatientByUserId(userId: Long): Either<DomainError, Patient> =
+        patientRepository.findByAccountId(userId)
             .singleOrNone()
             .fold(
-                { UserProfileFindingError.NotFoundByUserId(userId).left() },
+                { PatientFindingError.NotFoundByUserId(userId).left() },
                 {
                     it.toDomain().right()
                         .also {
@@ -49,27 +49,27 @@ open class ProfileDao(
     override fun checkNotExistsWithUsernameInContacts(username: String): Either<DomainError, Unit> =
         either {
             ensure(
-                !profileRepository.existsByTelegramEqualsIgnoreCaseOrPhoneEqualsIgnoreCase(
+                !patientRepository.existsByTelegramEqualsIgnoreCaseOrPhoneEqualsIgnoreCase(
                     username,
                     username
                 )
             ) {
-                UserProfileFindingError.ProfileWithUsernameAlreadyExists
+                PatientFindingError.ProfileWithUsernameAlreadyExists
             }
         }
 
     @Transactional
-    override fun updateProfile(profile: Profile): Either<DomainError, Profile> =
-        profileRepository.save(profile.toEntity())
+    override fun updatePatient(patient: Patient): Either<DomainError, Patient> =
+        patientRepository.save(patient.toEntity())
             .toDomain()
             .right()
             .also {
-                log.info("Profile for user with id ${profile.account.id} successfully updated in DB.")
+                log.info("Profile for user with id ${patient.account.id} successfully updated in DB.")
             }
 
     @Transactional
-    override fun eraseProfilesByAccountIds(accountIds: List<Long>): Either<DomainError, Unit> =
-        profileRepository.deleteByAccountIdIn(accountIds).right()
+    override fun erasePatientsByAccountIds(accountIds: List<Long>): Either<DomainError, Unit> =
+        patientRepository.deleteByAccountIdIn(accountIds).right()
             .also {
                 log.info("Profiles by id list wish size ${accountIds.size} successfully deleted from DB.")
             }
