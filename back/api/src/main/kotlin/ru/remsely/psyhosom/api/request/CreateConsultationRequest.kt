@@ -1,5 +1,5 @@
 package ru.remsely.psyhosom.api.request
 
-data class CreateSessionRequest(
+data class CreateConsultationRequest(
     val psychologistId: Long
 )

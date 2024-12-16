@@ -1,12 +1,12 @@
 package ru.remsely.psyhosom.db.entity
 
 import jakarta.persistence.*
-import ru.remsely.psyhosom.domain.session.Session
+import ru.remsely.psyhosom.domain.consultation.Consultation
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "session")
-data class Session(
+@Table(name = "consultation")
+data class Consultation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
@@ -21,7 +21,7 @@ data class Session(
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    val status: Session.Status,
+    val status: Consultation.Status,
 
     @Column(name = "order_dttm", nullable = false)
     val orderDate: LocalDateTime,

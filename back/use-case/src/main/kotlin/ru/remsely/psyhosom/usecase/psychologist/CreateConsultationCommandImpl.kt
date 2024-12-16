@@ -8,41 +8,41 @@ import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFinder
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistFinder
-import ru.remsely.psyhosom.domain.session.Session
-import ru.remsely.psyhosom.domain.session.dao.SessionCreator
-import ru.remsely.psyhosom.domain.session.dao.SessionFinder
-import ru.remsely.psyhosom.domain.session.event.CreateSessionEvent
+import ru.remsely.psyhosom.domain.consultation.Consultation
+import ru.remsely.psyhosom.domain.consultation.dao.ConsultationCreator
+import ru.remsely.psyhosom.domain.consultation.dao.ConsultationFinder
+import ru.remsely.psyhosom.domain.consultation.event.CreateConsultationEvent
 import ru.remsely.psyhosom.monitoring.log.logger
 import java.time.LocalDateTime
 
 @Component
-open class CreateSessionCommandImpl(
-    private val sessionCreator: SessionCreator,
-    private val sessionFinder: SessionFinder,
+open class CreateConsultationCommandImpl(
+    private val consultationCreator: ConsultationCreator,
+    private val consultationFinder: ConsultationFinder,
     private val psychologistFinder: PsychologistFinder,
     private val patientFinder: PatientFinder
-) : CreateSessionCommand {
+) : CreateConsultationCommand {
     private val log = logger()
 
     @Transactional
-    override fun execute(event: CreateSessionEvent): Either<DomainError, Session> = either {
+    override fun execute(event: CreateConsultationEvent): Either<DomainError, Consultation> = either {
         val patientId = event.patientId
         val psychologistId = event.psychologistId
 
         val psychologist = psychologistFinder.findPsychologistById(psychologistId).bind()
 
-        ensure(!sessionFinder.existActiveSessionByPatientAndPsychologist(patientId, psychologistId)) {
-            SessionCreationError.ActiveSessionExist(patientId, psychologistId)
+        ensure(!consultationFinder.existActiveConsultationByPatientAndPsychologist(patientId, psychologistId)) {
+            ConsultationCreationError.ActiveConsultationExist(patientId, psychologistId)
         }
 
         val patient = patientFinder.findPatientById(patientId).bind()
 
-        sessionCreator.createSession(
-            Session(
+        consultationCreator.createConsultation(
+            Consultation(
                 id = 0L,
                 patient = patient,
                 psychologist = psychologist,
-                status = Session.Status.PENDING,
+                status = Consultation.Status.PENDING,
                 orderDate = LocalDateTime.now(),
                 confirmationDate = null,
                 startDate = null

@@ -1,12 +1,12 @@
 package ru.remsely.psyhosom.api.response
 
-import ru.remsely.psyhosom.domain.session.Session
+import ru.remsely.psyhosom.domain.consultation.Consultation
 import java.time.LocalDateTime
 
-data class CreateSessionResponse(
+data class CreateConsultationResponse(
     val id: Long,
     val psychologistId: Long,
     val patientId: Long,
-    val status: Session.Status,
+    val status: Consultation.Status,
     val orderDate: LocalDateTime,
 )
