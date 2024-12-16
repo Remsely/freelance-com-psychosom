@@ -1,11 +1,26 @@
 package ru.remsely.psyhosom.db.extensions
 
-import ru.remsely.psyhosom.db.entity.User
-import ru.remsely.psyhosom.domain.user.User as DomainUser
+import ru.remsely.psyhosom.db.entity.Account
+import ru.remsely.psyhosom.db.entity.Profile
+import ru.remsely.psyhosom.domain.account.Account as DomainAccount
+import ru.remsely.psyhosom.domain.profile.Profile as DomainProfile
 
-fun DomainUser.toEntity() = User(
+fun DomainAccount.toEntity() = Account(
     id = id,
     username = username,
     password = password,
-    role = role
+    role = role,
+    isConfirmed = isConfirmed,
+    tgBotToken = tgBotToken.value,
+    tgChatId = tgChatId.value,
+    registrationDate = registrationDate
+)
+
+fun DomainProfile.toEntity() = Profile(
+    id = id,
+    account = account.toEntity(),
+    phone = phone?.value,
+    telegram = telegram?.value,
+    firstName = firstName,
+    lastName = lastName,
 )

@@ -10,4 +10,7 @@ object Modules {
     const val api = ":api"
     const val db = ":db"
     const val security = ":security"
+    const val monitoring = ":monitoring"
+    const val telegram = ":telegram"
+    const val scheduled = ":scheduled"
 }

@@ -1,7 +1,3 @@
-plugins {
-
-}
-
 group = Project.groupId
 version = Project.version
 
@@ -11,7 +7,10 @@ repositories {
 
 dependencies {
     implementation(project(Modules.domain))
+    implementation(project(Modules.monitoring))
 
+    implementation(Libs.spring_boot_starter)
+    implementation(Libs.spring_tx)
     implementation(Libs.arrow_core)
 
     testImplementation(Libs.kotlin_test_junit5)
