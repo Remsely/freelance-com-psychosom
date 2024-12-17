@@ -1,25 +1,23 @@
 package ru.remsely.psyhosom.db.dao
 
-import arrow.core.Either
-import arrow.core.left
-import arrow.core.right
-import arrow.core.toNonEmptyListOrNone
+import arrow.core.*
+import arrow.core.raise.either
+import arrow.core.raise.ensure
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.db.extensions.toDomain
 import ru.remsely.psyhosom.db.extensions.toEntity
 import ru.remsely.psyhosom.db.repository.ConsultationRepository
 import ru.remsely.psyhosom.domain.consultation.Consultation
-import ru.remsely.psyhosom.domain.consultation.dao.ConsultationCreator
-import ru.remsely.psyhosom.domain.consultation.dao.ConsultationFinder
-import ru.remsely.psyhosom.domain.consultation.dao.ConsultationFindingError
+import ru.remsely.psyhosom.domain.consultation.dao.*
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.monitoring.log.logger
+import kotlin.jvm.optionals.getOrNull
 
 @Component
 open class ConsultationDao(
     private val repository: ConsultationRepository
-) : ConsultationCreator, ConsultationFinder {
+) : ConsultationCreator, ConsultationUpdater, ConsultationFinder {
     private val log = logger()
 
     @Transactional
@@ -30,6 +28,20 @@ open class ConsultationDao(
             .also {
                 log.info("Session with id ${consultation.id} successfully created in DB.")
             }
+
+    @Transactional(readOnly = true)
+    override fun findConsultationById(consultationId: Long): Either<DomainError, Consultation> =
+        repository.findById(consultationId)
+            .getOrNull()
+            .toOption()
+            .fold(
+                { ConsultationFindingError.NotFoundById(consultationId).left() },
+                {
+                    it.toDomain().right().also {
+                        log.info("Session with id $consultationId successfully found in DB.")
+                    }
+                }
+            )
 
     @Transactional(readOnly = true)
     override fun existActiveConsultationByPatientAndPsychologist(
@@ -81,4 +93,16 @@ open class ConsultationDao(
                     }
                 }
             )
+
+    @Transactional
+    override fun cancelConsultation(consultation: Consultation): Either<DomainError, Consultation> = either {
+        ensure(consultation.status in listOf(Consultation.Status.PENDING, Consultation.Status.CONFIRMED)) {
+            ConsultationUpdateError.WrongStatusToCancel(consultation.status)
+        }
+        repository.save(
+            consultation.copy(
+                status = Consultation.Status.CANCELED
+            ).toEntity()
+        ).toDomain()
+    }
 }

@@ -15,9 +15,9 @@ import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFindingError
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistFindingError
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.psychologist.ConsultationCreationError
-import ru.remsely.psyhosom.usecase.psychologist.CreateConsultationCommand
-import ru.remsely.psyhosom.usecase.psychologist.FindActiveConsultationCommand
+import ru.remsely.psyhosom.usecase.consultation.ConsultationCreationError
+import ru.remsely.psyhosom.usecase.consultation.CreateConsultationCommand
+import ru.remsely.psyhosom.usecase.consultation.FindActiveConsultationCommand
 import java.time.LocalDateTime
 
 @RestController

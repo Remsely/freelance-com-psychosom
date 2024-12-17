@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.usecase.psychologist
+package ru.remsely.psyhosom.usecase.consultation
 
 import arrow.core.Either
 import arrow.core.raise.either
