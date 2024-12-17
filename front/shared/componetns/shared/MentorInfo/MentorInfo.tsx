@@ -12,20 +12,20 @@ export function MentorInfo() {
     return (
         <main className={styles.main}>
             <div className={styles.description}>
-                <TextMentorInfo>Добро пожаловать! Меня зовут [Имя специалиста], и я специализируюсь на психосоматике —
+                <TextMentorInfo>Добро пожаловать! Меня зовут Екатерина Сомова, и я специализируюсь на психосоматике —
                     области, которая помогает понять, как наши мысли и эмоции влияют на тело. Мой подход основан на
                     многолетнем опыте работы и личных исследованиях, которые я провожу, чтобы найти индивидуальное
                     решение для каждого клиента.</TextMentorInfo>
                 <HighlightInfo>Если вас беспокоят хронические симптомы, которые сложно объяснить медицинскими причинами,
                     психосоматика может стать ключом к разгадке.</HighlightInfo>
-                <TextMentorInfo>На протяжении своей практики я помог 20 клиентам в течении 2-х лет людям избавиться от
+                <TextMentorInfo>На протяжении своей практики я помогла 20 клиентам в течении 2-х лет людям избавиться от
                     внутренних блоков, восстановить баланс и обрести гармонию. Имею диплом в высшем образовании
                     Института Психосоматики.</TextMentorInfo>
                 <HighlightInfo onLinkClick={() => setIsOpenCertificate(true)}><a id='important-link'>Диплом</a>
                     : нажмите, чтобы открыть модальное окно и ознакомиться с моим дипломом.</HighlightInfo>
                 <Dialog isOpen={isOpenCertificate} setIsOpen={setIsOpenCertificate}> <Image src="/certificate.jpg"
-                                                                                            alt="" width={533}
-                                                                                            height={750}/> </Dialog>
+                                                                                            alt="" width={1000}
+                                                                                            height={700}/> </Dialog>
             </div>
             <PhotoMentorInfo>specialist.jpg</PhotoMentorInfo>
         </main>
