@@ -1,62 +1,69 @@
 import {ContactInput, PasswordInput} from "@/shared/componetns/shared/Inputs";
 import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {Button} from "@/shared/componetns/ui";
-import styles from "./AuthForm.module.scss"
+import styles from "./AuthForm.module.scss";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
-import {signIn} from "next-auth/react";
+import {signIn, SignInResponse, signOut, useSession} from "next-auth/react";
 import useDialogStore from "@/shared/stores/dialogStore";
-import {Github} from "lucide-react";
-
-// const socket = io("http://localhost:4000");
+import {QRCodeSection} from "@/shared/componetns/shared/Forms/AuthForm/QRCodeSection/QRCodeSection";
 
 export function AuthForm() {
-    const {register, formState: {errors}, clearErrors, handleSubmit, watch, reset} = useForm({
-        mode: "onBlur",
-    });
+    const { register, formState: { errors }, clearErrors, handleSubmit, watch, reset } = useForm({ mode: "onBlur" });
+    const { setTitle } = useDialogStore();
+    const { data: session } = useSession();
 
     const [qrLink, setQrLink] = useState<string | null>(null);
     const [mode, setMode] = useState<"login" | "register">("login");
-    const setTitle = useDialogStore((state) => state.setTitle);
+    const [dataAfterRegistration, setDataAfterRegistration] = useState<FieldValues | null>(null);
+
+    useEffect(() => setTitle(mode === "login" ? "Вход в аккаунт" : "Регистрация"), [mode, setTitle]);
 
     useEffect(() => {
-        if (mode === "login") {
-            setTitle("Вход в аккаунт")
+        if (session?.user.webSocketToken) {
+            signOut({redirect: false})
+            const ws = new WebSocket(`ws://localhost:8080/ws/auth/confirmation?token=${session.user.webSocketToken}`);
+            ws.onopen = () => console.log("WebSocket подключен");
+            ws.onclose = async () => {
+                console.log("WebSocket отключён");
+                if (dataAfterRegistration) onSubmit(dataAfterRegistration);
+            }
+            ws.onerror = (error) => console.error("Ошибка WebSocket:", error);
         }
+    }, [session, dataAfterRegistration]);
+
+    useEffect(() => {
+        if (session?.user.tbBotConfirmationUrl) {
+            setQrLink(session.user.tbBotConfirmationUrl);
+        }
+    }, [session]);
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const formattedContact = data.contact.startsWith("+7") ? "+" + data.contact.replace(/[^0-9]/g, "") : data.contact;
+        const credentials = {
+            username: formattedContact,
+            password: data.password,
+            redirect: false,
+            callbackUrl: "/",
+        };
+
         if (mode === "register") {
-            setTitle("Регистрация")
-        }
-    }, [mode, setTitle]);
-
-    const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
-        console.log(data)
-        if (mode === 'login') {
-            toast.success('Вы успешно авторизовались!')
+            setDataAfterRegistration(data);
+            await signIn("credentials", {...credentials, isRegister: true});
+            onSwitchMode();
         } else {
-            setQrLink('https://www.google.com/')
+            const result = await signIn("credentials", credentials);
+            handleAuthResult(result);
         }
+    };
 
-        //     if (mode === "login") {
-        //         const result = await signIn("credentials", {
-        //             identifier: data.identifier,
-        //             password: data.password,
-        //             redirect: false,
-        //         });
-        //         if (result?.error) {
-        //             toast.error("Ошибка авторизации");
-        //         } else {
-        //             toast.success("Вы успешно вошли!");
-        //         }
-        //     } else {
-        //         socket.emit("start-registration", { phone: data.identifier });
-        //
-        //         socket.on("qr-code", (qr: string) => setQrLink(qr));
-        //
-        //         socket.on("registration-confirmed", () => {
-        //             toast.success("Регистрация подтверждена!");
-        //             reset();
-        //         });
-        //     }
+    const handleAuthResult = (result: SignInResponse | undefined) => {
+        if (result?.status === 401 && !qrLink) return toast.error("Ошибка авторизации: Неверный логин или пароль");
+
+        if (result?.ok) {
+            toast.success("Успешная авторизация!");
+            setTimeout(() => (window.location.href = "/"), 700);
+        }
     };
 
     const onSwitchMode = () => {
@@ -68,11 +75,7 @@ export function AuthForm() {
         <>
             <div>
                 {qrLink ? (
-                    <div>
-                        <h2>Подтвердите через Telegram</h2>
-                        <img src={qrLink} alt="QR Code для Telegram"/>
-                        <p>Сканируйте QR код в Telegram</p>
-                    </div>
+                    <QRCodeSection qrLink={qrLink}/>
                 ) : (
                     <>
                         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -98,10 +101,6 @@ export function AuthForm() {
                                 : (<p className={styles.paragraph}>Нет аккаунта? <a className={styles.switchMode}
                                                                                     onClick={onSwitchMode}>Зарегистрироваться</a>
                                 </p>)}
-                            {/* FOR DEV */}
-                            <Button type="button" className={styles.buttonRegistration}
-                                    onClick={() => signIn('github', {callbackUrl: '/', redirect: true})}><Github/>GitHub</Button>
-                            {/* FOR DEV */}
                         </form>
                     </>
                 )}

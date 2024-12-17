@@ -13,22 +13,8 @@ export type Navigation = {
 }
 
 export type User = {
-    id: number;
-    name: string;
-    password: string;
-    email: string;
-}
-
-export type Token = {
-    id: string;
-    name?: string;
-    email?: string;
-    image?: string;
-}
-
-export type SessionUser = {
-    id: string;
-    name?: string;
-    email?: string;
-    image?: string;
+    firstname: string | null;
+    lastname: string | null;
+    phone: string | null;
+    telegram: string | null
 }

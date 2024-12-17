@@ -13,18 +13,6 @@
     background: inherit;
     border: 1px solid $title-font-color;
 
-    /* FOR DEV */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-        margin-right: 5px;
-        stroke: $title-font-color;
-    }
-
-    /* FOR DEV */
-
     &:hover {
         border: 1px solid $button-hover-color;
     }
