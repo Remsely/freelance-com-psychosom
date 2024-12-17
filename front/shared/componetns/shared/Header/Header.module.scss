@@ -3,12 +3,22 @@
     padding-top: 25px;
     padding-bottom: 50px;
 
-    .title {
-        color: $title-font-color;
-        font-weight: $font-weight-title;
-        font-size: $font-size-title;
-        text-align: center;
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 12px;
+
+        .title {
+            color: $title-font-color;
+            font-weight: $font-weight-title;
+            font-size: $font-size-title;
+            text-align: center;
+        }
+
+        img {
+            margin-right: 5px;
+        }
     }
 
     .navbar {
