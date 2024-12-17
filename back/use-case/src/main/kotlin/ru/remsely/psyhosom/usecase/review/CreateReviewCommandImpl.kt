@@ -29,6 +29,11 @@ open class CreateReviewCommandImpl(
     @Transactional
     override fun execute(event: CreateReviewEvent): Either<DomainError, Review> = either {
         val patient = patientFinder.findPatientById(event.patientId).bind()
+
+        ensure(patient.firstName != null && patient.lastName != null) {
+            ReviewCreationError.PatientPersonalDataNotFilled(patientId = patient.id)
+        }
+
         val psychologist = psychologistFinder.findPsychologistById(event.psychologistId).bind()
 
         ensure(
@@ -44,12 +49,12 @@ open class CreateReviewCommandImpl(
         }
 
         ensure(
-            consultationFinder.existActiveConsultationByPatientAndPsychologist(
+            consultationFinder.existFinishedConsultationByPatientAndPsychologist(
                 patientId = patient.id,
                 psychologistId = psychologist.id
             )
         ) {
-            ReviewCreationError.ConsultationWithPsychologistNotFound(
+            ReviewCreationError.FinishedConsultationWithPsychologistNotFound(
                 patientId = patient.id,
                 psychologistId = psychologist.id
             )

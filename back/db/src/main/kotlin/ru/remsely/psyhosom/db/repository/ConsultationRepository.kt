@@ -12,7 +12,11 @@ interface ConsultationRepository : JpaRepository<Consultation, Long> {
         statuses: List<DomainConsultation.Status>
     ): Boolean
 
-    fun existsByPatientIdAndPsychologistId(patientId: Long, psychologistId: Long): Boolean
+    fun existsByPatientIdAndPsychologistIdAndStatus(
+        patientId: Long,
+        psychologistId: Long,
+        status: DomainConsultation.Status
+    ): Boolean
 
     @EntityGraph(attributePaths = ["patient", "psychologist"])
     fun findByPatientIdAndPsychologistIdAndStatusNotIn(

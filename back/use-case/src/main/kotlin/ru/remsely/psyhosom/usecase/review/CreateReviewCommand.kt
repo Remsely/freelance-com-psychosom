@@ -17,10 +17,16 @@ sealed class ReviewCreationError(override val message: String) : DomainError.Bus
         "Review from patient $patientId for psychologist $psychologistId already exist."
     )
 
-    data class ConsultationWithPsychologistNotFound(
+    data class FinishedConsultationWithPsychologistNotFound(
         private val psychologistId: Long,
         private val patientId: Long
     ) : ReviewCreationError(
-        "Consultation with psychologist $psychologistId for patient $patientId not found."
+        "Finished consultation with psychologist $psychologistId for patient $patientId not found."
+    )
+
+    data class PatientPersonalDataNotFilled(
+        private val patientId: Long
+    ) : ReviewCreationError(
+        "Patient $patientId personal data not filled."
     )
 }

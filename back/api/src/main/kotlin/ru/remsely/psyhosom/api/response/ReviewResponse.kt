@@ -3,7 +3,7 @@ package ru.remsely.psyhosom.api.response
 import ru.remsely.psyhosom.domain.review.Review
 import java.time.LocalDate
 
-data class CreateReviewResponse(
+data class ReviewResponse(
     val patient: Patient,
     val psychologist: Psychologist,
     val id: Long,
@@ -22,13 +22,13 @@ data class CreateReviewResponse(
     )
 }
 
-fun Review.toResponse() = CreateReviewResponse(
-    patient = CreateReviewResponse.Patient(
+fun Review.toResponse() = ReviewResponse(
+    patient = ReviewResponse.Patient(
         id = patient.id,
         name = patient.firstName!!,
         secondName = patient.lastName!!
     ),
-    psychologist = CreateReviewResponse.Psychologist(
+    psychologist = ReviewResponse.Psychologist(
         id = psychologist.id
     ),
     id = id,

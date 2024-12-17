@@ -7,4 +7,6 @@ import ru.remsely.psyhosom.db.entity.Review
 @Repository
 interface ReviewRepository : JpaRepository<Review, Long> {
     fun existsByPatientIdAndPsychologistId(patientId: Long, psychologistId: Long): Boolean
+
+    fun findByPsychologistId(psychologistId: Long): List<Review>
 }

@@ -61,10 +61,11 @@ open class ConsultationDao(
     }
 
     @Transactional(readOnly = true)
-    override fun existConsultationByPatientIdAndPsychologistId(patientId: Long, psychologistId: Long): Boolean =
-        repository.existsByPatientIdAndPsychologistId(
+    override fun existFinishedConsultationByPatientAndPsychologist(patientId: Long, psychologistId: Long): Boolean =
+        repository.existsByPatientIdAndPsychologistIdAndStatus(
             patientId = patientId,
-            psychologistId = psychologistId
+            psychologistId = psychologistId,
+            status = Consultation.Status.FINISHED
         ).also {
             log.info(
                 if (it)
@@ -119,4 +120,21 @@ open class ConsultationDao(
             ).toEntity()
         ).toDomain()
     }
+
+    // TODO: убрать
+    @Transactional
+    override fun finishConsultation(consultationId: Long): Boolean =
+        findConsultationById(consultationId)
+            .fold(
+                { false },
+                {
+                    repository.save(
+                        it.copy(
+                            status = Consultation.Status.FINISHED
+                        ).toEntity()
+                    )
+                    true
+                }
+            )
+
 }

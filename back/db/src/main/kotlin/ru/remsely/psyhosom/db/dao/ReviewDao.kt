@@ -34,6 +34,15 @@ open class ReviewDao(
             )
         }
 
+    @Transactional(readOnly = true)
+    override fun findReviewsByPsychologistId(psychologistId: Long): List<Review> =
+        repository.findByPsychologistId(psychologistId)
+            .map {
+                it.toDomain()
+            }.also {
+                log.info("${it.size} reviews for psychologist with id $psychologistId found in DB.")
+            }
+
     @Transactional
     override fun createReview(review: Review): Either<DomainError, Review> =
         repository.save(review.toEntity())
