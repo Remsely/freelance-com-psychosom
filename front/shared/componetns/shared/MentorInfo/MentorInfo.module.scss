@@ -1,0 +1,19 @@
+@use "@/shared/styles/variables" as *;
+
+.main {
+    display: flex;
+    position: relative;
+
+    border-left: $border-shadow;
+    border-top: $border-shadow;
+    backdrop-filter: $backdrop-filter;
+    background: $background-div-color;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    height: 560px;
+
+    .description {
+        width: 600px;
+        padding: 25px 0 0 20px;
+    }
+}
