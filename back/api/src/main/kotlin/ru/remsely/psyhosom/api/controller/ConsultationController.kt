@@ -29,7 +29,7 @@ class ConsultationController(
     private val log = logger()
 
     @PostMapping
-    fun createSession(
+    fun createConsultation(
         @AuthPatientId patientId: Long,
         @RequestBody request: CreateConsultationRequest
     ): ResponseEntity<*> {
@@ -58,7 +58,7 @@ class ConsultationController(
     }
 
     @GetMapping("/active")
-    fun findActiveSession(
+    fun findActiveConsultation(
         @AuthPatientId patientId: Long,
         @RequestParam(required = true) psychologistId: Long
     ): ResponseEntity<*> {

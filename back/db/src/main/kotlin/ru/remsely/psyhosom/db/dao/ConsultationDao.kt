@@ -26,7 +26,7 @@ open class ConsultationDao(
             .toDomain()
             .right()
             .also {
-                log.info("Session with id ${consultation.id} successfully created in DB.")
+                log.info("Consultation with id ${consultation.id} successfully created in DB.")
             }
 
     @Transactional(readOnly = true)
@@ -38,7 +38,7 @@ open class ConsultationDao(
                 { ConsultationFindingError.NotFoundById(consultationId).left() },
                 {
                     it.toDomain().right().also {
-                        log.info("Session with id $consultationId successfully found in DB.")
+                        log.info("Consultation with id $consultationId successfully found in DB.")
                     }
                 }
             )
@@ -47,18 +47,32 @@ open class ConsultationDao(
     override fun existActiveConsultationByPatientAndPsychologist(
         patientId: Long,
         psychologistId: Long
-    ): Boolean = repository.existsSessionByPatientIdAndPsychologistIdAndStatusNotIn(
+    ): Boolean = repository.existsByPatientIdAndPsychologistIdAndStatusNotIn(
         patientId = patientId,
         psychologistId = psychologistId,
         statuses = listOf(Consultation.Status.FINISHED, Consultation.Status.CANCELED)
     ).also {
         log.info(
             if (it)
-                "Session for patient with id $patientId and psychologist with id $psychologistId exist in DB."
+                "Active consultation for patient with id $patientId and psychologist with id $psychologistId exist in DB."
             else
-                "Session for patient with id $patientId and psychologist with id $psychologistId not exist in DB."
+                "Active consultation for patient with id $patientId and psychologist with id $psychologistId not exist in DB."
         )
     }
+
+    @Transactional(readOnly = true)
+    override fun existConsultationByPatientIdAndPsychologistId(patientId: Long, psychologistId: Long): Boolean =
+        repository.existsByPatientIdAndPsychologistId(
+            patientId = patientId,
+            psychologistId = psychologistId
+        ).also {
+            log.info(
+                if (it)
+                    "Consultation for patient with id $patientId and psychologist with id $psychologistId exist in DB."
+                else
+                    "Consultation for patient with id $patientId and psychologist with id $psychologistId not exist in DB."
+            )
+        }
 
     @Transactional(readOnly = true)
     override fun findActiveSessionByPatientIdAndPsychologistId(
