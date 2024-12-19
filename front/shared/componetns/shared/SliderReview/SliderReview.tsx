@@ -34,7 +34,7 @@ export const SliderReview: FC = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/v1/psychologists/1/reviews");
+                const response = await fetch("http://109.196.101.51:8080/api/v1/psychologists/1/reviews");
                 if (!response.ok) {
                     throw new Error("Не удалось загрузить отзывы");
                 }

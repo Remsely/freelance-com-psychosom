@@ -28,7 +28,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
             const phone = data.contact.startsWith("+7") ? "+" + data.contact.replace(/[^0-9]/g, "") : data.contact;
             const telegram = data.contact.startsWith("@") ? data.contact : null
             try {
-                const response = await fetch('http://localhost:8080/api/v1/psychologists/1/consultations', {
+                const response = await fetch('http://109.196.101.51:8080/api/v1/psychologists/1/consultations', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${session.user.jwtToken}`,
@@ -41,7 +41,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
                 }
 
                 const userData = { firstName: data.firstName, lastName: data.lastName, phone: phone, telegram: telegram};
-                const userDataResponse = await fetch('http://localhost:8080/api/v1/patients', {
+                const userDataResponse = await fetch('http://109.196.101.51:8080/api/v1/patients', {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${session.user.jwtToken}`,

@@ -32,7 +32,7 @@ export function ReviewForm() {
     const onSubmit: SubmitHandler<FieldValues> = async (data: Review) => {
         try {
             const reviewData = { rating: data.rating, text: data.text };
-            const response = await fetch("http://localhost:8080/api/v1/psychologists/1/reviews", {
+            const response = await fetch("http://109.196.101.51:8080/api/v1/psychologists/1/reviews", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
