@@ -10,7 +10,7 @@ export function Footer() {
                 <footer className={`${styles.footer} container`}>
                     <div className={styles.logo}>
                         <Image src="/logo-without-bg.svg" alt="" width={40} height={40}/>
-                        <h1 className={styles.title}>ПсихоСома</h1>
+                        <h1 className={styles.title}>Psychosom</h1>
                     </div>
                     <div className={styles.important}>
                         <h2>Важное</h2>
