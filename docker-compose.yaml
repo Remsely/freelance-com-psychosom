@@ -5,22 +5,22 @@ services:
       - '3000:3000'
     environment:
       - NEXTAUTH_SECRET=24230c0d373a2bba872b0893dc81ec00
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://109.196.101.51:3000
       - BACKEND_URL=http://back:8080
     depends_on:
       - back
 
   back:
-    build: ./back
+    build: ./deploy
     ports:
       - '8080:8080'
     environment:
-      - DB_NAME=psyhosom
-      - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=test
+      - DB_NAME=psychosom
+      - POSTGRES_USER=psychosom
+      - POSTGRES_PASSWORD=psychosom348233083
       - DB_HOST=db
       - DB_PORT=5432
-      - PSYHOSOM_WEB_URL=http://localhost:3000
+      - PSYHOSOM_WEB_URL=http://109.196.101.51:3000
       - PSYHOSOM_BOT_TOKEN=7849359674:AAGu7dC2hjt6JwchT6UIqjt64XHat5UrUH8
       - PSYHOSOM_BOT_USERNAME=psyhosom_test_1_bot
     depends_on:
@@ -35,9 +35,9 @@ services:
       timeout: 10s
       retries: 5
     environment:
-      POSTGRES_DB: psyhosom
-      POSTGRES_USER: test
-      POSTGRES_PASSWORD: test
+      POSTGRES_DB: psychosom
+      POSTGRES_USER: psychosom
+      POSTGRES_PASSWORD: psychosom348233083
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
