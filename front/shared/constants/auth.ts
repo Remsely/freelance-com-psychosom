@@ -11,18 +11,6 @@ const apiRequest = async (url: string, body: Record<string, unknown>) => {
     return { ok: res.ok, data };
 };
 
-// const apiRequestWithToken = async (url: string, token: string) => {
-//     const res = await fetch(url, {
-//         method: "GET",
-//         headers: {
-//             "Authorization": `Bearer ${token}`,
-//             "Content-Type": "application/json",
-//         },
-//     });
-//     const data = await res.json();
-//     return { ok: res.ok, data };
-// };
-
 export const authConfig: AuthOptions = {
     providers: [
         CredentialsProvider({
@@ -53,14 +41,6 @@ export const authConfig: AuthOptions = {
         async jwt({ token, user}) {
             if (user) {
                 token = { ...token, ...user };
-                // if (!token.jwtToken) throw new Error("JWT token is missing");
-                //
-                // const profileEndpoint = "http://localhost:8080/api/v1/patients/profile";
-                // const { ok, data } = await apiRequestWithToken(profileEndpoint, token.jwtToken);
-                //
-                // if (ok) {
-                //     token = { ...token, ...data };
-                // }
             }
             return token;
         },

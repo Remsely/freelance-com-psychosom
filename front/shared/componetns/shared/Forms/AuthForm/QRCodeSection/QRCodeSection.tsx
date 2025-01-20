@@ -17,8 +17,8 @@ export function QRCodeSection(props: { qrLink: string }) {
             <div>
                 <QRCodeSVG className="qrCode" value={props.qrLink} size={350} fgColor={"#6E522D"} imageSettings={{
                     src: "/logo-without-bg.svg",
-                    height: 60,
-                    width: 60,
+                    height: 50,
+                    width: 50,
                     opacity: 1,
                     excavate: true,
                 }}/>
