@@ -10,7 +10,7 @@ export function Header() {
             <header id="head" className={`${styles.header} container`}>
                 <div className={styles.logo}>
                     <Image src="/logo-without-bg.svg" alt="" width={50} height={50}/>
-                    <h1 className={styles.title}>ПсихоСома</h1>
+                    <h1 className={styles.title}>Психосоматика</h1>
                 </div>
                 <nav className={styles.navbar}>
                     <Navbar/>
