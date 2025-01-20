@@ -38,7 +38,6 @@ export function ConsultationForm(props: ConsultationFormProps) {
             if (data.phone) {
                 data.phone = data.phone.replace(/[^0-9]/g, "");
             }
-            console.log(data);
             props.setIsOpen(true);
             setIsSubmitted(true);
             Cookies.set(Cookie.consultationFormSubmitted, 'true', {expires: 1});
@@ -46,7 +45,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
             setContactValue("");
         } else {
             props.setIsOpen(true);
-            toast("Прежде чем записаться к консультанту, пожалуйста, войдите в аккаунт", {
+            toast("Прежде чем записаться на консультацию, пожалуйста, войдите в аккаунт", {
                 icon: <CircleAlert />,
                 duration: 3000,
                 className: styles.toast

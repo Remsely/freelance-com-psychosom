@@ -28,8 +28,7 @@ export function ReviewForm() {
         }
     }, [setTitle]);
 
-    const onSubmit: SubmitHandler<FieldValues> = (data: object) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<FieldValues> = () => {
         setIsSubmitted(true);
         Cookies.set(Cookie.reviewFormSubmitted, "true", {expires: 1});
         setTitle("")
