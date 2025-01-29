@@ -1,4 +1,4 @@
-FROM oven/bun:latest as base
+FROM oven/bun:latest AS base
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ ENV NEXT_PUBLIC_REST_URL=$NEXT_PUBLIC_REST_URL
 
 RUN bun next build
 
-FROM oven/bun:slim as runner
+FROM oven/bun:slim AS runner
 
 WORKDIR /app
 
