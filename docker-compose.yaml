@@ -1,11 +1,17 @@
 services:
   front:
-    build: ./front
+    build:
+      context: ./front
+      args:
+        NEXT_PUBLIC_WS_URL: ws://localhost:8080
+        NEXT_PUBLIC_REST_URL: http://localhost:8080
     ports:
       - '3000:3000'
     environment:
       - NEXTAUTH_SECRET=24230c0d373a2bba872b0893dc81ec00
       - NEXTAUTH_URL=http://localhost:3000
+      - NEXT_PUBLIC_REST_URL=${NEXT_PUBLIC_REST_URL}
+      - NEXT_PUBLIC_WS_URL=${NEXT_PUBLIC_WS_URL}
       - BACKEND_URL=http://back:8080
     depends_on:
       - back
