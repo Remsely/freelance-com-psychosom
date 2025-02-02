@@ -25,6 +25,7 @@ export function PasswordInput(props: PasswordInputProps) {
                 <h2 className={styles.title}>{props.mode === "again" ? "Повторите пароль" : "Пароль"}</h2>
                 <div className={styles.input}>
                     <input
+                        placeholder={props.mode === "again" ? "Повторите пароль" : "Пароль"}
                         type={showPassword ? "text" : "password"}
                         {...props.register(
                             props.mode === "again" ? "passwordAgain" : "password",

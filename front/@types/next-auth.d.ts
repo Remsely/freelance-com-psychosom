@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
     interface Session {
@@ -9,8 +9,8 @@ declare module "next-auth" {
             telegram?: string | null;
             jwtToken?: string;
             webSocketToken?: string;
-            tbBotConfirmationUrl?: string;
-        };
+            accountConfirmationUrl?: string;
+        } & DefaultSession["user"];
     }
 
     interface User {
@@ -18,20 +18,20 @@ declare module "next-auth" {
         lastname?: string | null;
         phone?: string | null;
         telegram?: string | null;
-        tbBotConfirmationUrl?: string;
-        webSocketToken?: string;
         jwtToken?: string;
+        webSocketToken?: string;
+        accountConfirmationUrl?: string;
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        jwtToken?: string | undefined;
+        jwtToken?: string;
         firstname?: string | null;
         lastname?: string | null;
         phone?: string | null;
         telegram?: string | null;
-        tbBotConfirmationUrl?: string;
         webSocketToken?: string;
+        accountConfirmationUrl?: string;
     }
 }
