@@ -160,12 +160,13 @@ label {
   Приводим к единому цвету svg-элементы
  */
 
-svg[fill], svg[stroke] {
-  fill: currentColor;
-  stroke: currentColor;
+svg:not(.qrCode) [fill] { fill: currentColor }
+svg:not(.qrCode) [stroke] { stroke: currentColor }
+
+
+#qrCode svg:not(.qrCode) [fill] {
+  fill: currentColor
 }
-
-
 
 /**
   Чиним баг задержки смены цвета при взаимодействии с svg-элементами

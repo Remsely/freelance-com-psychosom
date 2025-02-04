@@ -101,7 +101,7 @@ export function ProfileForm() {
                             <LoadingSpinner/>
                         </div>
                     ) : status === "unauthenticated" ? (
-                        redirect('/not-auth')
+                        redirect('/')
                     ) : message ? (
                         <p className={styles.message}>{message}</p>
                     ) : profile ? (
