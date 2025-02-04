@@ -29,8 +29,6 @@ export function ProfileForm() {
         setLoading(true);
         setMessage("");
 
-        console.log(session)
-
         try {
             const res = await fetch(`/api/proxy/api/v1/patients`);
 
@@ -98,38 +96,47 @@ export function ProfileForm() {
             <div>
                 <form onSubmit={handleUpdate}>
                     <h1 className={styles.title}>Профиль пользователя</h1>
-                    {
-                        status === "loading" ? <div className={styles.loaderWrapper}><LoadingSpinner/></div> :
-                            status === "unauthenticated" ? redirect('/not-auth') :
-                                message ? <p className={styles.message}>{message}</p> :
-                                    <>
-                                        <div>
-                                            <label>
-                                                Имя:
-                                                <Input
-                                                    name="firstName"
-                                                    defaultValue={profile?.firstName}
-                                                    required
-                                                    disabled={loading}
-                                                />
-                                            </label>
-                                        </div>
-                                        <div>
-                                            <label>
-                                                Фамилия:
-                                                <Input
-                                                    name="lastName"
-                                                    defaultValue={profile?.lastName}
-                                                    required
-                                                    disabled={loading}
-                                                />
-                                            </label>
-                                        </div>
-                                        <Button className={styles.button} type="submit" disabled={loading}>
-                                            {loading ? "Обновление..." : "Обновить профиль"}
-                                        </Button>
-                                    </>
-                    }
+                    {status === "loading" ? (
+                        <div className={styles.loaderWrapper}>
+                            <LoadingSpinner/>
+                        </div>
+                    ) : status === "unauthenticated" ? (
+                        redirect('/not-auth')
+                    ) : message ? (
+                        <p className={styles.message}>{message}</p>
+                    ) : profile ? (
+                        <>
+                            <div>
+                                <label>
+                                    Имя:
+                                    <Input
+                                        name="firstName"
+                                        defaultValue={profile.firstName}
+                                        required
+                                        disabled={loading}
+                                    />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Фамилия:
+                                    <Input
+                                        name="lastName"
+                                        defaultValue={profile.lastName}
+                                        required
+                                        disabled={loading}
+                                    />
+                                </label>
+                            </div>
+                            <Button className={styles.button} type="submit" disabled={loading}>
+                                {loading ? "Обновление..." : "Обновить профиль"}
+                            </Button>
+                        </>
+                    ) : (
+                        <div className={styles.loaderWrapper}>
+                            <LoadingSpinner/>
+                        </div>
+                    )}
                 </form>
             </div>
         </div>
