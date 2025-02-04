@@ -1,0 +1,52 @@
+@use "@/shared/styles/variables" as *;
+
+.notFoundBlock {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    .info {
+        margin: auto 0;
+    }
+
+    svg {
+        stroke: $title-font-color;
+    }
+
+    .titleBlock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+            color: $title-font-color;
+            font-size: $font-size-title;
+        }
+
+        svg {
+            margin-left: 10px;
+        }
+    }
+
+    p {
+        width: 610px;
+        font-size: $font-size-text-title;
+    }
+
+    .buttonsContainer {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+
+        .button {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+
+            svg {
+                margin-right: 8px;
+            }
+        }
+    }
+}
