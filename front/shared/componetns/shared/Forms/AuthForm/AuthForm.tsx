@@ -1,3 +1,5 @@
+"use client";
+
 import {ContactInput, NameInput, PasswordInput} from "@/shared/componetns/shared/Inputs";
 import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {Button} from "@/shared/componetns/ui";
@@ -27,9 +29,9 @@ export function AuthForm() {
     useEffect(() => setTitle(mode === "login" ? "Вход в аккаунт" : "Регистрация"), [mode, setTitle]);
 
     useEffect(() => {
-        if (session?.user.webSocketToken) {
+        if (session?.webSocketToken) {
             signOut({redirect: false});
-            const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/ws/auth/confirmation?token=${session.user.webSocketToken}`);
+            const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/ws/auth/confirmation?token=${session.webSocketToken}`);
             ws.onopen = () => console.log("WebSocket подключен");
             ws.onclose = async () => {
                 console.log("WebSocket отключён");
@@ -40,8 +42,8 @@ export function AuthForm() {
     }, [session, dataAfterRegistration]);
 
     useEffect(() => {
-        if (session?.user.accountConfirmationUrl) {
-            setQrLink(session.user.accountConfirmationUrl);
+        if (session?.accountConfirmationUrl) {
+            setQrLink(session.accountConfirmationUrl);
         }
     }, [session]);
 

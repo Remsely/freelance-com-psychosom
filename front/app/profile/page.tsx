@@ -1,5 +1,6 @@
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
+import {ProfileForm} from "@/shared/componetns/shared/Forms";
 
 export default async function ProfilePage() {
     const session = await getUserSession();
@@ -8,12 +9,5 @@ export default async function ProfilePage() {
         return redirect('/not-auth');
     }
 
-    const user = session;
-
-
-    if (!user) {
-        return redirect('/not-auth');
-    }
-
-    return <div>{user.firstname}</div>;
+    return <ProfileForm/>;
 }

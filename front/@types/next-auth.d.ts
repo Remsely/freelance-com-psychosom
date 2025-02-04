@@ -1,37 +1,31 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth from "next-auth";
 
 declare module "next-auth" {
     interface Session {
+        token?: string;
+        webSocketToken?: string;
+        accountConfirmationUrl?: string;
         user: {
             firstname?: string | null;
             lastname?: string | null;
-            phone?: string | null;
-            telegram?: string | null;
-            jwtToken?: string;
-            webSocketToken?: string;
-            accountConfirmationUrl?: string;
-        } & DefaultSession["user"];
+            username?: string | null;
+        };
     }
 
     interface User {
         firstname?: string | null;
         lastname?: string | null;
-        phone?: string | null;
-        telegram?: string | null;
-        jwtToken?: string;
-        webSocketToken?: string;
-        accountConfirmationUrl?: string;
+        username?: string | null;
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        jwtToken?: string;
+        token?: string;
         firstname?: string | null;
         lastname?: string | null;
-        phone?: string | null;
-        telegram?: string | null;
+        username?: string | null;
         webSocketToken?: string;
         accountConfirmationUrl?: string;
     }

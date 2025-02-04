@@ -1,5 +1,6 @@
-import { AuthOptions } from "next-auth";
+import {AuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { cookies } from "next/headers";
 
 interface AuthRequest {
     username: string;
@@ -12,7 +13,7 @@ const apiRequest = async (url: string, body: AuthRequest) => {
     try {
         const res = await fetch(url, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body),
         });
 
@@ -20,13 +21,13 @@ const apiRequest = async (url: string, body: AuthRequest) => {
 
         if (!res.ok) {
             console.error("Запрос к API не выполнен:", data);
-            return { ok: false, data };
+            return {ok: false, data};
         }
 
-        return { ok: true, data };
+        return {ok: true, data};
     } catch (error) {
         console.error("Исключение при запросе к API:", error);
-        return { ok: false, data: null };
+        return {ok: false, data: null};
     }
 };
 
@@ -35,10 +36,10 @@ export const authConfig: AuthOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                username: { label: "Username", type: "text" },
-                password: { label: "Password", type: "password" },
-                firstName: { label: "FirstName", type: "text" },
-                lastName: { label: "LastName", type: "text" },
+                username: {label: "Username", type: "text"},
+                password: {label: "Password", type: "password"},
+                firstName: {label: "FirstName", type: "text"},
+                lastName: {label: "LastName", type: "text"},
             },
             async authorize(credentials, req) {
                 if (!credentials?.username || !credentials?.password) {
@@ -66,14 +67,25 @@ export const authConfig: AuthOptions = {
                     requestBody.lastName = credentials.lastName;
                 }
 
-                const { ok, data } = await apiRequest(endpoint, requestBody);
+                const {ok, data} = await apiRequest(endpoint, requestBody);
+
+                (await cookies()).set("backend_token", data.token, {
+                    httpOnly: true,
+                    secure: !!process.env.NEXTAUTH_SECRET,
+                    sameSite: "lax",
+                    path: "/",
+                    maxAge: 60 * 60 * 24 * 7,
+                });
 
                 return ok ? data : null;
             },
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
-    session: { strategy: "jwt" },
+    session: {
+        strategy: "jwt",
+        maxAge: 60 * 60 * 24 * 7,
+    },
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
@@ -82,11 +94,8 @@ export const authConfig: AuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            session.user = {
-                jwtToken: token.jwtToken,
-                webSocketToken: token.webSocketToken,
-                accountConfirmationUrl: token.accountConfirmationUrl,
-            };
+            session.webSocketToken = token.webSocketToken;
+            session.accountConfirmationUrl = token.accountConfirmationUrl;
             return session;
         },
     },
