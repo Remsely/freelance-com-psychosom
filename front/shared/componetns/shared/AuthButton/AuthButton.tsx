@@ -4,7 +4,7 @@ import styles from "./AuthButton.module.scss"
 import {AuthForm} from "@/shared/componetns/shared/Forms";
 import {useEffect, useState} from "react";
 import {Dialog, Popover, PopoverContent, PopoverTrigger} from "@/shared/componetns/ui";
-import {LogIn, LogOut, Settings, User} from "lucide-react";
+import {LogIn, LogOut, PenLine, User} from "lucide-react";
 import useDialogStore from "@/shared/stores/dialogStore";
 import {signOut, useSession} from "next-auth/react";
 import Link from "next/link";
@@ -33,7 +33,7 @@ export function AuthButton() {
                     <ul className={styles.authList}>
                         <li className={styles.authItem}>
                             <Link href="/profile">
-                                <Settings /> Настройки
+                                <PenLine /> Изменить
                             </Link>
                         </li>
                         <li onClick={() => signOut()} className={styles.authItem}>

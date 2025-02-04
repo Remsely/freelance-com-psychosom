@@ -6,7 +6,7 @@ export default async function ProfilePage() {
     const session = await getUserSession();
 
     if (!session) {
-        return redirect('/not-auth');
+        return redirect('/');
     }
 
     return <ProfileForm/>;
