@@ -1,14 +1,15 @@
-import {NextRequest, NextResponse} from "next/server";
-import {cookies} from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export const dynamic = 'force-dynamic';
 
-async function handler(req: NextRequest, { params }: { params: { path: string[] } })  {
+async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }>}) {
+    const { path } = await params;
     try {
         const token = (await cookies()).get("backend_token")?.value;
         if (!token) return new NextResponse("Unauthorized", {status: 401});
 
-        const pathSegment = params.path.join("/");
+        const pathSegment = path.join("/");
         const backendUrl = new URL(`${process.env.BACKEND_URL}/${pathSegment}${req.nextUrl.search}`);
 
         const res = await fetch(backendUrl, {
@@ -23,7 +24,6 @@ async function handler(req: NextRequest, { params }: { params: { path: string[] 
 
         const data = await res.json();
         return NextResponse.json(data);
-
     } catch (error) {
         console.error("Proxy error:", error);
         return new NextResponse("Internal Server Error", {status: 500});

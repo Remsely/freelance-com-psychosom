@@ -7,32 +7,17 @@ import {
     SubmitMessage,
     SliderReview
 } from "@/shared/componetns/shared";
-import {useEffect, useState} from "react";
+import {useEffect, useState, Suspense} from "react";
 import {AuthForm, ConsultationForm} from "@/shared/componetns/shared/Forms";
 import {Dialog} from "@/shared/componetns/ui";
 import {useSession} from "next-auth/react";
 import useDialogStore from "@/shared/stores/dialogStore";
-import { useSearchParams } from "next/navigation";
-import {scroller} from "react-scroll";
+import {ScrollToSection} from "@/shared/lib/scroll-to-section";
 
 export default function Home() {
     const {data: session} = useSession();
     const [isOpenForm, setIsOpenForm] = useState(false);
     const setTitle = useDialogStore((state) => state.setTitle);
-
-    const searchParams = useSearchParams();
-
-    useEffect(() => {
-        const section = searchParams.get("section");
-        if (section) {
-            scroller.scrollTo(section, {
-                duration: 800,
-                delay: 0,
-                smooth: "easeInOutQuart",
-                offset: -100,
-            });
-        }
-    }, [searchParams]);
 
     useEffect(() => {
         if (!isOpenForm) {
@@ -41,22 +26,24 @@ export default function Home() {
     }, [isOpenForm, setTitle])
 
     return (
-        <>
-            <div className="container">
-                <MentorInfo/>
+        <div className="container">
+            <Suspense fallback={null}>
+                <ScrollToSection/>
+            </Suspense>
 
-                <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
-                <Dialog isOpen={isOpenForm} setIsOpen={setIsOpenForm}>{ session ? <SubmitMessage
-                    title="Поздравляем, вы записаны!"> Вы записались на консультацию к специалисту.
-                    Скоро с вами свяжется специалист по методу связи, который вы указали. </SubmitMessage> : <AuthForm/>
-                } </Dialog>
+            <MentorInfo/>
 
-                <FrameTitle id="reviews">Отзывы</FrameTitle>
+            <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
+            <Dialog isOpen={isOpenForm} setIsOpen={setIsOpenForm}>{ session ? <SubmitMessage
+                title="Поздравляем, вы записаны!"> Вы записались на консультацию к специалисту.
+                Скоро с вами свяжется специалист по методу связи, который вы указали. </SubmitMessage> : <AuthForm/>}
+            </Dialog>
 
-                <SliderReview/>
+            <FrameTitle id="reviews">Отзывы</FrameTitle>
 
-                <ReviewButton/>
-            </div>
-        </>
+            <SliderReview/>
+
+            <ReviewButton/>
+        </div>
     );
 }
