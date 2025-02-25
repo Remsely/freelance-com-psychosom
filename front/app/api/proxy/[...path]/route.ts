@@ -12,6 +12,14 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
         const pathSegment = path.join("/");
         const backendUrl = new URL(`${process.env.BACKEND_URL}/${pathSegment}${req.nextUrl.search}`);
 
+        let requestBody;
+        if (req.method !== "GET") {
+            const contentLength = req.headers.get('content-length');
+            if (contentLength && parseInt(contentLength) > 0) {
+                requestBody = await req.json();
+            }
+        }
+
         const res = await fetch(backendUrl, {
             method: req.method,
             headers: {
@@ -19,7 +27,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
                 "Content-Type": "application/json",
             },
             cache: "no-store",
-            body: req.method !== "GET" ? JSON.stringify(await req.json()) : undefined,
+            body: requestBody ? JSON.stringify(requestBody) : undefined,
         });
 
         const data = await res.json();

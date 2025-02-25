@@ -1,0 +1,22 @@
+@use "@/shared/styles/variables" as *;
+
+.buttonUi {
+    background: $button-bg-color;
+    color: $title-font-color;
+    font-weight: $font-weight-title;
+    box-shadow: $box-shadow-button;
+    border: none;
+    padding: 6px 12px;
+    border-radius: $border-radius-inputs-form;
+    font-size: $font-size-text;
+    cursor: pointer;
+    transition: $transition-main;
+
+    &:hover {
+        background-color: $button-hover-color;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
