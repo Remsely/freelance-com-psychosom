@@ -28,7 +28,7 @@ export default function Home() {
 
             <SliderReview/>
 
-            <ReviewButton/>
+            <ReviewButton setIsOpenAuthModal={setIsOpenAuthModal}/>
         </div>
     );
 }

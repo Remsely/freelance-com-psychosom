@@ -8,6 +8,7 @@ import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 import {signIn, SignInResponse, signOut, useSession} from "next-auth/react";
 import {QRCodeSection} from "./QRCodeSection/QRCodeSection";
+import {useDataStore} from "@/shared/stores/dataStore";
 
 interface AuthModalFormProps {
     isOpen: boolean;
@@ -27,7 +28,8 @@ export function AuthModalForm({isOpen, onClose}: AuthModalFormProps) {
 
     const [qrLink, setQrLink] = useState<string | null>(null);
     const [mode, setMode] = useState<"login" | "register">("login");
-    const [dataAfterRegistration, setDataAfterRegistration] = useState<FieldValues | null>(null);
+    const setData = useDataStore((state) => state.setDataAfterRegistration);
+    const { dataAfterRegistration } = useDataStore();
 
     useEffect(() => {
         if (session?.webSocketToken) {
@@ -40,7 +42,7 @@ export function AuthModalForm({isOpen, onClose}: AuthModalFormProps) {
             };
             ws.onerror = (error) => console.error("Ошибка WebSocket:", error);
         }
-    }, [session, dataAfterRegistration]);
+    }, [session]);
 
     useEffect(() => {
         if (session?.accountConfirmationUrl) {
@@ -58,7 +60,7 @@ export function AuthModalForm({isOpen, onClose}: AuthModalFormProps) {
         };
 
         if (mode === "register") {
-            setDataAfterRegistration(data);
+            setData(data);
             await signIn("credentials", {
                 ...credentials,
                 firstName: data.firstName,
@@ -80,6 +82,7 @@ export function AuthModalForm({isOpen, onClose}: AuthModalFormProps) {
         if (result?.ok) {
             toast.success("Успешная авторизация!");
             setTimeout(() => (window.location.href = "/"), 700);
+            setData({});
         }
     };
 

@@ -3,8 +3,8 @@
 import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useState} from "react";
 import styles from "./ConsultationForm.module.scss";
-import {Button, Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/componetns/ui";
-import {ContactInput, NameInput, TextInput} from "@/shared/componetns/shared/Inputs";
+import {Button, Calendar, Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/componetns/ui";
+import {TextInput} from "@/shared/componetns/shared/Inputs";
 import {FrameTitle} from "@/shared/componetns/shared";
 import {useSession} from "next-auth/react";
 import {toast} from "react-hot-toast";
@@ -18,11 +18,10 @@ export function ConsultationForm(props: ConsultationFormProps) {
     const [isOpen, setIsOpen] = useState(false);
     const {setIsOpenAuthModal} = props;
     const {data: session} = useSession();
-    const {register, handleSubmit, reset, formState: {errors}, clearErrors} = useForm({
+    const [date, setDate] = useState<Date | undefined>(new Date())
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onBlur",
     });
-
-    const [contactValue, setContactValue] = useState<string>("");
 
     const onSubmit: SubmitHandler<FieldValues> = async () => {
         if (session) {
@@ -31,19 +30,16 @@ export function ConsultationForm(props: ConsultationFormProps) {
                     method: "POST",
                 });
 
-                if (!response.ok) {
-                    throw new Error('Не удалось записать на консультацию!');
-                }
+                if (!response.ok) throw new Error('Не удалось записать на консультацию!');
 
                 reset();
-                setContactValue("");
+                setIsOpen(true);
                 toast.success("Вы успешно записаны на консультацию!");
             } catch (error) {
                 console.error(error);
                 toast.error("Произошла ошибка при записи на консультацию. Пожалуйста, попробуйте позже.");
             }
         } else {
-            setIsOpen(false)
             setIsOpenAuthModal(true);
             toast("Прежде чем записаться к специалисту, пожалуйста, войдите в аккаунт", {
                 icon: <CircleAlert/>,
@@ -61,7 +57,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Поздравляем, вы записаны!</DialogTitle>
-                        <p>Вы записались на консультацию к специалисту.
+                        <p className={styles.textModal}>Вы записались на консультацию к специалисту.
                         Скоро с вами свяжется специалист по методу связи, который вы указали.</p>
                     </DialogHeader>
                 </DialogContent>
@@ -71,6 +67,9 @@ export function ConsultationForm(props: ConsultationFormProps) {
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                     <div className={`${styles.leftColumn} ${styles.block}`}>
                         <div className={styles.inputs}>
+                            <Calendar mode="single"
+                                      selected={date}
+                                      onSelect={setDate}/>
                         </div>
                     </div>
 

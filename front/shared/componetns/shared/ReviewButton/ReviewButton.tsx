@@ -3,13 +3,18 @@
 import styles from "./ReviewButton.module.scss"
 import {useEffect, useState} from "react";
 import {Button} from "@/shared/componetns/ui";
-import {AuthModalForm, ReviewModalForm} from "@/shared/componetns/shared/Forms";
+import {ReviewModalForm} from "@/shared/componetns/shared/Forms";
 import {useSession} from "next-auth/react";
 import {toast} from "react-hot-toast";
 import {CircleAlert} from "lucide-react";
 
-export function ReviewButton() {
+interface ReviewButtonProps {
+    setIsOpenAuthModal: (isOpenAuthModal: boolean) => void;
+}
+
+export function ReviewButton(props: ReviewButtonProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const {setIsOpenAuthModal} = props;
     const {data: session} = useSession();
 
     useEffect(() => {
@@ -23,7 +28,7 @@ export function ReviewButton() {
         if (session) {
             setIsOpen(true)
         } else {
-            setIsOpen(true)
+            setIsOpenAuthModal(true);
             toast("Прежде чем оставить отзыв, пожалуйста, войдите в аккаунт", {
                 icon: <CircleAlert/>,
                 duration: 3000,

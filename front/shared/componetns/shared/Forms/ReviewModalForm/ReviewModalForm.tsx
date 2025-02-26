@@ -3,11 +3,9 @@
 import styles from "./ReviewModalForm.module.scss"
 import { FieldError, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import { NameInput, StarRatingInput, TextInput } from "@/shared/componetns/shared/Inputs";
+import { StarRatingInput, TextInput } from "@/shared/componetns/shared/Inputs";
 import {Button, Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/componetns/ui";
-import useDialogStore from "@/shared/stores/dialogStore";
 import { Review } from "@/@types/types";
-import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import {SubmitMessage} from "@/shared/componetns/shared";
 
@@ -17,11 +15,9 @@ interface ReviewModalFormProps {
 }
 
 export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
-    const { data: session } = useSession();
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const setTitle = useDialogStore((state) => state.setTitle);
 
-    const {register, handleSubmit, reset, formState: { errors }, clearErrors, setValue} = useForm({ mode: "onBlur" });
+    const {register, handleSubmit, reset, formState: { errors }, setValue} = useForm({ mode: "onBlur" });
 
     const handleErrorResponse = (status: number) => {
         const errorMessages: Record<number, string> = {
@@ -36,12 +32,16 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
 
     const onSubmit: SubmitHandler<FieldValues> = async (data: Review) => {
         try {
+            console.log(data)
+            if (data.rating === 0 || undefined) {
+                toast.error("Пожалуйста, выберите рейтинг.", { duration: 3000 });
+                return;
+            }
             const reviewData = { rating: data.rating, text: data.text };
-            const response = await fetch(`${process.env.NEXT_PUBLIC_REST_URL}/api/v1/psychologists/1/reviews`, {
+            const response = await fetch(`/api/proxy/api/v1/psychologists/1/reviews`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.token}`,
                 },
                 body: JSON.stringify(reviewData),
             });
@@ -53,7 +53,6 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
 
             setIsSubmitted(true);
             toast.success("Вы успешно оставили отзыв!")
-            setTitle("");
             reset();
         } catch (error) {
             console.error("Ошибка при отправке отзыва:", error);
@@ -65,31 +64,17 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
         onClose();
     };
 
-    const handleRatingSelect = (rating: number) => setValue("rating", rating);
+    const handleRatingSelect = (rating: number) => setValue("rating", rating, { shouldValidate: true });
 
     return (
         <Dialog open={isOpen} onOpenChange={handleClose}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Оставить отзыв</DialogTitle>
+                    <DialogTitle>{isSubmitted ? "Спасибо за отзыв!" : "Оставить отзыв"}</DialogTitle>
                         {!isSubmitted ? (
                             <form onSubmit={handleSubmit(onSubmit)} method="POST" className={`${styles.form} ${styles.block}`}>
                                 <div className={styles.flexDiv}>
                                     <div className={styles.inputs}>
-                                        <NameInput
-                                            label="Имя"
-                                            name="firstname"
-                                            register={register}
-                                            errors={errors as Record<string, FieldError | undefined>}
-                                            clearErrors={clearErrors}
-                                        />
-                                        <NameInput
-                                            label="Фамилия"
-                                            name="lastname"
-                                            register={register}
-                                            errors={errors as Record<string, FieldError | undefined>}
-                                            clearErrors={clearErrors}
-                                        />
                                         <StarRatingInput onRatingSelect={handleRatingSelect} />
                                     </div>
                                     <div className={`${styles.textarea} block-modal`}>
