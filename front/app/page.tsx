@@ -4,26 +4,14 @@ import {
     FrameTitle,
     MentorInfo,
     ReviewButton,
-    SubmitMessage,
     SliderReview
 } from "@/shared/componetns/shared";
-import {useEffect, useState, Suspense} from "react";
-import {AuthForm, ConsultationForm} from "@/shared/componetns/shared/Forms";
-import {Dialog} from "@/shared/componetns/ui";
-import {useSession} from "next-auth/react";
-import useDialogStore from "@/shared/stores/dialogStore";
+import {Suspense, useState} from "react";
+import {AuthModalForm, ConsultationForm} from "@/shared/componetns/shared/Forms";
 import {ScrollToSection} from "@/shared/lib/scroll-to-section";
 
 export default function Home() {
-    const {data: session} = useSession();
-    const [isOpenForm, setIsOpenForm] = useState(false);
-    const setTitle = useDialogStore((state) => state.setTitle);
-
-    useEffect(() => {
-        if (!isOpenForm) {
-            setTitle("")
-        }
-    }, [isOpenForm, setTitle])
+    const [isOpenAuthModal, setIsOpenAuthModal] = useState(false);
 
     return (
         <div className="container">
@@ -33,11 +21,8 @@ export default function Home() {
 
             <MentorInfo/>
 
-            <ConsultationForm setIsOpen={setIsOpenForm} isOpen={isOpenForm}/>
-            <Dialog isOpen={isOpenForm} setIsOpen={setIsOpenForm}>{ session ? <SubmitMessage
-                title="Поздравляем, вы записаны!"> Вы записались на консультацию к специалисту.
-                Скоро с вами свяжется специалист по методу связи, который вы указали. </SubmitMessage> : <AuthForm/>}
-            </Dialog>
+            <AuthModalForm isOpen={isOpenAuthModal} onClose={() => setIsOpenAuthModal(false)}/>
+            <ConsultationForm setIsOpenAuthModal={setIsOpenAuthModal}/>
 
             <FrameTitle id="reviews">Отзывы</FrameTitle>
 

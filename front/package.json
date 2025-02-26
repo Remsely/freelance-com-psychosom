@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-popover": "^1.1.5",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-visually-hidden": "^1.1.2",
     "lucide-react": "^0.456.0",
     "next": "15.1.4",
     "next-auth": "^4.24.11",
