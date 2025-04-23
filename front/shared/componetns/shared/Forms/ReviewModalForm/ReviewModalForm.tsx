@@ -28,6 +28,7 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
 
         const message = errorMessages[status] || "Не удалось отправить отзыв. Попробуйте позже.";
         toast.error(message, { duration: 3000 });
+        return message
     };
 
     const onSubmit: SubmitHandler<FieldValues> = async (data: Review) => {
@@ -47,8 +48,7 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
             });
 
             if (!response.ok) {
-                handleErrorResponse(response.status);
-                return;
+                throw new Error(handleErrorResponse(response.status))
             }
 
             setIsSubmitted(true);
