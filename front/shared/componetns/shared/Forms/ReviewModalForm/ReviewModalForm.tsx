@@ -1,12 +1,12 @@
 "use client";
 
 import styles from "./ReviewModalForm.module.scss"
-import { FieldError, FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
-import { StarRatingInput, TextInput } from "@/shared/componetns/shared/Inputs";
+import {FieldError, FieldValues, SubmitHandler, useForm} from "react-hook-form";
+import {useState} from "react";
+import {StarRatingInput, TextInput} from "@/shared/componetns/shared/Inputs";
 import {Button, Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/componetns/ui";
-import { Review } from "@/@types/types";
-import { toast } from "react-hot-toast";
+import {Review} from "@/@types/types";
+import {toast} from "react-hot-toast";
 import {SubmitMessage} from "@/shared/componetns/shared";
 
 interface ReviewModalFormProps {
@@ -28,12 +28,10 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
 
         const message = errorMessages[status] || "Не удалось отправить отзыв. Попробуйте позже.";
         toast.error(message, { duration: 3000 });
-        return message
     };
 
     const onSubmit: SubmitHandler<FieldValues> = async (data: Review) => {
         try {
-            console.log(data)
             if (data.rating === 0 || undefined) {
                 toast.error("Пожалуйста, выберите рейтинг.", { duration: 3000 });
                 return;
@@ -48,7 +46,8 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
             });
 
             if (!response.ok) {
-                throw new Error(handleErrorResponse(response.status))
+                handleErrorResponse(response.status);
+                return
             }
 
             setIsSubmitted(true);

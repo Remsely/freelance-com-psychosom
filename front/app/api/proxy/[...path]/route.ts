@@ -7,7 +7,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
     const { path } = await params;
     try {
         const token = (await cookies()).get("backend_token")?.value;
-        if (!token) return new NextResponse("Unauthorized", {status: 401});
+        if (!token) return new NextResponse("Unauthorized", { status: 401 });
 
         const pathSegment = path.join("/");
         const backendUrl = new URL(`${process.env.BACKEND_URL}/${pathSegment}${req.nextUrl.search}`);
@@ -30,15 +30,21 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
             body: requestBody ? JSON.stringify(requestBody) : undefined,
         });
 
-        if (!res.ok) {
-            throw new Error(res.statusText);
+        const contentType = res.headers.get("content-type") || "";
+        let responseBody: BodyInit;
+        if (contentType.includes("application/json")) {
+            responseBody = await res.json();
+            return NextResponse.json(responseBody, { status: res.status });
+        } else {
+            responseBody = await res.text();
+            return new NextResponse(responseBody, {
+                status: res.status,
+                headers: { "content-type": contentType }
+            });
         }
-
-        const data = await res.json();
-        return NextResponse.json(data);
     } catch (error) {
         console.error("Proxy error:", error);
-        return new NextResponse("Internal Server Error", {status: 500});
+        return new NextResponse("Internal Server Error", { status: 500 });
     }
 }
 
