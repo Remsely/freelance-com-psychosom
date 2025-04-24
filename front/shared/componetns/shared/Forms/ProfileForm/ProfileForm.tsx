@@ -4,9 +4,9 @@ import {FormEvent, useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import {Button, Input} from "@/shared/componetns/ui";
 import styles from "./ProfileForm.module.scss";
-import {cn} from "@/shared/lib/utils";
 import {redirect} from "next/navigation";
 import {LoadingSpinner} from "@/shared/componetns/shared";
+import {cn} from "@/shared/utils";
 
 interface ProfileData {
     firstName: string;

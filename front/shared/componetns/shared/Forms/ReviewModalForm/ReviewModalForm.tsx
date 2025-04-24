@@ -8,6 +8,7 @@ import {Button, Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared
 import {Review} from "@/@types/types";
 import {toast} from "react-hot-toast";
 import {SubmitMessage} from "@/shared/componetns/shared";
+import { reviewService } from "@/shared/services";
 
 interface ReviewModalFormProps {
     isOpen: boolean;
@@ -37,13 +38,7 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
                 return;
             }
             const reviewData = { rating: data.rating, text: data.text };
-            const response = await fetch(`/api/proxy/api/v1/psychologists/1/reviews`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(reviewData),
-            });
+            await reviewService.submitReview(1, reviewData);
 
             if (!response.ok) {
                 handleErrorResponse(response.status);
