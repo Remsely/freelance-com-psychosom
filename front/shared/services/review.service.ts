@@ -1,7 +1,7 @@
 import {Review} from "@/@types/types";
 import {api} from "@/shared/utils";
 
-interface ReviewSubmitData {
+export interface ReviewSubmitData {
     rating: number
     text: string
 }
