@@ -21,6 +21,7 @@ export function ReviewModalForm({ isOpen, onClose } : ReviewModalFormProps) {
 
     const handleErrorResponse = (status: number) => {
         const errorMessages: Record<number, string> = {
+            // TODO Убрать потом
             409: "Ваш аккаунт не заполнен. Заполните данные, прежде чем оставить отзыв.",
             401: "Прежде чем оставить отзыв, пожалуйста, войдите в аккаунт.",
             400: "Прежде чем оставить отзыв, сеанс со специалистом должен состояться или вы уже оставляли отзыв.",
