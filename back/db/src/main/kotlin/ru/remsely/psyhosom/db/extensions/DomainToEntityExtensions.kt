@@ -15,7 +15,7 @@ fun DomainAccount.toEntity() = Account(
     isConfirmed = isConfirmed,
     tgBotToken = tgBotToken.value,
     tgChatId = tgChatId.value,
-    registrationDate = registrationDate
+    registrationDtTm = registrationDate
 )
 
 fun DomainPatient.toEntity() = Patient(
@@ -37,9 +37,11 @@ fun DomainConsultation.toEntity() = Consultation(
     psychologist = psychologist.toEntity(),
     patient = patient.toEntity(),
     status = status,
-    orderDate = orderDate,
-    confirmationDate = confirmationDate,
-    startDate = startDate
+    problemDescription = problemDescription,
+    startDtTm = startDtTm,
+    endDtTm = endDtTm,
+    orderDtTm = orderDtTm,
+    confirmationDtTm = confirmationDtTm
 )
 
 fun DomainReview.toEntity() = Review(

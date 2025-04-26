@@ -23,7 +23,7 @@ fun Account.toDomain() = DomainAccount(
     tgChatId = TelegramChatId(tgChatId).getOrElse {
         throw RuntimeException("Invalid telegram chat id.")
     },
-    registrationDate = registrationDate
+    registrationDate = registrationDtTm
 )
 
 fun Patient.toDomain() = DomainPatient(
@@ -44,10 +44,12 @@ fun Consultation.toDomain() = DomainConsultation(
     id = id,
     psychologist = psychologist.toDomain(),
     patient = patient.toDomain(),
+    problemDescription = problemDescription,
+    startDtTm = startDtTm,
+    endDtTm = endDtTm,
     status = status,
-    orderDate = orderDate,
-    confirmationDate = confirmationDate,
-    startDate = startDate,
+    orderDtTm = orderDtTm,
+    confirmationDtTm = confirmationDtTm,
 )
 
 fun Review.toDomain() = DomainReview(

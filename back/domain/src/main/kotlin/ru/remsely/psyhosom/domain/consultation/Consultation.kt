@@ -8,10 +8,12 @@ data class Consultation(
     val id: Long,
     val psychologist: Psychologist,
     val patient: Patient,
+    val problemDescription: String?,
+    val startDtTm: LocalDateTime,
+    val endDtTm: LocalDateTime,
     val status: Status,
-    val orderDate: LocalDateTime,
-    val confirmationDate: LocalDateTime?,
-    val startDate: LocalDateTime?
+    val orderDtTm: LocalDateTime,
+    val confirmationDtTm: LocalDateTime?,
 ) {
     enum class Status {
         PENDING,
