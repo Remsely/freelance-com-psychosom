@@ -16,7 +16,7 @@ import ru.remsely.psyhosom.telegram.callback.CancelConsultationCallback
 import ru.remsely.psyhosom.telegram.properties.TelegramPropertiesBotCredentials
 
 @Component
-class PatientNotificationBot(
+class PsychosomBot(
     private val cancelConsultationCallback: CancelConsultationCallback,
     commands: Set<BotCommand>,
     private val telegramPropertiesBotCredentials: TelegramPropertiesBotCredentials

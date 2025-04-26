@@ -13,7 +13,7 @@ import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFinder
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistFinder
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.telegram.BotNotifyWithCancelConsultationButtonCommand
+import ru.remsely.psyhosom.usecase.telegram.TelegramBotNotifier
 import java.time.LocalDateTime
 
 @Component
@@ -22,7 +22,7 @@ open class CreateConsultationCommandImpl(
     private val consultationFinder: ConsultationFinder,
     private val psychologistFinder: PsychologistFinder,
     private val patientFinder: PatientFinder,
-    private val telegramNotifyCommand: BotNotifyWithCancelConsultationButtonCommand
+    private val tgBotNotifier: TelegramBotNotifier
 ) : CreateConsultationCommand {
     private val log = logger()
 
@@ -56,12 +56,16 @@ open class CreateConsultationCommandImpl(
         ).bind()
 
         log.info(
-            "Session for patient with id $patientId and psychologist with id $psychologistId " +
-                    "successfully created."
+            "Session for patient with id $patientId and psychologist with id $psychologistId successfully created."
         )
 
-        telegramNotifyCommand.sendMessage(
+        tgBotNotifier.sendStartConsultationNotifierToPatient(
             chatId = patient.account.tgChatId,
+            consultation = consultation
+        )
+
+        tgBotNotifier.sendStartConsultationNotifierToPsychologist(
+            chatId = psychologist.account.tgChatId,
             consultation = consultation
         )
 

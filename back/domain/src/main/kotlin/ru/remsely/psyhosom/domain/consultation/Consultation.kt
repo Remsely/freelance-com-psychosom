@@ -20,6 +20,7 @@ data class Consultation(
 ) {
     enum class Status {
         PENDING,
+        REJECTED,
         CONFIRMED,
         CANCELED,
         FINISHED
