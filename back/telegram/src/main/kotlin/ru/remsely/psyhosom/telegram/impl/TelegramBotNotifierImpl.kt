@@ -8,6 +8,11 @@ import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.telegram.PsychosomBot
 import ru.remsely.psyhosom.telegram.command.Command
 import ru.remsely.psyhosom.usecase.telegram.TelegramBotNotifier
+import java.time.format.DateTimeFormatter
+
+
+private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
 @Component
 class TelegramBotNotifierImpl(
@@ -56,10 +61,9 @@ class TelegramBotNotifierImpl(
         }
 
         val message = """
-            ## Новая заявка на консультацию.
+            *Новая заявка на консультацию*
             
-            ${consultation.patient.firstName} хочет записаться к вам на прием ${consultation.period.readableStartDate} 
-            на `${consultation.period.readableTimePeriod}`.
+            ${consultation.patient.firstName} хочет записаться к вам на прием `${consultation.period.readableStartDate} на ${consultation.period.readableTimePeriod}`.
         """.trimIndent()
 
         psychosomBot.sendMessageWithKeyboard(chatId, message, keyboardMarkup)
@@ -67,7 +71,7 @@ class TelegramBotNotifierImpl(
 }
 
 val Consultation.Period.readableStartDate: String
-    get() = "${start.dayOfMonth}.${start.monthValue}.${start.year}"
+    get() = this.start.format(dateFormatter)
 
 val Consultation.Period.readableTimePeriod: String
-    get() = "${start.hour}:${start.minute} - ${end.hour}:${end.minute}"
+    get() = "${this.start.format(timeFormatter)}-${this.end.format(timeFormatter)}"
