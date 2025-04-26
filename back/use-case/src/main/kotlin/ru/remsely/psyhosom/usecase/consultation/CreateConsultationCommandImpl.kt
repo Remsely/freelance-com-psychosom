@@ -45,8 +45,10 @@ open class CreateConsultationCommandImpl(
                 patient = patient,
                 psychologist = psychologist,
                 problemDescription = event.problemDescription,
-                startDtTm = event.startDtTm,
-                endDtTm = event.endDtTm,
+                period = Consultation.Period(
+                    start = event.startDtTm,
+                    end = event.endDtTm
+                ).bind(),
                 status = Consultation.Status.PENDING,
                 orderDtTm = LocalDateTime.now(),
                 confirmationDtTm = null

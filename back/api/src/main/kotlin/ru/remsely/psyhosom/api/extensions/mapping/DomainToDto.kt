@@ -1,10 +1,11 @@
 package ru.remsely.psyhosom.api.extensions.mapping
 
+import org.springframework.http.HttpStatus
 import ru.remsely.psyhosom.api.dto.response.ConsultationResponse
 import ru.remsely.psyhosom.api.dto.response.ErrorResponse
 import ru.remsely.psyhosom.api.dto.response.PatientResponse
 import ru.remsely.psyhosom.api.dto.response.ReviewResponse
-import ru.remsely.psyhosom.api.extensions.error.responseStatus
+import ru.remsely.psyhosom.api.extensions.error_handling.responseStatus
 import ru.remsely.psyhosom.domain.consultation.Consultation
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.Patient
@@ -40,8 +41,8 @@ fun Consultation.toDto(): ConsultationResponse =
         psychologistId = psychologist.id,
         patientId = patient.id,
         problemDescription = problemDescription,
-        startDtTm = startDtTm,
-        endDtTm = endDtTm,
+        startDtTm = period.start,
+        endDtTm = period.end,
         status = status,
         orderDtTm = orderDtTm,
         confirmationDtTm = confirmationDtTm
@@ -50,6 +51,13 @@ fun Consultation.toDto(): ConsultationResponse =
 fun DomainError.toDto() = ErrorResponse(
     status = this.responseStatus.name,
     message = this.message,
+    source = this.javaClass.name,
+    timestamp = LocalDateTime.now()
+)
+
+fun Exception.toDto(status: HttpStatus) = ErrorResponse(
+    status = status.name,
+    message = this.message ?: "No message provided.",
     source = this.javaClass.name,
     timestamp = LocalDateTime.now()
 )

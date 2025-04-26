@@ -1,10 +1,16 @@
 package ru.remsely.psyhosom.api.controller
 
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import ru.remsely.psyhosom.api.controller.open_api.ConsultationControllerContract
 import ru.remsely.psyhosom.api.dto.request.CreateConsultationRequest
-import ru.remsely.psyhosom.api.extensions.error.toResponse
+import ru.remsely.psyhosom.api.extensions.error_handling.toResponse
 import ru.remsely.psyhosom.api.extensions.mapping.toDto
 import ru.remsely.psyhosom.api.utils.annotations.AuthPatientId
 import ru.remsely.psyhosom.domain.consultation.dao.ConsultationUpdater

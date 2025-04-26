@@ -10,7 +10,7 @@ import ru.remsely.psyhosom.api.dto.request.LoginRequest
 import ru.remsely.psyhosom.api.dto.request.RegisterRequest
 import ru.remsely.psyhosom.api.dto.response.LoginResponse
 import ru.remsely.psyhosom.api.dto.response.RegisterResponse
-import ru.remsely.psyhosom.api.extensions.error.toResponse
+import ru.remsely.psyhosom.api.extensions.error_handling.toResponse
 import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.event.LoginAccountEvent
 import ru.remsely.psyhosom.domain.account.event.RegisterAccountEvent

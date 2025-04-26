@@ -1,7 +1,11 @@
 package ru.remsely.psyhosom.db.extensions
 
-import arrow.core.getOrElse
-import ru.remsely.psyhosom.db.entity.*
+import ru.remsely.psyhosom.db.entity.Account
+import ru.remsely.psyhosom.db.entity.Consultation
+import ru.remsely.psyhosom.db.entity.Patient
+import ru.remsely.psyhosom.db.entity.Psychologist
+import ru.remsely.psyhosom.db.entity.Review
+import ru.remsely.psyhosom.domain.error.getOrThrowUnexpectedBehavior
 import ru.remsely.psyhosom.domain.value_object.ReviewRating
 import ru.remsely.psyhosom.domain.value_object.TelegramBotToken
 import ru.remsely.psyhosom.domain.value_object.TelegramChatId
@@ -17,12 +21,8 @@ fun Account.toDomain() = DomainAccount(
     password = password,
     role = role,
     isConfirmed = isConfirmed,
-    tgBotToken = TelegramBotToken(tgBotToken).getOrElse {
-        throw RuntimeException("Invalid telegram bot token.")
-    },
-    tgChatId = TelegramChatId(tgChatId).getOrElse {
-        throw RuntimeException("Invalid telegram chat id.")
-    },
+    tgBotToken = TelegramBotToken(tgBotToken).getOrThrowUnexpectedBehavior(),
+    tgChatId = TelegramChatId(tgChatId).getOrThrowUnexpectedBehavior(),
     registrationDate = registrationDtTm
 )
 
@@ -45,8 +45,7 @@ fun Consultation.toDomain() = DomainConsultation(
     psychologist = psychologist.toDomain(),
     patient = patient.toDomain(),
     problemDescription = problemDescription,
-    startDtTm = startDtTm,
-    endDtTm = endDtTm,
+    period = DomainConsultation.Period(startDtTm, endDtTm).getOrThrowUnexpectedBehavior(),
     status = status,
     orderDtTm = orderDtTm,
     confirmationDtTm = confirmationDtTm,
@@ -56,9 +55,7 @@ fun Review.toDomain() = DomainReview(
     id = id,
     psychologist = psychologist.toDomain(),
     patient = patient.toDomain(),
-    rating = ReviewRating(rating).getOrElse {
-        throw RuntimeException("Invalid review rating.")
-    },
+    rating = ReviewRating(rating).getOrThrowUnexpectedBehavior(),
     text = text,
     date = date
 )
