@@ -52,7 +52,8 @@ open class CreateConsultationCommandImpl(
                 ).bind(),
                 status = Consultation.Status.PENDING,
                 orderDtTm = LocalDateTime.now(),
-                confirmationDtTm = null
+                confirmationDtTm = null,
+                meetingLink = null
             )
         ).bind()
 

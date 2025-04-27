@@ -15,6 +15,8 @@ interface ConsultationFinder {
         patientId: Long,
         psychologistId: Long
     ): Either<DomainError, Consultation>
+
+    fun findAllConfirmedConsultationsToNotify(): List<Consultation>
 }
 
 sealed class ConsultationFindingError(override val message: String) : DomainError.BusinessLogicError {

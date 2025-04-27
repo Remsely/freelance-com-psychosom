@@ -11,4 +11,5 @@ sealed class NotificationEvent {
     data class ConsultationCancelled(val consultation: Consultation) : NotificationEvent()
     data class ConsultationRejected(val consultation: Consultation) : NotificationEvent()
     data class ConsultationConfirmed(val consultation: Consultation) : NotificationEvent()
+    data class ConsultationNotified(val consultation: Consultation) : NotificationEvent()
 }

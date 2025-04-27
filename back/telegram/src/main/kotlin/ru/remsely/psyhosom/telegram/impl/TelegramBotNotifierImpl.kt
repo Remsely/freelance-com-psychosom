@@ -24,6 +24,7 @@ class TelegramBotNotifierImpl(
         is NotificationEvent.ConsultationCancelled -> sendCancel(event.consultation)
         is NotificationEvent.ConsultationRejected -> sendReject(event.consultation)
         is NotificationEvent.ConsultationConfirmed -> sendConfirmation(event.consultation)
+        is NotificationEvent.ConsultationNotified -> sendComingNotification(event.consultation)
     }
 
     private fun sendCreation(c: Consultation) {
@@ -153,6 +154,51 @@ class TelegramBotNotifierImpl(
         val psychologistText = """
             ✅ <b>Консультация подтверждена.</b>
             Мы отправим вам ссылку для присоединения к звонку перед консультацией.
+        """.trimIndent()
+
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chatId = c.patient.account.tgChatId,
+                text = patientText,
+            )
+        )
+
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chatId = c.psychologist.account.tgChatId,
+                text = psychologistText,
+            )
+        )
+    }
+
+    private fun sendComingNotification(c: Consultation) {
+        val meetingLink = c.meetingLink?.value ?: absSender.execute(
+            botMessageSender.sendMessage(
+                chatId = c.psychologist.account.tgChatId,
+                text = "⚠️ <b>Ошибка при создании встречи. Обратитесь в службу поддержки!</b>",
+            )
+        )
+
+        val patientText = """
+            📣 <b>Напоминание о консультации.</b>
+            
+            🗓 Дата: ${c.period.readableStartDate}
+            ⏰ Время: ${c.period.readableTimePeriod}
+            
+            👤 Специалист: ${c.psychologist.firstName} ${c.psychologist.lastName}
+            
+            💻 Присоединиться к звонку: $meetingLink
+        """.trimIndent()
+
+        val psychologistText = """
+            ⏰ <b>Скоро консультация.</b>
+            
+            🗓 Дата: ${c.period.readableStartDate}
+            ⏰ Время: ${c.period.readableTimePeriod}
+            
+            👤 Пациент: ${c.patient.firstName} ${c.patient.lastName}
+            
+            💻 Присоединиться к звонку: $meetingLink
         """.trimIndent()
 
         absSender.execute(

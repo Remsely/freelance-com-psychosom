@@ -23,6 +23,12 @@ spring:
     init:
       mode: never
 
+scheduled:
+  account-cleaner:
+    fixed-rate-ms: 150000
+  consultations-notifier:
+    fixed-rate-ms: 150000
+
 security:
   jwt:
     private-key-path: classpath:jwt/rsa/private_key.pem
