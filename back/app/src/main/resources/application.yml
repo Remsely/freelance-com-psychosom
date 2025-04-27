@@ -25,11 +25,11 @@ spring:
 
 scheduled:
   account-cleaner:
-    fixed-rate-ms: 150000
+    fixed-rate-ms: 60000
   consultations-notifier:
-    fixed-rate-ms: 150000
+    fixed-rate-ms: 60000
   ended-consultation-informer:
-    fixed-rate-ms: 150000
+    fixed-rate-ms: 60000
 
 security:
   jwt:

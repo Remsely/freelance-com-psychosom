@@ -22,7 +22,7 @@ class ConfirmConsultationCommandImpl(
             .findConsultationById(consultationId)
             .bind()
 
-        ensure(chatId == consultation.patient.account.tgChatId) {
+        ensure(chatId == consultation.psychologist.account.tgChatId) {
             ConsultationConfirmationError.WrongChat(chatId, consultationId)
         }
 
