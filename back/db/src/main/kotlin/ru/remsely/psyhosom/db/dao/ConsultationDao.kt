@@ -197,11 +197,6 @@ open class ConsultationDao(
             }
     }
 
-    @Transactional
-    override fun finishConsultation(consultation: Consultation): Either<DomainError, Consultation> {
-        TODO("Not yet implemented")
-    }
-
     // TODO: убрать
     @Transactional
     override fun finishConsultation(consultationId: Long): Boolean =
