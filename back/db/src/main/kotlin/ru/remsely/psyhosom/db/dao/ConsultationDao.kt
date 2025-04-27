@@ -12,6 +12,7 @@ import ru.remsely.psyhosom.domain.consultation.Consultation
 import ru.remsely.psyhosom.domain.consultation.dao.*
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.monitoring.log.logger
+import java.time.LocalDateTime
 import kotlin.jvm.optionals.getOrNull
 
 @Component
@@ -52,7 +53,7 @@ open class ConsultationDao(
     ): Boolean = repository.existsByPatientIdAndPsychologistIdAndStatusNotIn(
         patientId = patientId,
         psychologistId = psychologistId,
-        statuses = listOf(Consultation.Status.FINISHED, Consultation.Status.CANCELED)
+        statuses = listOf(Consultation.Status.FINISHED, Consultation.Status.CANCELED, Consultation.Status.REJECTED)
     ).also {
         log.info(
             if (it)
@@ -121,6 +122,50 @@ open class ConsultationDao(
                 status = Consultation.Status.CANCELED
             ).toEntity()
         ).toDomain()
+            .also {
+                log.info("Consultation with id ${it.id} was canceled in DB.")
+            }
+    }
+
+    @Transactional
+    override fun rejectConsultation(consultation: Consultation): Either<DomainError, Consultation> = either {
+        ensure(consultation.status == Consultation.Status.PENDING) {
+            ConsultationUpdateError.WrongStatusToReject(consultation.status)
+        }
+        repository.save(
+            consultation.copy(
+                status = Consultation.Status.REJECTED
+            ).toEntity()
+        ).toDomain()
+            .also {
+                log.info("Consultation with id ${it.id} was rejected in DB.")
+            }
+    }
+
+    @Transactional
+    override fun confirmConsultation(consultation: Consultation): Either<DomainError, Consultation> = either {
+        ensure(consultation.status == Consultation.Status.PENDING) {
+            ConsultationUpdateError.WrongStatusToConfirm(consultation.status)
+        }
+        repository.save(
+            consultation.copy(
+                status = Consultation.Status.CONFIRMED,
+                confirmationDtTm = LocalDateTime.now()
+            ).toEntity()
+        ).toDomain()
+            .also {
+                log.info("Consultation with id ${it.id} was confirmed in DB.")
+            }
+    }
+
+    @Transactional
+    override fun notifyConsultation(consultation: Consultation): Either<DomainError, Consultation> {
+        TODO("Not yet implemented")
+    }
+
+    @Transactional
+    override fun finishConsultation(consultation: Consultation): Either<DomainError, Consultation> {
+        TODO("Not yet implemented")
     }
 
     // TODO: убрать

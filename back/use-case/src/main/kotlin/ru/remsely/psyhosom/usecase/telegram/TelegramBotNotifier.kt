@@ -1,10 +1,14 @@
 package ru.remsely.psyhosom.usecase.telegram
 
 import ru.remsely.psyhosom.domain.consultation.Consultation
-import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 
 interface TelegramBotNotifier {
-    fun sendStartConsultationNotifierToPatient(chatId: TelegramChatId, consultation: Consultation)
+    fun notify(event: NotificationEvent)
+}
 
-    fun sendStartConsultationNotifierToPsychologist(chatId: TelegramChatId, consultation: Consultation)
+sealed class NotificationEvent {
+    data class ConsultationCreated(val consultation: Consultation) : NotificationEvent()
+    data class ConsultationCancelled(val consultation: Consultation) : NotificationEvent()
+    data class ConsultationRejected(val consultation: Consultation) : NotificationEvent()
+    data class ConsultationConfirmed(val consultation: Consultation) : NotificationEvent()
 }
