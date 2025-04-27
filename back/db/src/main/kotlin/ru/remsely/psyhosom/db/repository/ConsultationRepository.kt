@@ -31,4 +31,10 @@ interface ConsultationRepository : JpaRepository<Consultation, Long> {
         status: DomainConsultation.Status,
         startDtTm: LocalDateTime
     ): List<Consultation>
+
+    @EntityGraph(attributePaths = ["patient", "psychologist"])
+    fun findAllByStatusAndEndDtTmBefore(
+        status: DomainConsultation.Status,
+        startDtTm: LocalDateTime
+    ): List<Consultation>
 }

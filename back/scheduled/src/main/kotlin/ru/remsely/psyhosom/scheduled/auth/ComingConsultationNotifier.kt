@@ -6,7 +6,7 @@ import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.usecase.consultation.NotifyComingConsultationsCommand
 
 @Component
-class ConsultationNotifier(
+class ComingConsultationNotifier(
     private val command: NotifyComingConsultationsCommand
 ) {
     private val log = logger()
@@ -15,5 +15,13 @@ class ConsultationNotifier(
     fun notifyComingConsultations() {
         log.info("Starting scheduled task to notify coming consultations...")
         command.execute()
+            .fold(
+                {
+                    log.warn("Consultations notification failed with error: ${it.message}.")
+                },
+                {
+                    log.info("Successfully notified consultations.")
+                }
+            )
     }
 }

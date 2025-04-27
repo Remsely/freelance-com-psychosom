@@ -141,6 +141,16 @@ open class ConsultationDao(
                 log.info("Found ${it.size} consultations to notify.")
             }
 
+    override fun findAllFinishedConsultationsToInform(): List<Consultation> =
+        repository.findAllByStatusAndEndDtTmBefore(
+            status = Consultation.Status.NOTIFIED,
+            startDtTm = LocalDateTime.now()
+        ).map {
+            it.toDomain()
+        }.also {
+            log.info("Found ${it.size} consultations to inform finishing.")
+        }
+
     @Transactional
     override fun cancelConsultation(consultation: Consultation): Either<DomainError, Consultation> = either {
         ensure(consultation.status in listOf(Consultation.Status.PENDING, Consultation.Status.CONFIRMED)) {

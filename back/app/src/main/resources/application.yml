@@ -28,6 +28,8 @@ scheduled:
     fixed-rate-ms: 150000
   consultations-notifier:
     fixed-rate-ms: 150000
+  ended-consultation-informer:
+    fixed-rate-ms: 150000
 
 security:
   jwt:
@@ -43,6 +45,7 @@ telegram:
 
 frontend:
   url: ${PSYHOSOM_WEB_URL:http://localhost:3000}
+  review-url: "${frontend.url}?section=reviews"
 
 springdoc:
   swagger-ui:

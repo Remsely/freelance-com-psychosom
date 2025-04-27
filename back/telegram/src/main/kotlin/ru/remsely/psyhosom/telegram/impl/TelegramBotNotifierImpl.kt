@@ -1,5 +1,6 @@
 package ru.remsely.psyhosom.telegram.impl
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
@@ -16,7 +17,11 @@ private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
 @Component
 class TelegramBotNotifierImpl(
+    @Value("\${frontend.review-url}")
+    private val reviewUrl: String,
+
     private val absSender: AbsSender,
+
     private val botMessageSender: BotMessageSender,
 ) : TelegramBotNotifier {
     override fun notify(event: NotificationEvent) = when (event) {
@@ -25,6 +30,7 @@ class TelegramBotNotifierImpl(
         is NotificationEvent.ConsultationRejected -> sendReject(event.consultation)
         is NotificationEvent.ConsultationConfirmed -> sendConfirmation(event.consultation)
         is NotificationEvent.ConsultationNotified -> sendComingNotification(event.consultation)
+        is NotificationEvent.ConsultationFinished -> sendFinishedNotification(event.consultation)
     }
 
     private fun sendCreation(c: Consultation) {
@@ -212,6 +218,23 @@ class TelegramBotNotifierImpl(
             botMessageSender.sendMessage(
                 chatId = c.psychologist.account.tgChatId,
                 text = psychologistText,
+            )
+        )
+    }
+
+    fun sendFinishedNotification(c: Consultation) {
+        val patientText = """
+            ✅ <b>Консультация завершена!</b>
+
+            Спасибо, что выбрали нас. Мы будем рады получить от вас обратную связь.
+            Отзыв о специалисте можно оставить по ссылке: $reviewUrl.
+        """.trimIndent()
+
+
+        absSender.execute(
+            botMessageSender.sendMessage(
+                chatId = c.patient.account.tgChatId,
+                text = patientText,
             )
         )
     }
