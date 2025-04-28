@@ -43,6 +43,8 @@ export function Calendar({
                 ...classNames,
             }}
             components={{
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 IconLeft: ({ className = "", ...props }) => (
                     <ChevronLeft className={`icon-left ${className}`} {...props} />
                 ),
@@ -54,4 +56,4 @@ export function Calendar({
         />
     )
 }
-Calendar.displayName = "Calendar"
+Calendar.displayName = "Calendar";

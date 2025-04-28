@@ -3,6 +3,7 @@ package ru.remsely.psyhosom.usecase.consultation
 import arrow.core.Either
 import arrow.core.raise.either
 import arrow.core.raise.ensure
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.remsely.psyhosom.domain.consultation.Consultation
@@ -13,7 +14,7 @@ import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.dao.PatientFinder
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistFinder
 import ru.remsely.psyhosom.monitoring.log.logger
-import ru.remsely.psyhosom.usecase.telegram.BotNotifyWithCancelConsultationButtonCommand
+import ru.remsely.psyhosom.usecase.telegram.NotificationEvent
 import java.time.LocalDateTime
 
 @Component
@@ -22,7 +23,7 @@ open class CreateConsultationCommandImpl(
     private val consultationFinder: ConsultationFinder,
     private val psychologistFinder: PsychologistFinder,
     private val patientFinder: PatientFinder,
-    private val telegramNotifyCommand: BotNotifyWithCancelConsultationButtonCommand
+    private val eventPublisher: ApplicationEventPublisher
 ) : CreateConsultationCommand {
     private val log = logger()
 
@@ -34,7 +35,7 @@ open class CreateConsultationCommandImpl(
         val psychologist = psychologistFinder.findPsychologistById(psychologistId).bind()
 
         ensure(!consultationFinder.existActiveConsultationByPatientAndPsychologist(patientId, psychologistId)) {
-            ConsultationCreationError.ActiveConsultationExist(patientId, psychologistId)
+            ConsultationCreationValidationError.ActiveConsultationExist(patientId, psychologistId)
         }
 
         val patient = patientFinder.findPatientById(patientId).bind()
@@ -44,21 +45,24 @@ open class CreateConsultationCommandImpl(
                 id = 0L,
                 patient = patient,
                 psychologist = psychologist,
+                problemDescription = event.problemDescription,
+                period = Consultation.Period(
+                    start = event.startDtTm,
+                    end = event.endDtTm
+                ).bind(),
                 status = Consultation.Status.PENDING,
-                orderDate = LocalDateTime.now(),
-                confirmationDate = null,
-                startDate = null
+                orderDtTm = LocalDateTime.now(),
+                confirmationDtTm = null,
+                meetingLink = null
             )
         ).bind()
 
         log.info(
-            "Session for patient with id $patientId and psychologist with id $psychologistId " +
-                    "successfully created."
+            "Session for patient with id $patientId and psychologist with id $psychologistId successfully created."
         )
 
-        telegramNotifyCommand.sendMessage(
-            chatId = patient.account.tgChatId,
-            consultation = consultation
+        eventPublisher.publishEvent(
+            NotificationEvent.ConsultationCreated(consultation)
         )
 
         consultation
