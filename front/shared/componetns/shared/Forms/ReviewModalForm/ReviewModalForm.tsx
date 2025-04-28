@@ -15,7 +15,6 @@ interface ReviewFormValues {
 interface ReviewModalFormProps {
     isOpen: boolean;
     onClose: () => void;
-    psychologistId: number;
 }
 
 const psychologistId = 1;

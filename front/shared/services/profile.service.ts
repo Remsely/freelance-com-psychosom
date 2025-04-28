@@ -7,11 +7,11 @@ export interface ProfileData {
 
 class ProfileService {
 	public async findProfile() {
-		return await api.get<ProfileData>('/patients')
+		return await api.get<ProfileData>('patients')
 	}
 
 	public async updateProfile(body: ProfileData) {
-		return await api.put<ProfileData>('/patients', body)
+		return await api.put<ProfileData>('patients', body)
 	}
 }
 

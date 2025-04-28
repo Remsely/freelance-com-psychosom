@@ -90,7 +90,6 @@ export function AuthModalForm({isOpen, onClose}: AuthModalFormProps) {
         if (result?.ok) {
             toast.success("Успешная авторизация!");
             setTimeout(() => (window.location.href = "/"), 700);
-            setData({});
         }
     };
 

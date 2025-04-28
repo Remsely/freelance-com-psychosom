@@ -6,3 +6,10 @@ export const api = new FetchClient({
 		credentials: 'include'
 	}
 })
+
+export const apiServer = new FetchClient({
+	baseUrl: process.env.BACKEND_URL as string + '/api/v1',
+	options: {
+		credentials: 'include'
+	}
+})
