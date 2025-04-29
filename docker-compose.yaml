@@ -21,17 +21,17 @@ services:
     ports:
       - '8080:8080'
     environment:
+      - DB_HOST=db
       - DB_NAME=psychosom
+      - DB_PORT=5432
       - POSTGRES_USER=psychosom
       - POSTGRES_PASSWORD=psychosom_1234
-      - DB_HOST=db
-      - DB_PORT=5432
-      - PSYHOSOM_WEB_URL=http://localhost:3000
-      - PSYHOSOM_BOT_TOKEN=7849359674:AAGu7dC2hjt6JwchT6UIqjt64XHat5UrUH8
-      - PSYHOSOM_BOT_USERNAME=psyhosom_test_1_bot
+      - PSYСHOSOM_WEB_URL=http://localhost:3000
+      - PSYСHOSOM_BOT_TOKEN=7849359674:AAGu7dC2hjt6JwchT6UIqjt64XHat5UrUH8
+      - PSYСHOSOM_BOT_USERNAME=psyhosom_test_1_bot
       - S3_ENDPOINT=http://s3:9000
       - S3_ACCESS_KEY=psychosom
-      - S3_SECRET_KEY=psychosom_secret
+      - S3_SECRET_KEY=psychosom_1234
       - S3_BUCKET=psychosom
       - S3_REGION=eu-north-1
     depends_on:
@@ -58,7 +58,6 @@ services:
       POSTGRES_PASSWORD: psychosom_1234
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
 
   s3:
     image: minio/minio:latest

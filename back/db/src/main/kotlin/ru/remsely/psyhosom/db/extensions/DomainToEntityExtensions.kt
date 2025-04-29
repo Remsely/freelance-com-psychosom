@@ -33,7 +33,8 @@ fun DomainPsychologist.toEntity() = Psychologist(
     id = id,
     account = account.toEntity(),
     firstName = firstName,
-    lastName = lastName
+    lastName = lastName,
+    profileImageUrl = profileImageUrl
 )
 
 fun DomainConsultation.toEntity() = Consultation(

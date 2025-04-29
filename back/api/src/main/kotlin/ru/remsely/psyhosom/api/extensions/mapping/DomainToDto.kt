@@ -4,12 +4,14 @@ import org.springframework.http.HttpStatus
 import ru.remsely.psyhosom.api.dto.response.ConsultationResponse
 import ru.remsely.psyhosom.api.dto.response.ErrorResponse
 import ru.remsely.psyhosom.api.dto.response.PatientResponse
+import ru.remsely.psyhosom.api.dto.response.RegisterResponse
 import ru.remsely.psyhosom.api.dto.response.ReviewResponse
 import ru.remsely.psyhosom.api.extensions.error_handling.responseStatus
 import ru.remsely.psyhosom.domain.consultation.Consultation
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.Patient
 import ru.remsely.psyhosom.domain.review.Review
+import ru.remsely.psyhosom.usecase.auth.AccountCreatedEvent
 import java.time.LocalDateTime
 
 fun Patient.toDto() = PatientResponse(
@@ -60,4 +62,9 @@ fun Exception.toDto(status: HttpStatus) = ErrorResponse(
     message = this.message ?: "No message provided.",
     source = this.javaClass.name,
     timestamp = LocalDateTime.now()
+)
+
+fun AccountCreatedEvent.toDto(): RegisterResponse = RegisterResponse(
+    accountConfirmationUrl = confirmationUrl,
+    webSocketToken = webSocketToken.value
 )

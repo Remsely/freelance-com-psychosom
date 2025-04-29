@@ -38,7 +38,8 @@ fun Psychologist.toDomain() = DomainPsychologist(
     id = id,
     account = account.toDomain(),
     firstName = firstName,
-    lastName = lastName
+    lastName = lastName,
+    profileImageUrl = profileImageUrl
 )
 
 fun Consultation.toDomain() = DomainConsultation(

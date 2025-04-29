@@ -6,5 +6,6 @@ data class Psychologist(
     val id: Long,
     val account: Account,
     val firstName: String,
-    val lastName: String
+    val lastName: String,
+    val profileImageUrl: String
 )

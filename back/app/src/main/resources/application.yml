@@ -25,16 +25,16 @@ spring:
 telegram:
   bot:
     endpoints:
-      confirmation: https://t.me/${PSYHOSOM_BOT_USERNAME:psyhosom_test_2_bot}?start=
-    token: ${PSYHOSOM_BOT_TOKEN:8199547612:AAHOhfzIyITbm6XYe_3Wr4rUcVqC867c-C4}
-    username: ${PSYHOSOM_BOT_USERNAME:psyhosom_test_2_bot}
+      confirmation: https://t.me/${PSYСHOSOM_BOT_USERNAME:psyhosom_test_2_bot}?start=
+    token: ${PSYСHOSOM_BOT_TOKEN:8199547612:AAHOhfzIyITbm6XYe_3Wr4rUcVqC867c-C4}
+    username: ${PSYСHOSOM_BOT_USERNAME:psyhosom_test_2_bot}
 
 s3:
   endpoint: ${S3_ENDPOINT:http://localhost:9000}
   region: ${S3_REGION:us-east-1}
   bucket: ${S3_BUCKET:psychosom}
   access-key: ${S3_ACCESS_KEY:psychosom}
-  secret-key: ${S3_SECRET_KEY:psychosom_secret}
+  secret-key: ${S3_SECRET_KEY:psychosom_1234}
   path-style-access: true
 
 frontend:
