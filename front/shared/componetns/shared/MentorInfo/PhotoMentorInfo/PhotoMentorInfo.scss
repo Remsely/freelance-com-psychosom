@@ -1,0 +1,20 @@
+@use "@/shared/styles/variables" as *;
+
+@use "@/shared/styles/variables" as *;
+
+.psychologist-profile {
+    &__photo-block {
+        flex: 1 1 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(130deg, #fff8f2 68%, #f7c68620 100%);
+    }
+    &__photo {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0 18px 18px 0;
+        background: #f0e4d7;
+    }
+}

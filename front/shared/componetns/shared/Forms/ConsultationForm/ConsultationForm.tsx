@@ -13,11 +13,11 @@ import {useScheduleConsultation} from "@/shared/hooks";
 
 interface ConsultationFormProps {
     setIsOpenAuthModal: (isOpenAuthModal: boolean) => void;
+    id: number;
 }
 
-export function ConsultationForm(props: ConsultationFormProps) {
+export function ConsultationForm({setIsOpenAuthModal, id}: ConsultationFormProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const { setIsOpenAuthModal } = props;
     const { data: session } = useSession();
     const [date, setDate] = useState<Date | undefined>(new Date());
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -35,7 +35,7 @@ export function ConsultationForm(props: ConsultationFormProps) {
 
             scheduleConsultation(
                 {
-                    id: 1,
+                    id,
                     startDtTm: "28-04-2025 13:00:00.000",
                     endDtTm: "28-04-2025 13:50:00.000",
                     problemDescription: data.message,
