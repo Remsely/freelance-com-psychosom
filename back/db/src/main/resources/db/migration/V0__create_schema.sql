@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS psychologist_profile
     account_id        BIGINT REFERENCES account (id) NOT NULL UNIQUE,
     first_name        VARCHAR(255)                   NOT NULL,
     last_name         VARCHAR(255)                   NOT NULL,
+    article JSONB NOT NULL,
     profile_image_url VARCHAR(255)                   NOT NULL
 );
 

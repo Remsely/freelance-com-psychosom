@@ -1,15 +1,19 @@
 package ru.remsely.psyhosom.api.extensions.mapping
 
 import org.springframework.http.HttpStatus
+import ru.remsely.psyhosom.api.dto.ArticleBlockDto
 import ru.remsely.psyhosom.api.dto.response.ConsultationResponse
 import ru.remsely.psyhosom.api.dto.response.ErrorResponse
 import ru.remsely.psyhosom.api.dto.response.PatientResponse
+import ru.remsely.psyhosom.api.dto.response.PsychologistFullInfoResponse
 import ru.remsely.psyhosom.api.dto.response.RegisterResponse
 import ru.remsely.psyhosom.api.dto.response.ReviewResponse
 import ru.remsely.psyhosom.api.extensions.error_handling.responseStatus
 import ru.remsely.psyhosom.domain.consultation.Consultation
 import ru.remsely.psyhosom.domain.error.DomainError
 import ru.remsely.psyhosom.domain.patient.Patient
+import ru.remsely.psyhosom.domain.psychologist.Article
+import ru.remsely.psyhosom.domain.psychologist.Psychologist
 import ru.remsely.psyhosom.domain.review.Review
 import ru.remsely.psyhosom.usecase.auth.AccountCreatedEvent
 import java.time.LocalDateTime
@@ -67,4 +71,17 @@ fun Exception.toDto(status: HttpStatus) = ErrorResponse(
 fun AccountCreatedEvent.toDto(): RegisterResponse = RegisterResponse(
     accountConfirmationUrl = confirmationUrl,
     webSocketToken = webSocketToken.value
+)
+
+fun Psychologist.toDto(): PsychologistFullInfoResponse = PsychologistFullInfoResponse(
+    id = id,
+    firstName = firstName,
+    lastName = lastName,
+    article = article.values.map { it.toDto() },
+    profileImage = profileImageUrl
+)
+
+fun Article.ArticleBlock.toDto(): ArticleBlockDto = ArticleBlockDto(
+    type = type,
+    content = content
 )

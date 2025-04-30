@@ -13,6 +13,7 @@ import ru.remsely.psyhosom.domain.value_object.TelegramChatId
 import ru.remsely.psyhosom.domain.account.Account as DomainAccount
 import ru.remsely.psyhosom.domain.consultation.Consultation as DomainConsultation
 import ru.remsely.psyhosom.domain.patient.Patient as DomainPatient
+import ru.remsely.psyhosom.domain.psychologist.Article as DomainArticle
 import ru.remsely.psyhosom.domain.psychologist.Psychologist as DomainPsychologist
 import ru.remsely.psyhosom.domain.review.Review as DomainReview
 
@@ -39,7 +40,17 @@ fun Psychologist.toDomain() = DomainPsychologist(
     account = account.toDomain(),
     firstName = firstName,
     lastName = lastName,
-    profileImageUrl = profileImageUrl
+    profileImageUrl = profileImageUrl,
+    article = article.toDomain()
+)
+
+fun Psychologist.Article.toDomain() = DomainArticle(
+    values = values.map { it.toDomain() }
+)
+
+fun Psychologist.Article.ArticleBlock.toDomain() = DomainArticle.ArticleBlock(
+    type = type,
+    content = content
 )
 
 fun Consultation.toDomain() = DomainConsultation(

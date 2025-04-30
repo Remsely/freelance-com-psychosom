@@ -9,6 +9,7 @@ import ru.remsely.psyhosom.domain.account.Account
 import ru.remsely.psyhosom.domain.account.dao.AccountCreator
 import ru.remsely.psyhosom.domain.account.event.RegisterPsychologistEvent
 import ru.remsely.psyhosom.domain.error.DomainError
+import ru.remsely.psyhosom.domain.psychologist.Article
 import ru.remsely.psyhosom.domain.psychologist.Psychologist
 import ru.remsely.psyhosom.domain.psychologist.dao.PsychologistCreator
 import ru.remsely.psyhosom.domain.value_object.PhoneNumber
@@ -59,7 +60,8 @@ class RegisterPsychologistCommandImpl(
                 account = account,
                 firstName = event.firstName,
                 lastName = event.lastName,
-                profileImageUrl = s3File.url
+                profileImageUrl = s3File.url,
+                article = Article.empty()
             )
         ).bind()
 
