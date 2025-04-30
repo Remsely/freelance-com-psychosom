@@ -10,10 +10,10 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
 import ru.remsely.psyhosom.api.dto.ArticleBlockDto
-import ru.remsely.psyhosom.api.dto.response.ConsultationResponse
 import ru.remsely.psyhosom.api.dto.response.ErrorResponse
+import ru.remsely.psyhosom.api.dto.response.PsychologistFullInfoResponse
 
-@Tag(name = "Психологи", description = "Эндпоинты для оперирования психологами")
+@Tag(name = "Психологи", description = "Эндпоинты для оперирования данными психологов")
 interface PsychologistControllerContract {
     @Operation(summary = "Публикация статьи психолога")
     @ApiResponses(
@@ -24,7 +24,7 @@ interface PsychologistControllerContract {
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = ConsultationResponse::class)
+                        schema = Schema(implementation = PsychologistFullInfoResponse::class)
                     )
                 ]
             ),

@@ -77,7 +77,7 @@ fun Psychologist.toDto(): PsychologistFullInfoResponse = PsychologistFullInfoRes
     id = id,
     firstName = firstName,
     lastName = lastName,
-    article = article.values.map { it.toDto() },
+    article = article.values.takeIf { it.isNotEmpty() }?.map { it.toDto() },
     profileImage = profileImageUrl
 )
 
