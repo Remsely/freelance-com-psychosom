@@ -22,6 +22,11 @@ spring:
     init:
       mode: never
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
 telegram:
   bot:
     endpoints:
@@ -38,7 +43,7 @@ s3:
   path-style-access: true
 
 frontend:
-  url: ${PSYHOSOM_WEB_URL:http://localhost:3000}
+  url: ${PSYCHOSOM_WEB_URL:http://localhost:3000}
   review-url: "${frontend.url}?section=reviews"
 
 security:

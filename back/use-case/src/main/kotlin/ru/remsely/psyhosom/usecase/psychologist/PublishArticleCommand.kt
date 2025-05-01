@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.usecase.consultation
+package ru.remsely.psyhosom.usecase.psychologist
 
 import arrow.core.Either
 import ru.remsely.psyhosom.domain.error.DomainError

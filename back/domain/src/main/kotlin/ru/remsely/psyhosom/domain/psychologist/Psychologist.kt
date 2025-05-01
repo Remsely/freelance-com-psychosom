@@ -7,6 +7,17 @@ data class Psychologist(
     val account: Account,
     val firstName: String,
     val lastName: String,
-    val profileImageUrl: String,
+    val profileImage: String,
     val article: Article,
-)
+    val educations: List<Education>
+) {
+    data class Education(
+        val id: Long,
+        val files: List<File>
+    ) {
+        data class File(
+            val id: Long,
+            val url: String
+        )
+    }
+}

@@ -78,7 +78,8 @@ fun Psychologist.toDto(): PsychologistFullInfoResponse = PsychologistFullInfoRes
     firstName = firstName,
     lastName = lastName,
     article = article.values.takeIf { it.isNotEmpty() }?.map { it.toDto() },
-    profileImage = profileImageUrl
+    profileImage = profileImage,
+    educationFiles = educations.takeIf { it.isNotEmpty() }?.flatMap { edu -> edu.files.map { it.url } }
 )
 
 fun Article.ArticleBlock.toDto(): ArticleBlockDto = ArticleBlockDto(

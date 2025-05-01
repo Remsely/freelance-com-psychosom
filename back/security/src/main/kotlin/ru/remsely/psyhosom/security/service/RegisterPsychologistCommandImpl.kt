@@ -60,8 +60,9 @@ class RegisterPsychologistCommandImpl(
                 account = account,
                 firstName = event.firstName,
                 lastName = event.lastName,
-                profileImageUrl = s3File.url,
-                article = Article.empty()
+                profileImage = s3File.url,
+                article = Article.empty(),
+                educations = emptyList()
             )
         ).bind()
 

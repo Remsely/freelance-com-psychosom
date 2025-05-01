@@ -1,11 +1,14 @@
 package ru.remsely.psyhosom.db.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToMany
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import org.hibernate.annotations.JdbcTypeCode
@@ -34,8 +37,24 @@ data class Psychologist(
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb", nullable = false)
-    val article: Article
+    val article: Article,
+
+    @OneToMany(
+        mappedBy = "psychologist",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    private val joinedEducations: MutableList<PsychologistEducation> = mutableListOf()
 ) {
+    val educations: List<PsychologistEducation>
+        get() = joinedEducations
+
+    fun setEducations(newList: List<PsychologistEducation>) {
+        joinedEducations.clear()
+        joinedEducations.addAll(newList)
+    }
+
     @JvmInline
     value class Article(
         val values: List<ArticleBlock>

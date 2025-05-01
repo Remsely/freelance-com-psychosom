@@ -21,8 +21,8 @@ services:
     container_name: local-env-psychosom-s3
     command: server /data --console-address ":9001"
     ports:
-      - "9000:9000" # S3 API
-      - "9001:9001" # Web UI
+      - '9000:9000' # S3 API
+      - '9001:9001' # Web UI
     environment:
       MINIO_ROOT_USER: psychosom
       MINIO_ROOT_PASSWORD: psychosom_1234
@@ -46,6 +46,10 @@ services:
     depends_on:
       s3:
         condition: service_healthy
+
+networks:
+  default:
+    name: psychosom_back_local_env
 
 volumes:
   postgres_data:

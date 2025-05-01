@@ -4,6 +4,8 @@ import ru.remsely.psyhosom.db.entity.Account
 import ru.remsely.psyhosom.db.entity.Consultation
 import ru.remsely.psyhosom.db.entity.Patient
 import ru.remsely.psyhosom.db.entity.Psychologist
+import ru.remsely.psyhosom.db.entity.PsychologistEducation
+import ru.remsely.psyhosom.db.entity.PsychologistEducationFile
 import ru.remsely.psyhosom.db.entity.Review
 import ru.remsely.psyhosom.domain.error.getOrThrowUnexpectedBehavior
 import ru.remsely.psyhosom.domain.value_object.MeetingLink
@@ -40,8 +42,19 @@ fun Psychologist.toDomain() = DomainPsychologist(
     account = account.toDomain(),
     firstName = firstName,
     lastName = lastName,
-    profileImageUrl = profileImageUrl,
-    article = article.toDomain()
+    profileImage = profileImageUrl,
+    article = article.toDomain(),
+    educations = educations.map { it.toDomain() }
+)
+
+fun PsychologistEducation.toDomain() = DomainPsychologist.Education(
+    id = id,
+    files = files.map { it.toDomain() }
+)
+
+fun PsychologistEducationFile.toDomain() = DomainPsychologist.Education.File(
+    id = id,
+    url = fileUrl,
 )
 
 fun Psychologist.Article.toDomain() = DomainArticle(
