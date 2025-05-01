@@ -32,10 +32,7 @@ interface ConsultationFormProps {
     id: number;
 }
 
-export function ConsultationForm({
-                                     setIsOpenAuthModal,
-                                     id,
-                                 }: ConsultationFormProps) {
+export function ConsultationForm({setIsOpenAuthModal, id}: ConsultationFormProps) {
     const { data: session } = useSession();
 
     const { data: schedule, isLoading } = usePsychologistSchedule(id);
@@ -64,7 +61,6 @@ export function ConsultationForm({
     } = useForm({ mode: "onBlur" });
 
     const { scheduleConsultation, isScheduling } = useScheduleConsultation();
-
     const [isOpen, setIsOpen] = useState(false);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -81,7 +77,6 @@ export function ConsultationForm({
             return;
         }
 
-        /* "dd-MM-yyyy" */
         const [d, m, y] = selectedDate.toLocaleDateString("ru-RU").split(".");
         const datePart = `${d}-${m}-${y}`;
 
@@ -103,11 +98,9 @@ export function ConsultationForm({
         );
     };
 
-    /* ---------- Деактивация недоступных дат ---------- */
     const disableUnavailable = (d: Date) =>
         !availableDates.some((av) => av.toDateString() === d.toDateString());
 
-    /* ---------- UI ---------- */
     return (
         <>
             <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
@@ -125,7 +118,6 @@ export function ConsultationForm({
 
             <div className={styles.formWrapper}>
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                    {/* Календарь */}
                     <div className={`${styles.leftColumn} ${styles.block}`}>
                         {isLoading ? (
                             <Skeleton className={styles.calendarSkeleton} height={320} />
@@ -142,10 +134,7 @@ export function ConsultationForm({
                             />
                         )}
                     </div>
-
-                    {/* Правая колонка */}
                     <div className={`${styles.rightColumn} ${styles.block}`}>
-                        {/* Слоты времени */}
                         <div className={styles.timesWrapper}>
                             {isLoading && (
                                 <Skeleton
@@ -173,15 +162,12 @@ export function ConsultationForm({
                                 </button>
                             ))}
                         </div>
-
                         <TextInput
                             label="Опишите свою проблему"
                             name="message"
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                         />
-
-                        {/* Кнопка */}
                         <Button
                             className={styles.buttonForm}
                             type="submit"
