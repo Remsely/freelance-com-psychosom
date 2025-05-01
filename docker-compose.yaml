@@ -29,7 +29,7 @@ services:
       - PSYСHOSOM_WEB_URL=http://localhost:3000
       - PSYСHOSOM_BOT_TOKEN=7849359674:AAGu7dC2hjt6JwchT6UIqjt64XHat5UrUH8
       - PSYСHOSOM_BOT_USERNAME=psyhosom_test_1_bot
-      - S3_ENDPOINT=http://s3:9000
+      - S3_ENDPOINT=http://localhost:9000
       - S3_ACCESS_KEY=psychosom
       - S3_SECRET_KEY=psychosom_1234
       - S3_BUCKET=psychosom
