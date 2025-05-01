@@ -13,7 +13,7 @@ export default function NotFoundPage() {
                 <Ban size={150}/>
                 <h1>404 - Страница не найдена</h1>
                 <p>Извините, но эта страница не существует.</p>
-                <Link href="/front/public">
+                <Link href="/">
                     <Button>Вернуться на главную</Button>
                 </Link>
             </div>

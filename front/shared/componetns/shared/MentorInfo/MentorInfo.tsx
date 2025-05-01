@@ -1,7 +1,6 @@
 "use client";
 
 import React, {useState} from "react";
-import Image from "next/image";
 import {
     Dialog,
     DialogContent,
@@ -25,38 +24,34 @@ export function MentorInfo({specialist}: PsychologistProfileType) {
 
     return (
         <div className="psychologist-profile">
-            <div className="psychologist-profile__info">
-                <div className="psychologist-profile__fio">
-                    {specialist.firstName} {specialist.lastName}
-                </div>
-                {specialist.article.map((block, idx) => {
-                    if (block.type === "tip") {
-                        return (
-                            <HighlightInfo key={idx}>{block.content}</HighlightInfo>
-                        );
-                    }
-                    if (block.type === "paragraph") {
-                        return (
-                            <div className="psychologist-profile__paragraph" key={idx}>
-                                {block.content}
-                            </div>
-                        );
-                    }
-                    return null;
-                })}
-                <CertificatesInfo certificates={specialist.educationFiles} handleOpenCertificate={handleOpenCertificate}/>
-            </div>
             <PhotoMentorInfo specialist={specialist}/>
+            <div className="psychologist-profile__fio">
+                {specialist.firstName} {specialist.lastName}
+            </div>
+            {specialist.article.map((block, idx) => {
+                if (block.type === "TIP") {
+                    return (
+                        <HighlightInfo key={idx}>{block.content}</HighlightInfo>
+                    );
+                }
+                if (block.type === "PARAGRAPH") {
+                    return (
+                        <div className="psychologist-profile__paragraph" key={idx}>
+                            {block.content}
+                        </div>
+                    );
+                }
+                return null;
+            })}
+            <CertificatesInfo certificates={specialist.educationFiles} handleOpenCertificate={handleOpenCertificate}/>
             <Dialog open={openCertificate} onOpenChange={() => setOpenCertificate(false)}>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Документ о квалификации</DialogTitle>
                         {currentCertificate && (
-                            <Image
+                            <img
                                 src={currentCertificate}
                                 alt="Сертификат"
-                                width={1200}
-                                height={750}
                                 style={{maxWidth: "100%", height: "auto", borderRadius: 12}}
                             />
                         )}

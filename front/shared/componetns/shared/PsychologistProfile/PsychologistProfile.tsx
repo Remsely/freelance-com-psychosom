@@ -1,27 +1,47 @@
 "use client";
 
 import {
-    ConsultationForm,
-    MentorInfo, SliderReview,
+    ConsultationForm, LoadingSpinner,
+    MentorInfo,
+    SliderReview,
 } from "@/shared/componetns";
-import {PsychologistProfileData} from "@/@types/types";
-import {useAuth} from "@/shared/hooks";
+import { useAuth, usePsychologistProfile } from "@/shared/hooks";
+import { notFound } from "next/navigation";
 
 interface PsychologistProfileProps {
-    specialist: PsychologistProfileData
     psychologistId: number;
 }
 
-export function PsychologistProfile({specialist, psychologistId} : PsychologistProfileProps) {
-    const {setIsOpenAuthModal} = useAuth();
+export function PsychologistProfile({ psychologistId }: PsychologistProfileProps) {
+    const { setIsOpenAuthModal } = useAuth();
+
+    const {
+        profile: specialist,
+        isLoading,
+        isError,
+        error,
+    } = usePsychologistProfile({ psychologistId });
+
+    if (isLoading) return (
+        <div className="loader-center-wrapper">
+            <LoadingSpinner/>
+        </div>
+        );
+
+    if (isError) return <p>{error?.message ?? "Не удалось получить данные"}</p>;
+
+    if (!specialist) return notFound();
 
     return (
         <>
-            <MentorInfo specialist={specialist}/>
+            <MentorInfo specialist={specialist} />
 
-            <ConsultationForm id={psychologistId} setIsOpenAuthModal={setIsOpenAuthModal}/>
+            <ConsultationForm
+                id={psychologistId}
+                setIsOpenAuthModal={setIsOpenAuthModal}
+            />
 
-            <SliderReview psychologistId={psychologistId}/>
+            <SliderReview psychologistId={psychologistId} />
         </>
     );
 }
