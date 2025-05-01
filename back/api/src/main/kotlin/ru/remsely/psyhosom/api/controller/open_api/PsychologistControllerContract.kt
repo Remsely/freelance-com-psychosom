@@ -133,4 +133,54 @@ interface PsychologistControllerContract {
 
         request: AddPsychologistEducationRequest
     ): ResponseEntity<*>
+
+    @Operation(summary = "Получение информации о психологе")
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Информация добавлена успешно",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = PsychologistFullInfoResponse::class)
+                    )
+                ]
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Некорректные входные данные",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ErrorResponse::class)
+                    )
+                ]
+            ),
+            ApiResponse(
+                responseCode = "401",
+                description = "Неверные учетные данные",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ErrorResponse::class)
+                    )
+                ]
+            ),
+            ApiResponse(
+                responseCode = "500",
+                description = "Внутренняя ошибка сервера",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = ErrorResponse::class)
+                    )
+                ]
+            )
+        ]
+    )
+    fun getPsychologistInfo(
+        @Parameter(description = "ID психолога")
+        psychologistId: Long
+    ): ResponseEntity<*>
 }

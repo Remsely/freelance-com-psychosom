@@ -2,7 +2,9 @@ package ru.remsely.psyhosom.api.controller
 
 import arrow.core.flatMap
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,6 +21,7 @@ import ru.remsely.psyhosom.api.utils.annotations.AuthPsychologistId
 import ru.remsely.psyhosom.domain.psychologist.event.AddPsychologistEducationEvent
 import ru.remsely.psyhosom.monitoring.log.logger
 import ru.remsely.psyhosom.usecase.psychologist.AddPsychologistEducationCommand
+import ru.remsely.psyhosom.usecase.psychologist.GetPsychologistByIdCommand
 import ru.remsely.psyhosom.usecase.psychologist.PublishArticleCommand
 
 @RestController
@@ -26,6 +29,7 @@ import ru.remsely.psyhosom.usecase.psychologist.PublishArticleCommand
 class PsychologistController(
     private val publishArticleCommand: PublishArticleCommand,
     private val addEducationCommand: AddPsychologistEducationCommand,
+    private val getPsychologistByIdCommand: GetPsychologistByIdCommand
 ) : PsychologistControllerContract {
     private val log = logger()
 
@@ -68,6 +72,23 @@ class PsychologistController(
                     )
                 )
             }
+            .fold(
+                { err ->
+                    err.toResponse()
+                        .also { log.warn(err.message) }
+                },
+                {
+                    ResponseEntity.ok(it.toDto())
+                }
+            )
+    }
+
+    @GetMapping("/{psychologistId}")
+    override fun getPsychologistInfo(
+        @PathVariable psychologistId: Long
+    ): ResponseEntity<*> {
+        log.info("GET /api/v1/psychologists/$psychologistId")
+        return getPsychologistByIdCommand.execute(psychologistId)
             .fold(
                 { err ->
                     err.toResponse()
