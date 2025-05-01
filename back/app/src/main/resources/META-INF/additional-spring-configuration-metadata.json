@@ -36,9 +36,14 @@
       "description": "Frequency of finished consultations informer worker."
     },
     {
-      "name": "s3.endpoint",
+      "name": "s3.internal-endpoint",
       "type": "java.lang.String",
-      "description": "S3 storage endpoint."
+      "description": "S3 internal storage endpoint."
+    },
+    {
+      "name": "s3.public-endpoint",
+      "type": "java.lang.String",
+      "description": "S3 public storage endpoint."
     },
     {
       "name": "s3.region",

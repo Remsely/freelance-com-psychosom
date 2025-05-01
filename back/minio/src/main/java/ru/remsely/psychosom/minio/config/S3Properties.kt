@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component
 @Component
 @ConfigurationProperties(prefix = "s3")
 data class S3Properties(
-    var endpoint: String = "",
+    var internalEndpoint: String = "",
+    var publicEndpoint: String = "",
     var region: String = "",
     var bucket: String = "",
     var accessKey: String = "",

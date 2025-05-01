@@ -34,7 +34,7 @@ class MinioS3FileCreator(
                 s3Client.putObject(request, RequestBody.fromInputStream(input, file.size))
             }
 
-            val url = "${s3properties.endpoint}/${s3properties.bucket}/$key"
+            val url = "${s3properties.publicEndpoint}/${s3properties.bucket}/$key"
 
             return S3File(
                 bucket = s3properties.bucket,

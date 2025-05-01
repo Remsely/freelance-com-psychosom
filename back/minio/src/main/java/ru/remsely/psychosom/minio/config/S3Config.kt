@@ -15,7 +15,7 @@ open class S3Config(
 ) {
     @Bean
     open fun s3Client(): S3Client = S3Client.builder()
-        .endpointOverride(URI(properties.endpoint))
+        .endpointOverride(URI(properties.internalEndpoint))
         .region(Region.of(properties.region))
         .credentialsProvider(
             StaticCredentialsProvider.create(
