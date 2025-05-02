@@ -7,6 +7,7 @@ import {
 } from "@/shared/componetns";
 import { useAuth, usePsychologistProfile } from "@/shared/hooks";
 import { notFound } from "next/navigation";
+import Head from "next/head";
 
 interface PsychologistProfileProps {
     psychologistId: number;
@@ -33,10 +34,14 @@ export function PsychologistProfile({ psychologistId }: PsychologistProfileProps
 
     return (
         <>
+            <Head>
+                <title>Психосоматика | {specialist.firstName} {specialist.lastName}</title>
+            </Head>
             <MentorInfo specialist={specialist} />
 
             <ConsultationForm
                 id={psychologistId}
+                specialistName={`${specialist.firstName} ${specialist.lastName}`}
                 setIsOpenAuthModal={setIsOpenAuthModal}
             />
 

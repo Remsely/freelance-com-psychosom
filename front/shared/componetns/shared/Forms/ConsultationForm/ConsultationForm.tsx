@@ -1,15 +1,23 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import {CircleAlert, ChevronLeft, ChevronRight} from "lucide-react";
+import {toast} from "react-hot-toast";
+import {useSession} from "next-auth/react";
+import styles from "./ConsultationForm.module.scss";
+import {cn} from "@/shared/utils";
+import {useCallback, useMemo, useState} from "react";
+import {isSameDay} from "date-fns";
 import {
     FieldValues,
     SubmitHandler,
     useForm,
     FieldError,
 } from "react-hook-form";
-import { addDays, startOfWeek } from "date-fns";
-
-import styles from "./ConsultationForm.module.scss";
+import {
+    BackendSlot,
+    usePsychologistSchedule,
+    useScheduleConsultation,
+} from "@/shared/hooks";
 import {
     Button,
     Calendar,
@@ -17,63 +25,59 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-} from "@/shared/componetns/ui";
-import { TextInput } from "@/shared/componetns/shared/Inputs";
-import { FrameTitle } from "@/shared/componetns/shared";
-import { CircleAlert, ChevronLeft } from "lucide-react";
-import { toast } from "react-hot-toast";
-import { useSession } from "next-auth/react";
-import {BackendSlot, usePsychologistSchedule, useScheduleConsultation } from "@/shared/hooks";
-import Skeleton from "react-loading-skeleton";
+    FrameTitle,
+    TextInput,
+    SlotList, DisableFn, WeekStep
+} from "@/shared/componetns";
 
 interface ConsultationFormProps {
-    setIsOpenAuthModal: (v: boolean) => void;
     id: number;
+    specialistName: string;
+    setIsOpenAuthModal: (v: boolean) => void;
 }
 
 export function ConsultationForm({
-                                     setIsOpenAuthModal,
                                      id,
+                                     specialistName,
+                                     setIsOpenAuthModal,
                                  }: ConsultationFormProps) {
-    const { data: session } = useSession();
+    const {data: schedule, isLoading} = usePsychologistSchedule(id);
+    const {data: session} = useSession();
+    const {scheduleConsultation, isScheduling} = useScheduleConsultation();
 
-    const { data: schedule, isLoading } = usePsychologistSchedule(id);
-
-    const [selectedDate, setSelectedDate] = useState<Date>();
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>();
     const [selectedSlot, setSelectedSlot] = useState<BackendSlot | null>(null);
-
-    const availableDates = useMemo<Date[]>(
-        () => schedule?.map((d) => d.jsDate) ?? [],
-        [schedule],
-    );
-
-    const daySlots = useMemo<BackendSlot[]>(() => {
-        if (!selectedDate || !schedule) return [];
-        const day = schedule.find(
-            (d) => d.jsDate.toDateString() === selectedDate.toDateString(),
-        );
-        return day?.slots ?? [];
-    }, [selectedDate, schedule]);
-
-    const disableUnavailable = (d: Date) =>
-        !availableDates.some((av) => av.toDateString() === d.toDateString());
+    const [weekOffset, setWeekOffset] = useState(0);
+    const [dialog, toggleDialog] = useState(false);
 
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
-    } = useForm({ mode: "onBlur" });
+        formState: {errors},
+    } = useForm({mode: "onBlur"});
 
-    const { scheduleConsultation, isScheduling } = useScheduleConsultation();
-    const [isOpen, setIsOpen] = useState(false);
+    const availableDates = useMemo(
+        () => schedule?.map((d) => d.jsDate) ?? [],
+        [schedule],
+    );
+
+    const disableDate = useCallback<DisableFn>(
+        (d) => !availableDates.some((av) => isSameDay(av, d)),
+        [availableDates],
+    );
+
+    const daySlots = useMemo<BackendSlot[]>(() => {
+        if (!selectedDate || !schedule) return [];
+        return schedule.find((d) => isSameDay(d.jsDate, selectedDate))?.slots ?? [];
+    }, [selectedDate, schedule]);
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         if (!session) {
             setIsOpenAuthModal(true);
             toast(
                 "Прежде чем записаться к специалисту, пожалуйста, войдите в аккаунт",
-                { icon: <CircleAlert />, className: styles.toast },
+                {icon: <CircleAlert/>, className: styles.toast},
             );
             return;
         }
@@ -83,7 +87,6 @@ export function ConsultationForm({
         }
         const [d, m, y] = selectedDate.toLocaleDateString("ru-RU").split(".");
         const datePart = `${d}-${m}-${y}`;
-
         scheduleConsultation(
             {
                 id,
@@ -96,28 +99,23 @@ export function ConsultationForm({
                     reset();
                     setSelectedDate(undefined);
                     setSelectedSlot(null);
-                    setIsOpen(true);
+                    setWeekOffset(0);
+                    toggleDialog(true);
                 },
             },
         );
     };
 
-    const weekDates = useMemo<Date[]>(() => {
-        if (!selectedDate) return [];
-        const monday = startOfWeek(selectedDate, { weekStartsOn: 1 });
-        return Array.from({ length: 7 }, (_, i) => addDays(monday, i));
-    }, [selectedDate]);
-
     return (
         <>
-            <FrameTitle id="consultation">Запишитесь на консультацию</FrameTitle>
+            <FrameTitle id="consultation">{specialistName} | Запись на консультацию</FrameTitle>
 
-            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <Dialog open={dialog} onOpenChange={toggleDialog}>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Поздравляем, вы записаны!</DialogTitle>
                         <p className={styles.textModal}>
-                            Скоро с вами свяжется специалист по выбранному способу связи.
+                            Вы успешно записаны на консультацию к специалисту <b>{specialistName}</b>. Перейди в телеграмм-бот, чтобы продолжить запись.
                         </p>
                     </DialogHeader>
                 </DialogContent>
@@ -125,111 +123,84 @@ export function ConsultationForm({
 
             <div className={styles.formWrapper}>
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                    <div className={`${styles.leftColumn} ${styles.block}`}>
+                    <div className={cn(styles.leftColumn, styles.block)}>
                         {!selectedDate && (
-                            <>
-                                {isLoading ? (
-                                    <Skeleton
-                                        className={styles.calendarSkeleton}
-                                        height={320}
-                                        width={250}
-                                    />
-                                ) : (
-                                    <Calendar
-                                        mode="single"
-                                        selected={undefined}
-                                        onSelect={(d) => setSelectedDate(d)}
-                                        disabled={disableUnavailable}
-                                        className={styles.calendar}
-                                    />
-                                )}
-                            </>
+                            <Calendar
+                                mode="single"
+                                disabled={disableDate}
+                                onSelect={(d) => {
+                                    setSelectedDate(d);
+                                    setWeekOffset(0);
+                                }}
+                                className={styles.calendar}
+                            />
                         )}
 
                         {selectedDate && (
                             <div>
-                                <button
-                                    type="button"
-                                    className={styles.backBtn}
-                                    onClick={() => {
-                                        setSelectedDate(undefined);
-                                        setSelectedSlot(null);
-                                    }}
-                                >
-                                    <ChevronLeft size={16} /> Изменить дату
-                                </button>
-
-                                <div className={styles.weekStrip}>
-                                    {weekDates.map((d) => {
-                                        const isAvail = !disableUnavailable(d);
-                                        const isSel = d.toDateString() === selectedDate.toDateString();
-                                        return (
-                                            <button
-                                                key={d.toISOString()}
-                                                type="button"
-                                                disabled={!isAvail}
-                                                className={`${styles.dayBtn} ${
-                                                    isSel ? styles.dayBtnActive : ""
-                                                }`}
-                                                onClick={() => {
-                                                    setSelectedDate(d);
-                                                    setSelectedSlot(null);
-                                                }}
-                                            >
-                                                {d.toLocaleDateString("ru-RU", {
-                                                    weekday: "short",
-                                                    day: "2-digit",
-                                                })}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-
-                                <div className={styles.timesWrapper}>
-                                    {isLoading && (
-                                        <Skeleton
-                                            className={styles.timeSkeleton}
-                                            width={220}
-                                            height={20}
-                                            count={3}
-                                        />
-                                    )}
-
-                                    {!isLoading && daySlots.length === 0 && (
-                                        <p className={styles.noTimes}>Нет свободных слотов</p>
-                                    )}
-
-                                    {daySlots.map((s) => (
+                                <div className={styles.weekHeader}>
+                                    <button
+                                        type="button"
+                                        className={styles.backBtn}
+                                        onClick={() => {
+                                            setSelectedDate(undefined);
+                                            setSelectedSlot(null);
+                                            setWeekOffset(0);
+                                        }}
+                                    >
+                                        <ChevronLeft size={26}/> Назад
+                                    </button>
+                                    <div className={styles.weekButtons}>
                                         <button
-                                            key={s.start}
                                             type="button"
-                                            onClick={() => setSelectedSlot(s)}
-                                            className={`${styles.timeBtn} ${
-                                                selectedSlot?.start === s.start
-                                                    ? styles.timeBtnActive
-                                                    : ""
-                                            }`}
+                                            className="rdp-button_next"
+                                            onClick={() => setWeekOffset(weekOffset - 1)}
                                         >
-                                            {s.start}
+                                            <ChevronLeft size={24}/>
                                         </button>
-                                    ))}
+                                        <button
+                                            type="button"
+                                            className="rdp-button_previous"
+                                            onClick={() => setWeekOffset(weekOffset + 1)}
+                                        >
+                                            <ChevronRight size={24}/>
+                                        </button>
+                                    </div>
                                 </div>
+                                <WeekStep
+                                    baseDate={selectedDate}
+                                    offset={weekOffset}
+                                    onOffsetChange={setWeekOffset}
+                                    disableDate={disableDate}
+                                    selectedDate={selectedDate}
+                                    onSelectDate={(d) => {
+                                        setSelectedDate(d);
+                                        setSelectedSlot(null);
+                                        setWeekOffset(0);
+                                    }}
+                                />
+                                <SlotList
+                                    loading={isLoading}
+                                    slots={daySlots}
+                                    selectedSlot={selectedSlot}
+                                    onSelect={setSelectedSlot}
+                                />
                             </div>
                         )}
                     </div>
 
-                    <div className={`${styles.textarea} ${styles.block}`}>
+                    <div className={cn(styles.textarea, styles.block)}>
                         <TextInput
-                            label="Опишите свою проблему (это поможет помочь специалисту лучше понять вас до встречи)"
+                            label="Опишите свою проблему (необязательно)"
                             name="message"
                             register={register}
                             errors={errors as Record<string, FieldError | undefined>}
                         />
                         <Button
-                            className={styles.buttonForm}
                             type="submit"
-                            disabled={isScheduling}
+                            className={styles.buttonForm}
                             loading={isScheduling}
+                            disabled={isScheduling}
                         >
                             Записаться
                         </Button>
