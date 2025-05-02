@@ -46,4 +46,10 @@ data class PsychologistFullInfoResponse(
         )
     )
     val educationFiles: List<String>?,
+
+    @field:Schema(
+        description = "Средний рейтинг психолога",
+        example = "4.87"
+    )
+    val rating: Double?,
 )
