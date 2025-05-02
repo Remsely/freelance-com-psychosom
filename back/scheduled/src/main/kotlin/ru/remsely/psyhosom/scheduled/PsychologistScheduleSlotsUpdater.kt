@@ -1,5 +1,7 @@
 package ru.remsely.psyhosom.scheduled
 
+import org.springframework.boot.context.event.ApplicationReadyEvent
+import org.springframework.context.event.EventListener
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.monitoring.log.logger
@@ -11,17 +13,24 @@ class PsychologistScheduleSlotsUpdater(
 ) {
     private val log = logger()
 
+    @EventListener(ApplicationReadyEvent::class)
+    fun runOnceAfterStartup() {
+        doUpdate()
+    }
+
     @Scheduled(cron = "\${scheduled.psychologist-schedule-slots-addition.cron}")
     fun updateScheduleSlots() {
-        log.info("Starting scheduled task to update psychologist schedule slots...")
-        command.execute()
-            .fold(
-                {
-                    log.warn("Scheduled slots updating failed.")
-                },
-                {
-                    log.warn("Successfully updated psychologists schedule slots.")
-                }
-            )
+        doUpdate()
+    }
+
+    private fun doUpdate() {
+        command.execute().fold(
+            {
+                log.error("Updating schedule slots failed.")
+            },
+            {
+                log.info("Successfully updated psychologists schedule slots.")
+            }
+        )
     }
 }
