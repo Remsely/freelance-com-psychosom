@@ -43,7 +43,7 @@ export function ConsultationForm({
                                  }: ConsultationFormProps) {
     const {data: schedule, isLoading} = usePsychologistSchedule(id);
     const {data: session} = useSession();
-    const {scheduleConsultation, isScheduling} = useScheduleConsultation();
+    const {scheduleConsultation, isScheduling} = useScheduleConsultation({psychologistId: id});
 
     const [selectedDate, setSelectedDate] = useState<Date | undefined>();
     const [selectedSlot, setSelectedSlot] = useState<BackendSlot | null>(null);
@@ -89,9 +89,9 @@ export function ConsultationForm({
         const datePart = `${d}-${m}-${y}`;
         scheduleConsultation(
             {
-                id,
-                startDtTm: `${datePart} ${selectedSlot.start}:00.000`,
-                endDtTm: `${datePart} ${selectedSlot.end}:00.000`,
+                date: datePart,
+                startTm: `${selectedSlot.start}:00`,
+                endTm: `${selectedSlot.end}:00`,
                 problemDescription: data.message,
             },
             {

@@ -1,19 +1,21 @@
 @use "@/shared/styles/variables" as *;
 
 .timesWrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
 }
 
 .timeBtn,
 .timeBtnActive {
-    padding: 6px 5px;
+    padding: 8px 3px;
     border-radius: 6px;
     border: 1px solid $title-hover-color;
     font-size: 14px;
     background: transparent;
     transition: $transition-fastest;
+    width: 100%;
+    text-align: center;
 
     &:hover {
         background: $button-hover-color;
