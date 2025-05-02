@@ -9,6 +9,7 @@ import ru.remsely.psyhosom.api.dto.response.PatientResponse
 import ru.remsely.psyhosom.api.dto.response.PsychologistFullInfoResponse
 import ru.remsely.psyhosom.api.dto.response.RegisterResponse
 import ru.remsely.psyhosom.api.dto.response.ReviewResponse
+import ru.remsely.psyhosom.api.dto.response.ScheduleItemResponse
 import ru.remsely.psyhosom.api.extensions.error_handling.responseStatus
 import ru.remsely.psyhosom.domain.consultation.Consultation
 import ru.remsely.psyhosom.domain.error.DomainError
@@ -16,6 +17,7 @@ import ru.remsely.psyhosom.domain.patient.Patient
 import ru.remsely.psyhosom.domain.psychologist.Article
 import ru.remsely.psyhosom.domain.psychologist.Psychologist
 import ru.remsely.psyhosom.domain.review.Review
+import ru.remsely.psyhosom.domain.schedule.Schedule
 import ru.remsely.psyhosom.usecase.auth.AccountCreatedEvent
 import java.time.LocalDateTime
 
@@ -93,3 +95,19 @@ fun Article.ArticleBlock.toDto(): ArticleBlockDto = ArticleBlockDto(
     type = type,
     content = content
 )
+
+fun Schedule.toDto(): List<ScheduleItemResponse> = this.values
+    .groupBy { it.date }
+    .map { (date, slots) ->
+        ScheduleItemResponse(
+            date = date,
+            slots = slots.sortedBy { it.startTm }
+                .map {
+                    ScheduleItemResponse.Slot(
+                        startTm = it.startTm,
+                        endTm = it.endTm
+                    )
+                }
+        )
+    }
+    .sortedBy { it.date }

@@ -7,21 +7,21 @@ import java.time.LocalTime
 @Schema(description = "Запрос на создание отзыва")
 data class CreateConsultationRequest(
     @field:Schema(
-        description = "Дата и время начала консультации",
+        description = "Дата консультации",
         pattern = "dd-MM-yyyy",
         example = "25-12-2025"
     )
     val date: LocalDate,
 
     @field:Schema(
-        description = "Дата и время начала консультации",
+        description = "Время начала консультации",
         pattern = "HH:mm:ss",
         example = "13:00:00"
     )
     val startTm: LocalTime,
 
     @field:Schema(
-        description = "Дата и время окончания консультации",
+        description = "Время окончания консультации",
         pattern = "HH:mm:ss",
         example = "14:00:00"
     )
