@@ -2,6 +2,7 @@ package ru.remsely.psyhosom.api.extensions.mapping
 
 import org.springframework.http.HttpStatus
 import ru.remsely.psyhosom.api.dto.ArticleBlockDto
+import ru.remsely.psyhosom.api.dto.ScheduleSlotDto
 import ru.remsely.psyhosom.api.dto.response.ConsultationResponse
 import ru.remsely.psyhosom.api.dto.response.ErrorResponse
 import ru.remsely.psyhosom.api.dto.response.PatientResponse
@@ -41,18 +42,20 @@ fun Review.toDto() = ReviewResponse(
     date = date
 )
 
-fun Consultation.toDto(): ConsultationResponse =
-    ConsultationResponse(
-        id = id,
-        psychologistId = psychologist.id,
-        patientId = patient.id,
-        problemDescription = problemDescription,
-        startDtTm = period.start,
-        endDtTm = period.end,
-        status = status,
-        orderDtTm = orderDtTm,
-        confirmationDtTm = confirmationDtTm
-    )
+fun Consultation.toDto(): ConsultationResponse = ConsultationResponse(
+    id = id,
+    psychologistId = psychologist.id,
+    patientId = patient.id,
+    problemDescription = problemDescription,
+    scheduleSlot = ScheduleSlotDto(
+        date = scheduleSlot.date,
+        startTm = scheduleSlot.startTm,
+        endTm = scheduleSlot.endTm,
+    ),
+    status = status,
+    orderDtTm = orderDtTm,
+    confirmationDtTm = confirmationDtTm
+)
 
 fun DomainError.toDto() = ErrorResponse(
     status = this.responseStatus.name,
@@ -77,9 +80,13 @@ fun Psychologist.toDto(): PsychologistFullInfoResponse = PsychologistFullInfoRes
     id = id,
     firstName = firstName,
     lastName = lastName,
-    article = article.values.takeIf { it.isNotEmpty() }?.map { it.toDto() },
+    article = article.values
+        .takeIf { it.isNotEmpty() }
+        ?.map { it.toDto() },
     profileImage = profileImage,
-    educationFiles = educations.takeIf { it.isNotEmpty() }?.flatMap { edu -> edu.files.map { it.url } }
+    educationFiles = educations
+        .takeIf { it.isNotEmpty() }
+        ?.flatMap { edu -> edu.files.map { it.url } }
 )
 
 fun Article.ArticleBlock.toDto(): ArticleBlockDto = ArticleBlockDto(
