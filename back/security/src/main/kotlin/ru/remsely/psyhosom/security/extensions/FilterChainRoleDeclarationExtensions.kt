@@ -3,6 +3,7 @@ package ru.remsely.psyhosom.security.extensions
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer
+import ru.remsely.psyhosom.domain.account.Account
 
 @DslMarker
 private annotation class RoleDslMarker
@@ -46,12 +47,12 @@ fun AuthorizeHttpRequestsConfigurer<HttpSecurity>
 
 fun AuthorizeHttpRequestsConfigurer<HttpSecurity>
 .AuthorizationManagerRequestMatcherRegistry.withRole(
-    role: String,
+    role: Account.Role,
     block: RoleDsl.() -> Unit
 ): AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry {
     val dsl = RoleDsl().apply(block)
     dsl.mappings.forEach { (method, path) ->
-        this.requestMatchers(method, path).hasRole(role)
+        this.requestMatchers(method, path).hasRole(role.name)
     }
     return this
 }

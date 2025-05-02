@@ -46,10 +46,10 @@ class SecurityConfig(
             .cors { it.configurationSource(corsConfig()) }
             .authorizeHttpRequests { auth ->
                 auth
-                    .withRole(Account.Role.ADMIN.name) {
+                    .withRole(Account.Role.ADMIN) {
                         post("/api/v1/auth/register/admin")
                     }
-                    .withRole(Account.Role.PATIENT.name) {
+                    .withRole(Account.Role.PATIENT) {
                         put("/api/v1/patients")
                         get("/api/v1/patients")
                         post("/api/v1/psychologists/*/consultations")
@@ -57,7 +57,7 @@ class SecurityConfig(
                         patch("/api/v1/psychologists/*/consultations/*/finish")
                         post("/api/v1/psychologists/*/reviews")
                     }
-                    .withRole(Account.Role.PSYCHOLOGIST.name) {
+                    .withRole(Account.Role.PSYCHOLOGIST) {
                         put("/api/v1/psychologists/article")
                         post("/api/v1/psychologists/education")
                     }
