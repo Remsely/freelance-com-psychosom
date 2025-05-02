@@ -5,16 +5,13 @@
 
     .leftColumn {
         flex-shrink: 0;
-        width: 301px;
-        padding: 15px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 350px;
+        padding: 20px;
         margin-right: 10px;
-
-        .inputs {
-            height: calc(450px - 135px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+        height: 405px;
     }
 
     .textarea {
@@ -22,7 +19,7 @@
         flex-direction: column;
         flex-shrink: 0;
         position: relative;
-        width: calc(100% - 311px);
+        width: calc(100% - 350px);
         padding: 16px 20px;
 
         button {
@@ -89,4 +86,58 @@
 
 .textModal {
     width: 650px;
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: $title-font-color;
+    background: transparent;
+}
+
+.weekStrip {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.dayBtn {
+    width: 38px;
+    padding: 4px 0;
+    border-radius: 6px;
+    font-size: 12px;
+    background: transparent;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+}
+
+.dayBtnActive {
+    background: $button-hover-color;
+    color: #fff;
+}
+
+.timesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.timeBtn,
+.timeBtnActive {
+    width: 68px;
+    padding: 6px 0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: transparent;
+}
+
+.timeBtnActive {
+    background: $button-hover-color;
+    color: #fff;
 }

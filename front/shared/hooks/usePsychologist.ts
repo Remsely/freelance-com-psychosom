@@ -15,7 +15,7 @@ export interface BackendDaySchedule {
 
 const TEST_SCHEDULE: BackendDaySchedule[] = [
     {
-        jsDate: new Date(),
+        jsDate: new Date(Date.now() + 24 * 60 * 60 * 3000),
         slots: [
             { start: '09:00', end: '09:50' },
             { start: '11:00', end: '11:50' },
@@ -60,7 +60,6 @@ export function usePsychologistProfile({
         data,
         isPending,
         isError,
-        error,
     } = useQuery<PsychologistProfileData, FetchError>({
         queryKey: ['psychologist-profile', psychologistId],
         queryFn: () => {
@@ -76,6 +75,5 @@ export function usePsychologistProfile({
         profile: data,
         isLoading: isPending,
         isError,
-        error,
     };
 }

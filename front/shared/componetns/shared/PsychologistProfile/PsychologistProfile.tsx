@@ -19,7 +19,6 @@ export function PsychologistProfile({ psychologistId }: PsychologistProfileProps
         profile: specialist,
         isLoading,
         isError,
-        error,
     } = usePsychologistProfile({ psychologistId });
 
     if (isLoading) return (
@@ -28,7 +27,7 @@ export function PsychologistProfile({ psychologistId }: PsychologistProfileProps
         </div>
         );
 
-    if (isError) return <p>{error?.message ?? "Не удалось получить данные"}</p>;
+    if (isError) return <p>{"Не удалось получить данные"}</p>;
 
     if (!specialist) return notFound();
 
