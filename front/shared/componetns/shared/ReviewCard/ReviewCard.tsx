@@ -29,10 +29,12 @@ export function ReviewCard({name, rating, text, date, isLoading = false}: Review
                 <>
                     <div className={styles.info}>
                         <h3 className="">{name}</h3>
-                        <span>{rating} </span>
-                        <Star/>
+                        <div className={styles.rating}>
+                            <span className="">{rating} </span>
+                            <Star size={26}/>
+                        </div>
                     </div>
-                    <p>{text}</p>
+                    <p className="">{text}</p>
                     <h4 className="">{readableDate} г</h4>
                 </>
             )}

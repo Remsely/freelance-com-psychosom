@@ -20,8 +20,8 @@ export function PsychologistCard({ id, firstName, lastName, profileImage, rating
                 />
                 {rating !== null && (
                     <span className={styles.badge}>
-                <StarIcon size={22} strokeWidth={3}/>
                         {rating.toFixed(2)}
+                        <StarIcon size={22}/>
               </span>
                 )}
             </Link>
