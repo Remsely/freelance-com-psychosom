@@ -43,7 +43,7 @@ export function SliderReview({psychologistId, rating}: { psychologistId: number,
             <div className="slider-review__header">
                 <FrameTitle id="reviews">Отзывы</FrameTitle>
                 {rating !== null && (
-                    <h2 className="slider-review__header-rating">
+                    <h2 className="slider-review__header__rating">
                         {rating.toFixed(2)}
                         <StarIcon size={32}/>
                     </h2>

@@ -35,7 +35,7 @@ export function PsychologistProfile({ psychologistId }: PsychologistProfileProps
     return (
         <>
             <Head>
-                <title>Психосоматика | {specialist.firstName} {specialist.lastName}</title>
+                <title>Psychosom | {specialist.firstName} {specialist.lastName}</title>
             </Head>
             <MentorInfo specialist={specialist} />
 

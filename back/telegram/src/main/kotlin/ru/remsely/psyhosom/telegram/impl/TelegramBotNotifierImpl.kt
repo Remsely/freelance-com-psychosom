@@ -229,7 +229,7 @@ class TelegramBotNotifierImpl(
             ✅ <b>Консультация завершена!</b>
 
             Спасибо, что выбрали нас. Мы будем рады получить от вас обратную связь.
-            Отзыв о специалисте можно оставить по ссылке: $frontendUrl/${c.psychologist.id}?section=reviews.
+            Отзыв о специалисте можно оставить по ссылке: $frontendUrl/psychologist/${c.psychologist.id}?section=reviews.
         """.trimIndent()
 
         absSender.execute(

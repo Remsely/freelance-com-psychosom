@@ -13,12 +13,18 @@ export function PsychologistsCatalog() {
         </div>
     )
 
-    if (isError) return <p className={styles.error}>Не удалось загрузить данные 😔</p>;
+    if (isError) return (
+        <div className="loader-center-wrapper">
+            <p className={styles.error}>Не удалось загрузить данные 😔</p>;
+        </div>
+    )
+
 
     return (
         <section className={styles.psychologistsCatalog}>
             {psychologists?.map((p) => (
-                <PsychologistCard key={p.id} profileImage={p.profileImage} id={p.id} firstName={p.firstName} lastName={p.lastName} rating={p.rating}/>
+                <PsychologistCard key={p.id} profileImage={p.profileImage} id={p.id} firstName={p.firstName}
+                                  lastName={p.lastName} rating={p.rating}/>
             ))}
         </section>
     );
