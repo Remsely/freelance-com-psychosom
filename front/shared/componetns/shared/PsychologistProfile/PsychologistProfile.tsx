@@ -45,7 +45,7 @@ export function PsychologistProfile({ psychologistId }: PsychologistProfileProps
                 setIsOpenAuthModal={setIsOpenAuthModal}
             />
 
-            <SliderReview psychologistId={psychologistId} />
+            <SliderReview psychologistId={psychologistId} rating={specialist.rating} />
         </>
     );
 }
