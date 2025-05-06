@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.security
+package ru.remsely.psyhosom.security.config
 
 import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey
