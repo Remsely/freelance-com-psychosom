@@ -3,20 +3,20 @@ services:
     build:
       context: ./front
       args:
-        NEXT_PUBLIC_WS_URL: ws://localhost:8080
-        NEXT_PUBLIC_REST_URL: http://localhost:8080
+        NEXT_PUBLIC_WS_URL: ws://109.73.196.45:8080
+        NEXT_PUBLIC_REST_URL: http://109.73.196.45:8080
     container_name: psychosom-front
     ports:
       - '3000:3000'
     environment:
       - NEXTAUTH_SECRET=24230c0d373a2bba872b0893dc81ec00
-      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://109.73.196.45:3000
       - BACKEND_URL=http://back:8080
     depends_on:
       - back
 
   back:
-    build: ./back
+    build: ./deploy
     container_name: psychosom-back
     ports:
       - '8080:8080'
@@ -26,14 +26,14 @@ services:
       - DB_NAME=psychosom
       - DB_PORT=5432
       - POSTGRES_USER=psychosom
-      - POSTGRES_PASSWORD=psychosom_1234
-      - PSYСHOSOM_WEB_URL=http://localhost:3000
-      - PSYСHOSOM_BOT_TOKEN=7849359674:AAGu7dC2hjt6JwchT6UIqjt64XHat5UrUH8
-      - PSYСHOSOM_BOT_USERNAME=psyhosom_test_1_bot
+      - POSTGRES_PASSWORD=psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf
+      - PSYСHOSOM_WEB_URL=http://109.73.196.45:3000
+      - PSYСHOSOM_BOT_TOKEN=7782387969:AAG0R0bUObHwfR3dj9VaeWR4ipnSV2oaP8M
+      - PSYСHOSOM_BOT_USERNAME=mirea_csad_demonstration_bot
       - S3_INTERNAL_ENDPOINT=http://s3:9000
-      - S3_PUBLIC_ENDPOINT=http://localhost:9000
+      - S3_PUBLIC_ENDPOINT=http://109.73.196.45:9000
       - S3_ACCESS_KEY=psychosom
-      - S3_SECRET_KEY=psychosom_1234
+      - S3_SECRET_KEY=psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf
       - S3_BUCKET=psychosom
       - S3_REGION=eu-north-1
     depends_on:
@@ -57,7 +57,7 @@ services:
     environment:
       POSTGRES_DB: psychosom
       POSTGRES_USER: psychosom
-      POSTGRES_PASSWORD: psychosom_1234
+      POSTGRES_PASSWORD: psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -70,7 +70,7 @@ services:
       - '9001:9001' # Web UI
     environment:
       MINIO_ROOT_USER: psychosom
-      MINIO_ROOT_PASSWORD: psychosom_1234
+      MINIO_ROOT_PASSWORD: psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9000/minio/health/live || exit 1" ]
       interval: 5s
