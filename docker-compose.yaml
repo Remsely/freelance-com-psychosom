@@ -27,9 +27,9 @@ services:
       - DB_PORT=5432
       - POSTGRES_USER=psychosom
       - POSTGRES_PASSWORD=psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf
-      - PSYСHOSOM_WEB_URL=http://front:3000
-      - PSYСHOSOM_BOT_TOKEN=7782387969:AAG0R0bUObHwfR3dj9VaeWR4ipnSV2oaP8M
-      - PSYСHOSOM_BOT_USERNAME=mirea_csad_demonstration_bot
+      - PSYCHOSOM_WEB_URL=http://109.73.196.45:3000
+      - PSYCHOSOM_BOT_TOKEN=7782387969:AAG0R0bUObHwfR3dj9VaeWR4ipnSV2oaP8M
+      - PSYCHOSOM_BOT_USERNAME=mirea_csad_demonstration_bot
       - S3_INTERNAL_ENDPOINT=http://s3:9000
       - S3_PUBLIC_ENDPOINT=http://109.73.196.45:9000
       - S3_ACCESS_KEY=psychosom

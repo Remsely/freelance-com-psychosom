@@ -30,9 +30,9 @@ spring:
 telegram:
   bot:
     endpoints:
-      confirmation: https://t.me/${PSYСHOSOM_BOT_USERNAME:psyhosom_test_2_bot}?start=
-    token: ${PSYСHOSOM_BOT_TOKEN:8199547612:AAHOhfzIyITbm6XYe_3Wr4rUcVqC867c-C4}
-    username: ${PSYСHOSOM_BOT_USERNAME:psyhosom_test_2_bot}
+      confirmation: https://t.me/${PSYCHOSOM_BOT_USERNAME:psyhosom_test_2_bot}?start=
+    token: ${PSYCHOSOM_BOT_TOKEN:8199547612:AAHOhfzIyITbm6XYe_3Wr4rUcVqC867c-C4}
+    username: ${PSYCHOSOM_BOT_USERNAME:psyhosom_test_2_bot}
 
 s3:
   internal-endpoint: ${S3_INTERNAL_ENDPOINT:http://localhost:9000}
