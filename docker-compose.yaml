@@ -84,7 +84,7 @@ services:
     container_name: psychosom-s3-bucket-creator
     entrypoint: >
       /bin/sh -c "
-        mc alias set psychosom_s3 http://s3:9000 psychosom psychosom_1234;
+        mc alias set psychosom_s3 http://s3:9000 psychosom psychosom_1234khkhaklsdyflksadjfyasdlfashdgfasdfjaksdgfasldfsadf;
         mc mb -p psychosom_s3/psychosom;
         mc anonymous set download psychosom_s3/psychosom
       "
