@@ -52,7 +52,7 @@ export const authConfig: AuthOptions = {
 
                         (await cookies()).set("backend_token", token, {
                             httpOnly: true,
-                            secure: !!process.env.NEXTAUTH_SECRET,
+                            secure: false,
                             sameSite: "lax",
                             path: "/",
                             maxAge: 60 * 60 * 24 * 7,
