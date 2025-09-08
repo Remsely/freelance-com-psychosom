@@ -6,6 +6,8 @@ rootProject.name = "psychosom"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+includeBuild("build-logic")
+
 include(
     "domain",
     "db",

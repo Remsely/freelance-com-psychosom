@@ -1,33 +1,7 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
-    alias(libs.plugins.kotlin.jpa)
-    alias(libs.plugins.ksp)
+    // This prevents multiple loading of the Kotlin plugin during build-logic convention plugins compilation
+    alias(libs.plugins.kotlin.jvm) apply false
 }
 
-group = Project.groupId
-version = Project.version
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-configurations.all {
-    resolutionStrategy {
-        preferProjectModules()
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-tasks.withType<BootJar> {
-    mainClass.set(Project.main_class)
-}
+group = "ru.remsely.psyhosom"
+version = "0.0.1-SNAPSHOT"

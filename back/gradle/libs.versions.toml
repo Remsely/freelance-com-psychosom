@@ -2,6 +2,9 @@
 
 # Core
 kotlin = "2.0.10"
+java = "21"
+
+# Arrow
 arrow = "1.2.4"
 
 # Spring
@@ -9,7 +12,6 @@ spring-boot = "3.3.2"
 spring-boot-plugin = "3.4.0"
 spring-tx = "6.1.12"
 spring-dependency-management-plugin = "1.1.6"
-kotlin-spring-plugin = "1.9.24"
 
 # Lower-level Spring
 jakarta-servlet-api = "6.1.0"
@@ -18,7 +20,6 @@ jakarta-servlet-api = "6.1.0"
 postgresql = "42.7.1"
 flyway = "10.17.3"
 flyway-plugin = "9.10.0"
-kotlin-jpa-plugin = "1.9.24"
 
 # Monitoring / logging
 slf4j = "2.0.16"
@@ -43,7 +44,7 @@ ksp-plugin = "2.0.10-1.0.24"
 
 [libraries]
 
-# Spring starters (core)
+# Spring Boot starters
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
 spring-boot-starter-webSocket = { module = "org.springframework.boot:spring-boot-starter-websocket", version.ref = "spring-boot" }
@@ -82,28 +83,37 @@ flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql
 springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-open-api-starter" }
 
 # Kotlin
-jetbrains_kotlin_reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+jetbrains-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 
 # Testing
-kotlin_test_junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
-junit_platform_launcher = { module = "org.junit.platform:junit-platform-launcher" }
-kotest_assertions_arrow = { module = "io.kotest.extensions:kotest-assertions-arrow", version.ref = "kotest-assertions-arrow" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+kotest-assertions-arrow = { module = "io.kotest.extensions:kotest-assertions-arrow", version.ref = "kotest-assertions-arrow" }
+
+# Gradle plugins for build-logic
+gradle-plugins-kotlin-jvm = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
+gradle-plugins-kotlin-jpa = { module = "org.jetbrains.kotlin.plugin.jpa:org.jetbrains.kotlin.plugin.jpa.gradle.plugin", version.ref = "kotlin" }
+gradle-plugins-kotlin-spring = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
+gradle-plugins-spring-boot = { module = "org.springframework.boot:org.springframework.boot.gradle.plugin", version.ref = "spring-boot-plugin" }
+gradle-plugins-spring-dependency-management = { module = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin", version.ref = "spring-dependency-management-plugin" }
+gradle-plugins-flyway = { module = "org.flywaydb.flyway:org.flywaydb.flyway.gradle.plugin", version.ref = "flyway-plugin" }
+gradle-plugins-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp-plugin" }
 
 #-----------------------------------------------------------------------------------------------------------------------
 
 [plugins]
 
 # Kotlin
-kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 java = { id = "java" }
 
 # Spring
-kotlin_spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin-spring-plugin" }
-spring_boot = { id = "org.springframework.boot", version.ref = "spring-boot-plugin" }
-spring_dependency_management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management-plugin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot-plugin" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management-plugin" }
 
 # DB / migrations
-kotlin_jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin-jpa-plugin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
 flyway = { id = "org.flywaydb.flyway", version.ref = "flyway-plugin" }
 
 # KSP
@@ -149,6 +159,6 @@ s3 = [
 
 testing-module = [
     "spring-boot-starter-test",
-    "kotlin_test_junit5",
-    "kotest_assertions_arrow"
+    "kotlin-test-junit5",
+    "kotest-assertions-arrow"
 ]
