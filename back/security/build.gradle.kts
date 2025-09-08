@@ -18,13 +18,10 @@ dependencies {
     implementation(projects.useCase)
     implementation(projects.monitoring)
 
-    implementation(libs.spring.boot.starter.security)
-    implementation(libs.spring.boot.starter.oauth2.resource.server)
-    implementation(libs.spring.tx)
-
-    compileOnly(libs.jakarta.servlet.api)
+    implementation(libs.bundles.security)
 
     implementation(libs.arrow.core)
+    implementation(libs.spring.tx)
 }
 
 tasks {

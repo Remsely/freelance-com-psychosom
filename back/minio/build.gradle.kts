@@ -19,11 +19,10 @@ dependencies {
     implementation(projects.useCase)
     implementation(projects.monitoring)
 
-    implementation(libs.spring.boot.starter)
+    implementation(libs.bundles.s3)
 
     implementation(libs.arrow.core)
-
-    implementation(libs.amazon.awsSdk.s3)
+    implementation(libs.spring.boot.starter)
 }
 
 tasks.test {

@@ -20,10 +20,6 @@ dependencies {
     implementation(libs.spring.boot.starter)
     implementation(libs.spring.tx)
     implementation(libs.arrow.core)
-
-    testImplementation(libs.kotlin.test.junit5)
-    testImplementation(libs.spring.boot.starter.test)
-    testImplementation(libs.kotest.assertions.arrow)
 }
 
 tasks {

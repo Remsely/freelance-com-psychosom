@@ -14,8 +14,8 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.slf2j)
-    implementation(libs.logback)
+    implementation(libs.slf2j.api)
+    implementation(libs.logback.classic)
 }
 
 tasks.test {

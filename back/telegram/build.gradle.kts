@@ -18,10 +18,9 @@ dependencies {
     implementation(projects.useCase)
     implementation(projects.monitoring)
 
-    implementation(libs.spring.boot.starter)
-    implementation(libs.telegrambots.spring.boot.starter)
-    implementation(libs.telegrambots.extensions)
+    implementation(libs.bundles.telegram)
 
+    implementation(libs.spring.boot.starter)
     implementation(libs.arrow.core)
 }
 
