@@ -90,15 +90,6 @@ kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 kotest-assertions-arrow = { module = "io.kotest.extensions:kotest-assertions-arrow", version.ref = "kotest-assertions-arrow" }
 
-# Gradle plugins for build-logic
-gradle-plugins-kotlin-jvm = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
-gradle-plugins-kotlin-jpa = { module = "org.jetbrains.kotlin.plugin.jpa:org.jetbrains.kotlin.plugin.jpa.gradle.plugin", version.ref = "kotlin" }
-gradle-plugins-kotlin-spring = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
-gradle-plugins-spring-boot = { module = "org.springframework.boot:org.springframework.boot.gradle.plugin", version.ref = "spring-boot-plugin" }
-gradle-plugins-spring-dependency-management = { module = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin", version.ref = "spring-dependency-management-plugin" }
-gradle-plugins-flyway = { module = "org.flywaydb.flyway:org.flywaydb.flyway.gradle.plugin", version.ref = "flyway-plugin" }
-gradle-plugins-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp-plugin" }
-
 #-----------------------------------------------------------------------------------------------------------------------
 
 [plugins]
