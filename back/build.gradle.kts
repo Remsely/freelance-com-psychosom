@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
@@ -28,29 +26,6 @@ configurations.all {
 
 repositories {
     mavenCentral()
-}
-
-subprojects {
-    repositories {
-        mavenCentral()
-    }
-
-    tasks {
-        withType<KotlinCompile> {
-            compilerOptions {
-                freeCompilerArgs = listOf("-Xjvm-default=all-compatibility")
-                jvmTarget.set(JvmTarget.JVM_21)
-            }
-        }
-
-        withType<JavaCompile> {
-            options.compilerArgs.add("-Xlint:all")
-        }
-
-        withType<Test> {
-            useJUnitPlatform()
-        }
-    }
 }
 
 tasks.withType<BootJar> {

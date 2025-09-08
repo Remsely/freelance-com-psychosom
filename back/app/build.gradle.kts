@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
@@ -40,4 +43,21 @@ dependencies {
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.kotlin.test.junit5)
     testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+tasks {
+    withType<KotlinCompile> {
+        compilerOptions {
+            freeCompilerArgs = listOf("-Xjvm-default=all-compatibility")
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
+
+    withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:all")
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+    }
 }
