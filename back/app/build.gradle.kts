@@ -19,15 +19,15 @@ repositories {
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.api))
-    implementation(project(Modules.db))
-    implementation(project(Modules.security))
-    implementation(project(Modules.telegram))
-    implementation(project(Modules.monitoring))
-    implementation(project(Modules.scheduled))
-    implementation(project(Modules.minio))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.api)
+    implementation(projects.db)
+    implementation(projects.security)
+    implementation(projects.telegram)
+    implementation(projects.monitoring)
+    implementation(projects.scheduled)
+    implementation(projects.minio)
 
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.data.jpa)

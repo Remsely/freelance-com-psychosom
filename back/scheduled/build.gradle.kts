@@ -11,9 +11,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.monitoring)
 
     implementation(libs.arrow.core)
     implementation(libs.spring.boot.starter)

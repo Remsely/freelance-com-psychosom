@@ -2,15 +2,19 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
-rootProject.name = "psyhosom"
+rootProject.name = "psychosom"
 
-include(":domain")
-include(":use-case")
-include(":db")
-include(":api")
-include(":app")
-include(":security")
-include(":monitoring")
-include(":telegram")
-include(":scheduled")
-include(":minio")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+    "domain",
+    "db",
+    "use-case",
+    "api",
+    "app",
+    "security",
+    "monitoring",
+    "telegram",
+    "scheduled",
+    "minio"
+)
