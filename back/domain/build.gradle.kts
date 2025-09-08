@@ -1,5 +1,6 @@
 plugins {
-    id(Plugins.ksp) version PluginVersions.ksp
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 group = Project.groupId
@@ -10,11 +11,11 @@ repositories {
 }
 
 dependencies {
-    implementation(Libs.arrow_core)
-    implementation(Libs.arrow_optics)
-    ksp(Libs.arrow_optics_ksp)
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.optics)
+    ksp(libs.arrow.opticsKsp)
 
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotlin_test_junit5)
-    testImplementation(Libs.kotest_assertions_arrow)
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.kotest.assertions.arrow)
 }

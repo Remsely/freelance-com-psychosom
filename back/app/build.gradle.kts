@@ -1,7 +1,8 @@
 plugins {
-    id(Plugins.kotlin_spring) version PluginVersions.kotlin_spring
-    id(Plugins.spring_boot) version PluginVersions.spring_boot
-    id(Plugins.spring_dependency_management) version PluginVersions.spring_dependency_management
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 group = Project.groupId
@@ -28,15 +29,15 @@ dependencies {
     implementation(project(Modules.scheduled))
     implementation(project(Modules.minio))
 
-    implementation(Libs.spring_boot_starter_web)
-    implementation(Libs.spring_boot_starter_data_jpa)
-    implementation(Libs.spring_boot_starter_web_socket)
-    implementation(Libs.springdoc_openapi_starter)
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation(libs.spring.boot.starter.webSocket)
+    implementation(libs.springdoc.openapi.starter.webmvc.ui)
 
-    implementation(Libs.jackson_module_kotlin)
-    implementation(Libs.jetbrains_kotlin_reflect)
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.jetbrains.kotlin.reflect)
 
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotlin_test_junit5)
-    testRuntimeOnly(Libs.junit_platform_launcher)
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.kotlin.test.junit5)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }

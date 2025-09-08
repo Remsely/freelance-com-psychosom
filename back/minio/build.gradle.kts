@@ -1,5 +1,7 @@
 plugins {
-    id("java")
+    alias(libs.plugins.java)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
 }
 
 group = Project.groupId
@@ -14,11 +16,11 @@ dependencies {
     implementation(project(Modules.use_case))
     implementation(project(Modules.monitoring))
 
-    implementation(Libs.spring_boot_starter)
+    implementation(libs.spring.boot.starter)
 
-    implementation(Libs.arrow_core)
+    implementation(libs.arrow.core)
 
-    implementation(Libs.aws_sdk)
+    implementation(libs.amazon.awsSdk.s3)
 }
 
 tasks.test {

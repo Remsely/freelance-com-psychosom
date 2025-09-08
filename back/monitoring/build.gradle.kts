@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
 }
 
 group = "ru.remsely.psyhosom.monitoring"
@@ -10,10 +11,8 @@ repositories {
 }
 
 dependencies {
-    implementation(Libs.slf2j)
-    implementation(Libs.logback)
-
-    testImplementation(kotlin("test"))
+    implementation(libs.slf2j)
+    implementation(libs.logback)
 }
 
 tasks.test {

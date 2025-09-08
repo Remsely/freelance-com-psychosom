@@ -3,12 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    id(Plugins.kotlin_jvm) version PluginVersions.kotlin_jvm
-    id(Plugins.kotlin_spring) version PluginVersions.kotlin_spring
-    id(Plugins.spring_boot) version PluginVersions.spring_boot
-    id(Plugins.spring_dependency_management) version PluginVersions.spring_dependency_management
-    id(Plugins.kotlin_jpa) version PluginVersions.kotlin_jpa
-    id(Plugins.ksp) version PluginVersions.ksp
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.kotlin.jpa)
+    alias(libs.plugins.ksp)
 }
 
 group = Project.groupId
@@ -31,11 +31,6 @@ repositories {
 }
 
 subprojects {
-    apply {
-        plugin(Plugins.kotlin_jvm)
-        plugin(Plugins.kotlin_spring)
-    }
-
     repositories {
         mavenCentral()
     }

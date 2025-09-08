@@ -1,6 +1,11 @@
 group = Project.groupId
 version = Project.version
 
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+}
+
 repositories {
     mavenCentral()
 }
@@ -10,13 +15,11 @@ dependencies {
     implementation(project(Modules.use_case))
     implementation(project(Modules.monitoring))
 
-    implementation(Libs.spring_boot_starter)
-    implementation(Libs.telegrambots_spring_boot_starter)
-    implementation(Libs.telegrambots_extensions)
+    implementation(libs.spring.boot.starter)
+    implementation(libs.telegrambots.spring.boot.starter)
+    implementation(libs.telegrambots.extensions)
 
-    implementation(Libs.arrow_core)
-
-    testImplementation(kotlin("test"))
+    implementation(libs.arrow.core)
 }
 
 tasks.test {

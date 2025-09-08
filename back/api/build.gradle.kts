@@ -1,5 +1,6 @@
 plugins {
-
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
 }
 
 group = Project.groupId
@@ -14,15 +15,15 @@ dependencies {
     implementation(project(Modules.use_case))
     implementation(project(Modules.monitoring))
 
-    implementation(Libs.spring_boot_starter_web)
-    implementation(Libs.spring_boot_starter_web_socket)
-    implementation(Libs.springdoc_openapi_starter)
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.webSocket)
+    implementation(libs.springdoc.openapi.starter.webmvc.ui)
 
-    implementation(Libs.jackson_module_kotlin)
+    implementation(libs.jackson.module.kotlin)
 
-    implementation(Libs.arrow_core)
+    implementation(libs.arrow.core)
 
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotlin_test_junit5)
-    testImplementation(Libs.kotest_assertions_arrow)
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.kotest.assertions.arrow)
 }

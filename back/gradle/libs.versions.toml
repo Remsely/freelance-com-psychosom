@@ -1,0 +1,73 @@
+[versions]
+arrow = "1.2.4"
+kotest-assertions-arrow = "1.4.0"
+spring-boot = "3.3.2"
+spring-tx = "6.1.12"
+jakarta-servlet-api = "6.1.0"
+postgresql = "42.7.1"
+flyway = "10.17.3"
+slf4j = "2.0.16"
+logback = "1.5.12"
+telegram-bots = "6.9.7.1"
+springdoc-open-api-starter = "2.8.4"
+aws-sdk = "2.31.30"
+
+kotlin-jvm-plugin = "2.0.10"
+kotlin-spring-plugin = "1.9.24"
+spring-dependency-management-plugin = "1.1.6"
+spring-boot-plugin = "3.4.0"
+kotlin-jpa-plugin = "1.9.24"
+ksp-plugin = "2.0.10-1.0.24"
+flyway-plugin = "9.10.0"
+
+
+[libraries]
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter", version.ref = "spring-boot" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-starter-webSocket = { module = "org.springframework.boot:spring-boot-starter-websocket", version.ref = "spring-boot" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "spring-boot" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security", version.ref = "spring-boot" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server", version.ref = "spring-boot" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
+
+spring-tx = { module = "org.springframework:spring-tx", version.ref = "spring-tx" }
+jakarta-servlet-api = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servlet-api" }
+
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
+arrow-opticsKsp = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
+
+telegrambots-spring-boot-starter = { module = "org.telegram:telegrambots-spring-boot-starter", version.ref = "telegram-bots" }
+telegrambots-extensions = { module = "org.telegram:telegrambotsextensions", version.ref = "telegram-bots" }
+
+amazon-awsSdk-s3 = { module = "software.amazon.awssdk:s3", version.ref = "aws-sdk" }
+
+slf2j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
+
+springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-open-api-starter" }
+
+jetbrains_kotlin_reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+jackson_module_kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+kotlin_test_junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+junit_platform_launcher = { module = "org.junit.platform:junit-platform-launcher" }
+kotest_assertions_arrow = { module = "io.kotest.extensions:kotest-assertions-arrow", version.ref = "kotest-assertions-arrow" }
+
+
+[bundles]
+
+
+[plugins]
+kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm-plugin" }
+kotlin_spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin-spring-plugin" }
+spring_boot = { id = "org.springframework.boot", version.ref = "spring-boot-plugin" }
+spring_dependency_management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management-plugin" }
+kotlin_jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin-jpa-plugin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-plugin" }
+flyway = { id = "org.flywaydb.flyway", version.ref = "flyway-plugin" }
+java = { id = "java" }

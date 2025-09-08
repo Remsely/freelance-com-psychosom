@@ -1,6 +1,11 @@
 group = Project.groupId
 version = Project.version
 
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+}
+
 repositories {
     mavenCentral()
 }
@@ -9,11 +14,11 @@ dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.monitoring))
 
-    implementation(Libs.spring_boot_starter)
-    implementation(Libs.spring_tx)
-    implementation(Libs.arrow_core)
+    implementation(libs.spring.boot.starter)
+    implementation(libs.spring.tx)
+    implementation(libs.arrow.core)
 
-    testImplementation(Libs.kotlin_test_junit5)
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotest_assertions_arrow)
+    testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.kotest.assertions.arrow)
 }
