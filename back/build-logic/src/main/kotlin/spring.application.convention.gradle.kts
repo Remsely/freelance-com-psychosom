@@ -6,7 +6,6 @@ plugins {
 }
 
 apply(plugin = libs.plugins.spring.boot.get().pluginId)
-apply(plugin = libs.plugins.spring.dependency.management.get().pluginId)
 
 tasks.withType<BootJar> {
     mainClass.set("ru.remsely.psyhosom.app.PsyhosomApplication")

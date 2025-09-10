@@ -11,7 +11,6 @@ dependencies {
     pluginImplementation(libs.plugins.kotlin.jvm)
     pluginImplementation(libs.plugins.kotlin.spring)
     pluginImplementation(libs.plugins.spring.boot)
-    pluginImplementation(libs.plugins.spring.dependency.management)
 
     /* Workaround for version catalog working inside precompiled scripts
     Issue - https://github.com/gradle/gradle/issues/15383 */

@@ -8,7 +8,6 @@ dependencies {
     implementation(projects.monitoring)
 
     implementation(libs.bundles.web)
-    implementation(libs.bundles.testing.module)
 
     implementation(libs.arrow.core)
 }

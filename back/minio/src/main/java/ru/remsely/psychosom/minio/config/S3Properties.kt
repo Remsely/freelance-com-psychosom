@@ -1,16 +1,28 @@
 package ru.remsely.psychosom.minio.config
 
-import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-@ConfigurationProperties(prefix = "s3")
-data class S3Properties(
-    var internalEndpoint: String = "",
-    var publicEndpoint: String = "",
-    var region: String = "",
-    var bucket: String = "",
-    var accessKey: String = "",
-    var secretKey: String = "",
-    var pathStyleAccess: Boolean = false
+class S3Properties(
+    @param:Value("\${s3.internal-endpoint:}")
+    val internalEndpoint: String,
+
+    @param:Value("\${s3.public-endpoint:}")
+    val publicEndpoint: String,
+
+    @param:Value("\${s3.region:}")
+    val region: String,
+
+    @param:Value("\${s3.bucket:}")
+    val bucket: String,
+
+    @param:Value("\${s3.access-key:}")
+    val accessKey: String,
+
+    @param:Value("\${s3.secret-key:}")
+    val secretKey: String,
+
+    @param:Value("\${s3.path-style-access:false}")
+    val pathStyleAccess: Boolean
 )

@@ -3,6 +3,5 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.slf2j.api)
-    implementation(libs.logback.classic)
+    api(libs.bundles.logging)
 }

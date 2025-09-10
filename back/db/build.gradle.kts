@@ -11,6 +11,5 @@ dependencies {
 
     implementation(libs.bundles.db)
 
-    implementation(libs.jetbrains.kotlin.reflect)
     implementation(libs.arrow.core)
 }

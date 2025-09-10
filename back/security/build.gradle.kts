@@ -8,6 +8,7 @@ dependencies {
     implementation(projects.monitoring)
 
     implementation(libs.bundles.security)
+    implementation(libs.bundles.spring.library.base)
 
     implementation(libs.arrow.core)
     implementation(libs.spring.tx)

@@ -7,6 +7,7 @@ dependencies {
     implementation(projects.useCase)
     implementation(projects.monitoring)
 
+    implementation(libs.bundles.spring.library.base)
+
     implementation(libs.arrow.core)
-    implementation(libs.spring.boot.starter)
 }

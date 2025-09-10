@@ -8,7 +8,7 @@ dependencies {
     implementation(projects.monitoring)
 
     implementation(libs.bundles.s3)
+    implementation(libs.bundles.spring.library.base)
 
     implementation(libs.arrow.core)
-    implementation(libs.spring.boot.starter)
 }

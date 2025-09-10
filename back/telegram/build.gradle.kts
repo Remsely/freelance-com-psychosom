@@ -9,6 +9,5 @@ dependencies {
 
     implementation(libs.bundles.telegram)
 
-    implementation(libs.spring.boot.starter)
     implementation(libs.arrow.core)
 }
