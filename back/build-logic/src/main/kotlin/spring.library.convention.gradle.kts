@@ -1,4 +1,7 @@
+import extensions.libs
+
 plugins {
-    id("org.jetbrains.kotlin.plugin.spring")
     id("kotlin.library.convention")
 }
+
+apply(plugin = libs.plugins.kotlin.spring.get().pluginId)

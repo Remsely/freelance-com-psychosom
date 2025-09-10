@@ -1,11 +1,13 @@
 import extensions.javaVersion
+import extensions.libs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
     id("base.project.convention")
 }
+
+apply(plugin = libs.plugins.kotlin.jvm.get().pluginId)
 
 tasks {
     withType<KotlinCompile> {
