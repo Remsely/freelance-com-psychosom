@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.api.config.webmvc
+package ru.remsely.psyhosom.app.config.web
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
@@ -8,7 +8,7 @@ import ru.remsely.psyhosom.api.utils.annotations.resolver.AuthPatientIdResolver
 import ru.remsely.psyhosom.api.utils.annotations.resolver.AuthPsychologistIdResolver
 
 @Configuration
-class WebConfig(
+class WebMvcConfig(
     private val authAccountIdResolver: AuthAccountIdResolver,
     private val authPatientIdResolver: AuthPatientIdResolver,
     private val authPsychologistIdResolver: AuthPsychologistIdResolver

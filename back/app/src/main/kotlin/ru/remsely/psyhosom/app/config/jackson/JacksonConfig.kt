@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.api.config.jackson
+package ru.remsely.psyhosom.app.config.jackson
 
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer

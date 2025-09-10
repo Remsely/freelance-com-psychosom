@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.api.config.websocket
+package ru.remsely.psyhosom.app.config.web
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
