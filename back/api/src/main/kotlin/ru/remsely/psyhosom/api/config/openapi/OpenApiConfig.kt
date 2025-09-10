@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.open_api
+package ru.remsely.psyhosom.api.config.openapi
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.security.SecurityScheme

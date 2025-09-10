@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.web
+package ru.remsely.psyhosom.api.config.webmvc
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver

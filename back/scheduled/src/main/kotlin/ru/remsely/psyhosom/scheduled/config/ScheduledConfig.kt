@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.scheduled
+package ru.remsely.psyhosom.scheduled.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling

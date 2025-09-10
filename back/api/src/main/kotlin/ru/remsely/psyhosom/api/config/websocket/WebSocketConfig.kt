@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.web
+package ru.remsely.psyhosom.api.config.websocket
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -14,7 +14,7 @@ import ru.remsely.psyhosom.api.web_socket.WebSocketSessionManager
 @Configuration
 @EnableWebSocket
 class WebSocketConfig(
-    @Value("\${frontend.url}")
+    @param:Value("\${frontend.url}")
     private val websiteUrl: String
 ) : WebSocketConfigurer {
     @Autowired

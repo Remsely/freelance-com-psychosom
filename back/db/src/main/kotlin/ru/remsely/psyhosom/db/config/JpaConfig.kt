@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.app.config.jpa
+package ru.remsely.psyhosom.db.config
 
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Configuration
