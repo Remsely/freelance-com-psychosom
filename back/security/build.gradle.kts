@@ -1,20 +1,15 @@
-group = Project.groupId
-version = Project.version
-
-repositories {
-    mavenCentral()
+plugins {
+    id("spring.library.convention")
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.monitoring)
 
-    implementation(Libs.spring_boot_starter_security)
-    implementation(Libs.spring_boot_starter_oauth2_resource_server)
-    implementation(Libs.spring_tx)
+    implementation(libs.bundles.security)
+    implementation(libs.bundles.spring.library.base)
 
-    compileOnly(Libs.jakarta_servlet_api)
-
-    implementation(Libs.arrow_core)
+    implementation(libs.arrow.core)
+    implementation(libs.spring.tx)
 }

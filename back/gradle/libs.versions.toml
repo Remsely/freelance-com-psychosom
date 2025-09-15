@@ -1,0 +1,165 @@
+[versions]
+
+# Core
+java = "21"
+kotlin = "2.0.10"
+spring-boot = "3.4.2"
+
+# Arrow
+arrow = "1.2.4"
+
+# DB / migrations
+flyway = "10.20.1"
+
+# Telegram
+telegram-bots = "6.9.7.1"
+
+# S3
+aws-sdk = "2.31.30"
+
+# Docs
+springdoc-open-api-starter = "2.8.4"
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+[libraries]
+
+# Spring Boot starters
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-webSocket = { module = "org.springframework.boot:spring-boot-starter-websocket" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
+# Spring boot common dependencies
+spring-context = { module = "org.springframework:spring-context" }
+spring-tx = { module = "org.springframework:spring-tx" }
+
+# DB / migrations
+spring-data-jpa = { module = "org.springframework.data:spring-data-jpa" }
+postgresql = { module = "org.postgresql:postgresql" } # TODO: 1 vulnerability mentioned in mvmreposiory.com
+flyway-core = { module = "org.flywaydb:flyway-core" }
+flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql" }
+jakarta-persistence-api = { module = "jakarta.persistence:jakarta.persistence-api" }
+jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api" }
+hibernate-core = { module = "org.hibernate.orm:hibernate-core" }
+
+# Web
+spring-web = { module = "org.springframework:spring-web" }
+spring-webmvc = { module = "org.springframework:spring-webmvc" }
+spring-websocket = { module = "org.springframework:spring-websocket" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+# Security
+spring-security-config = { module = "org.springframework.security:spring-security-config" }
+spring-security-oauth2-resource-server = { module = "org.springframework.security:spring-security-oauth2-resource-server" }
+spring-security-oauth2-jose = { module = "org.springframework.security:spring-security-oauth2-jose" }
+
+# Arrow
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
+arrow-opticsKsp = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
+
+# Telegram
+telegrambots-spring-boot-starter = { module = "org.telegram:telegrambots-spring-boot-starter", version.ref = "telegram-bots" } # TODO: deprecated Spring Boot 2.7.18 (causes conflict resolution)
+telegrambots-extensions = { module = "org.telegram:telegrambotsextensions", version.ref = "telegram-bots" }
+
+# AWS
+amazon-awsSdk-s3 = { module = "software.amazon.awssdk:s3", version.ref = "aws-sdk" }
+
+# Monitoring / logging
+slf2j-api = { module = "org.slf4j:slf4j-api" }
+logback-classic = { module = "ch.qos.logback:logback-classic" }
+
+# Docs (There is no separation in SpringDoc starter)
+springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-open-api-starter" }
+
+# Kotlin
+jetbrains-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+[plugins]
+
+# Kotlin
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+# Spring
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+
+# DB / migrations
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+[bundles]
+
+# Base Spring library dependencies
+spring-library-base = [
+    "spring-context",
+    "jakarta-annotation-api"
+]
+
+# Spring library with transaction support
+spring-library-tx = [
+    "jakarta-annotation-api",
+    "spring-context",
+    "spring-tx"
+]
+
+# Web layer dependencies (MVC, WebSocket, JSON, API documentation)
+web = [
+    "spring-webmvc",
+    "spring-websocket",
+    "jackson-module-kotlin",
+    "springdoc-openapi-starter-webmvc-ui", # There is no separation in SpringDoc starter
+]
+
+# Database and persistence layer dependencies
+db = [
+    "spring-data-jpa",
+    "postgresql",
+    "flyway-core",
+    "flyway-database-postgresql",
+    "jakarta-persistence-api",
+    "hibernate-core",
+]
+
+# Security layer dependencies (OAuth2, JWT support)
+security = [
+    "spring-security-config",
+    "spring-security-oauth2-resource-server",
+    "spring-security-oauth2-jose"
+]
+
+# Logging infrastructure dependencies
+logging = [
+    "slf2j-api",
+    "logback-classic"
+]
+
+# Telegram bot integration dependencies
+telegram = [
+    "telegrambots-extensions",
+    "telegrambots-spring-boot-starter"
+]
+
+# S3 integration dependencies
+s3 = [
+    "amazon-awsSdk-s3"
+]
+
+# Spring Boot starters collection
+spring-boot-starters = [
+    "spring-boot-starter",
+    "spring-boot-starter-web",
+    "spring-boot-starter-webSocket",
+    "spring-boot-starter-data-jpa",
+    "spring-boot-starter-security",
+    "spring-boot-starter-oauth2-resource-server",
+    "spring-boot-starter-test",
+]

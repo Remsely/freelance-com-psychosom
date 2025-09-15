@@ -14,7 +14,7 @@ import ru.remsely.psyhosom.api.web_socket.WebSocketSessionManager
 @Configuration
 @EnableWebSocket
 class WebSocketConfig(
-    @Value("\${frontend.url}")
+    @param:Value("\${frontend.url}")
     private val websiteUrl: String
 ) : WebSocketConfigurer {
     @Autowired

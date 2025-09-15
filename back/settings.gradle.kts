@@ -1,16 +1,18 @@
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-}
+rootProject.name = "psychosom"
 
-rootProject.name = "psyhosom"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":domain")
-include(":use-case")
-include(":db")
-include(":api")
-include(":app")
-include(":security")
-include(":monitoring")
-include(":telegram")
-include(":scheduled")
-include(":minio")
+includeBuild("build-logic")
+
+include(
+    "domain",
+    "db",
+    "use-case",
+    "api",
+    "app",
+    "security",
+    "monitoring",
+    "telegram",
+    "scheduled",
+    "minio"
+)

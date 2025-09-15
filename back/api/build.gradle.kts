@@ -1,28 +1,13 @@
 plugins {
-
-}
-
-group = Project.groupId
-version = Project.version
-
-repositories {
-    mavenCentral()
+    id("spring.library.convention")
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.monitoring)
 
-    implementation(Libs.spring_boot_starter_web)
-    implementation(Libs.spring_boot_starter_web_socket)
-    implementation(Libs.springdoc_openapi_starter)
+    implementation(libs.bundles.web)
 
-    implementation(Libs.jackson_module_kotlin)
-
-    implementation(Libs.arrow_core)
-
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotlin_test_junit5)
-    testImplementation(Libs.kotest_assertions_arrow)
+    implementation(libs.arrow.core)
 }

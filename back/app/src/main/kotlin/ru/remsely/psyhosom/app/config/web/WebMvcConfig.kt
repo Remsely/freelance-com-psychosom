@@ -8,7 +8,7 @@ import ru.remsely.psyhosom.api.utils.annotations.resolver.AuthPatientIdResolver
 import ru.remsely.psyhosom.api.utils.annotations.resolver.AuthPsychologistIdResolver
 
 @Configuration
-class WebConfig(
+class WebMvcConfig(
     private val authAccountIdResolver: AuthAccountIdResolver,
     private val authPatientIdResolver: AuthPatientIdResolver,
     private val authPsychologistIdResolver: AuthPsychologistIdResolver

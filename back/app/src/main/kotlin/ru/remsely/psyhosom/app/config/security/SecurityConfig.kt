@@ -1,4 +1,4 @@
-package ru.remsely.psyhosom.security.config
+package ru.remsely.psyhosom.app.config.security
 
 import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey
@@ -36,7 +36,7 @@ import ru.remsely.psyhosom.security.service.UserDetailsServiceImpl
 class SecurityConfig(
     private val rsaKeyProperties: RsaKeyProperties,
 
-    @Value("\${frontend.url}")
+    @param:Value("\${frontend.url}")
     private val websiteUrl: String
 ) {
     @Bean

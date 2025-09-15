@@ -1,19 +1,12 @@
-group = Project.groupId
-version = Project.version
-
-repositories {
-    mavenCentral()
+plugins {
+    id("spring.library.convention")
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.monitoring)
 
-    implementation(Libs.spring_boot_starter)
-    implementation(Libs.spring_tx)
-    implementation(Libs.arrow_core)
+    implementation(libs.bundles.spring.library.tx)
 
-    testImplementation(Libs.kotlin_test_junit5)
-    testImplementation(Libs.spring_boot_starter_test)
-    testImplementation(Libs.kotest_assertions_arrow)
+    implementation(libs.arrow.core)
 }

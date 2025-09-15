@@ -1,26 +1,14 @@
 plugins {
-    id("java")
-}
-
-group = Project.groupId
-version = Project.version
-
-repositories {
-    mavenCentral()
+    id("spring.library.convention")
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.monitoring)
 
-    implementation(Libs.spring_boot_starter)
+    implementation(libs.bundles.s3)
+    implementation(libs.bundles.spring.library.base)
 
-    implementation(Libs.arrow_core)
-
-    implementation(Libs.aws_sdk)
-}
-
-tasks.test {
-    useJUnitPlatform()
+    implementation(libs.arrow.core)
 }

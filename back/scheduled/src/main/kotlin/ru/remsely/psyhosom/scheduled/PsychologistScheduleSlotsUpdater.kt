@@ -1,7 +1,7 @@
 package ru.remsely.psyhosom.scheduled
 
-import org.springframework.boot.context.event.ApplicationReadyEvent
-import org.springframework.context.event.EventListener
+import org.springframework.context.ApplicationListener
+import org.springframework.context.event.ContextRefreshedEvent
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import ru.remsely.psyhosom.monitoring.log.logger
@@ -10,11 +10,10 @@ import ru.remsely.psyhosom.usecase.psychologist.UpdatePsychologistScheduleSlotsC
 @Component
 class PsychologistScheduleSlotsUpdater(
     private val command: UpdatePsychologistScheduleSlotsCommand
-) {
+) : ApplicationListener<ContextRefreshedEvent> {
     private val log = logger()
 
-    @EventListener(ApplicationReadyEvent::class)
-    fun runOnceAfterStartup() {
+    override fun onApplicationEvent(event: ContextRefreshedEvent) {
         doUpdate()
     }
 

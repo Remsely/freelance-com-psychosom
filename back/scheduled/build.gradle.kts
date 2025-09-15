@@ -1,25 +1,13 @@
-group = Project.groupId
-version = Project.version
-
-repositories {
-    mavenCentral()
+plugins {
+    id("spring.library.convention")
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-    implementation(project(Modules.use_case))
-    implementation(project(Modules.monitoring))
+    implementation(projects.domain)
+    implementation(projects.useCase)
+    implementation(projects.monitoring)
 
-    implementation(Libs.arrow_core)
-    implementation(Libs.spring_boot_starter)
+    implementation(libs.bundles.spring.library.base)
 
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(21)
+    implementation(libs.arrow.core)
 }
